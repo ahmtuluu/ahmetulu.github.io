@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Su Analiz Sistemi — Ahmet Ulu</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#111110; --surface:#1a1a18; --border:#2a2a27; --text:#e8e6e1; --muted:#6b6b65; --soft:#9b9991; --accent:#d4a574; --line:#2e2e2b; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-weight:300; line-height:1.7; font-size:15px; }
+nav { position:fixed; top:0; right:0; left:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:22px 40px; background:rgba(17,17,16,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+.nav-logo { font-family:'Lora',serif; font-size:16px; color:var(--text); text-decoration:none; }
+.nav-back { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-back:hover { color:var(--accent); }
+.container { max-width:680px; margin:0 auto; padding:110px 40px 80px; }
+.blog-tag { font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
+h1 { font-family:'Lora',serif; font-size:clamp(24px,4vw,38px); font-weight:400; line-height:1.25; letter-spacing:-0.5px; margin-bottom:16px; }
+.blog-meta { font-size:13px; color:var(--muted); margin-bottom:48px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+p { font-size:15px; color:var(--soft); line-height:1.85; margin-bottom:20px; }
+p strong { color:var(--text); font-weight:500; }
+h3 { font-family:'Lora',serif; font-size:21px; font-weight:400; color:var(--text); margin:40px 0 14px; }
+.blog-img { width:100%; border-radius:6px; margin:28px 0 8px; border:1px solid var(--border); display:block; max-height:500px; object-fit:cover; }
+.blog-img-caption { font-size:12px; color:var(--muted); text-align:center; margin-bottom:28px; }
+.tech-box { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:6px; padding:20px 24px; margin:28px 0; }
+.tech-box h4 { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent); margin-bottom:14px; }
+.tech-row { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.tech-row:last-child { border-bottom:none; padding-bottom:0; }
+.tech-row .comp { color:var(--text); font-weight:500; }
+.tech-row .detail { color:var(--muted); font-size:12px; }
+.page-footer { margin-top:56px; padding-top:22px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); }
+@media(max-width:600px){ nav{padding:18px 20px;} .container{padding:100px 20px 60px;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ahmet Ulu</a>
+  <a href="index.html" class="nav-back">← Yazılara dön</a>
+</nav>
+
+<div class="container">
+
+  <div class="blog-tag">Akıllı Tarım Sistemi · 1. Adım</div>
+  <h1>Su Analiz Sistemi: Sıfırdan Bir Sistem Kurmak</h1>
+  <div class="blog-meta">Ahmet Ulu · Mart 2026</div>
+
+  <p>Akıllı tarım projemizin ilk adımını tamamladık: <strong>Su Analiz Sistemi.</strong> Bu sistem aslında tek başına bile ciddi bir iş — sulama suyunun pH'ı, TDS değeri veya sıcaklığı tehlikeli seviyelere ulaştığında çiftçiyi anında uyarıyor, mobil uygulamadan bildirim gönderiyor. Güneş enerjisiyle çalışıyor, şebekeye bağlı değil, doğrudan tarlaya kurulabiliyor. Benim için bu proje sadece bir sistem değil, sıfırdan bir şey inşa etmenin ne demek olduğunu öğrendiğim bir süreçti.</p>
+
+  <img src="img1.jpeg" class="blog-img" alt="Breadboard üzerinde sensör testleri">
+  <div class="blog-img-caption">Breadboard üzerinde ilk sensör testleri — her bileşeni tek tek devreye alıp ESP32 ile haberleştirdim</div>
+
+  <h3>Başlangıç: breadboard ve bitmek bilmeyen kalibrasyon</h3>
+
+  <p>Her şey breadboard üzerinde başladı. pH sensörü, TDS sensörü, DS18B20 sıcaklık sensörü — hepsini teker teker devreye aldım, ESP32 ile konuşturmaya çalıştım. Kulağa basit geliyor ama inanın en çok yoran kısım <strong>kalibrasyon</strong> oldu. Sistem tamamen bitmişken bile kalibrasyon problemi peşimizi bırakmadı. pH sensörü özellikle sinir bozucu — referans solüsyonlarla sürekli ayar gerektiriyor, en ufak sapmada yanlış alarm üretebiliyor. Bu kısımda gerçekten çok vakit harcadık ve hâlâ tam anlamıyla bitmiş sayılmaz.</p>
+
+  <img src="img2.jpeg" class="blog-img" alt="PCB lehim çalışması">
+  <div class="blog-img-caption">İlk PCB deneyimim — hem devre tasarımını hem de lehim tekniğini aynı anda öğrendim</div>
+
+  <h3>Hiç ders almadan ilk PCB</h3>
+
+  <p>Breadboard'da her şey çalışır hale gelince sıra <strong>PCB'ye</strong> geldi. Daha önce hiç PCB tasarlamamıştım, doğrudan yazılıma oturdum ve öğrenerek yaptım. İlk ve en büyük hatamız: kartı çok küçük seçtik. Tüm bileşenleri o küçük alana sığdırmak gerçekten zor oldu. Üstüne bir de bu PCB'de hazır yollar yok — her bağlantıyı tek tek elle çizmem gerekiyordu. Saatler sürdü ama sonunda oldu. Lehim konusunda daha önce deneyimim vardı, o yüzden çok zorlanmadım. Açıkçası çıkan işten oldukça memnun kaldım.</p>
+
+  <img src="img3.jpeg" class="blog-img" alt="Metal iskelet imalatı sanayide">
+  <div class="blog-img-caption">Sanayide iskelet imalatı — günlerce uğraşmanın meyvesi</div>
+
+  <h3>Sanayi, toz ve kıvılcım</h3>
+
+  <p>Elektronik taraf bitti, sıra fiziksel yapıya geldi. Güneş panelini tutacak, altında elektronik kutuyu barındıracak, sahaya dayanıklı bir iskelet lazımdı. Arkadaşımla birlikte sanayiye gidip geldik, günlerce uğraştık. Burada özellikle teşekkür etmem gereken biri var: <strong>Mehmet usta.</strong> Öğrenci olduğumuzu görüp "kim uğraşacak sizinle" demek yerine uygun fiyata bize yardım etti. Böyle insanlar olmasaydı bu iş çok daha zordu.</p>
+
+  <img src="img4.jpeg" class="blog-img" alt="Elektronik kutu içi - devre ve bağlantılar">
+  <div class="blog-img-caption">Kutunun içi: Solar charge controller, ESP32 ve tüm sensör bağlantıları</div>
+
+  <h3>Enerji sistemi: neden bu kadar büyük akü?</h3>
+
+  <p>Sistemi tamamen <strong>off-grid</strong> yapmak istediğimiz için enerji tasarımına özen gösterdik. 12V 24Ah akü ve 24W güneş paneli kullandık — bu biraz büyük gibi görünebilir ama kasıtlı seçtik. İleride su motoru yetersiz kalırsa daha güçlüyle değiştireceğiz, önceden geniş tuttuk. Şu anki pompa çalışma sırasında yaklaşık 0.7A çekiyor, sistem bu akü ile günlerce beslenebilir.</p>
+
+  <p>ESP32'nin 5V ihtiyacını solar charge controller'ın USB çıkışından karşılıyoruz. Su motoruysa 6V istiyor ama controller'da bu voltaj yok, sadece 13V çıkış var. Oraya bir <strong>buck converter</strong> ekleyip 13V'u 6V'a indirdik. Küçük ama kritik bir detay.</p>
+
+  <div class="tech-box">
+    <h4>Teknik Detaylar</h4>
+    <div class="tech-row"><span class="comp">Mikrodenetleyici</span><span class="detail">ESP32 (WiFi + Bluetooth)</span></div>
+    <div class="tech-row"><span class="comp">pH Sensörü</span><span class="detail">Analog pH probe + pH-4502C modülü</span></div>
+    <div class="tech-row"><span class="comp">TDS Sensörü</span><span class="detail">Gravity TDS metre</span></div>
+    <div class="tech-row"><span class="comp">Sıcaklık Sensörü</span><span class="detail">DS18B20 su geçirmez prob</span></div>
+    <div class="tech-row"><span class="comp">Akü</span><span class="detail">12V 24Ah kurşun-asit</span></div>
+    <div class="tech-row"><span class="comp">Güneş Paneli</span><span class="detail">24W monokristal</span></div>
+    <div class="tech-row"><span class="comp">Şarj Kontrolcüsü</span><span class="detail">Solar Charge Controller — 13V + 2×5V USB çıkış</span></div>
+    <div class="tech-row"><span class="comp">Voltaj Düşürücü</span><span class="detail">Buck converter (13V → 6V, su motoru için)</span></div>
+    <div class="tech-row"><span class="comp">Su Motoru</span><span class="detail">6V DC pompa — 1.2A başlangıç, 0.7A çalışma</span></div>
+  </div>
+
+  <h3>Mobil uygulama: veriyi çiftçinin eline taşımak</h3>
+
+  <p>Donanım ne kadar iyi olursa olsun, çiftçi tarladan uzaktayken verilere ulaşamıyorsa pek bir anlamı kalmıyor. O yüzden sistemin ayrılmaz bir parçası olarak <strong>mobil uygulama</strong> geliştirdik. ESP32 ölçüm verilerini WiFi üzerinden buluta gönderiyor, uygulama da oradan anlık olarak çekiyor. Arayüzü mümkün olduğunca sade tuttuk — pH değeri, TDS, su sıcaklığı ve sistem durumu ana ekranda tek bakışta görünüyor. Değerler tehlikeli seviyelere ulaştığında doğrudan telefona <strong>bildirim</strong> gidiyor. Teknik bilgisi olmayan bir çiftçinin de rahatça kullanabileceği bir şey yapmak istedik — ve bunu başardığımızı düşünüyorum.</p>
+
+  <img src="img5.jpeg" class="blog-img" alt="Tamamlanmış sistem - güneş paneli ve kutu">
+  <div class="blog-img-caption">Güneş paneli üstte, elektronik kutu altında — sistem sahaya hazır</div>
+
+  <h3>Kafayı yiyen sorun: sensör gürültüsü</h3>
+
+  <p>Her şey hazır, test aşamasına geçtik. Ve tam o sırada garip bir şey fark ettik: sensörler birbirini etkiliyor. Üç sensör aynı anda çalışınca ölçüm değerleri kayıyor. Daha da kötüsü, <strong>su motoru devreye girince</strong> motorun yarattığı elektriksel gürültü sensörleri tamamen çıldırtıyor — anlamsız değerler, sahte alarmlar.</p>
+
+  <p>İki çözüm yolu vardı: yazılımsal filtreleme ya da donanımsal gürültü engelleme devresi. Önce yazılımsal tarafı çözdük — motor çalışırken ölçümü kısa süre askıya alıyoruz, okuma zamanlamalarını düzenledik. Şimdilik bu yeterli. Donanımsal çözüme sahadan gelen geri bildirimlere göre karar vereceğiz. Bu bizim ilk sistemimiz, nasıl davranacağını önce görmek istiyoruz.</p>
+
+  <img src="img6.jpeg" class="blog-img" alt="Sistemin genel görünümü">
+  <div class="blog-img-caption">Sistemin dış görünümü — güneş paneli, kutu ve iskelet bir arada</div>
+
+  <h3>Sonuç</h3>
+
+  <p>Sistem sahaya kurulabilecek durumda. Güneş enerjisiyle besleniyor, verileri buluta gönderiyor, mobil uygulamadan takip edilebiliyor, anormal durumda bildirim atıyor. Eksikleri var, iyileştirilecek yerleri kesinlikle var. Ama bu ilk adım için bence yeterinden fazlası. En değerli şey ise şu: PCB tasarımı, lehim, kalibrasyon, gürültü problemi, enerji yönetimi... hepsini sıfırdan, yaşayarak öğrendim.</p>
+
+  <h3>Teşekkürler</h3>
+
+  <p>Bu projeyi tek başıma yapamadım. Her adımda yanımda olan <strong>arkadaşlarıma</strong> içtenlikle teşekkür etmek istiyorum — sanayideki yorucu günlerde, sabaha kadar süren test aşamalarında, her "neden çalışmıyor" krizinde hep birlikteydik. Ayrıca iskelet imalatında bize yardım eden <strong>Mehmet ustaya</strong>, fikir ve desteklerini esirgemeyen herkese çok teşekkürler. Güzel bir ekip çalışmasıydı.</p>
+
+  <div class="page-footer">© 2025 Ahmet Ulu · Kayseri — <a href="index.html" style="color:var(--accent);text-decoration:none;">Ana sayfaya dön</a></div>
+
+</div>
+</body>
+</html>
