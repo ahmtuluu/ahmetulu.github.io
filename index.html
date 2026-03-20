@@ -9,13 +9,15 @@
 :root{--bg:#111110;--surface:#1a1a18;--border:#2a2a27;--text:#e8e6e1;--muted:#6b6b65;--soft:#9b9991;--accent:#d4a574;--line:#2e2e2b;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;font-size:15px;min-height:100vh;}
+#circuit-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0;transition:opacity 1.2s ease;}
+#circuit-canvas.show{opacity:1;}
 nav{position:fixed;top:0;right:0;left:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:22px 40px;background:rgba(17,17,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
 .nav-logo{font-family:'Lora',serif;font-size:16px;color:var(--text);cursor:pointer;border:none;background:none;font-weight:400;}
 .nav-links{display:flex;gap:24px;list-style:none;}
 .nav-links button{background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:color 0.2s;padding:0;font-weight:300;}
 .nav-links button:hover{color:var(--text);}
 .nav-links button.active{color:var(--accent);}
-.page{display:none;min-height:100vh;padding:0 40px;max-width:700px;margin:0 auto;flex-direction:column;}
+.page{display:none;min-height:100vh;padding:0 40px;max-width:700px;margin:0 auto;flex-direction:column;position:relative;z-index:1;}
 .page.active{display:flex;animation:pageIn 0.35s ease forwards;}
 @keyframes pageIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 #page-home{padding-top:120px;padding-bottom:60px;justify-content:center;}
@@ -35,7 +37,7 @@ nav{position:fixed;top:0;right:0;left:0;z-index:100;display:flex;justify-content
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
 .social-links{display:flex;gap:10px;margin-top:28px;opacity:0;transform:translateY(10px);transition:opacity 0.6s ease 0.3s,transform 0.6s ease 0.3s;}
 .social-links.show{opacity:1;transform:translateY(0);}
-.social-link{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--muted);text-decoration:none;transition:all 0.2s;}
+.social-link{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:rgba(26,26,24,0.8);color:var(--muted);text-decoration:none;transition:all 0.2s;}
 .social-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
 .social-link svg{width:16px;height:16px;fill:currentColor;}
 .inner-page{padding-top:110px;padding-bottom:80px;justify-content:flex-start;}
@@ -102,6 +104,7 @@ nav{position:fixed;top:0;right:0;left:0;z-index:100;display:flex;justify-content
 </style>
 </head>
 <body>
+<canvas id="circuit-canvas"></canvas>
 <nav>
   <button class="nav-logo" onclick="showPage('home')">Ahmet Ulu</button>
   <ul class="nav-links">
@@ -123,13 +126,13 @@ nav{position:fixed;top:0;right:0;left:0;z-index:100;display:flex;justify-content
   </div>
   <div class="social-links" id="socialLinks">
     <a href="https://github.com/ahmtuluu" target="_blank" class="social-link" title="GitHub">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
     </a>
     <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" class="social-link" title="LinkedIn">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
     </a>
     <a href="mailto:ahulu2006@gmail.com" class="social-link" title="E-posta">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
     </a>
   </div>
 </div>
@@ -169,14 +172,14 @@ nav{position:fixed;top:0;right:0;left:0;z-index:100;display:flex;justify-content
     <div class="timeline-item">
       <div class="item-meta">2025</div>
       <div class="item-title">Akıllı Tarım Sistemi</div>
-      <div class="item-desc">Toprak nemi, sıcaklık ve ışık sensörleriyle otomatik sulama ve izleme yapan IoT tabanlı proje. Veriler buluta aktarılarak uzaktan takip ve kontrol sağlanmaktadır.</div>
+      <div class="item-desc">Toprak nemi, sıcaklık ve ışık sensörleriyle otomatik sulama ve izleme yapan IoT tabanlı proje.</div>
       <div class="item-tags"><span class="tag">ESP32</span><span class="tag">Python</span><span class="tag">IoT</span><span class="tag">Sensör</span></div>
       <a href="#" class="item-link">Ayrıntılar yakında →</a>
     </div>
     <div class="timeline-item">
       <div class="item-meta">2025</div>
       <div class="item-title">Topraksız Tarım Projesi</div>
-      <div class="item-desc">Hidroponik yöntemle bitki yetiştirmeyi otomatikleştiren sistem. Besin çözeltisi pH ve EC değerlerini sürekli ölçerek dozaj pompalarını kontrol etmektedir.</div>
+      <div class="item-desc">Hidroponik yöntemle bitki yetiştirmeyi otomatikleştiren sistem. pH ve EC değerlerini ölçerek dozaj pompalarını kontrol eder.</div>
       <div class="item-tags"><span class="tag">Raspberry Pi</span><span class="tag">Python</span><span class="tag">C++</span><span class="tag">Otomasyon</span></div>
       <a href="#" class="item-link">Ayrıntılar yakında →</a>
     </div>
@@ -210,21 +213,17 @@ nav{position:fixed;top:0;right:0;left:0;z-index:100;display:flex;justify-content
   <div class="contact-links">
     <a href="mailto:ahulu2006@gmail.com" class="contact-row">
       <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></span>
-      <span class="contact-label">E-posta</span>
-      ahulu2006@gmail.com
+      <span class="contact-label">E-posta</span>ahulu2006@gmail.com
     </a>
     <a href="https://github.com/ahmtuluu" target="_blank" class="contact-row">
       <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></span>
-      <span class="contact-label">GitHub</span>
-      github.com/ahmtuluu
+      <span class="contact-label">GitHub</span>github.com/ahmtuluu
     </a>
     <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" class="contact-row">
       <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
-      <span class="contact-label">LinkedIn</span>
-      linkedin.com/in/ahmet-ulu
+      <span class="contact-label">LinkedIn</span>linkedin.com/in/ahmet-ulu
     </a>
   </div>
-
   <form action="https://formspree.io/f/mvzwyvky" method="POST" id="contactForm" class="contact-form">
     <div class="form-row">
       <div class="form-group"><label>Ad Soyad</label><input type="text" name="name" placeholder="Adın ne?" required></div>
@@ -234,7 +233,6 @@ nav{position:fixed;top:0;right:0;left:0;z-index:100;display:flex;justify-content
     <button type="submit" class="btn btn-primary" style="width:fit-content;margin-top:4px;">Gönder →</button>
   </form>
   <div class="form-success" id="formSuccess">✓ Mesajın alındı! En kısa sürede dönüş yapacağım.</div>
-
   <div class="page-footer">© 2025 Ahmet Ulu · Kayseri</div>
 </div>
 
@@ -249,6 +247,7 @@ function showPage(id){
   window.scrollTo(0,0);
 }
 
+// Typewriter
 var lines=[{text:'Merhaba, ben',italic:false},{text:'Ahmet Ulu.',italic:true}];
 var li=0,ci=0;
 var te=document.getElementById('homeTitle');
@@ -256,18 +255,12 @@ var de=document.getElementById('homeDesc');
 var ce=document.getElementById('homeCta');
 var le=document.getElementById('homeLabel');
 var se=document.getElementById('socialLinks');
-
 setTimeout(function(){le.style.opacity='1';},300);
-
 function type(){
   if(li>=lines.length){
     var c=te.querySelector('.cursor-blink');
     if(c){c.remove();}
-    setTimeout(function(){
-      de.classList.add('show');
-      ce.classList.add('show');
-      se.classList.add('show');
-    },200);
+    setTimeout(function(){de.classList.add('show');ce.classList.add('show');se.classList.add('show');},200);
     return;
   }
   var line=lines[li];
@@ -292,6 +285,7 @@ function type(){
 }
 setTimeout(type,600);
 
+// Form
 var form=document.getElementById('contactForm');
 if(form){
   form.addEventListener('submit',function(e){
@@ -299,13 +293,199 @@ if(form){
     var data=new FormData(form);
     fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
     .then(function(r){
-      if(r.ok){
-        form.style.display='none';
-        document.getElementById('formSuccess').classList.add('show');
-      }
+      if(r.ok){form.style.display='none';document.getElementById('formSuccess').classList.add('show');}
     });
   });
 }
+
+// PCB ANİMASYONU
+var canvas=document.getElementById('circuit-canvas');
+var ctx=canvas.getContext('2d');
+var W,H,frame=0;
+var nodes=[],clines=[],chips=[],resistors=[];
+
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();
+window.addEventListener('resize',function(){resize();initPCB();});
+
+function initPCB(){
+  nodes=[];clines=[];chips=[];resistors=[];
+  var gx=56,gy=56;
+  var cols=Math.ceil(W/gx)+1;
+  var rows=Math.ceil(H/gy)+1;
+
+  // Grid noktaları (lehim padleri)
+  for(var r=0;r<rows;r++){
+    for(var c=0;c<cols;c++){
+      if(Math.random()>0.38){
+        nodes.push({
+          x:c*gx+(Math.random()*8-4),
+          y:r*gy+(Math.random()*8-4),
+          px:c*gx,py:r*gy,
+          pulse:Math.random()*Math.PI*2,
+          spd:0.003+Math.random()*0.004,
+          type:Math.random()>0.85?'via':'pad'
+        });
+      }
+    }
+  }
+
+  // Devre izleri (sadece yatay/dikey — PCB gibi)
+  for(var i=0;i<nodes.length;i++){
+    for(var j=i+1;j<nodes.length;j++){
+      var dx=Math.abs(nodes[i].px-nodes[j].px);
+      var dy=Math.abs(nodes[i].py-nodes[j].py);
+      if((dx<=gx&&dy===0)||(dy<=gy&&dx===0)){
+        if(Math.random()>0.35){
+          clines.push({
+            a:i,b:j,prog:0,
+            spd:0.0015+Math.random()*0.002,
+            delay:Math.floor(Math.random()*200),
+            signal:Math.random(),
+            sigSpd:0.003+Math.random()*0.005
+          });
+        }
+      }
+    }
+  }
+
+  // IC Çipleri (dikdörtgen)
+  var chipCount=Math.floor(W*H/120000);
+  for(var i=0;i<chipCount;i++){
+    var w=30+Math.floor(Math.random()*30);
+    var h=20+Math.floor(Math.random()*20);
+    chips.push({
+      x:Math.random()*(W-80)+40,
+      y:Math.random()*(H-60)+30,
+      w:w,h:h,
+      pulse:Math.random()*Math.PI*2,
+      spd:0.002+Math.random()*0.003,
+      pins:Math.floor(w/8)
+    });
+  }
+
+  // Dirençler (küçük dikdörtgenler)
+  var resCount=Math.floor(W*H/60000);
+  for(var i=0;i<resCount;i++){
+    resistors.push({
+      x:Math.random()*(W-60)+30,
+      y:Math.random()*(H-40)+20,
+      rot:Math.random()>0.5?0:Math.PI/2,
+      pulse:Math.random()*Math.PI*2,
+      spd:0.002+Math.random()*0.003
+    });
+  }
+}
+initPCB();
+
+function drawPCB(){
+  ctx.clearRect(0,0,W,H);
+  frame++;
+
+  // Devre izleri
+  for(var i=0;i<clines.length;i++){
+    var l=clines[i];
+    if(frame>l.delay){l.prog=Math.min(1,l.prog+l.spd);}
+    if(l.prog<=0)continue;
+    var na=nodes[l.a],nb=nodes[l.b];
+
+    ctx.beginPath();
+    ctx.moveTo(na.x,na.y);
+    ctx.lineTo(na.x+(nb.x-na.x)*l.prog,na.y+(nb.y-na.y)*l.prog);
+    ctx.strokeStyle='rgba(212,165,116,0.08)';
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+
+    // Sinyal noktası
+    if(l.prog>=1){
+      l.signal+=l.sigSpd;
+      if(l.signal>1)l.signal=0;
+      var sx=na.x+(nb.x-na.x)*l.signal;
+      var sy=na.y+(nb.y-na.y)*l.signal;
+      ctx.beginPath();
+      ctx.arc(sx,sy,1.5,0,Math.PI*2);
+      ctx.fillStyle='rgba(212,165,116,0.4)';
+      ctx.fill();
+    }
+  }
+
+  // Pad ve via noktaları
+  for(var i=0;i<nodes.length;i++){
+    var n=nodes[i];
+    n.pulse+=n.spd;
+    var g=0.12+Math.sin(n.pulse)*0.06;
+
+    if(n.type==='via'){
+      // Via: daire içinde daire
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,4,0,Math.PI*2);
+      ctx.strokeStyle='rgba(212,165,116,'+g+')';
+      ctx.lineWidth=1;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,1.5,0,Math.PI*2);
+      ctx.fillStyle='rgba(212,165,116,'+(g*0.8)+')';
+      ctx.fill();
+    } else {
+      // SMD pad: kare
+      ctx.strokeStyle='rgba(212,165,116,'+g+')';
+      ctx.lineWidth=1;
+      ctx.strokeRect(n.x-3,n.y-3,6,6);
+      ctx.fillStyle='rgba(212,165,116,'+(g*0.4)+')';
+      ctx.fillRect(n.x-1.5,n.y-1.5,3,3);
+    }
+  }
+
+  // IC çipleri
+  for(var i=0;i<chips.length;i++){
+    var c=chips[i];
+    c.pulse+=c.spd;
+    var g=0.1+Math.sin(c.pulse)*0.04;
+    var cx=c.x-c.w/2,cy=c.y-c.h/2;
+
+    ctx.strokeStyle='rgba(212,165,116,'+g+')';
+    ctx.lineWidth=1;
+    ctx.strokeRect(cx,cy,c.w,c.h);
+    ctx.fillStyle='rgba(212,165,116,'+(g*0.15)+')';
+    ctx.fillRect(cx,cy,c.w,c.h);
+
+    // Pin noktaları üstte ve altta
+    for(var p=0;p<c.pins;p++){
+      var px=cx+8+p*8;
+      if(px>cx+c.w-4)break;
+      // Üst pinler
+      ctx.fillStyle='rgba(212,165,116,'+(g*1.2)+')';
+      ctx.fillRect(px-1.5,cy-4,3,4);
+      // Alt pinler
+      ctx.fillRect(px-1.5,cy+c.h,3,4);
+    }
+  }
+
+  // Dirençler
+  for(var i=0;i<resistors.length;i++){
+    var r=resistors[i];
+    r.pulse+=r.spd;
+    var g=0.1+Math.sin(r.pulse)*0.05;
+
+    ctx.save();
+    ctx.translate(r.x,r.y);
+    ctx.rotate(r.rot);
+    ctx.strokeStyle='rgba(212,165,116,'+g+')';
+    ctx.lineWidth=1;
+    ctx.strokeRect(-12,-4,24,8);
+    ctx.fillStyle='rgba(212,165,116,'+(g*0.2)+')';
+    ctx.fillRect(-12,-4,24,8);
+    // Uç padler
+    ctx.fillStyle='rgba(212,165,116,'+(g*1.5)+')';
+    ctx.fillRect(-18,-3,6,6);
+    ctx.fillRect(12,-3,6,6);
+    ctx.restore();
+  }
+
+  requestAnimationFrame(drawPCB);
+}
+
+setTimeout(function(){canvas.classList.add('show');drawPCB();},600);
 </script>
 </body>
 </html>
