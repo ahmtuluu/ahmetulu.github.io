@@ -6,94 +6,99 @@
 <title>Ahmet Ulu</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root { --bg:#111110; --surface:#1a1a18; --border:#2a2a27; --text:#e8e6e1; --muted:#6b6b65; --soft:#9b9991; --accent:#d4a574; --line:#2e2e2b; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-weight:300; line-height:1.7; font-size:15px; min-height:100vh; }
-nav { position:fixed; top:0; right:0; left:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:22px 40px; background:rgba(17,17,16,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
-.nav-logo { font-family:'Lora',serif; font-size:16px; color:var(--text); cursor:pointer; border:none; background:none; font-weight:400; }
-.nav-links { display:flex; gap:24px; list-style:none; }
-.nav-links button { background:none; border:none; font-family:'Inter',sans-serif; font-size:13px; color:var(--muted); cursor:pointer; transition:color 0.2s; padding:0; font-weight:300; }
-.nav-links button:hover { color:var(--text); }
-.nav-links button.active { color:var(--accent); }
-.page { display:none; min-height:100vh; padding:0 40px; max-width:700px; margin:0 auto; flex-direction:column; }
-.page.active { display:flex; }
-#page-home { padding-top:120px; padding-bottom:60px; justify-content:center; }
-.home-label { font-size:12px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; opacity:0; transition:opacity 0.6s ease; }
-.home-title { font-family:'Lora',serif; font-size:clamp(36px,6vw,56px); font-weight:400; line-height:1.2; letter-spacing:-0.5px; margin-bottom:28px; min-height:140px; }
-.tline { display:block; }
-.cursor-blink { display:inline-block; width:2px; height:0.85em; background:var(--accent); margin-left:3px; vertical-align:middle; animation:blink 1s step-end infinite; }
-@keyframes blink { 50%{opacity:0;} }
-.home-desc { font-size:16px; color:var(--soft); max-width:460px; line-height:1.8; opacity:0; transform:translateY(10px); transition:opacity 0.6s ease,transform 0.6s ease; }
-.home-desc.show { opacity:1; transform:translateY(0); }
-.home-cta { display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; opacity:0; transform:translateY(10px); transition:opacity 0.6s ease 0.15s,transform 0.6s ease 0.15s; }
-.home-cta.show { opacity:1; transform:translateY(0); }
-.btn { font-size:13px; padding:10px 22px; border-radius:100px; cursor:pointer; transition:all 0.2s; font-family:'Inter',sans-serif; font-weight:400; border:none; }
-.btn-primary { background:var(--accent); color:#111; }
-.btn-primary:hover { background:#e0b585; }
-.btn-ghost { background:var(--surface); color:var(--soft); border:1px solid var(--border); }
-.btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
-.inner-page { padding-top:110px; padding-bottom:80px; justify-content:flex-start; }
-.page-header { margin-bottom:48px; }
-.page-header h2 { font-family:'Lora',serif; font-size:clamp(28px,4vw,40px); font-weight:400; letter-spacing:-0.5px; margin-bottom:8px; }
-.page-header p { font-size:14px; color:var(--muted); }
-.about-text { font-size:15px; color:var(--soft); line-height:1.85; max-width:540px; }
-.about-text+.about-text { margin-top:16px; }
-.about-text strong { color:var(--text); font-weight:500; }
-.skills-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:36px; }
-.skill-group { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:16px 18px; transition:border-color 0.2s; }
-.skill-group:hover { border-color:var(--accent); }
-.skill-group-label { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:10px; }
-.skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
-.stag { font-size:12px; padding:3px 10px; border-radius:100px; background:var(--bg); color:var(--soft); border:1px solid var(--line); }
-.timeline { position:relative; padding-left:20px; border-left:1px solid var(--line); }
-.timeline-item { position:relative; padding-bottom:36px; padding-left:24px; }
-.timeline-item:last-child { padding-bottom:0; }
-.timeline-item::before { content:''; position:absolute; left:-25px; top:7px; width:7px; height:7px; border-radius:50%; background:var(--border); border:1.5px solid var(--muted); transition:all 0.2s; }
-.timeline-item:hover::before { border-color:var(--accent); background:var(--accent); }
-.item-meta { font-size:11px; color:var(--muted); margin-bottom:5px; }
-.item-title { font-size:16px; font-weight:500; color:var(--text); margin-bottom:7px; }
-.item-desc { font-size:14px; color:var(--soft); line-height:1.65; }
-.item-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
-.tag { font-size:11px; padding:2px 9px; border-radius:100px; background:var(--surface); color:var(--muted); border:1px solid var(--border); }
-.item-link { display:inline-block; margin-top:10px; font-size:12px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-.item-link:hover { color:var(--accent); }
-.edu-list { display:flex; flex-direction:column; }
-.edu-item { display:flex; gap:20px; padding:22px 0; border-bottom:1px solid var(--line); }
-.edu-item:first-child { border-top:1px solid var(--line); }
-.edu-icon { width:42px; height:42px; border-radius:8px; background:var(--surface); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
-.edu-title { font-size:15px; font-weight:500; color:var(--text); margin-bottom:4px; }
-.edu-sub { font-size:13px; color:var(--soft); margin-bottom:4px; }
-.edu-date { font-size:12px; color:var(--muted); }
-.edu-badge { display:inline-block; margin-top:8px; font-size:11px; padding:3px 10px; border-radius:100px; background:rgba(212,165,116,0.1); color:var(--accent); border:1px solid rgba(212,165,116,0.25); }
-.yazi-kategori { margin-bottom:40px; }
-.yazi-kategori-baslik { font-family:'Lora',serif; font-size:20px; font-weight:400; color:var(--text); margin-bottom:4px; }
-.yazi-kategori-desc { font-size:13px; color:var(--muted); margin-bottom:16px; }
-.yazi-item { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:var(--surface); border:1px solid var(--border); border-radius:6px; margin-bottom:8px; cursor:pointer; transition:all 0.2s; text-decoration:none; }
-.yazi-item:hover { border-color:var(--accent); padding-left:20px; }
-.yazi-item:hover .yazi-item-title { color:var(--accent); }
-.yazi-item-title { font-size:14px; color:var(--text); transition:color 0.2s; }
-.yazi-item-meta { font-size:12px; color:var(--muted); white-space:nowrap; }
-.yazi-item-arrow { font-size:14px; color:var(--muted); margin-left:12px; }
-.empty-state { padding:48px 0; text-align:center; border:1px dashed var(--border); border-radius:8px; }
-.empty-state .icon { font-size:28px; margin-bottom:12px; }
-.empty-state .title { font-size:15px; color:var(--soft); margin-bottom:8px; }
-.empty-state .sub { font-size:13px; color:var(--muted); }
-.contact-intro { font-size:15px; color:var(--soft); line-height:1.8; max-width:440px; margin-bottom:32px; }
-.contact-links { display:flex; flex-direction:column; margin-bottom:40px; }
-.contact-row { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); text-decoration:none; color:var(--soft); font-size:14px; transition:color 0.2s,padding-left 0.2s; }
-.contact-row:first-child { border-top:1px solid var(--line); }
-.contact-row:hover { color:var(--accent); padding-left:6px; }
-.contact-icon { width:20px; text-align:center; }
-.contact-label { color:var(--muted); font-size:12px; min-width:64px; }
-.contact-form { display:flex; flex-direction:column; gap:14px; }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.form-group { display:flex; flex-direction:column; gap:6px; }
-.form-group label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; }
-.form-group input,.form-group textarea { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:12px 14px; font-family:'Inter',sans-serif; font-size:14px; font-weight:300; outline:none; border-radius:4px; transition:border-color 0.2s; resize:none; }
-.form-group input:focus,.form-group textarea:focus { border-color:var(--accent); }
-.form-group input::placeholder,.form-group textarea::placeholder { color:var(--muted); }
-.page-footer { margin-top:56px; padding-top:22px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); }
-@media(max-width:600px){ nav{padding:18px 20px;} .page{padding:0 20px;} .nav-links{gap:12px;} .skills-grid{grid-template-columns:1fr;} .form-row{grid-template-columns:1fr;} }
+:root{--bg:#111110;--surface:#1a1a18;--border:#2a2a27;--text:#e8e6e1;--muted:#6b6b65;--soft:#9b9991;--accent:#d4a574;--line:#2e2e2b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;font-size:15px;min-height:100vh;}
+nav{position:fixed;top:0;right:0;left:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:22px 40px;background:rgba(17,17,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.nav-logo{font-family:'Lora',serif;font-size:16px;color:var(--text);cursor:pointer;border:none;background:none;font-weight:400;}
+.nav-links{display:flex;gap:24px;list-style:none;}
+.nav-links button{background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:color 0.2s;padding:0;font-weight:300;}
+.nav-links button:hover{color:var(--text);}
+.nav-links button.active{color:var(--accent);}
+.page{display:none;min-height:100vh;padding:0 40px;max-width:700px;margin:0 auto;flex-direction:column;}
+.page.active{display:flex;animation:pageIn 0.35s ease forwards;}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+#page-home{padding-top:120px;padding-bottom:60px;justify-content:center;}
+.home-label{font-size:12px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;opacity:0;transition:opacity 0.6s ease;}
+.home-title{font-family:'Lora',serif;font-size:clamp(36px,6vw,56px);font-weight:400;line-height:1.2;letter-spacing:-0.5px;margin-bottom:28px;min-height:140px;}
+.tline{display:block;}
+.cursor-blink{display:inline-block;width:2px;height:0.85em;background:var(--accent);margin-left:3px;vertical-align:middle;animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+.home-desc{font-size:16px;color:var(--soft);max-width:460px;line-height:1.8;opacity:0;transform:translateY(10px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.home-desc.show{opacity:1;transform:translateY(0);}
+.home-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;opacity:0;transform:translateY(10px);transition:opacity 0.6s ease 0.15s,transform 0.6s ease 0.15s;}
+.home-cta.show{opacity:1;transform:translateY(0);}
+.btn{font-size:13px;padding:10px 22px;border-radius:100px;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;font-weight:400;border:none;}
+.btn-primary{background:var(--accent);color:#111;}
+.btn-primary:hover{background:#e0b585;}
+.btn-ghost{background:var(--surface);color:var(--soft);border:1px solid var(--border);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+.social-links{display:flex;gap:10px;margin-top:28px;opacity:0;transform:translateY(10px);transition:opacity 0.6s ease 0.3s,transform 0.6s ease 0.3s;}
+.social-links.show{opacity:1;transform:translateY(0);}
+.social-link{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--muted);text-decoration:none;transition:all 0.2s;}
+.social-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.social-link svg{width:16px;height:16px;fill:currentColor;}
+.inner-page{padding-top:110px;padding-bottom:80px;justify-content:flex-start;}
+.page-header{margin-bottom:48px;}
+.page-header h2{font-family:'Lora',serif;font-size:clamp(28px,4vw,40px);font-weight:400;letter-spacing:-0.5px;margin-bottom:8px;}
+.page-header p{font-size:14px;color:var(--muted);}
+.about-text{font-size:15px;color:var(--soft);line-height:1.85;max-width:540px;}
+.about-text+.about-text{margin-top:16px;}
+.about-text strong{color:var(--text);font-weight:500;}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;}
+.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;transition:border-color 0.2s;}
+.skill-group:hover{border-color:var(--accent);}
+.skill-group-label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.stag{font-size:12px;padding:3px 10px;border-radius:100px;background:var(--bg);color:var(--soft);border:1px solid var(--line);}
+.timeline{position:relative;padding-left:20px;border-left:1px solid var(--line);}
+.timeline-item{position:relative;padding-bottom:36px;padding-left:24px;}
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-item::before{content:'';position:absolute;left:-25px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--border);border:1.5px solid var(--muted);transition:all 0.2s;}
+.timeline-item:hover::before{border-color:var(--accent);background:var(--accent);}
+.item-meta{font-size:11px;color:var(--muted);margin-bottom:5px;}
+.item-title{font-size:16px;font-weight:500;color:var(--text);margin-bottom:7px;}
+.item-desc{font-size:14px;color:var(--soft);line-height:1.65;}
+.item-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.tag{font-size:11px;padding:2px 9px;border-radius:100px;background:var(--surface);color:var(--muted);border:1px solid var(--border);}
+.item-link{display:inline-block;margin-top:10px;font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.item-link:hover{color:var(--accent);}
+.edu-list{display:flex;flex-direction:column;}
+.edu-item{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);}
+.edu-item:first-child{border-top:1px solid var(--line);}
+.edu-icon{width:42px;height:42px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.edu-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px;}
+.edu-sub{font-size:13px;color:var(--soft);margin-bottom:4px;}
+.edu-date{font-size:12px;color:var(--muted);}
+.edu-badge{display:inline-block;margin-top:8px;font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(212,165,116,0.1);color:var(--accent);border:1px solid rgba(212,165,116,0.25);}
+.yazi-kategori{margin-bottom:40px;}
+.yazi-kategori-baslik{font-family:'Lora',serif;font-size:20px;font-weight:400;color:var(--text);margin-bottom:4px;}
+.yazi-kategori-desc{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.yazi-item{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:6px;margin-bottom:8px;cursor:pointer;transition:all 0.2s;text-decoration:none;}
+.yazi-item:hover{border-color:var(--accent);padding-left:20px;}
+.yazi-item:hover .yazi-item-title{color:var(--accent);}
+.yazi-item-title{font-size:14px;color:var(--text);transition:color 0.2s;}
+.yazi-item-meta{font-size:12px;color:var(--muted);white-space:nowrap;}
+.yazi-item-arrow{font-size:14px;color:var(--muted);margin-left:12px;}
+.contact-intro{font-size:15px;color:var(--soft);line-height:1.8;max-width:440px;margin-bottom:32px;}
+.contact-links{display:flex;flex-direction:column;margin-bottom:40px;}
+.contact-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--soft);font-size:14px;transition:color 0.2s,padding-left 0.2s;}
+.contact-row:first-child{border-top:1px solid var(--line);}
+.contact-row:hover{color:var(--accent);padding-left:6px;}
+.contact-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.contact-icon svg{width:16px;height:16px;fill:currentColor;}
+.contact-label{color:var(--muted);font-size:12px;min-width:64px;}
+.contact-form{display:flex;flex-direction:column;gap:14px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;}
+.form-group input,.form-group textarea{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:12px 14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:300;outline:none;border-radius:4px;transition:border-color 0.2s;resize:none;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted);}
+.form-success{display:none;padding:16px 20px;background:rgba(212,165,116,0.1);border:1px solid rgba(212,165,116,0.3);border-radius:6px;font-size:14px;color:var(--accent);}
+.form-success.show{display:block;}
+.page-footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);}
+@media(max-width:600px){nav{padding:18px 20px;}.page{padding:0 20px;}.nav-links{gap:12px;}.skills-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -116,6 +121,17 @@ nav { position:fixed; top:0; right:0; left:0; z-index:100; display:flex; justify
     <button class="btn btn-primary" onclick="showPage('projeler')">Projelerime bak</button>
     <button class="btn btn-ghost" onclick="showPage('hakkimda')">Hakkımda</button>
   </div>
+  <div class="social-links" id="socialLinks">
+    <a href="https://github.com/ahmtuluu" target="_blank" class="social-link" title="GitHub">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" class="social-link" title="LinkedIn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="mailto:ahulu2006@gmail.com" class="social-link" title="E-posta">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+    </a>
+  </div>
 </div>
 
 <div id="page-hakkimda" class="page inner-page">
@@ -125,7 +141,7 @@ nav { position:fixed; top:0; right:0; left:0; z-index:100; display:flex; justify
   <p class="about-text">Bu site; projelerimi, deneyimlerimi ve öğrendiklerimi bir arada tuttuğum dijital evim.</p>
   <div class="skills-grid">
     <div class="skill-group"><div class="skill-group-label">Yazılım</div><div class="skill-tags"><span class="stag">Python</span><span class="stag">C</span><span class="stag">C++</span></div></div>
-    <div class="skill-group"><div class="skill-group-label">Donanım & Kartlar</div><div class="skill-tags"><span class="stag">Raspberry Pi</span><span class="stag">STM32</span><span class="stag">ESP32</span></div></div>
+    <div class="skill-group"><div class="skill-group-label">Donanım ve Kartlar</div><div class="skill-tags"><span class="stag">Raspberry Pi</span><span class="stag">STM32</span><span class="stag">ESP32</span></div></div>
     <div class="skill-group"><div class="skill-group-label">Uzmanlık Alanları</div><div class="skill-tags"><span class="stag">Gömülü Sistemler</span><span class="stag">IoT</span><span class="stag">Otomasyon</span></div></div>
     <div class="skill-group"><div class="skill-group-label">İlgi Alanları</div><div class="skill-tags"><span class="stag">Machine Learning</span><span class="stag">Sinyal İşleme</span><span class="stag">Kontrol Sistemleri</span></div></div>
   </div>
@@ -192,66 +208,104 @@ nav { position:fixed; top:0; right:0; left:0; z-index:100; display:flex; justify
   <div class="page-header"><h2>İletişim</h2><p>Bir proje fikrin mi var? Yazışalım.</p></div>
   <p class="contact-intro">İş birliği, proje fikri veya sadece merhaba demek için ulaşabilirsin. Genellikle 1–2 gün içinde dönüş yaparım.</p>
   <div class="contact-links">
-    <a href="mailto:ahulu2006@gmail.com" class="contact-row"><span class="contact-icon">✉</span><span class="contact-label">E-posta</span>ahulu2006@gmail.com</a>
-    <a href="https://github.com/ahmtuluu" target="_blank" class="contact-row"><span class="contact-icon">↗</span><span class="contact-label">GitHub</span>github.com/ahmtuluu</a>
-    <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" class="contact-row"><span class="contact-icon">↗</span><span class="contact-label">LinkedIn</span>linkedin.com/in/ahmet-ulu</a>
+    <a href="mailto:ahulu2006@gmail.com" class="contact-row">
+      <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></span>
+      <span class="contact-label">E-posta</span>
+      ahulu2006@gmail.com
+    </a>
+    <a href="https://github.com/ahmtuluu" target="_blank" class="contact-row">
+      <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></span>
+      <span class="contact-label">GitHub</span>
+      github.com/ahmtuluu
+    </a>
+    <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" class="contact-row">
+      <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+      <span class="contact-label">LinkedIn</span>
+      linkedin.com/in/ahmet-ulu
+    </a>
   </div>
-  <div class="contact-form">
+
+  <form action="https://formspree.io/f/mvzwyvky" method="POST" id="contactForm" class="contact-form">
     <div class="form-row">
-      <div class="form-group"><label>Ad Soyad</label><input type="text" placeholder="Adın ne?"></div>
-      <div class="form-group"><label>E-posta</label><input type="email" placeholder="mail@ornek.com"></div>
+      <div class="form-group"><label>Ad Soyad</label><input type="text" name="name" placeholder="Adın ne?" required></div>
+      <div class="form-group"><label>E-posta</label><input type="email" name="email" placeholder="mail@ornek.com" required></div>
     </div>
-    <div class="form-group"><label>Mesaj</label><textarea rows="5" placeholder="Ne düşünüyorsun?"></textarea></div>
-    <button class="btn btn-primary" style="width:fit-content;margin-top:4px;">Gönder →</button>
-  </div>
+    <div class="form-group"><label>Mesaj</label><textarea name="message" rows="5" placeholder="Ne düşünüyorsun?" required></textarea></div>
+    <button type="submit" class="btn btn-primary" style="width:fit-content;margin-top:4px;">Gönder →</button>
+  </form>
+  <div class="form-success" id="formSuccess">✓ Mesajın alındı! En kısa sürede dönüş yapacağım.</div>
+
   <div class="page-footer">© 2025 Ahmet Ulu · Kayseri</div>
 </div>
 
 <script>
-function showPage(id) {
+function showPage(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.nav-links button').forEach(function(b){b.classList.remove('active');});
-  var page = document.getElementById('page-'+id);
-  if(page) page.classList.add('active');
-  var btn = document.getElementById('nav-'+id);
-  if(btn) btn.classList.add('active');
+  var page=document.getElementById('page-'+id);
+  if(page){page.classList.add('active');}
+  var btn=document.getElementById('nav-'+id);
+  if(btn){btn.classList.add('active');}
   window.scrollTo(0,0);
 }
+
 var lines=[{text:'Merhaba, ben',italic:false},{text:'Ahmet Ulu.',italic:true}];
-var lineIdx=0,charIdx=0;
-var titleEl=document.getElementById('homeTitle');
-var descEl=document.getElementById('homeDesc');
-var ctaEl=document.getElementById('homeCta');
-var labelEl=document.getElementById('homeLabel');
-setTimeout(function(){labelEl.style.opacity='1';},300);
+var li=0,ci=0;
+var te=document.getElementById('homeTitle');
+var de=document.getElementById('homeDesc');
+var ce=document.getElementById('homeCta');
+var le=document.getElementById('homeLabel');
+var se=document.getElementById('socialLinks');
+
+setTimeout(function(){le.style.opacity='1';},300);
+
 function type(){
-  if(lineIdx>=lines.length){
-    var cur=titleEl.querySelector('.cursor-blink');
-    if(cur)cur.remove();
-    setTimeout(function(){descEl.classList.add('show');ctaEl.classList.add('show');},200);
+  if(li>=lines.length){
+    var c=te.querySelector('.cursor-blink');
+    if(c){c.remove();}
+    setTimeout(function(){
+      de.classList.add('show');
+      ce.classList.add('show');
+      se.classList.add('show');
+    },200);
     return;
   }
-  var line=lines[lineIdx];
-  if(charIdx===0){
-    var span=document.createElement('span');
-    span.className='tline';
-    if(line.italic){span.style.fontStyle='italic';span.style.color='var(--accent)';}
-    var oldCur=titleEl.querySelector('.cursor-blink');
-    if(oldCur)oldCur.remove();
-    var cursor=document.createElement('span');
-    cursor.className='cursor-blink';
-    span.appendChild(cursor);
-    titleEl.appendChild(span);
+  var line=lines[li];
+  if(ci===0){
+    var s=document.createElement('span');
+    s.className='tline';
+    if(line.italic){s.style.fontStyle='italic';s.style.color='var(--accent)';}
+    var oc=te.querySelector('.cursor-blink');
+    if(oc){oc.remove();}
+    var cur=document.createElement('span');
+    cur.className='cursor-blink';
+    s.appendChild(cur);
+    te.appendChild(s);
   }
-  var spans=titleEl.querySelectorAll('.tline');
-  var cur=spans[lineIdx];
-  var cursor=cur.querySelector('.cursor-blink');
-  cur.insertBefore(document.createTextNode(line.text[charIdx]),cursor);
-  charIdx++;
-  if(charIdx>=line.text.length){lineIdx++;charIdx=0;setTimeout(type,320);}
+  var sp=te.querySelectorAll('.tline');
+  var cs=sp[li];
+  var cc=cs.querySelector('.cursor-blink');
+  cs.insertBefore(document.createTextNode(line.text[ci]),cc);
+  ci++;
+  if(ci>=line.text.length){li++;ci=0;setTimeout(type,320);}
   else{setTimeout(type,55);}
 }
 setTimeout(type,600);
+
+var form=document.getElementById('contactForm');
+if(form){
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data=new FormData(form);
+    fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+    .then(function(r){
+      if(r.ok){
+        form.style.display='none';
+        document.getElementById('formSuccess').classList.add('show');
+      }
+    });
+  });
+}
 </script>
 </body>
 </html>
