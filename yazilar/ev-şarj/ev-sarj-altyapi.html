@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EV Şarj Optimizasyonu — Raspberry Pi ve Veri Altyapısı — Ahmet Ulu</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#111110; --surface:#1a1a18; --border:#2a2a27; --text:#e8e6e1; --muted:#6b6b65; --soft:#9b9991; --accent:#d4a574; --line:#2e2e2b; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-weight:300; line-height:1.7; font-size:15px; }
+nav { position:fixed; top:0; right:0; left:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:22px 40px; background:rgba(17,17,16,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+.nav-logo { font-family:'Lora',serif; font-size:16px; color:var(--text); text-decoration:none; }
+.nav-back { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-back:hover { color:var(--accent); }
+.container { max-width:680px; margin:0 auto; padding:110px 40px 80px; }
+.blog-tag { font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
+h1 { font-family:'Lora',serif; font-size:clamp(24px,4vw,38px); font-weight:400; line-height:1.25; letter-spacing:-0.5px; margin-bottom:16px; }
+.blog-meta { font-size:13px; color:var(--muted); margin-bottom:48px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+p { font-size:15px; color:var(--soft); line-height:1.85; margin-bottom:20px; }
+p strong { color:var(--text); font-weight:500; }
+h3 { font-family:'Lora',serif; font-size:21px; font-weight:400; color:var(--text); margin:40px 0 14px; }
+.blog-img { width:100%; border-radius:6px; margin:28px 0 8px; border:1px solid var(--border); display:block; max-height:500px; object-fit:cover; }
+.blog-img-caption { font-size:12px; color:var(--muted); text-align:center; margin-bottom:28px; }
+.tech-box { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:6px; padding:20px 24px; margin:28px 0; }
+.tech-box h4 { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent); margin-bottom:14px; }
+.tech-row { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.tech-row:last-child { border-bottom:none; padding-bottom:0; }
+.tech-row .comp { color:var(--text); font-weight:500; }
+.tech-row .detail { color:var(--muted); font-size:12px; }
+.page-footer { margin-top:56px; padding-top:22px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); }
+@media(max-width:600px){ nav{padding:18px 20px;} .container{padding:100px 20px 60px;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">Ahmet Ulu</a>
+  <a href="../../index.html" class="nav-back">← Yazılara dön</a>
+</nav>
+
+<div class="container">
+
+  <div class="blog-tag">Elektrik Şarj İstasyonu Optimizasyonu · 1. Adım</div>
+  <h1>Raspberry Pi ve Veri Altyapısı: Temeli Kurmak</h1>
+  <div class="blog-meta">Ahmet Ulu · Nisan 2026</div>
+
+  <p>Bu projedeki görevim sistemin temelini kurmaktı. Kulağa sade geliyor ama "temel" derken gerçekten her şeyi sıfırdan inşa etmekten bahsediyorum.</p>
+
+  <h3>Veritabanı: verinin bir yere gitmesi lazım</h3>
+
+  <p>İlk iş <strong>Raspberry Pi</strong> üzerine <strong>PostgreSQL</strong> kurmak oldu. Şarj istasyonlarından gelecek verilerin — sıcaklık, nem, enerji tüketimi, doluluk oranı — düzenli bir şekilde saklanabileceği tablo yapılarını hazırladım. Henüz ortada gerçek bir donanım yoktu, ama sistem ona hazır hale geldi.</p>
+
+  <img src="datatable.jpg" class="blog-img" alt="PostgreSQL veritabanı tablo görünümü">
+  <div class="blog-img-caption">Veritabanına akan anlık veriler — current, voltage, battery_percent her 2 saniyede bir kaydediliyor</div>
+
+  <h3>Arduino ile ilk veri akışı</h3>
+
+  <p>Donanım tarafında <strong>Arduino</strong> ile Raspberry Pi arasında seri haberleşme kurdum. Arduino'dan simüle edilmiş sensör verileri geldi, <strong>Python</strong> bu verileri okuyup veritabanına yazdı. Gerçek sensörler olmadan önce veri akışının çalıştığını görmek istiyordum — ve çalıştı.</p>
+
+  <h3>Plaka algılama: her araç kendi bölümünde</h3>
+
+  <p>Sonra işin en çok ilgimi çeken kısmına geçtim: <strong>kamera ile plaka algılama.</strong> Raspberry Pi'ye bağlı kamera araç plakalarını tanıdı ve sisteme kaydetti. Her plaka için veritabanında otomatik olarak ayrı bir bölüm açıldı — giriş zamanı, sensör verileri, geçmiş kayıtlar hepsi o aracın plakası altında tutuldu. Sistem böylece çoklu kullanım için de hazır hale geldi.</p>
+
+  <img src="plaka.jpeg" class="blog-img" alt="Raspberry Pi kamera ile plaka algılama">
+  <div class="blog-img-caption">Kamera plakayı algılıyor, sistem otomatik olarak o araç için yeni bir kayıt açıyor</div>
+
+  <h3>Session yapısı ve REST API</h3>
+
+  <p>Her araç sisteme girdiğinde yeni bir <strong>session</strong> başlıyor, çıkışta kapanıyor. Bu yapı sayesinde hangi aracın ne zaman geldiği, ne kadar şarj yaptığı, o süredeki tüm sensör verileri tek bir session altında izlenebilir hale geldi.</p>
+
+  <img src="sessions.jpg" class="blog-img" alt="Session tablosu - araç giriş çıkış kayıtları">
+  <div class="blog-img-caption">Session tablosu — her araç girişinde yeni kayıt açılıyor, çıkışta is_active false'a dönüyor</div>
+
+  <p>Son olarak <strong>Flask</strong> ile bir REST API yazdım. Takım arkadaşım mobil uygulamayı geliştirdi, API üzerinden veriler uygulamaya aktarıldı ve ekranda göründü. İlk defa bir başkasının kullandığı bir şey yazmıştım — bu his farklıydı.</p>
+
+  <div class="tech-box">
+    <h4>Teknik Detaylar</h4>
+    <div class="tech-row"><span class="comp">Donanım</span><span class="detail">Raspberry Pi</span></div>
+    <div class="tech-row"><span class="comp">Veri Simülasyonu</span><span class="detail">Arduino — seri haberleşme</span></div>
+    <div class="tech-row"><span class="comp">Veritabanı</span><span class="detail">PostgreSQL</span></div>
+    <div class="tech-row"><span class="comp">Backend Dili</span><span class="detail">Python</span></div>
+    <div class="tech-row"><span class="comp">Plaka Algılama</span><span class="detail">Raspberry Pi Kamera + OCR</span></div>
+    <div class="tech-row"><span class="comp">API</span><span class="detail">Flask REST API</span></div>
+    <div class="tech-row"><span class="comp">Mobil Uygulama</span><span class="detail">Takım arkadaşı tarafından geliştirildi</span></div>
+  </div>
+
+  <h3>Sonuç</h3>
+
+  <p>Bu aşamada öğrendiğim en önemli şey teknik detaylar değildi aslında. Bir ekipte görev paylaşımının, zamanında iletişimin ve "bu benim işim bitti" demek yerine bütünün çalışmasını takip etmenin ne kadar kritik olduğunu gördüm.</p>
+
+  <p>Sonraki adım: gerçek sensörler ve optimizasyon algoritmaları.</p>
+
+  <div class="page-footer">© 2026 Ahmet Ulu · Kayseri — <a href="../../index.html" style="color:var(--accent);text-decoration:none;">Ana sayfaya dön</a></div>
+
+</div>
+</body>
+</html>
