@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12V DC Ayarlı Güç Kaynağı — Ahmet Ulu</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#111110; --surface:#1a1a18; --border:#2a2a27; --text:#e8e6e1; --muted:#6b6b65; --soft:#9b9991; --accent:#d4a574; --line:#2e2e2b; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-weight:300; line-height:1.7; font-size:15px; }
+nav { position:fixed; top:0; right:0; left:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:22px 40px; background:rgba(17,17,16,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+.nav-logo { font-family:'Lora',serif; font-size:16px; color:var(--text); text-decoration:none; }
+.nav-back { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-back:hover { color:var(--accent); }
+.container { max-width:680px; margin:0 auto; padding:110px 40px 80px; }
+.blog-tag { font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
+h1 { font-family:'Lora',serif; font-size:clamp(24px,4vw,38px); font-weight:400; line-height:1.25; letter-spacing:-0.5px; margin-bottom:16px; }
+.blog-meta { font-size:13px; color:var(--muted); margin-bottom:48px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+p { font-size:15px; color:var(--soft); line-height:1.85; margin-bottom:20px; }
+p strong { color:var(--text); font-weight:500; }
+h3 { font-family:'Lora',serif; font-size:21px; font-weight:400; color:var(--text); margin:40px 0 14px; }
+.blog-img { width:100%; border-radius:6px; margin:28px 0 8px; border:1px solid var(--border); display:block; max-height:500px; object-fit:cover; }
+.blog-img-caption { font-size:12px; color:var(--muted); text-align:center; margin-bottom:28px; }
+.tech-box { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:6px; padding:20px 24px; margin:28px 0; }
+.tech-box h4 { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent); margin-bottom:14px; }
+.tech-row { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.tech-row:last-child { border-bottom:none; padding-bottom:0; }
+.tech-row .comp { color:var(--text); font-weight:500; }
+.tech-row .detail { color:var(--muted); font-size:12px; }
+.page-footer { margin-top:56px; padding-top:22px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); }
+@media(max-width:600px){ nav{padding:18px 20px;} .container{padding:100px 20px 60px;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">Ahmet Ulu</a>
+  <a href="../../index.html" class="nav-back">← Yazılara dön</a>
+</nav>
+
+<div class="container">
+
+  <div class="blog-tag">Pratik Proje</div>
+  <h1>12V DC Ayarlı Güç Kaynağı — LM2596 ile Harici Potansiyometre Modifikasyonu</h1>
+  <div class="blog-meta">Ahmet Ulu · Nisan 2026</div>
+
+  <p>Son zamanlarda hem günlük kullanımda işime yarayacak hem de elektronik bilgimi geliştirecek bir proje yapmak istedim. <strong>LM2596</strong> tabanlı ayarlanabilir bir DC güç kaynağı tasarladım. Standart LM2596 modüller üzerinde küçük bir trimpot bulunuyor — hem çok küçük olduğu için kullanımı zor hem de hassas ayar için tornavida gerekiyor. Ben de bu trimpotu sökerek yerine dışarıdan çevrilebilen <strong>10 tur hassas potansiyometre</strong> bağlamaya karar verdim.</p>
+
+  <img src="schema2.png" class="blog-img" alt="LM2596 devre şeması">
+  <div class="blog-img-caption">Devrenin genel şeması — adaptörden çıkışa kadar tüm bağlantılar</div>
+
+  <h3>Devrenin yapısı</h3>
+
+  <p>Giriş kaynağı olarak <strong>12V DC adaptör</strong> kullandım. Adaptörden gelen enerji önce DC giriş soketine, ardından sigortaya ve açma-kapama anahtarına bağlandı. Anahtardan sonra hat LM2596 modülünün girişine verildi. Çıkış tarafında pozitif ve negatif terminaller ile anlık voltajı görmek için <strong>dijital voltmetre ekranı</strong> ekledim.</p>
+
+  <img src="schema1.png" class="blog-img" alt="Potansiyometre bağlantı şeması">
+  <div class="blog-img-caption">Potansiyometre dış bağlantı şeması — pot 1: GND, pot 2: FB, pot 3: OUT+</div>
+
+  <div class="tech-box">
+    <h4>Teknik Detaylar</h4>
+    <div class="tech-row"><span class="comp">Giriş Voltajı</span><span class="detail">12V DC Adaptör</span></div>
+    <div class="tech-row"><span class="comp">Çıkış Voltajı</span><span class="detail">1.25V – 37V (Ayarlanabilir)</span></div>
+    <div class="tech-row"><span class="comp">Buck Converter</span><span class="detail">LM2596 Adjustable Modül</span></div>
+    <div class="tech-row"><span class="comp">Potansiyometre</span><span class="detail">10K 10 Tur Hassas Pot</span></div>
+    <div class="tech-row"><span class="comp">Sigorta</span><span class="detail">2A</span></div>
+    <div class="tech-row"><span class="comp">Ekran</span><span class="detail">3 Kablolu Dijital Voltmetre</span></div>
+    <div class="tech-row"><span class="comp">Kasa</span><span class="detail">Geri dönüşüm süzme peynir kabı</span></div>
+  </div>
+
+  <h3>Sorunlar ve çözümleri</h3>
+
+  <p>En öğretici kısım karşılaştığım sorunlardı. İlk olarak lehim telimin kalitesiz olması yüzünden potansiyometreye gereğinden fazla ısı uyguladım ve pot kullanılamaz hale geldi. Yeni bir potansiyometre aldım, daha kaliteli lehim teli kullandım. Ama devre hâlâ çalışmıyordu.</p>
+
+  <p>Sorun <strong>pin bağlantısındaydı.</strong> Her potansiyometrede numaralandırma aynı görünse de orta ucun ve dış uçların fiziksel sırası modele göre değişebiliyor. Multimetre ile ölçüm yaparak gerçek pin yapısını belirledim.</p>
+
+  <p>Bir sorun daha vardı: lehimleme sırasında kartın <strong>GND padini</strong> zedelemiştim. Bu yüzden GND bağlantısını karttan değil, doğrudan çıkışın negatif ucundan aldım — buck converter devrelerinde çıkış eksi ile sistem GND ortaktır. Bu bağlantıyı yaptıktan sonra sistem tamamen düzgün çalışmaya başladı.</p>
+
+  <img src="device1.jpeg" class="blog-img" alt="Tamamlanmış güç kaynağı cihazı">
+  <div class="blog-img-caption">Tamamlanmış cihaz — voltmetre 6.75V gösteriyor, terminaller hazır</div>
+
+  <h3>Test</h3>
+
+  <p>Sistem çalışır hale gelince multimetre ile doğrulama yaptım. Cihazın kendi ekranı ile multimetre aynı değeri gösteriyordu — kalibrasyon sorunsuz.</p>
+
+  <img src="device2.jpeg" class="blog-img" alt="Multimetre ile test">
+  <div class="blog-img-caption">Multimetre testi — cihaz ekranı ve multimetre aynı değeri gösteriyor</div>
+
+  <h3>Kasa: geri dönüşüm ruhu</h3>
+
+  <p>Elimde bulunan eski bir <strong>süzme peynir kabını</strong> değerlendirdim ve cihaz kasası olarak kullandım. Normalde mutfakta görev yapan bu kahraman, kariyer değiştirerek artık masaüstünde güç elektroniği alanında hizmet veriyor.</p>
+
+  <img src="device3.jpeg" class="blog-img" alt="Cihazın yan görünümü — giriş soketi ve anahtar">
+  <div class="blog-img-caption">Yan tarafta DC giriş soketi ve açma-kapama anahtarı</div>
+
+  <h3>Sonuç</h3>
+
+  <p>Bu proje bana lehim kalitesinin önemini, fazla ısının bileşenlere zarar verebileceğini, pin numaralarına körü körüne güvenmek yerine ölçüm yapılması gerektiğini ve <strong>datasheet okumanın</strong> ne kadar kritik olduğunu öğretti. Bazen sorun yeni parça almakla değil, devrenin mantığını anlayarak çözülüyor.</p>
+
+  <p>Gelecekte akım ölçer, fan soğutma ve USB çıkış eklemeyi düşünüyorum. Bu çalışma benim için sadece bir devre değil, gerçek bir problem çözme pratiği oldu.</p>
+
+  <div class="page-footer">© 2026 Ahmet Ulu · Kayseri — <a href="../../index.html" style="color:var(--accent);text-decoration:none;">Ana sayfaya dön</a></div>
+
+</div>
+</body>
+</html>
