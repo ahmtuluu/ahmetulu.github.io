@@ -2,74 +2,81 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Su Analiz Sistemi — Ahmet Ulu</title>
+<meta name="description" content="Güneş enerjili, off-grid su analiz sistemi: pH, TDS ve sıcaklık ölçümü, PCB, mobil uygulama ve sensör gürültüsü.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="Su Analiz Sistemi — Ahmet Ulu">
+<meta property="og:description" content="Güneş enerjili, off-grid su analiz sistemi: pH, TDS ve sıcaklık ölçümü, PCB, mobil uygulama ve sensör gürültüsü.">
+<meta property="og:url" content="https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/kapak/akilli-tarim.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root { --bg:#111110; --surface:#1a1a18; --border:#2a2a27; --text:#e8e6e1; --muted:#6b6b65; --soft:#9b9991; --accent:#d4a574; --line:#2e2e2b; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-weight:300; line-height:1.7; font-size:15px; }
-nav { position:fixed; top:0; right:0; left:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:22px 40px; background:rgba(17,17,16,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
-.nav-logo { font-family:'Lora',serif; font-size:16px; color:var(--text); text-decoration:none; }
-.nav-back { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-.nav-back:hover { color:var(--accent); }
-.container { max-width:680px; margin:0 auto; padding:110px 40px 80px; }
-.blog-tag { font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
-h1 { font-family:'Lora',serif; font-size:clamp(24px,4vw,38px); font-weight:400; line-height:1.25; letter-spacing:-0.5px; margin-bottom:16px; }
-.blog-meta { font-size:13px; color:var(--muted); margin-bottom:48px; padding-bottom:24px; border-bottom:1px solid var(--line); }
-p { font-size:15px; color:var(--soft); line-height:1.85; margin-bottom:20px; }
-p strong { color:var(--text); font-weight:500; }
-h3 { font-family:'Lora',serif; font-size:21px; font-weight:400; color:var(--text); margin:40px 0 14px; }
-.blog-img { width:100%; border-radius:6px; margin:28px 0 8px; border:1px solid var(--border); display:block; max-height:500px; object-fit:cover; }
-.blog-img-caption { font-size:12px; color:var(--muted); text-align:center; margin-bottom:28px; }
-.tech-box { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:6px; padding:20px 24px; margin:28px 0; }
-.tech-box h4 { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent); margin-bottom:14px; }
-.tech-row { display:flex; justify-content:space-between; align-items:baseline; padding:7px 0; border-bottom:1px solid var(--line); font-size:13px; }
-.tech-row:last-child { border-bottom:none; padding-bottom:0; }
-.tech-row .comp { color:var(--text); font-weight:500; }
-.tech-row .detail { color:var(--muted); font-size:12px; }
-.page-footer { margin-top:56px; padding-top:22px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); }
-@media(max-width:600px){ nav{padding:18px 20px;} .container{padding:100px 20px 60px;} }
-</style>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-
-<nav>
-  <a href="../../index.html" class="nav-logo">Ahmet Ulu</a>
-  <a href="../../index.html" class="nav-back">← Yazılara dön</a>
-</nav>
-
-<div class="container">
-
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../../egitim.html">Eğitim</a></li>
+    <li><a href="../../projeler.html">Projeler</a></li>
+    <li><a href="../../yazilar.html" aria-current="page">Yazılar</a></li>
+    <li><a href="../../iletisim.html">İletişim</a></li>
+  </ul>
+</header>
+<main id="icerik">
+<article class="wrap-narrow article">
+  <a href="../../yazilar.html" class="back-link">← Tüm yazılar</a>
   <div class="blog-tag">Akıllı Tarım Sistemi · 1. Adım</div>
   <h1>Su Analiz Sistemi: Sıfırdan Bir Sistem Kurmak</h1>
   <div class="blog-meta">Ahmet Ulu · Mart 2026</div>
 
   <p>Akıllı tarım projemizin ilk adımını tamamladık: <strong>Su Analiz Sistemi.</strong> Bu sistem aslında tek başına bile ciddi bir iş — sulama suyunun pH'ı, TDS değeri veya sıcaklığı tehlikeli seviyelere ulaştığında çiftçiyi anında uyarıyor, mobil uygulamadan bildirim gönderiyor. Güneş enerjisiyle çalışıyor, şebekeye bağlı değil, doğrudan tarlaya kurulabiliyor. Benim için bu proje sadece bir sistem değil, sıfırdan bir şey inşa etmenin ne demek olduğunu öğrendiğim bir süreçti.</p>
 
-  <img src="img1.jpeg" class="blog-img" alt="Breadboard üzerinde sensör testleri">
-  <div class="blog-img-caption">Breadboard üzerinde ilk sensör testleri — her bileşeni tek tek devreye alıp ESP32 ile haberleştirdim</div>
+  <figure class="blog-figure">
+    <img src="img1.jpeg" class="blog-img" alt="Breadboard üzerinde sensör testleri" width="1200" height="900" loading="eager" decoding="async">
+    <figcaption>Breadboard üzerinde ilk sensör testleri — her bileşeni tek tek devreye alıp ESP32 ile haberleştirdim</figcaption>
+  </figure>
 
   <h3>Başlangıç: breadboard ve bitmek bilmeyen kalibrasyon</h3>
 
   <p>Her şey breadboard üzerinde başladı. pH sensörü, TDS sensörü, DS18B20 sıcaklık sensörü — hepsini teker teker devreye aldım, ESP32 ile konuşturmaya çalıştım. Kulağa basit geliyor ama inanın en çok yoran kısım <strong>kalibrasyon</strong> oldu. Sistem tamamen bitmişken bile kalibrasyon problemi peşimizi bırakmadı. pH sensörü özellikle sinir bozucu — referans solüsyonlarla sürekli ayar gerektiriyor, en ufak sapmada yanlış alarm üretebiliyor. Bu kısımda gerçekten çok vakit harcadık ve hâlâ tam anlamıyla bitmiş sayılmaz.</p>
 
-  <img src="img2.jpeg" class="blog-img" alt="PCB lehim çalışması">
-  <div class="blog-img-caption">İlk PCB deneyimim — hem devre tasarımını hem de lehim tekniğini aynı anda öğrendim</div>
+  <figure class="blog-figure">
+    <img src="img2.jpeg" class="blog-img" alt="PCB lehim çalışması" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>İlk PCB deneyimim — hem devre tasarımını hem de lehim tekniğini aynı anda öğrendim</figcaption>
+  </figure>
 
   <h3>Hiç ders almadan ilk PCB</h3>
 
   <p>Breadboard'da her şey çalışır hale gelince sıra <strong>PCB'ye</strong> geldi. Daha önce hiç PCB tasarlamamıştım, doğrudan yazılıma oturdum ve öğrenerek yaptım. İlk ve en büyük hatamız: kartı çok küçük seçtik. Tüm bileşenleri o küçük alana sığdırmak gerçekten zor oldu. Üstüne bir de bu PCB'de hazır yollar yok — her bağlantıyı tek tek elle çizmem gerekiyordu. Saatler sürdü ama sonunda oldu. Lehim konusunda daha önce deneyimim vardı, o yüzden çok zorlanmadım. Açıkçası çıkan işten oldukça memnun kaldım.</p>
 
-  <img src="img3.jpeg" class="blog-img" alt="Metal iskelet imalatı sanayide">
-  <div class="blog-img-caption">Sanayide iskelet imalatı — günlerce uğraşmanın meyvesi</div>
+  <figure class="blog-figure">
+    <img src="img3.jpeg" class="blog-img" alt="Metal iskelet imalatı sanayide" width="560" height="1200" loading="lazy" decoding="async">
+    <figcaption>Sanayide iskelet imalatı — günlerce uğraşmanın meyvesi</figcaption>
+  </figure>
 
   <h3>Sanayi, toz ve kıvılcım</h3>
 
   <p>Elektronik taraf bitti, sıra fiziksel yapıya geldi. Güneş panelini tutacak, altında elektronik kutuyu barındıracak, sahaya dayanıklı bir iskelet lazımdı. Arkadaşımla birlikte sanayiye gidip geldik, günlerce uğraştık. Burada özellikle teşekkür etmem gereken biri var: <strong>Mehmet usta.</strong> Öğrenci olduğumuzu görüp "kim uğraşacak sizinle" demek yerine uygun fiyata bize yardım etti. Böyle insanlar olmasaydı bu iş çok daha zordu.</p>
 
-  <img src="img4.jpeg" class="blog-img" alt="Elektronik kutu içi - devre ve bağlantılar">
-  <div class="blog-img-caption">Kutunun içi: Solar charge controller, ESP32 ve tüm sensör bağlantıları</div>
+  <figure class="blog-figure">
+    <img src="img4.jpeg" class="blog-img" alt="Elektronik kutu içi - devre ve bağlantılar" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>Kutunun içi: Solar charge controller, ESP32 ve tüm sensör bağlantıları</figcaption>
+  </figure>
 
   <h3>Enerji sistemi: neden bu kadar büyük akü?</h3>
 
@@ -94,8 +101,10 @@ h3 { font-family:'Lora',serif; font-size:21px; font-weight:400; color:var(--text
 
   <p>Donanım ne kadar iyi olursa olsun, çiftçi tarladan uzaktayken verilere ulaşamıyorsa pek bir anlamı kalmıyor. O yüzden sistemin ayrılmaz bir parçası olarak <strong>mobil uygulama</strong> geliştirdik. ESP32 ölçüm verilerini WiFi üzerinden buluta gönderiyor, uygulama da oradan anlık olarak çekiyor. Arayüzü mümkün olduğunca sade tuttuk — pH değeri, TDS, su sıcaklığı ve sistem durumu ana ekranda tek bakışta görünüyor. Değerler tehlikeli seviyelere ulaştığında doğrudan telefona <strong>bildirim</strong> gidiyor. Teknik bilgisi olmayan bir çiftçinin de rahatça kullanabileceği bir şey yapmak istedik — ve bunu başardığımızı düşünüyorum.</p>
 
-  <img src="img5.jpeg" class="blog-img" alt="Tamamlanmış sistem - güneş paneli ve kutu">
-  <div class="blog-img-caption">Güneş paneli üstte, elektronik kutu altında — sistem sahaya hazır</div>
+  <figure class="blog-figure">
+    <img src="img5.jpeg" class="blog-img" alt="Tamamlanmış sistem - güneş paneli ve kutu" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>Güneş paneli üstte, elektronik kutu altında — sistem sahaya hazır</figcaption>
+  </figure>
 
   <h3>Kafayı yiyen sorun: sensör gürültüsü</h3>
 
@@ -103,8 +112,10 @@ h3 { font-family:'Lora',serif; font-size:21px; font-weight:400; color:var(--text
 
   <p>İki çözüm yolu vardı: yazılımsal filtreleme ya da donanımsal gürültü engelleme devresi. Önce yazılımsal tarafı çözdük — motor çalışırken ölçümü kısa süre askıya alıyoruz, okuma zamanlamalarını düzenledik. Şimdilik bu yeterli. Donanımsal çözüme sahadan gelen geri bildirimlere göre karar vereceğiz. Bu bizim ilk sistemimiz, nasıl davranacağını önce görmek istiyoruz.</p>
 
-  <img src="img6.jpeg" class="blog-img" alt="Sistemin genel görünümü">
-  <div class="blog-img-caption">Sistemin dış görünümü — güneş paneli, kutu ve iskelet bir arada</div>
+  <figure class="blog-figure">
+    <img src="img6.jpeg" class="blog-img" alt="Sistemin genel görünümü" width="559" height="1200" loading="lazy" decoding="async">
+    <figcaption>Sistemin dış görünümü — güneş paneli, kutu ve iskelet bir arada</figcaption>
+  </figure>
 
   <h3>Sonuç</h3>
 
@@ -114,8 +125,33 @@ h3 { font-family:'Lora',serif; font-size:21px; font-weight:400; color:var(--text
 
   <p>Bu projeyi tek başıma yapamadım. Her adımda yanımda olan <strong>arkadaşlarıma</strong> içtenlikle teşekkür etmek istiyorum — sanayideki yorucu günlerde, sabaha kadar süren test aşamalarında, her "neden çalışmıyor" krizinde hep birlikteydik. Ayrıca iskelet imalatında bize yardım eden <strong>Mehmet ustaya</strong>, fikir ve desteklerini esirgemeyen herkese çok teşekkürler. Güzel bir ekip çalışmasıydı.</p>
 
-  <div class="page-footer">© 2025 Ahmet Ulu · Kayseri — <a href="../../index.html" style="color:var(--accent);text-decoration:none;">Ana sayfaya dön</a></div>
+  
 
-</div>
+  <nav class="post-nav" aria-label="Diğer yazılar">
+    <div class="post-nav-title">Diğer yazılar</div>
+<a href="../../yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" class="post-item">
+  <img class="post-thumb" src="../../assets/img/kapak/guc-kaynagi.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Pratik Proje</div><div class="post-title">12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu</div><div class="post-date">Nisan 2026</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+<a href="../../yazilar/ev-sarj/ev-sarj-altyapi.html" class="post-item">
+  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">EV Şarj · 1. Adım</div><div class="post-title">Raspberry Pi ve Veri Altyapısı</div><div class="post-date">Nisan 2026</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+  </nav>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js" defer></script>
 </body>
 </html>
