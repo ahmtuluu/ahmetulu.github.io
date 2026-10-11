@@ -1,0 +1,49 @@
+  <div class="blog-tag">PROJE ADI · 1. Adım</div>
+  <h1>Yazı Başlığı</h1>
+  <div class="blog-meta">Ahmet Ulu · Ay 2026</div>
+
+  <p>Giriş paragrafı. Önemli kelimeler <strong>kalın</strong> yazılabilir.</p>
+
+  <!-- Tek fotoğraf. İlk fotoğraf loading="eager", diğerleri "lazy". -->
+  <figure class="blog-figure">
+    <img src="foto1.jpg" class="blog-img" alt="Fotoğrafın kısa açıklaması" width="1200" height="900" loading="eager" decoding="async">
+    <figcaption>Fotoğraf altı yazısı</figcaption>
+  </figure>
+
+  <h3>Ara başlık</h3>
+
+  <p>Paragraf...</p>
+
+  <!-- Şematik / PCB / 3D sekmeli görüntüleyici. id'ler sayfada benzersiz olmalı (kart1-..., kart2-...). -->
+  <div class="dv">
+    <div class="dv-head">
+      <div class="dv-title">Kart adı</div>
+      <div class="dv-tabs" role="tablist" aria-label="Görünüm">
+        <button class="dv-tab" role="tab" id="kart1-t1" aria-controls="kart1-p1" aria-selected="true">Şematik</button>
+        <button class="dv-tab" role="tab" id="kart1-t2" aria-controls="kart1-p2" aria-selected="false" tabindex="-1">PCB</button>
+        <button class="dv-tab" role="tab" id="kart1-t3" aria-controls="kart1-p3" aria-selected="false" tabindex="-1">3D</button>
+      </div>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="kart1-p1" aria-labelledby="kart1-t1">
+      <img src="kart1-sematik.png" class="blog-img" alt="Kart adı şematiği" width="1600" height="1100" loading="lazy" decoding="async">
+      <figcaption>Şematik açıklaması</figcaption>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="kart1-p2" aria-labelledby="kart1-t2" hidden>
+      <img src="kart1-pcb.png" class="blog-img" alt="Kart adı PCB yerleşimi" width="1600" height="1100" loading="lazy" decoding="async">
+      <figcaption>PCB açıklaması</figcaption>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="kart1-p3" aria-labelledby="kart1-t3" hidden>
+      <img src="kart1-3d.jpg" class="blog-img" alt="Kart adı 3D görünüm" width="1600" height="1100" loading="lazy" decoding="async">
+      <figcaption>3D görünüm açıklaması</figcaption>
+    </div>
+  </div>
+
+  <div class="tech-box">
+    <h4>Teknik Detaylar</h4>
+    <div class="tech-row"><span class="comp">Bileşen</span><span class="detail">Açıklama</span></div>
+    <div class="tech-row"><span class="comp">Bileşen</span><span class="detail">Açıklama</span></div>
+  </div>
+
+  <h3>Sonuç</h3>
+
+  <p>Paragraf...</p>

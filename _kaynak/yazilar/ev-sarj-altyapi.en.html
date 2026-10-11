@@ -1,0 +1,55 @@
+  <div class="blog-tag">EV Charging Station Optimization · Step 1</div>
+  <h1>Raspberry Pi and the Data Infrastructure: Laying the Foundation</h1>
+  <div class="blog-meta">Ahmet Ulu · April 2026</div>
+
+  <p>My job in this project was to lay the foundation of the system. That sounds modest, but by "foundation" I really mean building everything from scratch.</p>
+
+  <h3>The database: the data has to go somewhere</h3>
+
+  <p>The first task was installing <strong>PostgreSQL</strong> on a <strong>Raspberry Pi</strong>. I designed the table structures that would neatly store the data coming from the charging stations — temperature, humidity, energy consumption, occupancy. There was no real hardware yet, but the system was ready for it.</p>
+
+  <figure class="blog-figure">
+    <img src="datatable.jpg" class="blog-img" alt="PostgreSQL database table view" width="1200" height="544" loading="eager" decoding="async">
+    <figcaption>Live data flowing into the database — current, voltage and battery_percent are recorded every 2 seconds</figcaption>
+  </figure>
+
+  <h3>The first data flow with Arduino</h3>
+
+  <p>On the hardware side, I set up serial communication between an <strong>Arduino</strong> and the Raspberry Pi. Simulated sensor data came from the Arduino, and <strong>Python</strong> read it and wrote it to the database. I wanted to see the data flow working before the real sensors arrived — and it worked.</p>
+
+  <h3>License plate recognition: every vehicle gets its own section</h3>
+
+  <p>Then I moved on to the part that interested me most: <strong>license plate recognition with a camera.</strong> The camera connected to the Raspberry Pi recognized vehicle plates and recorded them in the system. For each plate, a separate section was automatically created in the database — entry time, sensor data and history were all kept under that vehicle's plate. This made the system ready for multiple users as well.</p>
+
+  <figure class="blog-figure">
+    <img src="plaka.jpeg" class="blog-img" alt="License plate recognition with the Raspberry Pi camera" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>The camera detects the plate and the system automatically opens a new record for that vehicle</figcaption>
+  </figure>
+
+  <h3>Session structure and a REST API</h3>
+
+  <p>Every time a vehicle enters the system, a new <strong>session</strong> starts, and it closes when the vehicle leaves. Thanks to this structure, which vehicle arrived when, how much it charged and all sensor data during that time can be tracked under a single session.</p>
+
+  <figure class="blog-figure">
+    <img src="sessions.jpg" class="blog-img" alt="Session table - vehicle entry and exit records" width="1200" height="710" loading="lazy" decoding="async">
+    <figcaption>The session table — a new record opens on every vehicle entry, and is_active turns false on exit</figcaption>
+  </figure>
+
+  <p>Finally, I wrote a REST API with <strong>Flask</strong>. My teammate developed the mobile app; the data was delivered to the app through the API and showed up on the screen. It was the first time I had written something that someone else used — that felt different.</p>
+
+  <div class="tech-box">
+    <h4>Technical Details</h4>
+    <div class="tech-row"><span class="comp">Hardware</span><span class="detail">Raspberry Pi</span></div>
+    <div class="tech-row"><span class="comp">Data Simulation</span><span class="detail">Arduino — serial communication</span></div>
+    <div class="tech-row"><span class="comp">Database</span><span class="detail">PostgreSQL</span></div>
+    <div class="tech-row"><span class="comp">Backend Language</span><span class="detail">Python</span></div>
+    <div class="tech-row"><span class="comp">Plate Recognition</span><span class="detail">Raspberry Pi Camera + OCR</span></div>
+    <div class="tech-row"><span class="comp">API</span><span class="detail">Flask REST API</span></div>
+    <div class="tech-row"><span class="comp">Mobile App</span><span class="detail">Developed by a teammate</span></div>
+  </div>
+
+  <h3>Conclusion</h3>
+
+  <p>The most important thing I learned at this stage wasn't actually the technical details. I saw how critical it is to divide tasks within a team, to communicate on time, and to keep an eye on whether the whole thing works instead of saying "my part is done".</p>
+
+  <p>Next step: real sensors and optimization algorithms.</p>

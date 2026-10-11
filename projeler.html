@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Projeler — Ahmet Ulu</title>
-<meta name="description" content="Ahmet Ulu'nun projeleri: akıllı tarım sistemi, EV şarj istasyonu optimizasyonu, topraksız tarım ve pratik elektronik projeler.">
+<meta name="description" content="Ahmet Ulu&#x27;nun projeleri: akıllı tarım sistemi, EV şarj istasyonu optimizasyonu, topraksız tarım ve pratik elektronik projeler.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#111110">
 <link rel="canonical" href="https://ahmetulu.com.tr/projeler.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/projeler.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/projects.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/projeler.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
 <meta property="og:title" content="Projeler — Ahmet Ulu">
-<meta property="og:description" content="Ahmet Ulu'nun projeleri: akıllı tarım sistemi, EV şarj istasyonu optimizasyonu, topraksız tarım ve pratik elektronik projeler.">
+<meta property="og:description" content="Ahmet Ulu&#x27;nun projeleri: akıllı tarım sistemi, EV şarj istasyonu optimizasyonu, topraksız tarım ve pratik elektronik projeler.">
 <meta property="og:url" content="https://ahmetulu.com.tr/projeler.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,60 +38,78 @@
     <li><a href="projeler.html" aria-current="page">Projeler</a></li>
     <li><a href="yazilar.html">Yazılar</a></li>
     <li><a href="iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="en/projects.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
   </ul>
 </header>
 <canvas id="circuit-canvas" aria-hidden="true"></canvas>
 <main id="icerik">
-  <div class="wrap inner fade-in">
+  <div class="wrap inner fade-in" data-filter>
     <div class="page-header"><h1>Projeler</h1><p>Geliştirdiğim projeler ve çalışmalarım.</p></div>
-    <div class="card-grid">
-<article class="card">
+    <div class="filter-bar">
+      <label class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" placeholder="Projelerde ara…" aria-label="Projelerde ara…" data-filter-search autocomplete="off"></label>
+      <div class="chips" role="group" aria-label="Etiketler"><button type="button" class="chip" data-filter-tag="" aria-pressed="true">Tümü</button><button type="button" class="chip" data-filter-tag="Python" aria-pressed="false">Python</button><button type="button" class="chip" data-filter-tag="ESP32" aria-pressed="false">ESP32</button><button type="button" class="chip" data-filter-tag="Raspberry Pi" aria-pressed="false">Raspberry Pi</button><button type="button" class="chip" data-filter-tag="C++" aria-pressed="false">C++</button><button type="button" class="chip" data-filter-tag="Enerji" aria-pressed="false">Enerji</button><button type="button" class="chip" data-filter-tag="Freelance" aria-pressed="false">Freelance</button><button type="button" class="chip" data-filter-tag="Güç Elektroniği" aria-pressed="false">Güç Elektroniği</button><button type="button" class="chip" data-filter-tag="IoT" aria-pressed="false">IoT</button><button type="button" class="chip" data-filter-tag="KiCad" aria-pressed="false">KiCad</button><button type="button" class="chip" data-filter-tag="Lehim" aria-pressed="false">Lehim</button><button type="button" class="chip" data-filter-tag="LM2596" aria-pressed="false">LM2596</button><button type="button" class="chip" data-filter-tag="Machine Learning" aria-pressed="false">Machine Learning</button><button type="button" class="chip" data-filter-tag="Otomasyon" aria-pressed="false">Otomasyon</button><button type="button" class="chip" data-filter-tag="PCB Tasarımı" aria-pressed="false">PCB Tasarımı</button><button type="button" class="chip" data-filter-tag="Sensör" aria-pressed="false">Sensör</button></div>
+    </div>
+    <section data-filter-section>
+      <div class="card-grid">
+<article class="card" data-filter-item data-tags="PCB Tasarımı|KiCad|ESP32|Freelance">
+  <div class="card-media"><img src="assets/img/kapak/pcb-tasarim.jpg" alt="Freelance PCB Tasarımı" width="800" height="500" loading="lazy" decoding="async"></div>
+  <div class="card-body">
+    <div class="card-meta"><span>2025–2026</span><span class="badge neutral">1 yazı</span></div>
+    <h3 class="card-title">Freelance PCB Tasarımı</h3>
+    <p class="card-desc">Bionluk üzerinden müşterilere özel şematik ve PCB tasarımı: ihtiyacı dinlemekten üretime hazır dosyalara kadar. 8 sipariş, 5.0 puan.</p>
+    <div class="tags"><a class="tag" href="projeler.html?tag=PCB Tasarımı">PCB Tasarımı</a><a class="tag" href="projeler.html?tag=KiCad">KiCad</a><a class="tag" href="projeler.html?tag=ESP32">ESP32</a><a class="tag" href="projeler.html?tag=Freelance">Freelance</a></div>
+    <div class="card-links"><a class="card-link card-stretch" href="yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html">Yazıyı oku →</a></div>
+  </div>
+</article>
+<article class="card" data-filter-item data-tags="ESP32|Python|IoT|Sensör">
   <div class="card-media"><img src="assets/img/kapak/akilli-tarim.jpg" alt="Akıllı Tarım Sistemi" width="800" height="500" loading="lazy" decoding="async"></div>
   <div class="card-body">
     <div class="card-meta"><span>2025</span><span class="badge neutral">1 yazı</span></div>
     <h3 class="card-title">Akıllı Tarım Sistemi</h3>
     <p class="card-desc">Toprak nemi, sıcaklık ve ışık sensörleriyle otomatik sulama ve izleme yapan IoT tabanlı proje.</p>
-    <div class="tags"><span class="tag">ESP32</span><span class="tag">Python</span><span class="tag">IoT</span><span class="tag">Sensör</span></div>
+    <div class="tags"><a class="tag" href="projeler.html?tag=ESP32">ESP32</a><a class="tag" href="projeler.html?tag=Python">Python</a><a class="tag" href="projeler.html?tag=IoT">IoT</a><a class="tag" href="projeler.html?tag=Sensör">Sensör</a></div>
     <div class="card-links"><a class="card-link card-stretch" href="yazilar/akilli-tarim/su-analizi.html">1. Adım — Su Analiz Sistemi →</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" data-filter-item data-tags="Python|Raspberry Pi|Machine Learning|Enerji">
   <div class="card-media"><img src="assets/img/kapak/ev-sarj.jpg" alt="Elektrik Şarj İstasyonu Optimizasyonu" width="800" height="500" loading="lazy" decoding="async"></div>
   <div class="card-body">
     <div class="card-meta"><span>2024</span><span class="badge neutral">1 yazı</span></div>
     <h3 class="card-title">Elektrik Şarj İstasyonu Optimizasyonu</h3>
     <p class="card-desc">Birden fazla EV şarj noktasının yük dengelemesini ve enerji dağıtımını optimize eden yazılım.</p>
-    <div class="tags"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Enerji</span></div>
+    <div class="tags"><a class="tag" href="projeler.html?tag=Python">Python</a><a class="tag" href="projeler.html?tag=Raspberry Pi">Raspberry Pi</a><a class="tag" href="projeler.html?tag=Machine Learning">Machine Learning</a><a class="tag" href="projeler.html?tag=Enerji">Enerji</a></div>
     <div class="card-links"><a class="card-link card-stretch" href="yazilar/ev-sarj/ev-sarj-altyapi.html">1. Adım — Raspberry Pi ve Veri Altyapısı →</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" data-filter-item data-tags="Raspberry Pi|Python|C++|Otomasyon">
   <div class="card-media placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
   <div class="card-body">
     <div class="card-meta"><span>2025</span></div>
     <h3 class="card-title">Topraksız Tarım Projesi</h3>
     <p class="card-desc">Hidroponik yöntemle bitki yetiştirmeyi otomatikleştiren sistem. pH ve EC değerlerini ölçerek dozaj pompalarını kontrol eder.</p>
-    <div class="tags"><span class="tag">Raspberry Pi</span><span class="tag">Python</span><span class="tag">C++</span><span class="tag">Otomasyon</span></div>
+    <div class="tags"><a class="tag" href="projeler.html?tag=Raspberry Pi">Raspberry Pi</a><a class="tag" href="projeler.html?tag=Python">Python</a><a class="tag" href="projeler.html?tag=C++">C++</a><a class="tag" href="projeler.html?tag=Otomasyon">Otomasyon</a></div>
     <div class="card-links"><span class="card-link muted">Ayrıntılar yakında</span></div>
   </div>
 </article>
-    </div>
-    <section class="section">
+      </div>
+    </section>
+    <section class="section" data-filter-section>
       <div class="section-head"><h2 class="section-title">Pratik projeler</h2></div>
-      <p class="page-header" style="margin:-12px 0 20px;font-size:15px;color:var(--muted)">Öğrenmek için yapılan küçük denemeler.</p>
+      <p class="section-desc">Öğrenmek için yapılan küçük denemeler.</p>
       <div class="card-grid">
-<article class="card">
+<article class="card" data-filter-item data-tags="LM2596|Güç Elektroniği|Lehim">
   <div class="card-media"><img src="assets/img/kapak/guc-kaynagi.jpg" alt="12V DC Ayarlı Güç Kaynağı" width="800" height="500" loading="lazy" decoding="async"></div>
   <div class="card-body">
     <div class="card-meta"><span>2026</span><span class="badge neutral">1 yazı</span></div>
     <h3 class="card-title">12V DC Ayarlı Güç Kaynağı</h3>
     <p class="card-desc">LM2596 buck modülünün trimpotu yerine dışarıdan çevrilebilen 10 tur hassas potansiyometre ve dijital voltmetre.</p>
-    <div class="tags"><span class="tag">LM2596</span><span class="tag">Güç Elektroniği</span><span class="tag">Lehim</span></div>
+    <div class="tags"><a class="tag" href="projeler.html?tag=LM2596">LM2596</a><a class="tag" href="projeler.html?tag=Güç Elektroniği">Güç Elektroniği</a><a class="tag" href="projeler.html?tag=Lehim">Lehim</a></div>
     <div class="card-links"><a class="card-link card-stretch" href="yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">Yazıyı oku →</a></div>
   </div>
 </article>
       </div>
     </section>
+    <p class="filter-empty" data-filter-empty hidden>Sonuç bulunamadı. Başka bir kelime ya da etiket dene.</p>
   </div>
 </main>
 <footer class="site-footer">
@@ -97,6 +118,7 @@
     <div class="footer-social">
       <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
       <a href="mailto:ahulu2006@gmail.com">E-posta</a>
     </div>
   </div>

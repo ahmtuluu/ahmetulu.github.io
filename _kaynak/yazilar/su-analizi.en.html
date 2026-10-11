@@ -1,0 +1,84 @@
+  <div class="blog-tag">Smart Agriculture System · Step 1</div>
+  <h1>Water Analysis System: Building a System from Scratch</h1>
+  <div class="blog-meta">Ahmet Ulu · March 2026</div>
+
+  <p>We have completed the first step of our smart agriculture project: <strong>the Water Analysis System.</strong> On its own, this is already a serious piece of work — when the pH, TDS value or temperature of irrigation water reaches dangerous levels, it instantly warns the farmer and sends a notification through the mobile app. It runs on solar power, is not connected to the grid, and can be installed directly in the field. For me this project was not just a system; it was the process in which I learned what it really means to build something from scratch.</p>
+
+  <figure class="blog-figure">
+    <img src="img1.jpeg" class="blog-img" alt="Sensor tests on a breadboard" width="1200" height="900" loading="eager" decoding="async">
+    <figcaption>First sensor tests on the breadboard — I brought each component up one by one and got it talking to the ESP32</figcaption>
+  </figure>
+
+  <h3>The start: a breadboard and endless calibration</h3>
+
+  <p>Everything started on a breadboard. The pH sensor, the TDS sensor, the DS18B20 temperature sensor — I brought them up one at a time and tried to get them talking to the ESP32. It sounds simple, but believe me, the most exhausting part was <strong>calibration</strong>. Even when the system was completely finished, calibration problems kept following us. The pH sensor is especially frustrating — it constantly needs adjusting with reference solutions, and the smallest drift can trigger a false alarm. We spent a lot of time on this part, and honestly it still isn't completely finished.</p>
+
+  <figure class="blog-figure">
+    <img src="img2.jpeg" class="blog-img" alt="Soldering the PCB" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>My first PCB experience — I learned circuit layout and soldering technique at the same time</figcaption>
+  </figure>
+
+  <h3>A first PCB without any lessons</h3>
+
+  <p>Once everything worked on the breadboard, it was time for the <strong>PCB</strong>. I had never designed a PCB before; I sat down with the software and learned by doing. Our first and biggest mistake: we chose a board that was too small. Fitting every component into that tiny area was really hard. On top of that, this board has no pre-made traces — I had to route every single connection by hand. It took hours, but in the end it worked. I already had some soldering experience, so that part wasn't too hard. Honestly, I was quite happy with the result.</p>
+
+  <figure class="blog-figure">
+    <img src="img3.jpeg" class="blog-img" alt="Building the metal frame at the industrial workshop" width="560" height="1200" loading="lazy" decoding="async">
+    <figcaption>Building the frame at the workshop — the result of days of effort</figcaption>
+  </figure>
+
+  <h3>Workshops, dust and sparks</h3>
+
+  <p>With the electronics done, it was time for the physical structure. We needed a sturdy frame that would hold the solar panel, house the electronics box underneath and survive in the field. My friend and I went back and forth to the industrial area and worked on it for days. There is one person I especially need to thank here: <strong>Mehmet usta.</strong> When he saw we were students, instead of saying "who's going to bother with you", he helped us for a fair price. Without people like him this would have been much harder.</p>
+
+  <figure class="blog-figure">
+    <img src="img4.jpeg" class="blog-img" alt="Inside the electronics box - circuit and connections" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>Inside the box: the solar charge controller, the ESP32 and all sensor connections</figcaption>
+  </figure>
+
+  <h3>The energy system: why such a big battery?</h3>
+
+  <p>Because we wanted the system to be fully <strong>off-grid</strong>, we paid close attention to the energy design. We used a 12V 24Ah battery and a 24W solar panel — this may look a bit oversized, but it was a deliberate choice. If the water pump turns out to be too weak, we will replace it with a more powerful one, so we left plenty of headroom. The current pump draws about 0.7A while running, and the system can run for days on this battery.</p>
+
+  <p>The ESP32's 5V supply comes from the solar charge controller's USB output. The water pump, however, needs 6V, which the controller does not provide — it only has a 13V output. We added a <strong>buck converter</strong> there to step 13V down to 6V. A small but critical detail.</p>
+
+  <div class="tech-box">
+    <h4>Technical Details</h4>
+    <div class="tech-row"><span class="comp">Microcontroller</span><span class="detail">ESP32 (WiFi + Bluetooth)</span></div>
+    <div class="tech-row"><span class="comp">pH Sensor</span><span class="detail">Analog pH probe + pH-4502C module</span></div>
+    <div class="tech-row"><span class="comp">TDS Sensor</span><span class="detail">Gravity TDS meter</span></div>
+    <div class="tech-row"><span class="comp">Temperature Sensor</span><span class="detail">DS18B20 waterproof probe</span></div>
+    <div class="tech-row"><span class="comp">Battery</span><span class="detail">12V 24Ah lead-acid</span></div>
+    <div class="tech-row"><span class="comp">Solar Panel</span><span class="detail">24W monocrystalline</span></div>
+    <div class="tech-row"><span class="comp">Charge Controller</span><span class="detail">Solar Charge Controller — 13V + 2×5V USB outputs</span></div>
+    <div class="tech-row"><span class="comp">Step-down Converter</span><span class="detail">Buck converter (13V → 6V, for the water pump)</span></div>
+    <div class="tech-row"><span class="comp">Water Pump</span><span class="detail">6V DC pump — 1.2A inrush, 0.7A running</span></div>
+  </div>
+
+  <h3>The mobile app: putting the data in the farmer's hands</h3>
+
+  <p>No matter how good the hardware is, it means little if the farmer can't reach the data while away from the field. That's why we developed a <strong>mobile app</strong> as an integral part of the system. The ESP32 sends its measurements to the cloud over WiFi, and the app pulls them from there in real time. We kept the interface as simple as possible — pH, TDS, water temperature and system status are all visible at a glance on the main screen. When values reach dangerous levels, a <strong>notification</strong> goes straight to the phone. We wanted to build something that a farmer with no technical background could use comfortably — and I think we succeeded.</p>
+
+  <figure class="blog-figure">
+    <img src="img5.jpeg" class="blog-img" alt="The completed system - solar panel and box" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>Solar panel on top, electronics box below — the system is ready for the field</figcaption>
+  </figure>
+
+  <h3>The problem that drove us crazy: sensor noise</h3>
+
+  <p>Everything was ready and we moved on to testing. And right then we noticed something strange: the sensors were affecting each other. When all three sensors ran at the same time, the readings drifted. Even worse, <strong>when the water pump kicked in</strong>, the electrical noise it created drove the sensors completely haywire — meaningless values and false alarms.</p>
+
+  <p>There were two ways forward: software filtering or a hardware noise-suppression circuit. We solved the software side first — we pause measurements briefly while the pump runs and reorganized the read timings. For now, that is enough. We will decide on a hardware solution based on feedback from the field. This is our first system, and we want to see how it behaves first.</p>
+
+  <figure class="blog-figure">
+    <img src="img6.jpeg" class="blog-img" alt="Overall view of the system" width="559" height="1200" loading="lazy" decoding="async">
+    <figcaption>The system from outside — solar panel, box and frame together</figcaption>
+  </figure>
+
+  <h3>Conclusion</h3>
+
+  <p>The system is ready to be installed in the field. It runs on solar power, sends its data to the cloud, can be monitored from the mobile app and sends notifications when something is wrong. It has shortcomings, and there are definitely things to improve. But for a first step, I think it is more than enough. The most valuable part is this: PCB design, soldering, calibration, noise problems, energy management... I learned all of it from scratch, by doing it.</p>
+
+  <h3>Thanks</h3>
+
+  <p>I couldn't have done this project alone. I sincerely want to thank <strong>my friends</strong> who were with me at every step — through the exhausting days at the workshop, the tests that lasted until morning, and every "why isn't it working" crisis, we were always together. Many thanks also to <strong>Mehmet usta</strong>, who helped us build the frame, and to everyone who shared their ideas and support. It was great teamwork.</p>

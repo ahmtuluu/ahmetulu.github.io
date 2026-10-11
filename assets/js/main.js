@@ -239,7 +239,7 @@
       err.classList.remove('show');
       btn.disabled = true;
       var oldText = btn.textContent;
-      btn.textContent = 'Gönderiliyor…';
+      btn.textContent = form.getAttribute('data-sending') || 'Gönderiliyor…';
       fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
         .then(function (r) {
           if (!r.ok) throw new Error('hata');
@@ -254,28 +254,156 @@
     });
   }
 
-  /* ---------- Fotoğraf büyütme ---------- */
-  var imgs = document.querySelectorAll('.blog-img');
+  var EN = document.documentElement.lang === 'en';
+
+  /* ---------- Şematik / PCB / 3D sekmeleri ---------- */
+  document.querySelectorAll('.dv').forEach(function (dv) {
+    var tabs = [].slice.call(dv.querySelectorAll('[role="tab"]'));
+    var select = function (tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !on;
+      });
+      if (focus) tab.focus();
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') select(tabs[(i + 1) % tabs.length], true);
+        if (e.key === 'ArrowLeft') select(tabs[(i - 1 + tabs.length) % tabs.length], true);
+      });
+    });
+  });
+
+  /* ---------- Filtre ve arama (projeler / yazılar) ---------- */
+  var norm = function (t) {
+    return (t || '').toLocaleLowerCase('tr').replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ğ/g, 'g')
+      .replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/ç/g, 'c').normalize('NFD').replace(/[̀-ͯ]/g, '');
+  };
+  document.querySelectorAll('[data-filter]').forEach(function (scope) {
+    var input = scope.querySelector('[data-filter-search]');
+    var chips = [].slice.call(scope.querySelectorAll('[data-filter-tag]'));
+    var items = [].slice.call(scope.querySelectorAll('[data-filter-item]'));
+    var sections = [].slice.call(scope.querySelectorAll('[data-filter-section]'));
+    var empty = scope.querySelector('[data-filter-empty]');
+    var active = '';
+    items.forEach(function (it) { it._text = norm(it.textContent + ' ' + it.getAttribute('data-tags')); });
+    var apply = function () {
+      var q = norm(input ? input.value.trim() : '');
+      var words = q ? q.split(/\s+/) : [];
+      var shown = 0;
+      items.forEach(function (it) {
+        var tags = (it.getAttribute('data-tags') || '').split('|');
+        var ok = (!active || tags.indexOf(active) > -1) && words.every(function (w) { return it._text.indexOf(w) > -1; });
+        it.classList.toggle('is-hidden', !ok);
+        if (ok) shown++;
+      });
+      sections.forEach(function (sec) {
+        sec.classList.toggle('is-hidden', !sec.querySelector('[data-filter-item]:not(.is-hidden)'));
+      });
+      if (empty) empty.hidden = shown > 0;
+    };
+    var setTag = function (tag) {
+      active = tag;
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-filter-tag') === tag ? 'true' : 'false'); });
+      try {
+        var url = new URL(location.href);
+        if (tag) url.searchParams.set('tag', tag); else url.searchParams.delete('tag');
+        history.replaceState(null, '', url);
+      } catch (e) {}
+      apply();
+    };
+    chips.forEach(function (c) { c.addEventListener('click', function () { setTag(c.getAttribute('data-filter-tag')); }); });
+    if (input) input.addEventListener('input', apply);
+    // Kart üzerindeki etiketlere tıklayınca sayfa yenilenmeden filtrele
+    scope.querySelectorAll('a.tag').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var t = new URL(a.href).searchParams.get('tag');
+        if (t && chips.some(function (c) { return c.getAttribute('data-filter-tag') === t; })) {
+          e.preventDefault(); setTag(t); scope.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+    var initial = new URLSearchParams(location.search).get('tag');
+    if (initial && chips.some(function (c) { return c.getAttribute('data-filter-tag') === initial; })) setTag(initial);
+  });
+
+  /* ---------- Fotoğraf galerisi (büyütme, ileri/geri, kaydırma) ---------- */
+  var imgs = [].slice.call(document.querySelectorAll('.blog-img'));
   if (imgs.length) {
     var box = document.createElement('div');
-    box.className = 'lightbox';
+    box.className = 'lightbox' + (imgs.length === 1 ? ' single' : '');
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-modal', 'true');
-    box.setAttribute('aria-label', 'Fotoğraf');
-    box.innerHTML = '<button class="lightbox-close" aria-label="Kapat">×</button><img alt="">';
+    box.setAttribute('aria-label', EN ? 'Photo' : 'Fotoğraf');
+    box.innerHTML =
+      '<div class="lightbox-count" aria-live="polite"></div>' +
+      '<button class="lightbox-btn lightbox-close" aria-label="' + (EN ? 'Close' : 'Kapat') + '">×</button>' +
+      '<button class="lightbox-btn lightbox-prev" aria-label="' + (EN ? 'Previous' : 'Önceki') + '">←</button>' +
+      '<button class="lightbox-btn lightbox-next" aria-label="' + (EN ? 'Next' : 'Sonraki') + '">→</button>' +
+      '<div class="lightbox-stage"><img alt=""></div><div class="lightbox-cap"></div>';
     document.body.appendChild(box);
-    var big = box.querySelector('img');
-    var close = function () { box.classList.remove('open'); document.body.style.overflow = ''; };
-    imgs.forEach(function (img) {
+    var big = box.querySelector('img'), cap = box.querySelector('.lightbox-cap'), count = box.querySelector('.lightbox-count');
+    var idx = 0, lastFocus = null;
+    var captionOf = function (img) {
+      var fig = img.closest('figure, .dv-panel');
+      var fc = fig && fig.querySelector('figcaption');
+      return fc ? fc.textContent : img.alt;
+    };
+    var show = function (i) {
+      idx = (i + imgs.length) % imgs.length;
+      var im = imgs[idx];
+      big.src = im.currentSrc || im.src;
+      big.alt = im.alt;
+      cap.textContent = captionOf(im);
+      count.textContent = (idx + 1) + ' / ' + imgs.length;
+    };
+    var open = function (i) {
+      lastFocus = document.activeElement;
+      show(i);
+      box.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      box.querySelector('.lightbox-close').focus();
+    };
+    var close = function () {
+      box.classList.remove('open');
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    };
+    imgs.forEach(function (img, i) {
       img.setAttribute('tabindex', '0');
-      var open = function () {
-        big.src = img.currentSrc || img.src; big.alt = img.alt;
-        box.classList.add('open'); document.body.style.overflow = 'hidden';
-      };
-      img.addEventListener('click', open);
-      img.addEventListener('keydown', function (e) { if (e.key === 'Enter') open(); });
+      img.setAttribute('role', 'button');
+      img.addEventListener('click', function () { open(i); });
+      img.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); } });
     });
-    box.addEventListener('click', close);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    box.querySelector('.lightbox-close').addEventListener('click', close);
+    box.querySelector('.lightbox-prev').addEventListener('click', function (e) { e.stopPropagation(); show(idx - 1); });
+    box.querySelector('.lightbox-next').addEventListener('click', function (e) { e.stopPropagation(); show(idx + 1); });
+    box.addEventListener('click', function (e) { if (e.target === box || e.target.classList.contains('lightbox-stage')) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!box.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight') show(idx + 1);
+      if (e.key === 'ArrowLeft') show(idx - 1);
+    });
+    // Parmakla kaydırma
+    var sx = null, sy = 0;
+    box.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    box.addEventListener('touchmove', function (e) {
+      if (sx === null) return;
+      var dx = e.touches[0].clientX - sx;
+      if (Math.abs(dx) > Math.abs(e.touches[0].clientY - sy)) big.style.transform = 'translateX(' + dx * 0.4 + 'px)';
+    }, { passive: true });
+    box.addEventListener('touchend', function (e) {
+      if (sx === null) return;
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      big.style.transform = '';
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(idx + (dx < 0 ? 1 : -1));
+      else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+      sx = null;
+    });
   }
 })();

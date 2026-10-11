@@ -1,0 +1,141 @@
+  <div class="blog-tag">PCB Design · Freelance</div>
+  <h1>PCB Design with KiCad: Boards I Designed for Clients on Bionluk</h1>
+  <div class="blog-meta">Ahmet Ulu · October 2026</div>
+
+  <p>This summer, the electronics work I spent the most time on was designing PCBs for clients through <strong>Bionluk</strong>, a Turkish freelance marketplace. I opened a listing for custom PCB design and have completed <strong>8 orders</strong> so far, and every review I've received is 5 stars. I did every design in <strong>KiCad</strong> and handled the whole process myself, from the idea the client described to the schematic, the board layout and the production-ready files.</p>
+
+  <p>In this post I take a closer look at two designs without sharing any client details. Use the tabs above each design to switch between the schematic, PCB and 3D views, and tap any image to enlarge it.</p>
+
+  <h3>How an order works</h3>
+
+  <p><strong>1. Understanding the need.</strong> Everything starts with listening to the client's project: what will the board do, which inputs and outputs are needed, how will it be powered, and are there any size or connector constraints? I don't start drawing until this part is clear.</p>
+
+  <p><strong>2. Schematic.</strong> I build the schematic hierarchically: power input, microcontroller, output stage and input stage each live on their own sheet. This makes the design easier to read, both for me and for the client.</p>
+
+  <p><strong>3. Placement and routing.</strong> I group and place components by function, route power traces wider than signal traces, and put the screw terminals on the edges where wiring is easiest.</p>
+
+  <p><strong>4. Revision and delivery.</strong> I go through the design with the client, make the requested changes and deliver the board with production-ready files.</p>
+
+  <h3>Design 1: Traffic Signal Control Board</h3>
+
+  <p>A <strong>NodeMCU</strong>-based control board that drives traffic lights and reads button or sensor inputs. I built the schematic as a seven-sheet hierarchy: power input, NodeMCU control, output stage, input stage, expansion and connectors.</p>
+
+  <div class="dv">
+    <div class="dv-head">
+      <div class="dv-title">Traffic Signal Board</div>
+      <div class="dv-tabs" role="tablist" aria-label="View">
+        <button class="dv-tab" role="tab" id="trf-t1" aria-controls="trf-p1" aria-selected="true">Block diagram</button>
+        <button class="dv-tab" role="tab" id="trf-t2" aria-controls="trf-p2" aria-selected="false" tabindex="-1">Outputs</button>
+        <button class="dv-tab" role="tab" id="trf-t3" aria-controls="trf-p3" aria-selected="false" tabindex="-1">Inputs</button>
+        <button class="dv-tab" role="tab" id="trf-t4" aria-controls="trf-p4" aria-selected="false" tabindex="-1">PCB</button>
+        <button class="dv-tab" role="tab" id="trf-t5" aria-controls="trf-p5" aria-selected="false" tabindex="-1">3D</button>
+      </div>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="trf-p1" aria-labelledby="trf-t1">
+      <img src="trafik-blok-sema.png" class="blog-img" alt="Hierarchical top-level schematic of the traffic signal board" width="1600" height="924" loading="eager" decoding="async">
+      <figcaption>Top-level sheet: each box is a separate schematic sheet — power, NodeMCU, 74HC595 outputs, PCF8574 inputs, expansion and connectors</figcaption>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="trf-p2" aria-labelledby="trf-t2" hidden>
+      <img src="trafik-cikislar-595.png" class="blog-img" alt="Output stage made of two 74HC595 shift registers" width="1600" height="669" loading="lazy" decoding="async">
+      <figcaption>Output stage: 16 outputs from two daisy-chained 74HC595s, with a test point on every output</figcaption>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="trf-p3" aria-labelledby="trf-t3" hidden>
+      <img src="trafik-girisler-pcf8574.png" class="blog-img" alt="Input stage with a PCF8574AP I2C port expander" width="809" height="801" loading="lazy" decoding="async">
+      <figcaption>Input stage: 8 inputs over I²C with a PCF8574AP</figcaption>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="trf-p4" aria-labelledby="trf-t4" hidden>
+      <img src="trafik-genisletme-pcb.png" class="blog-img" alt="PCB layout of the expansion board" width="1300" height="1412" loading="lazy" decoding="async">
+      <figcaption>Expansion board layout: wide +5V traces, screw terminals along the edges and mounting holes in all four corners</figcaption>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="trf-p5" aria-labelledby="trf-t5" hidden>
+      <img src="trafik-genisletme-3d.jpg" class="blog-img" alt="3D view of the expansion board" width="1300" height="1246" loading="lazy" decoding="async">
+      <figcaption>The expansion board in KiCad's 3D viewer</figcaption>
+    </div>
+  </div>
+
+  <p><strong>Outputs:</strong> To drive the lights I daisy-chained two <strong>74HC595</strong> shift registers. This gives 16 outputs while using only three NodeMCU pins (data, clock and latch).</p>
+
+  <p><strong>Inputs:</strong> For buttons and sensors I used a <strong>PCF8574AP</strong> I²C port expander. Eight inputs can be read over just the SDA and SCL lines; the 4.7k pull-up resistors on those lines are in the schematic too.</p>
+
+  <p><strong>Power and testing:</strong> The board is powered from a DC jack. It has a <strong>1N5819 Schottky diode</strong> for reverse-polarity protection, 470µF and 100nF filter capacitors at the input and a power LED. I added a total of <strong>24 test points</strong> across the inputs and outputs, which makes checking each signal with a multimeter much easier once the board is built.</p>
+
+  <p><strong>Expansion:</strong> A 2×4 connector carries the continuation of the output chain, the I²C bus and power, so expansion boards with the same structure can be added. The board in the PCB and 3D tabs is that expansion board: it has a 74HC595, a PCF8574AP and screw terminals for light outputs and sensor inputs. I chose DIP packages for the ICs so they can sit in sockets and be swapped easily.</p>
+
+  <h3>Design 2: Peltier Temperature Control Board</h3>
+
+  <p>An <strong>ESP32-WROOM-32</strong>-based power and control board that drives six Peltier modules with PWM. The same board also manages fans, pumps and sensors. The schematic has nine sheets; here I show the control and driver sheets.</p>
+
+  <div class="dv">
+    <div class="dv-head">
+      <div class="dv-title">Peltier Control Board</div>
+      <div class="dv-tabs" role="tablist" aria-label="View">
+        <button class="dv-tab" role="tab" id="plt-t1" aria-controls="plt-p1" aria-selected="true">ESP32</button>
+        <button class="dv-tab" role="tab" id="plt-t2" aria-controls="plt-p2" aria-selected="false" tabindex="-1">Drivers</button>
+        <button class="dv-tab" role="tab" id="plt-t3" aria-controls="plt-p3" aria-selected="false" tabindex="-1">3D</button>
+      </div>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="plt-p1" aria-labelledby="plt-t1">
+      <img src="peltier-esp32-kontrol.png" class="blog-img" alt="ESP32-WROOM-32 control stage schematic" width="1600" height="886" loading="lazy" decoding="async">
+      <figcaption>Control stage: ESP32-WROOM-32, reset and boot buttons, a programming header and all signal labels</figcaption>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="plt-p2" aria-labelledby="plt-t2" hidden>
+      <img src="peltier-surucu-kati.png" class="blog-img" alt="Peltier driver stage with TC4427 drivers and IRF2804 MOSFETs" width="1215" height="1431" loading="lazy" decoding="async">
+      <figcaption>Driver stage: three TC4427 MOSFET drivers, six IRF2804 MOSFETs and a Schottky diode on every output</figcaption>
+    </div>
+    <div class="dv-panel" role="tabpanel" id="plt-p3" aria-labelledby="plt-t3" hidden>
+      <img src="peltier-kontrol-3d.jpg" class="blog-img" alt="3D view of the Peltier control board" width="1111" height="1300" loading="lazy" decoding="async">
+      <figcaption>3D view of the board: Peltier terminals and MOSFETs along one edge, the ESP32 module and connectors on the other side</figcaption>
+    </div>
+  </div>
+
+  <p><strong>Control:</strong> The ESP32 handles 6 Peltier PWM channels, 3 fans with tachometer inputs, 2 pumps, a temperature sensor, flow and level sensor inputs, and a UART line for an LCD. I also added a programming header along with reset and boot buttons, so firmware can be flashed easily while the board is in place.</p>
+
+  <p><strong>Driver stage:</strong> The ESP32's 3.3V outputs aren't enough to fully turn on a power MOSFET switching a high-current load like a Peltier module. That's why I put <strong>TC4427</strong> MOSFET drivers in between: each drives two channels, so three of them cover all six. Switching is done on the 12V rail with <strong>IRF2804</strong> N-channel MOSFETs, and every Peltier output has a <strong>Schottky diode</strong>.</p>
+
+  <div class="tech-box">
+    <h4>Technical Details</h4>
+    <div class="tech-row"><span class="comp">Design tool</span><span class="detail">KiCad 10</span></div>
+    <div class="tech-row"><span class="comp">Schematic structure</span><span class="detail">Hierarchical, multi-sheet</span></div>
+    <div class="tech-row"><span class="comp">Microcontrollers</span><span class="detail">ESP32-WROOM-32, NodeMCU</span></div>
+    <div class="tech-row"><span class="comp">Inputs / outputs</span><span class="detail">74HC595 shift register, PCF8574AP I²C expander</span></div>
+    <div class="tech-row"><span class="comp">Power stage</span><span class="detail">TC4427 MOSFET driver, IRF2804 N-channel MOSFET</span></div>
+    <div class="tech-row"><span class="comp">Delivery</span><span class="detail">Production-ready files</span></div>
+    <div class="tech-row"><span class="comp">Platform</span><span class="detail">Bionluk — 8 completed orders, 5.0 rating</span></div>
+  </div>
+
+  <h3>What clients say</h3>
+
+  <p>A few of my reviews on Bionluk, translated from Turkish. I've hidden the buyers' usernames and profile photos; tap the screenshot under each review to see the original.</p>
+
+  <div class="review-grid in-article">
+    <figure class="review">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
+      <blockquote>“After I described the project I had in mind, Ahmet developed exactly the PCB design I needed in a very short time. Many thanks to him. You can work with him with confidence.”</blockquote>
+      <img src="yorum-1.png" class="blog-img review-thumb" alt="Screenshot of the original Bionluk review (Turkish): Ahmet Bey, aklımdaki projeyi anlatmam sonucu tam olarak ihtiyacım olan pcb tasarımını çok kısa bir sürede geliştirdi. Kendisine çok teşekkür ediyorum. Güvenle çalışabilirsiniz." width="1782" height="375" loading="lazy" decoding="async">
+      <figcaption>Bionluk client · ★ 5.0 · translated from Turkish</figcaption>
+    </figure>
+    <figure class="review">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
+      <blockquote>“He designed the PCB according to my needs and explained the details patiently. Thanks.”</blockquote>
+      <img src="yorum-2.png" class="blog-img review-thumb" alt="Screenshot of the original Bionluk review (Turkish): İhtiyaçlarım doğrultusundaki PCB yi tasarladı ve detaylarını hiç sıkılmadan anlattı teşekkürler" width="1830" height="330" loading="lazy" decoding="async">
+      <figcaption>Bionluk client · ★ 5.0 · translated from Turkish</figcaption>
+    </figure>
+    <figure class="review">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
+      <blockquote>“Ahmet did it exactly the way I wanted. He listened to my requests, we discussed it together, he was always helpful and delivered quickly. This was our first job; from now on we&#x27;ll keep working together through Bionluk. Thank you very much, great work. I wish you continued success.”</blockquote>
+      <img src="yorum-3.png" class="blog-img review-thumb" alt="Screenshot of the original Bionluk review (Turkish): Ahmet bey, tam istediğim gibi yaptı. İsteklerimi dinledi istişarede bulunduk, hep yardımcı oldu, kısa sürede teslim etti. Bu ilk işimizdi bundan sonrada beraber çalışacağız bionluk üzerinden çok teşekkürler ellerinize sağlık. Başarılarınızın devamını dilerim. Kolay gelsin" width="1852" height="440" loading="lazy" decoding="async">
+      <figcaption>Bionluk client · ★ 5.0 · translated from Turkish</figcaption>
+    </figure>
+  </div>
+  <p class="review-more"><a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">All reviews and my profile on Bionluk →</a></p>
+
+  <div class="cta-box">
+    <div>
+      <h4>Need a PCB designed?</h4>
+      <p>Tell me about your project; I'll design the schematic and the board in KiCad to fit your needs and deliver production-ready files.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">My Bionluk profile →</a>
+      <a class="btn btn-ghost" href="../contact.html">Get in touch</a>
+    </div>
+  </div>

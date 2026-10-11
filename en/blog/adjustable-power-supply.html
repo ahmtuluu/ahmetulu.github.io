@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>12V DC Adjustable Power Supply — Ahmet Ulu</title>
+<meta name="description" content="An adjustable DC power supply based on the LM2596: a 10-turn precision potentiometer instead of the trimpot, problems and fixes.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="12V DC Adjustable Power Supply — Ahmet Ulu">
+<meta property="og:description" content="An adjustable DC power supply based on the LM2596: a 10-turn precision potentiometer instead of the trimpot, problems and fixes.">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/kapak/guc-kaynagi.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html" aria-current="page">Blog</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<main id="icerik">
+<article class="wrap-narrow article">
+  <a href="../../en/blog.html" class="back-link">← All posts</a>
+  <div class="blog-tag">Practical Project</div>
+  <h1>12V DC Adjustable Power Supply — LM2596 with an External Potentiometer Mod</h1>
+  <div class="blog-meta">Ahmet Ulu · April 2026</div>
+
+  <p>Recently I wanted to build something that would be useful day to day and would also improve my electronics skills. I designed an adjustable DC power supply based on the <strong>LM2596</strong>. Standard LM2596 modules have a tiny trimpot on them — it is hard to use because it's so small, and fine adjustment needs a screwdriver. So I decided to remove this trimpot and replace it with an externally adjustable <strong>10-turn precision potentiometer</strong>.</p>
+
+  <figure class="blog-figure">
+    <img src="../../yazilar/pratik-projeler/guc-kaynagi/schema2.png" class="blog-img" alt="LM2596 circuit diagram" width="1774" height="887" loading="eager" decoding="async">
+    <figcaption>The overall schematic — every connection from the adapter to the output</figcaption>
+  </figure>
+
+  <h3>How the circuit is built</h3>
+
+  <p>I used a <strong>12V DC adapter</strong> as the input. Power from the adapter first goes to the DC input jack, then through a fuse and the on/off switch. After the switch, the line feeds the input of the LM2596 module. On the output side, I added positive and negative terminals and a <strong>digital voltmeter display</strong> to see the voltage in real time.</p>
+
+  <figure class="blog-figure">
+    <img src="../../yazilar/pratik-projeler/guc-kaynagi/schema1.png" class="blog-img" alt="Potentiometer wiring diagram" width="1536" height="1024" loading="lazy" decoding="async">
+    <figcaption>External potentiometer wiring — pot 1: GND, pot 2: FB, pot 3: OUT+</figcaption>
+  </figure>
+
+  <div class="tech-box">
+    <h4>Technical Details</h4>
+    <div class="tech-row"><span class="comp">Input Voltage</span><span class="detail">12V DC adapter</span></div>
+    <div class="tech-row"><span class="comp">Output Voltage</span><span class="detail">1.25V – 37V (adjustable)</span></div>
+    <div class="tech-row"><span class="comp">Buck Converter</span><span class="detail">LM2596 adjustable module</span></div>
+    <div class="tech-row"><span class="comp">Potentiometer</span><span class="detail">10K 10-turn precision pot</span></div>
+    <div class="tech-row"><span class="comp">Fuse</span><span class="detail">2A</span></div>
+    <div class="tech-row"><span class="comp">Display</span><span class="detail">3-wire digital voltmeter</span></div>
+    <div class="tech-row"><span class="comp">Enclosure</span><span class="detail">A recycled strained-yogurt tub</span></div>
+  </div>
+
+  <h3>Problems and how I solved them</h3>
+
+  <p>The most educational part was the problems I ran into. First, because my solder wire was poor quality, I applied too much heat to the potentiometer and ruined it. I bought a new potentiometer and used better solder. But the circuit still didn't work.</p>
+
+  <p>The problem was <strong>the pin connections.</strong> Even though the numbering looks the same on every potentiometer, the physical order of the wiper and the outer pins can differ between models. I measured with a multimeter to find the real pinout.</p>
+
+  <p>There was one more issue: while soldering I had damaged the board's <strong>GND pad</strong>. So I took the GND connection directly from the negative output terminal instead of the board — in buck converter circuits the output negative and system GND are common. After making this connection, the system started working perfectly.</p>
+
+  <figure class="blog-figure">
+    <img src="../../yazilar/pratik-projeler/guc-kaynagi/device1.jpeg" class="blog-img" alt="The finished power supply" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>The finished device — the voltmeter shows 6.75V and the terminals are ready</figcaption>
+  </figure>
+
+  <h3>Testing</h3>
+
+  <p>Once the system was working, I verified it with a multimeter. The device's own display and the multimeter showed the same value — calibration was spot on.</p>
+
+  <figure class="blog-figure">
+    <img src="../../yazilar/pratik-projeler/guc-kaynagi/device2.jpeg" class="blog-img" alt="Testing with a multimeter" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>Multimeter test — the device display and the multimeter show the same value</figcaption>
+  </figure>
+
+  <h3>The enclosure: in the spirit of recycling</h3>
+
+  <p>I reused an old <strong>strained-yogurt tub</strong> I had lying around as the enclosure. This hero, which normally served in the kitchen, has changed careers and now works in power electronics on my desk.</p>
+
+  <figure class="blog-figure">
+    <img src="../../yazilar/pratik-projeler/guc-kaynagi/device3.jpeg" class="blog-img" alt="Side view of the device — input jack and switch" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>The DC input jack and the on/off switch on the side</figcaption>
+  </figure>
+
+  <h3>Conclusion</h3>
+
+  <p>This project taught me how much solder quality matters, that too much heat can damage components, that you should measure instead of blindly trusting pin numbers, and how critical <strong>reading the datasheet</strong> is. Sometimes the fix isn't buying a new part — it's understanding the logic of the circuit.</p>
+
+  <p>In the future I'm thinking of adding a current meter, fan cooling and a USB output. For me, this wasn't just a circuit; it was real problem-solving practice.</p>
+
+  <nav class="post-nav" aria-label="More posts">
+    <div class="post-nav-title">More posts</div>
+<a href="../../en/blog/kicad-pcb-design.html" class="post-item" data-filter-item data-tags="PCB Designs">
+  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">PCB Design · Freelance</div><div class="post-title">PCB Design with KiCad: Boards I Designed for Clients</div><div class="post-date">October 2026</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+<a href="../../en/blog/ev-charging-data-infrastructure.html" class="post-item" data-filter-item data-tags="EV Charging Station Optimization">
+  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">EV Charging · Step 1</div><div class="post-title">Raspberry Pi and the Data Infrastructure</div><div class="post-date">April 2026</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+<a href="../../en/blog/water-analysis-system.html" class="post-item" data-filter-item data-tags="Smart Agriculture System">
+  <img class="post-thumb" src="../../assets/img/kapak/akilli-tarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Smart Agriculture · Step 1</div><div class="post-title">Water Analysis System</div><div class="post-date">March 2026</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+  </nav>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

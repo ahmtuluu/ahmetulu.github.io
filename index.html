@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ahmet Ulu — Elektrik-Elektronik, Gömülü Sistemler ve IoT</title>
-<meta name="description" content="Ahmet Ulu — Kayseri'den elektrik-elektronik mühendisliği öğrencisi. Gömülü sistemler, IoT ve otomasyon projeleri, yazılar ve deneyimler.">
+<meta name="description" content="Ahmet Ulu — Kayseri&#x27;den elektrik-elektronik mühendisliği öğrencisi. Gömülü sistemler, IoT ve otomasyon projeleri, yazılar ve deneyimler.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#111110">
 <link rel="canonical" href="https://ahmetulu.com.tr/">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
 <meta property="og:title" content="Ahmet Ulu — Elektrik-Elektronik, Gömülü Sistemler ve IoT">
-<meta property="og:description" content="Ahmet Ulu — Kayseri'den elektrik-elektronik mühendisliği öğrencisi. Gömülü sistemler, IoT ve otomasyon projeleri, yazılar ve deneyimler.">
+<meta property="og:description" content="Ahmet Ulu — Kayseri&#x27;den elektrik-elektronik mühendisliği öğrencisi. Gömülü sistemler, IoT ve otomasyon projeleri, yazılar ve deneyimler.">
 <meta property="og:url" content="https://ahmetulu.com.tr/">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,6 +38,7 @@
     <li><a href="projeler.html">Projeler</a></li>
     <li><a href="yazilar.html">Yazılar</a></li>
     <li><a href="iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="en/index.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
   </ul>
 </header>
 <canvas id="circuit-canvas" aria-hidden="true"></canvas>
@@ -60,54 +64,85 @@
       <section class="section" id="one-cikanlar">
         <div class="section-head"><h2 class="section-title">Öne çıkan projeler</h2><a class="section-link" href="projeler.html">Tümü →</a></div>
         <div class="card-grid">
-<article class="card">
+<article class="card" data-filter-item data-tags="PCB Tasarımı|KiCad|ESP32|Freelance">
+  <div class="card-media"><img src="assets/img/kapak/pcb-tasarim.jpg" alt="Freelance PCB Tasarımı" width="800" height="500" loading="lazy" decoding="async"></div>
+  <div class="card-body">
+    <div class="card-meta"><span>2025–2026</span><span class="badge neutral">1 yazı</span></div>
+    <h3 class="card-title">Freelance PCB Tasarımı</h3>
+    <p class="card-desc">Bionluk üzerinden müşterilere özel şematik ve PCB tasarımı: ihtiyacı dinlemekten üretime hazır dosyalara kadar. 8 sipariş, 5.0 puan.</p>
+    <div class="tags"><a class="tag" href="projeler.html?tag=PCB Tasarımı">PCB Tasarımı</a><a class="tag" href="projeler.html?tag=KiCad">KiCad</a><a class="tag" href="projeler.html?tag=ESP32">ESP32</a><a class="tag" href="projeler.html?tag=Freelance">Freelance</a></div>
+    <div class="card-links"><a class="card-link card-stretch" href="yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html">Yazıyı oku →</a></div>
+  </div>
+</article>
+<article class="card" data-filter-item data-tags="ESP32|Python|IoT|Sensör">
   <div class="card-media"><img src="assets/img/kapak/akilli-tarim.jpg" alt="Akıllı Tarım Sistemi" width="800" height="500" loading="lazy" decoding="async"></div>
   <div class="card-body">
     <div class="card-meta"><span>2025</span><span class="badge neutral">1 yazı</span></div>
     <h3 class="card-title">Akıllı Tarım Sistemi</h3>
     <p class="card-desc">Toprak nemi, sıcaklık ve ışık sensörleriyle otomatik sulama ve izleme yapan IoT tabanlı proje.</p>
-    <div class="tags"><span class="tag">ESP32</span><span class="tag">Python</span><span class="tag">IoT</span><span class="tag">Sensör</span></div>
+    <div class="tags"><a class="tag" href="projeler.html?tag=ESP32">ESP32</a><a class="tag" href="projeler.html?tag=Python">Python</a><a class="tag" href="projeler.html?tag=IoT">IoT</a><a class="tag" href="projeler.html?tag=Sensör">Sensör</a></div>
     <div class="card-links"><a class="card-link card-stretch" href="yazilar/akilli-tarim/su-analizi.html">1. Adım — Su Analiz Sistemi →</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" data-filter-item data-tags="Python|Raspberry Pi|Machine Learning|Enerji">
   <div class="card-media"><img src="assets/img/kapak/ev-sarj.jpg" alt="Elektrik Şarj İstasyonu Optimizasyonu" width="800" height="500" loading="lazy" decoding="async"></div>
   <div class="card-body">
     <div class="card-meta"><span>2024</span><span class="badge neutral">1 yazı</span></div>
     <h3 class="card-title">Elektrik Şarj İstasyonu Optimizasyonu</h3>
     <p class="card-desc">Birden fazla EV şarj noktasının yük dengelemesini ve enerji dağıtımını optimize eden yazılım.</p>
-    <div class="tags"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Enerji</span></div>
+    <div class="tags"><a class="tag" href="projeler.html?tag=Python">Python</a><a class="tag" href="projeler.html?tag=Raspberry Pi">Raspberry Pi</a><a class="tag" href="projeler.html?tag=Machine Learning">Machine Learning</a><a class="tag" href="projeler.html?tag=Enerji">Enerji</a></div>
     <div class="card-links"><a class="card-link card-stretch" href="yazilar/ev-sarj/ev-sarj-altyapi.html">1. Adım — Raspberry Pi ve Veri Altyapısı →</a></div>
   </div>
 </article>
-<article class="card">
-  <div class="card-media"><img src="assets/img/kapak/guc-kaynagi.jpg" alt="12V DC Ayarlı Güç Kaynağı" width="800" height="500" loading="lazy" decoding="async"></div>
-  <div class="card-body">
-    <div class="card-meta"><span>2026</span><span class="badge neutral">1 yazı</span></div>
-    <h3 class="card-title">12V DC Ayarlı Güç Kaynağı</h3>
-    <p class="card-desc">LM2596 buck modülünün trimpotu yerine dışarıdan çevrilebilen 10 tur hassas potansiyometre ve dijital voltmetre.</p>
-    <div class="tags"><span class="tag">LM2596</span><span class="tag">Güç Elektroniği</span><span class="tag">Lehim</span></div>
-    <div class="card-links"><a class="card-link card-stretch" href="yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">Yazıyı oku →</a></div>
-  </div>
-</article>
+        </div>
+      </section>
+      <section class="section">
+        <div class="service">
+          <div class="service-text">
+            <div class="post-kicker">Freelance</div>
+            <h2 class="section-title">PCB tasarımı yaptırmak mı istiyorsun?</h2>
+            <p>Bionluk üzerinden KiCad ile şematik ve PCB tasarımı yapıyorum: projeni dinliyorum, ihtiyacına göre tasarlıyorum ve üretime hazır dosyaları teslim ediyorum.</p>
+            <div class="cta-actions"><a class="btn btn-primary" href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk profilim →</a><a class="btn btn-ghost" href="yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html">Örnek tasarımlarım</a></div>
+          </div>
+          <div class="stats"><div class="stat"><div class="stat-num">8</div><div class="stat-label">tamamlanan sipariş</div></div><div class="stat"><div class="stat-num">5.0</div><div class="stat-label">Bionluk puanı</div></div><div class="stat"><div class="stat-num">6/6</div><div class="stat-label">beş yıldızlı yorum</div></div></div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">Müşteri yorumları</h2><a class="section-link" href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk'taki tüm yorumlar →</a></div>
+        <div class="review-grid">
+        <figure class="review">
+          <div class="review-stars" aria-label="5/5">★★★★★</div>
+          <blockquote>“Ahmet Bey, aklımdaki projeyi anlatmam sonucu tam olarak ihtiyacım olan pcb tasarımını çok kısa bir sürede geliştirdi. Kendisine çok teşekkür ediyorum. Güvenle çalışabilirsiniz.”</blockquote>
+          <figcaption>Bionluk alıcısı</figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review-stars" aria-label="5/5">★★★★★</div>
+          <blockquote>“İhtiyaçlarım doğrultusundaki PCB yi tasarladı ve detaylarını hiç sıkılmadan anlattı teşekkürler”</blockquote>
+          <figcaption>Bionluk alıcısı</figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review-stars" aria-label="5/5">★★★★★</div>
+          <blockquote>“Ahmet bey, tam istediğim gibi yaptı. İsteklerimi dinledi istişarede bulunduk, hep yardımcı oldu, kısa sürede teslim etti. Bu ilk işimizdi bundan sonrada beraber çalışacağız bionluk üzerinden çok teşekkürler ellerinize sağlık. Başarılarınızın devamını dilerim. Kolay gelsin”</blockquote>
+          <figcaption>Bionluk alıcısı</figcaption>
+        </figure>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head"><h2 class="section-title">Son yazılar</h2><a class="section-link" href="yazilar.html">Tümü →</a></div>
-<a href="yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" class="post-item">
+<a href="yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html" class="post-item" data-filter-item data-tags="PCB Tasarımları">
+  <img class="post-thumb" src="assets/img/kapak/pcb-tasarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">PCB Tasarımı · Freelance</div><div class="post-title">KiCad ile PCB Tasarımı: Bionluk'ta Müşteriler İçin Tasarladığım Kartlar</div><div class="post-date">Ekim 2026</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+<a href="yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" class="post-item" data-filter-item data-tags="Pratik Projeler">
   <img class="post-thumb" src="assets/img/kapak/guc-kaynagi.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
   <div class="post-info"><div class="post-kicker">Pratik Proje</div><div class="post-title">12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu</div><div class="post-date">Nisan 2026</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
-<a href="yazilar/ev-sarj/ev-sarj-altyapi.html" class="post-item">
+<a href="yazilar/ev-sarj/ev-sarj-altyapi.html" class="post-item" data-filter-item data-tags="Elektrik Şarj İstasyonu Optimizasyonu">
   <img class="post-thumb" src="assets/img/kapak/ev-sarj.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
   <div class="post-info"><div class="post-kicker">EV Şarj · 1. Adım</div><div class="post-title">Raspberry Pi ve Veri Altyapısı</div><div class="post-date">Nisan 2026</div></div>
-  <span class="post-arrow" aria-hidden="true">→</span>
-</a>
-<a href="yazilar/akilli-tarim/su-analizi.html" class="post-item">
-  <img class="post-thumb" src="assets/img/kapak/akilli-tarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">Akıllı Tarım · 1. Adım</div><div class="post-title">Su Analiz Sistemi</div><div class="post-date">Mart 2026</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
       </section>
@@ -120,6 +155,7 @@
     <div class="footer-social">
       <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
       <a href="mailto:ahulu2006@gmail.com">E-posta</a>
     </div>
   </div>

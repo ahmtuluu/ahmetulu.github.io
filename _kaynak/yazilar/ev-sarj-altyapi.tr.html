@@ -1,0 +1,55 @@
+  <div class="blog-tag">Elektrik Şarj İstasyonu Optimizasyonu · 1. Adım</div>
+  <h1>Raspberry Pi ve Veri Altyapısı: Temeli Kurmak</h1>
+  <div class="blog-meta">Ahmet Ulu · Nisan 2026</div>
+
+  <p>Bu projedeki görevim sistemin temelini kurmaktı. Kulağa sade geliyor ama "temel" derken gerçekten her şeyi sıfırdan inşa etmekten bahsediyorum.</p>
+
+  <h3>Veritabanı: verinin bir yere gitmesi lazım</h3>
+
+  <p>İlk iş <strong>Raspberry Pi</strong> üzerine <strong>PostgreSQL</strong> kurmak oldu. Şarj istasyonlarından gelecek verilerin — sıcaklık, nem, enerji tüketimi, doluluk oranı — düzenli bir şekilde saklanabileceği tablo yapılarını hazırladım. Henüz ortada gerçek bir donanım yoktu, ama sistem ona hazır hale geldi.</p>
+
+  <figure class="blog-figure">
+    <img src="datatable.jpg" class="blog-img" alt="PostgreSQL veritabanı tablo görünümü" width="1200" height="544" loading="eager" decoding="async">
+    <figcaption>Veritabanına akan anlık veriler — current, voltage, battery_percent her 2 saniyede bir kaydediliyor</figcaption>
+  </figure>
+
+  <h3>Arduino ile ilk veri akışı</h3>
+
+  <p>Donanım tarafında <strong>Arduino</strong> ile Raspberry Pi arasında seri haberleşme kurdum. Arduino'dan simüle edilmiş sensör verileri geldi, <strong>Python</strong> bu verileri okuyup veritabanına yazdı. Gerçek sensörler olmadan önce veri akışının çalıştığını görmek istiyordum — ve çalıştı.</p>
+
+  <h3>Plaka algılama: her araç kendi bölümünde</h3>
+
+  <p>Sonra işin en çok ilgimi çeken kısmına geçtim: <strong>kamera ile plaka algılama.</strong> Raspberry Pi'ye bağlı kamera araç plakalarını tanıdı ve sisteme kaydetti. Her plaka için veritabanında otomatik olarak ayrı bir bölüm açıldı — giriş zamanı, sensör verileri, geçmiş kayıtlar hepsi o aracın plakası altında tutuldu. Sistem böylece çoklu kullanım için de hazır hale geldi.</p>
+
+  <figure class="blog-figure">
+    <img src="plaka.jpeg" class="blog-img" alt="Raspberry Pi kamera ile plaka algılama" width="900" height="1200" loading="lazy" decoding="async">
+    <figcaption>Kamera plakayı algılıyor, sistem otomatik olarak o araç için yeni bir kayıt açıyor</figcaption>
+  </figure>
+
+  <h3>Session yapısı ve REST API</h3>
+
+  <p>Her araç sisteme girdiğinde yeni bir <strong>session</strong> başlıyor, çıkışta kapanıyor. Bu yapı sayesinde hangi aracın ne zaman geldiği, ne kadar şarj yaptığı, o süredeki tüm sensör verileri tek bir session altında izlenebilir hale geldi.</p>
+
+  <figure class="blog-figure">
+    <img src="sessions.jpg" class="blog-img" alt="Session tablosu - araç giriş çıkış kayıtları" width="1200" height="710" loading="lazy" decoding="async">
+    <figcaption>Session tablosu — her araç girişinde yeni kayıt açılıyor, çıkışta is_active false'a dönüyor</figcaption>
+  </figure>
+
+  <p>Son olarak <strong>Flask</strong> ile bir REST API yazdım. Takım arkadaşım mobil uygulamayı geliştirdi, API üzerinden veriler uygulamaya aktarıldı ve ekranda göründü. İlk defa bir başkasının kullandığı bir şey yazmıştım — bu his farklıydı.</p>
+
+  <div class="tech-box">
+    <h4>Teknik Detaylar</h4>
+    <div class="tech-row"><span class="comp">Donanım</span><span class="detail">Raspberry Pi</span></div>
+    <div class="tech-row"><span class="comp">Veri Simülasyonu</span><span class="detail">Arduino — seri haberleşme</span></div>
+    <div class="tech-row"><span class="comp">Veritabanı</span><span class="detail">PostgreSQL</span></div>
+    <div class="tech-row"><span class="comp">Backend Dili</span><span class="detail">Python</span></div>
+    <div class="tech-row"><span class="comp">Plaka Algılama</span><span class="detail">Raspberry Pi Kamera + OCR</span></div>
+    <div class="tech-row"><span class="comp">API</span><span class="detail">Flask REST API</span></div>
+    <div class="tech-row"><span class="comp">Mobil Uygulama</span><span class="detail">Takım arkadaşı tarafından geliştirildi</span></div>
+  </div>
+
+  <h3>Sonuç</h3>
+
+  <p>Bu aşamada öğrendiğim en önemli şey teknik detaylar değildi aslında. Bir ekipte görev paylaşımının, zamanında iletişimin ve "bu benim işim bitti" demek yerine bütünün çalışmasını takip etmenin ne kadar kritik olduğunu gördüm.</p>
+
+  <p>Sonraki adım: gerçek sensörler ve optimizasyon algoritmaları.</p>

@@ -1,0 +1,18 @@
+# Bu dosyalar GitHub'a gönderilmez (yayınlanmaz).
+
+# PCB klasöründe sadece siteye hazırlanmış görseller yayınlanır;
+# orijinal PDF'ler, sansürsüz ekran görüntüleri vb. bilgisayarında kalır.
+yazilar/pcb-tasarim/*
+!yazilar/pcb-tasarim/trafik-*
+!yazilar/pcb-tasarim/peltier-*
+!yazilar/pcb-tasarim/yorum-*
+!yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html
+
+# Word dosyaları (CV'nin düzenlenebilir hali vb.)
+*.docx
+~$*
+
+# Sistem dosyaları
+Thumbs.db
+desktop.ini
+.DS_Store

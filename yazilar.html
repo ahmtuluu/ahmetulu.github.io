@@ -8,6 +8,9 @@
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#111110">
 <link rel="canonical" href="https://ahmetulu.com.tr/yazilar.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/yazilar.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/blog.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/yazilar.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
@@ -35,39 +38,54 @@
     <li><a href="projeler.html">Projeler</a></li>
     <li><a href="yazilar.html" aria-current="page">Yazılar</a></li>
     <li><a href="iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="en/blog.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
   </ul>
 </header>
 <canvas id="circuit-canvas" aria-hidden="true"></canvas>
 <main id="icerik">
-  <div class="wrap-narrow inner fade-in">
+  <div class="wrap-narrow inner fade-in" data-filter>
     <div class="page-header"><h1>Yazılar</h1><p>Deneyimlerimi, öğrendiklerimi ve düşüncelerimi paylaştığım yer.</p></div>
-    <section class="post-group">
+    <div class="filter-bar">
+      <label class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" placeholder="Yazılarda ara…" aria-label="Yazılarda ara…" data-filter-search autocomplete="off"></label>
+      <div class="chips" role="group" aria-label="Etiketler"><button type="button" class="chip" data-filter-tag="" aria-pressed="true">Tümü</button><button type="button" class="chip" data-filter-tag="PCB Tasarımları" aria-pressed="false">PCB Tasarımları</button><button type="button" class="chip" data-filter-tag="Akıllı Tarım Sistemi" aria-pressed="false">Akıllı Tarım Sistemi</button><button type="button" class="chip" data-filter-tag="Elektrik Şarj İstasyonu Optimizasyonu" aria-pressed="false">Elektrik Şarj İstasyonu Optimizasyonu</button><button type="button" class="chip" data-filter-tag="Pratik Projeler" aria-pressed="false">Pratik Projeler</button></div>
+    </div>
+    <section class="post-group" data-filter-section>
+      <h2 class="post-group-title">PCB Tasarımları</h2>
+      <p class="post-group-desc">Bionluk üzerinden müşteriler için yaptığım tasarımlar</p>
+<a href="yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html" class="post-item" data-filter-item data-tags="PCB Tasarımları">
+  <img class="post-thumb" src="assets/img/kapak/pcb-tasarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-title">KiCad ile PCB Tasarımı: Bionluk'ta Müşteriler İçin Tasarladığım Kartlar</div><div class="post-date">Ekim 2026</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+    </section>
+    <section class="post-group" data-filter-section>
       <h2 class="post-group-title">Akıllı Tarım Sistemi</h2>
       <p class="post-group-desc">Projenin adım adım gelişimi</p>
-<a href="yazilar/akilli-tarim/su-analizi.html" class="post-item">
+<a href="yazilar/akilli-tarim/su-analizi.html" class="post-item" data-filter-item data-tags="Akıllı Tarım Sistemi">
   <img class="post-thumb" src="assets/img/kapak/akilli-tarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
   <div class="post-info"><div class="post-title">Su Analiz Sistemi</div><div class="post-date">Mart 2026</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
     </section>
-    <section class="post-group">
+    <section class="post-group" data-filter-section>
       <h2 class="post-group-title">Elektrik Şarj İstasyonu Optimizasyonu</h2>
       <p class="post-group-desc">Projenin adım adım gelişimi</p>
-<a href="yazilar/ev-sarj/ev-sarj-altyapi.html" class="post-item">
+<a href="yazilar/ev-sarj/ev-sarj-altyapi.html" class="post-item" data-filter-item data-tags="Elektrik Şarj İstasyonu Optimizasyonu">
   <img class="post-thumb" src="assets/img/kapak/ev-sarj.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
   <div class="post-info"><div class="post-title">Raspberry Pi ve Veri Altyapısı</div><div class="post-date">Nisan 2026</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
     </section>
-    <section class="post-group">
+    <section class="post-group" data-filter-section>
       <h2 class="post-group-title">Pratik Projeler</h2>
       <p class="post-group-desc">Öğrenmek için yapılan küçük denemeler</p>
-<a href="yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" class="post-item">
+<a href="yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" class="post-item" data-filter-item data-tags="Pratik Projeler">
   <img class="post-thumb" src="assets/img/kapak/guc-kaynagi.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
   <div class="post-info"><div class="post-title">12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu</div><div class="post-date">Nisan 2026</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
     </section>
+    <p class="filter-empty" data-filter-empty hidden>Sonuç bulunamadı. Başka bir kelime ya da etiket dene.</p>
   </div>
 </main>
 <footer class="site-footer">
@@ -76,6 +94,7 @@
     <div class="footer-social">
       <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
       <a href="mailto:ahulu2006@gmail.com">E-posta</a>
     </div>
   </div>

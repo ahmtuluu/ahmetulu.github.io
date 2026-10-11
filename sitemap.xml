@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ahmetulu.com.tr/</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/</loc></url>
   <url><loc>https://ahmetulu.com.tr/hakkimda.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/about.html</loc></url>
   <url><loc>https://ahmetulu.com.tr/egitim.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/education.html</loc></url>
   <url><loc>https://ahmetulu.com.tr/projeler.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/projects.html</loc></url>
   <url><loc>https://ahmetulu.com.tr/yazilar.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/blog.html</loc></url>
   <url><loc>https://ahmetulu.com.tr/iletisim.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/contact.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/blog/kicad-pcb-design.html</loc></url>
   <url><loc>https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html</loc></url>
   <url><loc>https://ahmetulu.com.tr/yazilar/ev-sarj/ev-sarj-altyapi.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html</loc></url>
   <url><loc>https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html</loc></url>
+  <url><loc>https://ahmetulu.com.tr/en/blog/water-analysis-system.html</loc></url>
 </urlset>
