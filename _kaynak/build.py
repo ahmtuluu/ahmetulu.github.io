@@ -11,7 +11,7 @@ Bu klasör (_kaynak) sitede yayınlanmaz. Sayfaların hepsi buradaki verilerden 
 - Opsiyonel bölümler (doldurulunca görünür): BIONLUK, STATS, REVIEWS, CV, GOATCOUNTER
 Elle düzenlenen HTML dosyaları bir sonraki çalıştırmada üzerine yazılır; değişiklikleri buradan yap.
 """
-import os, html, hashlib
+import os, html, hashlib, json, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -38,6 +38,7 @@ REVIEWS = [
       en="Ahmet did it exactly the way I wanted. He listened to my requests, we discussed it together, he was always helpful and delivered quickly. This was our first job; from now on we'll keep working together through Bionluk. Thank you very much, great work. I wish you continued success."),
 ]
 CV = 'assets/ahmet-ulu-cv.pdf'   # İngilizce CV, telefon numarası çıkarılmış sürüm
+GSC_VERIFICATION = "kDmbOcP_ZD3wqx9IxPQzHMZo0sCyWcbTu7h1BzVJdyA"   # Google Search Console 'HTML etiketi' doğrulama kodu (content="..." içindeki değer)
 GOATCOUNTER = None    # ör. 'ahmetulu' (goatcounter.com hesabındaki kod)
 
 # ---------------------------------------------------------------- ikonlar
@@ -99,30 +100,30 @@ POSTS = [  # en yeni en üstte
  dict(slug='pcb-tasarim', group='pcb', date=(2026, 10),
       tr_url='yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html', en_url='en/blog/kicad-pcb-design.html',
       img_dir='yazilar/pcb-tasarim/', thumb='assets/img/kapak/pcb-tasarim.jpg',
-      tr=dict(kicker='PCB Tasarımı · Freelance', title='KiCad ile PCB Tasarımı: Bionluk\'ta Müşteriler İçin Tasarladığım Kartlar', page_title='KiCad ile PCB Tasarımı',
+      tr=dict(kicker='PCB Tasarımı · Freelance', title='KiCad ile PCB Tasarımı: Bionluk\'ta Müşteriler İçin Tasarladığım Kartlar', page_title='KiCad ile PCB Tasarımı: ESP32 Peltier ve Trafik Sinyalizasyon Kartları',
               desc='Bionluk üzerinden müşteriler için KiCad ile tasarladığım kartlar: trafik sinyalizasyon kontrol kartı ve ESP32 tabanlı Peltier kontrol kartı; şematik, PCB ve 3D görünümler.'),
-      en=dict(kicker='PCB Design · Freelance', title='PCB Design with KiCad: Boards I Designed for Clients', page_title='PCB Design with KiCad',
+      en=dict(kicker='PCB Design · Freelance', title='PCB Design with KiCad: Boards I Designed for Clients', page_title='PCB Design with KiCad: ESP32 Peltier and Traffic Signal Boards',
               desc='Boards I designed in KiCad for clients on Bionluk: a traffic signal control board and an ESP32-based Peltier control board, with schematic, PCB and 3D views.')),
  dict(slug='guc-kaynagi', group='pratik', date=(2026, 4),
       tr_url='yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html', en_url='en/blog/adjustable-power-supply.html',
       img_dir='yazilar/pratik-projeler/guc-kaynagi/', thumb='assets/img/kapak/guc-kaynagi.jpg',
-      tr=dict(kicker='Pratik Proje', title='12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu', page_title='12V DC Ayarlı Güç Kaynağı',
+      tr=dict(kicker='Pratik Proje', title='12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu', page_title='LM2596 ile 12V Ayarlı Güç Kaynağı Yapımı',
               desc='LM2596 tabanlı ayarlanabilir DC güç kaynağı: trimpot yerine 10 tur hassas potansiyometre, sorunlar ve çözümleri.'),
-      en=dict(kicker='Practical Project', title='12V DC Adjustable Power Supply — LM2596 Mod', page_title='12V DC Adjustable Power Supply',
+      en=dict(kicker='Practical Project', title='12V DC Adjustable Power Supply — LM2596 Mod', page_title='Building a 12V Adjustable Power Supply with the LM2596',
               desc='An adjustable DC power supply based on the LM2596: a 10-turn precision potentiometer instead of the trimpot, problems and fixes.')),
  dict(slug='ev-sarj-altyapi', group='ev', date=(2026, 4),
       tr_url='yazilar/ev-sarj/ev-sarj-altyapi.html', en_url='en/blog/ev-charging-data-infrastructure.html',
       img_dir='yazilar/ev-sarj/', thumb='assets/img/kapak/ev-sarj.jpg', step=1,
-      tr=dict(kicker='EV Şarj · 1. Adım', title='Raspberry Pi ve Veri Altyapısı', page_title='EV Şarj Optimizasyonu — Raspberry Pi ve Veri Altyapısı',
-              desc='Raspberry Pi üzerinde PostgreSQL, Arduino ile veri akışı, kamera ile plaka algılama ve Flask REST API.'),
-      en=dict(kicker='EV Charging · Step 1', title='Raspberry Pi and the Data Infrastructure', page_title='EV Charging Optimization — Raspberry Pi and the Data Infrastructure',
-              desc='PostgreSQL on a Raspberry Pi, data flow from an Arduino, license plate recognition with a camera and a Flask REST API.')),
+      tr=dict(kicker='EV Şarj · 1. Adım', title='Raspberry Pi ve Veri Altyapısı', page_title='Elektrikli Araç Şarj İstasyonu: Raspberry Pi ile Veri Altyapısı',
+              desc='Elektrikli araç (EV) şarj istasyonu projesi: Raspberry Pi üzerinde PostgreSQL, Arduino ile sensör verisi, kamera ile plaka tanıma ve Flask REST API.'),
+      en=dict(kicker='EV Charging · Step 1', title='Raspberry Pi and the Data Infrastructure', page_title='EV Charging Station Data Infrastructure with Raspberry Pi',
+              desc='An electric vehicle (EV) charging station project: PostgreSQL on a Raspberry Pi, sensor data from an Arduino, license plate recognition and a Flask REST API.')),
  dict(slug='su-analizi', group='tarim', date=(2026, 3),
       tr_url='yazilar/akilli-tarim/su-analizi.html', en_url='en/blog/water-analysis-system.html',
       img_dir='yazilar/akilli-tarim/', thumb='assets/img/kapak/akilli-tarim.jpg', step=1,
-      tr=dict(kicker='Akıllı Tarım · 1. Adım', title='Su Analiz Sistemi', page_title='Su Analiz Sistemi',
+      tr=dict(kicker='Akıllı Tarım · 1. Adım', title='Su Analiz Sistemi', page_title='Güneş Enerjili Su Analiz Sistemi: ESP32 ile pH, TDS ve Sıcaklık Ölçümü',
               desc='Güneş enerjili, off-grid su analiz sistemi: pH, TDS ve sıcaklık ölçümü, PCB, mobil uygulama ve sensör gürültüsü.'),
-      en=dict(kicker='Smart Agriculture · Step 1', title='Water Analysis System', page_title='Water Analysis System',
+      en=dict(kicker='Smart Agriculture · Step 1', title='Water Analysis System', page_title='Solar-Powered Water Analysis System with ESP32: pH, TDS and Temperature',
               desc='A solar-powered, off-grid water analysis system: pH, TDS and temperature sensing, a PCB, a mobile app and sensor noise.')),
 ]
 POST = {p['slug']: p for p in POSTS}
@@ -171,7 +172,7 @@ def tag_name(t, lang):
 def post_url(p, lang):
     return p['tr_url'] if lang == 'tr' else p['en_url']
 
-def head(lang, path, title, desc, alt_path, og_image='assets/img/og.jpg', og_type='website', noindex=False):
+def head(lang, path, title, desc, alt_path, og_image='assets/img/og.jpg', og_type='website', noindex=False, ld=None):
     rel = rel_of(path)
     canon = f'{SITE}/{path}'.replace('/index.html', '/')
     tr_p, en_p = (path, alt_path) if lang == 'tr' else (alt_path, path)
@@ -185,6 +186,8 @@ def head(lang, path, title, desc, alt_path, og_image='assets/img/og.jpg', og_typ
     if GOATCOUNTER:
         gc = f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>\n'
     robots = '<meta name="robots" content="noindex">\n' if noindex else ''
+    gsc = f'<meta name="google-site-verification" content="{GSC_VERIFICATION}">\n' if GSC_VERIFICATION and path == 'index.html' else ''
+    ldjson = ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>\n' for x in (ld or []))
     return f'''<!DOCTYPE html>
 <html lang="{lang}">
 <head>
@@ -210,7 +213,7 @@ def head(lang, path, title, desc, alt_path, og_image='assets/img/og.jpg', og_typ
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{rel}assets/css/style.css?v={asset_ver('assets/css/style.css')}">
 <script>document.documentElement.classList.add('js')</script>
-{gc}</head>
+{gc}{gsc}{ldjson}</head>
 '''
 
 def nav(lang, path, active, alt_path):
@@ -263,6 +266,17 @@ def asset_ver(path):
     with open(os.path.join(ROOT, path), 'rb') as f:
         return hashlib.md5(f.read()).hexdigest()[:8]
 
+def person_ld(lang):
+    return {
+        '@type': 'Person', '@id': f'{SITE}/#ahmet-ulu', 'name': 'Ahmet Ulu', 'url': f'{SITE}/',
+        'image': f'{SITE}/assets/img/og.jpg', 'email': f'mailto:{EMAIL}',
+        'jobTitle': 'Elektrik-Elektronik Mühendisliği Öğrencisi, Gömülü Sistemler Geliştiricisi' if lang == 'tr' else 'Electrical & Electronics Engineering Student, Embedded Systems Developer',
+        'address': {'@type': 'PostalAddress', 'addressLocality': 'Kayseri', 'addressCountry': 'TR'},
+        'alumniOf': {'@type': 'CollegeOrUniversity', 'name': 'Abdullah Gül Üniversitesi'},
+        'knowsAbout': ['Gömülü Sistemler', 'IoT', 'PCB Tasarımı', 'KiCad', 'ESP32', 'STM32', 'Raspberry Pi', 'Elektrikli Araç Şarj Sistemleri'],
+        'sameAs': [GITHUB, LINKEDIN] + ([BIONLUK] if BIONLUK else []),
+    }
+
 CANVAS = '<canvas id="circuit-canvas" aria-hidden="true"></canvas>\n'
 
 def write(path, text):
@@ -272,10 +286,12 @@ def write(path, text):
         f.write(text)
     print('  ', path)
 
-def page(lang, key, title, desc, body, canvas=True):
+def page(lang, key, title, desc, body, canvas=None, ld=None):
+    if canvas is None:
+        canvas = (key == 'home')  # arka plan animasyonu sadece ana sayfada
     path = PAGES[key][0 if lang == 'tr' else 1]
     alt = PAGES[key][1 if lang == 'tr' else 0]
-    out = head(lang, path, title, desc, alt) + nav(lang, path, key, alt) + (CANVAS if canvas else '')
+    out = head(lang, path, title, desc, alt, ld=ld) + nav(lang, path, key, alt) + (CANVAS if canvas else '')
     out += f'<main id="icerik">\n{body}\n</main>\n' + footer(lang, path)
     write(path, out)
 
@@ -438,7 +454,9 @@ def build_home(lang):
       </section>
     </div>
   </div>'''
-    page(lang, 'home', title, desc, body)
+    ld = [{'@context': 'https://schema.org', '@graph': [person_ld(lang),
+          {'@type': 'WebSite', '@id': f'{SITE}/#site', 'url': f'{SITE}/', 'name': 'Ahmet Ulu', 'inLanguage': lang, 'publisher': {'@id': f'{SITE}/#ahmet-ulu'}}]}]
+    page(lang, 'home', title, desc, body, ld=ld)
 
 ABOUT = {
  'tr': dict(title='Hakkımda — Ahmet Ulu', h='Hakkımda', sub='Kim olduğum, ne ile ilgilendiğim.',
@@ -675,7 +693,18 @@ def build_post(p, lang):
         body = body.replace('<img src="', f'<img src="{rel}{p["img_dir"]}')
     others = '\n'.join(post_item(o, lang, rel) for o in POSTS if o is not p)
     blog = rel + PAGES['blog'][0 if lang == 'tr' else 1]
-    out = head(lang, path, f'{p[lang]["page_title"]} — Ahmet Ulu', p[lang]['desc'], alt, og_image=p['thumb'], og_type='article')
+    y, m = p['date']
+    blog_name = 'Yazılar' if lang == 'tr' else 'Blog'
+    ld = [{'@context': 'https://schema.org', '@graph': [
+        {'@type': 'BlogPosting', 'headline': p[lang]['title'], 'description': p[lang]['desc'],
+         'image': f'{SITE}/{p["thumb"]}', 'datePublished': f'{y}-{m:02d}-01', 'dateModified': p.get('modified', f'{y}-{m:02d}-01'),
+         'inLanguage': lang, 'mainEntityOfPage': f'{SITE}/{path}', 'author': {'@type': 'Person', 'name': 'Ahmet Ulu', 'url': f'{SITE}/'},
+         'keywords': ', '.join(p.get('keywords', {}).get(lang, []))},
+        {'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'Ahmet Ulu', 'item': f'{SITE}/' + ('' if lang == 'tr' else 'en/')},
+            {'@type': 'ListItem', 'position': 2, 'name': blog_name, 'item': f'{SITE}/{PAGES["blog"][0 if lang == "tr" else 1]}'},
+            {'@type': 'ListItem', 'position': 3, 'name': p[lang]['title'], 'item': f'{SITE}/{path}'}]}]}]
+    out = head(lang, path, f'{p[lang]["page_title"]} — Ahmet Ulu', p[lang]['desc'], alt, og_image=p['thumb'], og_type='article', ld=ld)
     out += nav(lang, path, 'blog', alt)
     out += f'''<main id="icerik">
 <article class="wrap-narrow article">
@@ -693,12 +722,15 @@ def build_post(p, lang):
     write(path, out)
 
 def build_sitemap():
+    today = datetime.date.today().isoformat()
     urls = []
     for k, (tr, en) in PAGES.items():
-        urls += [tr, en]
+        urls += [(tr, today), (en, today)]
     for p in POSTS:
-        urls += [p['tr_url'], p['en_url']]
-    body = '\n'.join(f'  <url><loc>{SITE}/{u}</loc></url>'.replace('/index.html<', '/<') for u in urls)
+        y, m = p['date']
+        mod = p.get('modified', f'{y}-{m:02d}-01')
+        urls += [(p['tr_url'], mod), (p['en_url'], mod)]
+    body = '\n'.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{d}</lastmod></url>'.replace('/index.html<', '/<') for u, d in urls)
     write('sitemap.xml', f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n')
     write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
 

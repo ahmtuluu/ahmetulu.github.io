@@ -400,3 +400,6 @@ a.tag:hover{color:var(--accent);border-color:var(--accent-border);}
 .article .review blockquote{font-size:16px;}
 .review-more{font-size:14.5px;}
 @media (min-width:761px){.cta-actions .btn{flex:0 0 auto;}}
+
+/* Animasyonsuz sayfalarda üstte hafif sıcak ışık */
+body{background:radial-gradient(1100px 520px at 75% -12%,rgba(212,165,116,.07),transparent 62%) no-repeat,var(--bg);}
