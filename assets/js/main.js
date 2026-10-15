@@ -301,6 +301,54 @@
     }, 500);
   }
 
+  /* ---------- Ana sayfa: kaydırdıkça renk geçişi ---------- */
+  var toned = [].slice.call(document.querySelectorAll('[data-tone]'));
+  if (toned.length) {
+    document.body.classList.add('tone-enabled');
+    var themeMeta = document.querySelector('meta[name="theme-color"]');
+    var currentTone = 'dark', toneTick = false;
+    var updateTone = function () {
+      toneTick = false;
+      var mid = window.innerHeight * 0.55, tone = toned[0].getAttribute('data-tone');
+      for (var i = 0; i < toned.length; i++) {
+        if (toned[i].getBoundingClientRect().top <= mid) tone = toned[i].getAttribute('data-tone');
+      }
+      if (tone !== currentTone) {
+        currentTone = tone;
+        document.body.classList.toggle('tone-light', tone === 'light');
+        if (themeMeta) themeMeta.setAttribute('content', tone === 'light' ? '#f3eee5' : '#111110');
+      }
+    };
+    window.addEventListener('scroll', function () {
+      if (!toneTick) { toneTick = true; requestAnimationFrame(updateTone); }
+    }, { passive: true });
+    window.addEventListener('resize', updateTone);
+    updateTone();
+  }
+
+  /* ---------- Ana sayfa: bölümler kaydırdıkça yumuşakça belirir ---------- */
+  if (toned.length && !reduceMotion && 'IntersectionObserver' in window) {
+    var items = [].slice.call(document.querySelectorAll('.home-sections .section-head, .home-sections .card, .home-sections .service, .home-sections .review, .home-sections .post-item'));
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          var t = en.target;
+          t.classList.add('in'); io.unobserve(t);
+          // Animasyon bitince sınıfları kaldır; kartların hover efekti normale dönsün
+          setTimeout(function () { t.classList.remove('will-appear', 'in'); t.style.transitionDelay = ''; }, 1100);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) {
+      // Sayfa açıldığında zaten görünenleri gizleme
+      if (el.getBoundingClientRect().top < window.innerHeight) return;
+      var sib = el.parentElement ? [].indexOf.call(el.parentElement.children, el) : 0;
+      el.style.transitionDelay = Math.min(sib, 3) * 90 + 'ms';
+      el.classList.add('will-appear');
+      io.observe(el);
+    });
+  }
+
   /* ---------- İletişim formu ---------- */
   var form = document.getElementById('contactForm');
   if (form) {

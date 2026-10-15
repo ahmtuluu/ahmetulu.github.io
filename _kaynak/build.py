@@ -375,7 +375,7 @@ def service_block(lang):
         txt = 'I design schematics and PCBs in KiCad through Bionluk: I listen to your project, design to your needs and deliver production-ready files.'
         b1, b2 = 'My Bionluk profile →', 'See example designs'
     b2_html = f'<a class="btn btn-ghost" href="{rel}{post_url(pcb, lang)}">{b2}</a>' if pcb else ''
-    return f'''      <section class="section">
+    return f'''      <section class="section" data-tone="dark">
         <div class="service">
           <div class="service-text">
             <div class="post-kicker">{kicker}</div>
@@ -400,7 +400,7 @@ def reviews_block(lang):
           <figcaption>{who}{note}</figcaption>
         </figure>''' for r in REVIEWS)
     more = f'<a class="section-link" href="{BIONLUK}" target="_blank" rel="noopener">{s["reviews_all"]}</a>' if BIONLUK else ''
-    return f'''      <section class="section">
+    return f'''      <section class="section" data-tone="light">
         <div class="section-head"><h2 class="section-title">{s["reviews"]}</h2>{more}</div>
         <div class="review-grid">
 {items}
@@ -428,7 +428,7 @@ def build_home(lang):
         intro = "I'm an electrical and electronics engineering student. But most of what I've really learned came from outside the classroom, while building things. I started most of them out of curiosity, and I've never been afraid of learning what I don't know."
         b1, b2 = 'See my projects', 'About me'
     body = f'''  <div class="wrap">
-    <section class="hero">
+    <section class="hero" data-tone="dark">
       <div class="home-label reveal">Kayseri, Türkiye</div>
       <h1 class="home-title" id="homeTitle"><span class="tline">{l1}</span><em class="tline">{l2}</em></h1>
       <p class="home-desc reveal">{intro}</p>
@@ -441,14 +441,14 @@ def build_home(lang):
     </section>
 
     <div class="home-sections">
-      <section class="section" id="one-cikanlar">
+      <section class="section" id="one-cikanlar" data-tone="light">
         <div class="section-head"><h2 class="section-title">{s['featured']}</h2><a class="section-link" href="{P('projects')}">{s['see_all']}</a></div>
         <div class="card-grid">
 {cards}
         </div>
       </section>
 {service_block(lang)}{reviews_block(lang)}
-      <section class="section">
+      <section class="section" data-tone="light">
         <div class="section-head"><h2 class="section-title">{s['latest']}</h2><a class="section-link" href="{P('blog')}">{s['see_all']}</a></div>
 {posts}
       </section>
