@@ -6,7 +6,7 @@
 <title>EV Charging Station Data Infrastructure with Raspberry Pi — Ahmet Ulu</title>
 <meta name="description" content="An electric vehicle (EV) charging station project: PostgreSQL on a Raspberry Pi, sensor data from an Arduino, license plate recognition and a Flask REST API.">
 <meta name="author" content="Ahmet Ulu">
-<meta name="theme-color" content="#111110">
+<meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html">
 <link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/yazilar/ev-sarj/ev-sarj-altyapi.html">
 <link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html">
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=58c64370">
+<link rel="stylesheet" href="../../assets/css/style.css?v=a80df6ca">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "Raspberry Pi and the Data Infrastructure", "description": "An electric vehicle (EV) charging station project: PostgreSQL on a Raspberry Pi, sensor data from an Arduino, license plate recognition and a Flask REST API.", "image": "https://ahmetulu.com.tr/assets/img/kapak/ev-sarj.jpg", "datePublished": "2026-04-01", "dateModified": "2026-04-01", "inLanguage": "en", "mainEntityOfPage": "https://ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html", "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}, "keywords": ""}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ahmetulu.com.tr/en/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Raspberry Pi and the Data Infrastructure", "item": "https://ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html"}]}]}</script>
 </head>
@@ -42,16 +42,21 @@
     <li class="nav-lang"><a href="../../yazilar/ev-sarj/ev-sarj-altyapi.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
   </ul>
 </header>
+<div class="read-progress" aria-hidden="true"><span></span></div>
 <main id="icerik">
 <article class="wrap-narrow article">
   <a href="../../en/blog.html" class="back-link">← All posts</a>
   <div class="blog-tag">EV Charging Station Optimization · Step 1</div>
   <h1>Raspberry Pi and the Data Infrastructure: Laying the Foundation</h1>
-  <div class="blog-meta">Ahmet Ulu · April 2026</div>
+  <div class="blog-meta">Ahmet Ulu · April 2026 · 2 min read</div>
+  <details class="toc">
+    <summary>Contents</summary>
+    <ol><li><a href="#the-database-the-data-has-to-go-somewhere">The database: the data has to go somewhere</a></li><li><a href="#the-first-data-flow-with-arduino">The first data flow with Arduino</a></li><li><a href="#license-plate-recognition-every-vehicle-gets-its-own-section">License plate recognition: every vehicle gets its own section</a></li><li><a href="#session-structure-and-a-rest-api">Session structure and a REST API</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+  </details>
 
   <p>My job in this project was to lay the foundation of the system. That sounds modest, but by "foundation" I really mean building everything from scratch.</p>
 
-  <h3>The database: the data has to go somewhere</h3>
+  <h3 id="the-database-the-data-has-to-go-somewhere">The database: the data has to go somewhere</h3>
 
   <p>The first task was installing <strong>PostgreSQL</strong> on a <strong>Raspberry Pi</strong>. I designed the table structures that would neatly store the data coming from the charging stations — temperature, humidity, energy consumption, occupancy. There was no real hardware yet, but the system was ready for it.</p>
 
@@ -60,11 +65,11 @@
     <figcaption>Live data flowing into the database — current, voltage and battery_percent are recorded every 2 seconds</figcaption>
   </figure>
 
-  <h3>The first data flow with Arduino</h3>
+  <h3 id="the-first-data-flow-with-arduino">The first data flow with Arduino</h3>
 
   <p>On the hardware side, I set up serial communication between an <strong>Arduino</strong> and the Raspberry Pi. Simulated sensor data came from the Arduino, and <strong>Python</strong> read it and wrote it to the database. I wanted to see the data flow working before the real sensors arrived — and it worked.</p>
 
-  <h3>License plate recognition: every vehicle gets its own section</h3>
+  <h3 id="license-plate-recognition-every-vehicle-gets-its-own-section">License plate recognition: every vehicle gets its own section</h3>
 
   <p>Then I moved on to the part that interested me most: <strong>license plate recognition with a camera.</strong> The camera connected to the Raspberry Pi recognized vehicle plates and recorded them in the system. For each plate, a separate section was automatically created in the database — entry time, sensor data and history were all kept under that vehicle's plate. This made the system ready for multiple users as well.</p>
 
@@ -73,7 +78,7 @@
     <figcaption>The camera detects the plate and the system automatically opens a new record for that vehicle</figcaption>
   </figure>
 
-  <h3>Session structure and a REST API</h3>
+  <h3 id="session-structure-and-a-rest-api">Session structure and a REST API</h3>
 
   <p>Every time a vehicle enters the system, a new <strong>session</strong> starts, and it closes when the vehicle leaves. Thanks to this structure, which vehicle arrived when, how much it charged and all sensor data during that time can be tracked under a single session.</p>
 
@@ -95,27 +100,44 @@
     <div class="tech-row"><span class="comp">Mobile App</span><span class="detail">Developed by a teammate</span></div>
   </div>
 
-  <h3>Conclusion</h3>
+  <h3 id="conclusion">Conclusion</h3>
 
   <p>The most important thing I learned at this stage wasn't actually the technical details. I saw how critical it is to divide tasks within a team, to communicate on time, and to keep an eye on whether the whole thing works instead of saying "my part is done".</p>
 
   <p>Next step: real sensors and optimization algorithms.</p>
 
+  <div class="share">
+    <span class="share-label">Share</span>
+    <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A//ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html&amp;text=Raspberry%20Pi%20and%20the%20Data%20Infrastructure" target="_blank" rel="noopener">X</a>
+    <a class="share-btn" href="https://wa.me/?text=Raspberry%20Pi%20and%20the%20Data%20Infrastructure%20https%3A//ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="share-btn" type="button" data-copy="https://ahmetulu.com.tr/en/blog/ev-charging-data-infrastructure.html" data-copied="Copied ✓">Copy link</button>
+  </div>
+
+  <aside class="author">
+    <div class="mono sm" aria-hidden="true"><span>AU</span></div>
+    <div>
+      <div class="author-name">Ahmet Ulu</div>
+      <p>Electrical and electronics engineering student at Abdullah Gül University; embedded systems developer at MUSTECH and freelance PCB designer.</p>
+      <div class="author-links"><a href="../../en/about.html">About me →</a><a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a></div>
+    </div>
+  </aside>
+
   <nav class="post-nav" aria-label="More posts">
     <div class="post-nav-title">More posts</div>
 <a href="../../en/blog/kicad-pcb-design.html" class="post-item" data-filter-item data-tags="PCB Designs">
-  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">PCB Design · Freelance</div><div class="post-title">PCB Design with KiCad: Boards I Designed for Clients</div><div class="post-date">October 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">PCB Design · Freelance</div><div class="post-title">PCB Design with KiCad: Boards I Designed for Clients</div><div class="post-date">October 2026 · 5 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../en/blog/adjustable-power-supply.html" class="post-item" data-filter-item data-tags="Practical Projects">
-  <img class="post-thumb" src="../../assets/img/kapak/guc-kaynagi.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">Practical Project</div><div class="post-title">12V DC Adjustable Power Supply — LM2596 Mod</div><div class="post-date">April 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/guc-kaynagi.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Practical Project</div><div class="post-title">12V DC Adjustable Power Supply — LM2596 Mod</div><div class="post-date">April 2026 · 3 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../en/blog/water-analysis-system.html" class="post-item" data-filter-item data-tags="Smart Agriculture System">
-  <img class="post-thumb" src="../../assets/img/kapak/akilli-tarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">Smart Agriculture · Step 1</div><div class="post-title">Water Analysis System</div><div class="post-date">March 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/akilli-tarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Smart Agriculture · Step 1</div><div class="post-title">Water Analysis System</div><div class="post-date">March 2026 · 6 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
   </nav>
@@ -132,6 +154,6 @@
     </div>
   </div>
 </footer>
-<script src="../../assets/js/main.js?v=dfaf07f7" defer></script>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
 </body>
 </html>

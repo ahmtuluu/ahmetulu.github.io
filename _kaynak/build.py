@@ -196,7 +196,7 @@ def head(lang, path, title, desc, alt_path, og_image='assets/img/og.jpg', og_typ
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 {robots}<meta name="author" content="Ahmet Ulu">
-<meta name="theme-color" content="#111110">
+<meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="{canon}">
 {alt}<meta property="og:type" content="{og_type}">
 <meta property="og:locale" content="{S[lang]['locale']}">
@@ -296,14 +296,34 @@ def page(lang, key, title, desc, body, canvas=None, ld=None):
     write(path, out)
 
 # ---------------------------------------------------------------- bileşenler
+def reading_time(p, lang):
+    import re as _re
+    path = os.path.join(HERE, 'yazilar', f'{p["slug"]}.{lang}.html')
+    txt = _re.sub(r'<[^>]+>', ' ', open(path, encoding='utf-8').read())
+    words = len(txt.split())
+    mins = max(1, round(words / 190))
+    return f'{mins} dk okuma' if lang == 'tr' else f'{mins} min read'
+
 def post_item(p, lang, rel, kicker=True):
     t = p[lang]
     k = f'<div class="post-kicker">{t["kicker"]}</div>' if kicker else ''
     g = next(x for x in GROUPS if x['key'] == p['group'])[lang][0]
     return f'''<a href="{rel}{post_url(p, lang)}" class="post-item" data-filter-item data-tags="{esc(g)}">
-  <img class="post-thumb" src="{rel}{p["thumb"]}" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info">{k}<div class="post-title">{t["title"]}</div><div class="post-date">{date_str(p, lang)}</div></div>
+  <img class="post-thumb" src="{rel}{p["thumb"]}" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info">{k}<div class="post-title">{t["title"]}</div><div class="post-date">{date_str(p, lang)} · {reading_time(p, lang)}</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
+</a>'''
+
+def post_card(p, lang, rel):
+    t = p[lang]
+    return f'''<a href="{rel}{post_url(p, lang)}" class="post-card">
+  <div class="post-card-media"><img src="{rel}{p["thumb"]}" alt="" width="800" height="500" loading="lazy" decoding="async"></div>
+  <div class="post-card-body">
+    <div class="post-kicker">{t["kicker"]}</div>
+    <h3 class="post-card-title">{t["title"]}</h3>
+    <p class="post-card-desc">{t["desc"]}</p>
+    <div class="post-date">{date_str(p, lang)} · {reading_time(p, lang)}</div>
+  </div>
 </a>'''
 
 def link_text(p, lang):
@@ -375,7 +395,7 @@ def service_block(lang):
         txt = 'I design schematics and PCBs in KiCad through Bionluk: I listen to your project, design to your needs and deliver production-ready files.'
         b1, b2 = 'My Bionluk profile →', 'See example designs'
     b2_html = f'<a class="btn btn-ghost" href="{rel}{post_url(pcb, lang)}">{b2}</a>' if pcb else ''
-    return f'''      <section class="section" data-tone="dark">
+    return f'''      <section class="section">
         <div class="service">
           <div class="service-text">
             <div class="post-kicker">{kicker}</div>
@@ -400,7 +420,7 @@ def reviews_block(lang):
           <figcaption>{who}{note}</figcaption>
         </figure>''' for r in REVIEWS)
     more = f'<a class="section-link" href="{BIONLUK}" target="_blank" rel="noopener">{s["reviews_all"]}</a>' if BIONLUK else ''
-    return f'''      <section class="section" data-tone="light">
+    return f'''      <section class="section">
         <div class="section-head"><h2 class="section-title">{s["reviews"]}</h2>{more}</div>
         <div class="review-grid">
 {items}
@@ -412,47 +432,150 @@ def reviews_block(lang):
 def build_home(lang):
     s = S[lang]
     rel = rel_of(PAGES['home'][0 if lang == 'tr' else 1])
-    cards = '\n'.join(project_card(PROJECTS[i], lang, rel) for i in FEATURED)
-    posts = '\n'.join(post_item(p, lang, rel) for p in POSTS[:3])
     P = lambda k: rel + PAGES[k][0 if lang == 'tr' else 1]
-    if lang == 'tr':
+    tr = lang == 'tr'
+    pcb_proj = PROJECTS[FEATURED[0]]
+    small1, small2 = PROJECTS[FEATURED[1]], PROJECTS[FEATURED[2]]
+    feat_posts = set(pcb_proj['posts'])
+    latest = next((p for p in POSTS if p['slug'] not in feat_posts), POSTS[0])
+
+    def proj_link(pr):
+        return rel + post_url(POST[pr['posts'][0]], lang) if pr['posts'] else P('projects')
+
+    if tr:
         title = 'Ahmet Ulu — Elektrik-Elektronik, Gömülü Sistemler ve IoT'
-        desc = "Ahmet Ulu — Kayseri'den elektrik-elektronik mühendisliği öğrencisi. Gömülü sistemler, IoT ve otomasyon projeleri, yazılar ve deneyimler."
+        desc = "Ahmet Ulu — Kayseri'den elektrik-elektronik mühendisliği öğrencisi. Gömülü sistemler, IoT ve PCB tasarımı projeleri, yazılar ve deneyimler."
         l1, l2 = 'Merhaba, ben', 'Ahmet Ulu.'
-        intro = 'Elektrik-elektronik öğrencisiyim. Ama asıl öğrendiğim şeylerin çoğu ders dışında, bir şeyler yaparken ortaya çıktı. Çoğuna meraktan başladım ve bilmediğim şeyleri öğrenmekten de hiç çekinmedim.'
-        b1, b2 = 'Projelerime bak', 'Hakkımda'
+        role = 'Gömülü Sistemler · IoT · PCB Tasarımı'
+        intro = 'Elektrik-elektronik öğrencisiyim. Asıl öğrendiklerimin çoğu ders dışında, bir şeyler yaparken ortaya çıktı: sensörlerden PCB\'lere, Raspberry Pi\'den mobil uygulamalara.'
+        b1, b2 = 'Projelerime bak', 'İletişime geç'
+        avail = 'Freelance PCB işlerine açığım'
+        uni, uni2 = 'Abdullah Gül Üniversitesi', 'Elektrik-Elektronik Müh.'
+        st_h, st_sub, st_link = 'Bionluk puanı', '8 tamamlanan sipariş · 6/6 beş yıldız', 'Profilim →'
+        stack_h = 'Kullandıklarım'
+        now_h, now_1, now_2 = 'Şu an', 'MUSTECH\'te gömülü sistemler geliştiricisi', 'Bionluk\'ta freelance PCB tasarımı'
+        feat_k = 'Öne çıkan'
+        soc_h = 'Bağlantılar'
+        last_k = 'Son yazı'
+        cv_h, cv_t = 'CV', 'İngilizce · PDF'
+        blog_h, blog_sub = 'Son yazılar', 'Projelerin adım adım hikâyesi, hatalar ve öğrendiklerim.'
+        cta_h, cta_t = 'Bir projen mi var?', 'PCB tasarımı, gömülü sistem ya da IoT fikrin varsa konuşalım. Genellikle 1–2 gün içinde dönüş yaparım.'
+        cta_b1, cta_b2 = 'Bana yaz →', 'Bionluk profilim'
     else:
         title = 'Ahmet Ulu — Electrical & Electronics, Embedded Systems and IoT'
-        desc = 'Ahmet Ulu — an electrical and electronics engineering student from Kayseri, Türkiye. Embedded systems, IoT and automation projects, posts and experiences.'
+        desc = 'Ahmet Ulu — an electrical and electronics engineering student from Kayseri, Türkiye. Embedded systems, IoT and PCB design projects, posts and experiences.'
         l1, l2 = "Hi, I'm", 'Ahmet Ulu.'
-        intro = "I'm an electrical and electronics engineering student. But most of what I've really learned came from outside the classroom, while building things. I started most of them out of curiosity, and I've never been afraid of learning what I don't know."
-        b1, b2 = 'See my projects', 'About me'
+        role = 'Embedded Systems · IoT · PCB Design'
+        intro = "I'm an electrical and electronics engineering student. Most of what I've really learned came from outside the classroom, while building things: from sensors to PCBs, from Raspberry Pi to mobile apps."
+        b1, b2 = 'See my projects', 'Get in touch'
+        avail = 'Open to freelance PCB work'
+        uni, uni2 = 'Abdullah Gül University', 'Electrical & Electronics Eng.'
+        st_h, st_sub, st_link = 'Bionluk rating', '8 completed orders · 6/6 five-star', 'My profile →'
+        stack_h = 'My toolkit'
+        now_h, now_1, now_2 = 'Now', 'Embedded systems developer at MUSTECH', 'Freelance PCB design on Bionluk'
+        feat_k = 'Featured'
+        soc_h = 'Elsewhere'
+        last_k = 'Latest post'
+        cv_h, cv_t = 'CV', 'PDF'
+        blog_h, blog_sub = 'Latest posts', 'Step-by-step project stories, mistakes and lessons learned.'
+        cta_h, cta_t = 'Got a project in mind?', "If you have a PCB, embedded or IoT idea, let's talk. I usually reply within 1–2 days."
+        cta_b1, cta_b2 = 'Write to me →', 'My Bionluk profile'
+
+    stack = ['ESP32', 'STM32', 'Raspberry Pi', 'Arduino', 'KiCad', 'Python', 'C / C++', 'MATLAB']
+    stack_html = ''.join(f'<span class="chip-sm">{x}</span>' for x in stack)
+    rating = STATS[1][0] if len(STATS) > 1 else '5.0'
+    cv_tile = ''
+    if CV:
+        cv_tile = f'''      <a class="tile t-cv" href="{rel}{CV}" target="_blank" rel="noopener" data-reveal="6">
+        <div class="tile-k">{cv_h}</div>
+        <div class="cv-icon" aria-hidden="true">{ICON['doc']}</div>
+        <div class="tile-sub">{cv_t} ↓</div>
+      </a>'''
+    bion_soc = f'<a href="{BIONLUK}" target="_blank" rel="noopener" class="soc">{ICON["chip"]}<span>Bionluk</span></a>' if BIONLUK else ''
+
+    def small_tile(pr, cls, d):
+        t = pr[lang]
+        return f'''      <a class="tile tile-img {cls}" href="{proj_link(pr)}" data-reveal="{d}">
+        <img src="{rel}{pr['cover']}" alt="" width="800" height="500" loading="lazy" decoding="async">
+        <div class="tile-over"><div class="tile-k">{pr['year']}</div><div class="tile-title">{t['title']}</div></div>
+      </a>'''
+
+    posts = '\n'.join(post_card(p, lang, rel) for p in [x for x in POSTS if x is not latest][:3])
     body = f'''  <div class="wrap">
-    <section class="hero" data-tone="dark">
-      <div class="home-label reveal">Kayseri, Türkiye</div>
-      <h1 class="home-title" id="homeTitle"><span class="tline">{l1}</span><em class="tline">{l2}</em></h1>
-      <p class="home-desc reveal">{intro}</p>
-      <div class="home-cta reveal">
-        <a class="btn btn-primary" href="{P('projects')}">{b1}</a>
-        <a class="btn btn-ghost" href="{P('about')}">{b2}</a>
+    <section class="bento" aria-label="{'Tanıtım' if tr else 'Introduction'}">
+      <div class="tile t-intro" data-reveal="0">
+        <div class="avail"><span class="dot" aria-hidden="true"></span>{avail}</div>
+        <h1 class="home-title" id="homeTitle"><span class="tline">{l1}</span><em class="tline">{l2}</em></h1>
+        <div class="role">{role}</div>
+        <p class="home-desc">{intro}</p>
+        <div class="home-cta">
+          <a class="btn btn-primary" href="{P('projects')}">{b1}</a>
+          <a class="btn btn-ghost" href="{P('contact')}">{b2}</a>
+        </div>
       </div>
-      {social_links(lang)}
-      <a class="scroll-hint reveal" href="#one-cikanlar">{s['scroll']} <span aria-hidden="true">↓</span></a>
+      <div class="tile t-mono" data-reveal="1">
+        <div class="mono" aria-hidden="true"><span>AU</span></div>
+        <div class="tile-title">{uni}</div>
+        <div class="tile-sub">{uni2} · Kayseri</div>
+      </div>
+      <a class="tile t-stat" href="{BIONLUK or P('contact')}" target="_blank" rel="noopener" data-reveal="2">
+        <div class="tile-k">{st_h}</div>
+        <div class="big-num">★ {rating}</div>
+        <div class="tile-sub">{st_sub}</div>
+        <div class="tile-link">{st_link}</div>
+      </a>
+      <div class="tile t-stack" data-reveal="3">
+        <div class="tile-k">{stack_h}</div>
+        <div class="chips-sm">{stack_html}</div>
+      </div>
+      <a class="tile tile-img t-feat" href="{proj_link(pcb_proj)}" data-reveal="1">
+        <img src="{rel}{pcb_proj['cover']}" alt="" width="800" height="500" loading="lazy" decoding="async">
+        <div class="tile-over">
+          <div class="tile-k">{feat_k} · {pcb_proj['year']}</div>
+          <div class="tile-title lg">{pcb_proj[lang]['title']}</div>
+          <div class="tile-sub">{pcb_proj[lang]['desc']}</div>
+        </div>
+      </a>
+{small_tile(small1, 't-p1', 2)}
+{small_tile(small2, 't-p2', 3)}
+      <div class="tile t-now" data-reveal="4">
+        <div class="tile-k">{now_h}</div>
+        <ul class="now-list"><li>{now_1}</li><li>{now_2}</li></ul>
+      </div>
+      <div class="tile t-soc" data-reveal="5">
+        <div class="tile-k">{soc_h}</div>
+        <div class="socs">
+          <a href="{GITHUB}" target="_blank" rel="noopener" class="soc">{ICON['github']}<span>GitHub</span></a>
+          <a href="{LINKEDIN}" target="_blank" rel="noopener" class="soc">{ICON['linkedin']}<span>LinkedIn</span></a>
+          {bion_soc}
+          <a href="mailto:{EMAIL}" class="soc">{ICON['mail']}<span>{'E-posta' if tr else 'Email'}</span></a>
+        </div>
+      </div>
+      <a class="tile t-last" href="{rel}{post_url(latest, lang)}" data-reveal="5">
+        <img src="{rel}{latest['thumb']}" alt="" width="800" height="500" loading="lazy" decoding="async">
+        <div>
+          <div class="tile-k">{last_k} · {date_str(latest, lang)}</div>
+          <div class="tile-title">{latest[lang]['title']}</div>
+          <div class="tile-sub">{reading_time(latest, lang)}</div>
+        </div>
+        <span class="tile-arrow" aria-hidden="true">→</span>
+      </a>
+{cv_tile}
     </section>
 
-    <div class="home-sections">
-      <section class="section" id="one-cikanlar" data-tone="light">
-        <div class="section-head"><h2 class="section-title">{s['featured']}</h2><a class="section-link" href="{P('projects')}">{s['see_all']}</a></div>
-        <div class="card-grid">
-{cards}
-        </div>
-      </section>
-{service_block(lang)}{reviews_block(lang)}
-      <section class="section" data-tone="light">
-        <div class="section-head"><h2 class="section-title">{s['latest']}</h2><a class="section-link" href="{P('blog')}">{s['see_all']}</a></div>
+    <section class="section" data-reveal="0">
+      <div class="section-head"><div><h2 class="section-title">{blog_h}</h2><p class="section-sub">{blog_sub}</p></div><a class="section-link" href="{P('blog')}">{s['see_all']}</a></div>
+      <div class="post-cards">
 {posts}
-      </section>
-    </div>
+      </div>
+    </section>
+{reviews_block(lang)}
+    <section class="section">
+      <div class="cta-band" data-reveal="0">
+        <div><h2 class="section-title">{cta_h}</h2><p>{cta_t}</p></div>
+        <div class="cta-actions"><a class="btn btn-primary" href="{P('contact')}">{cta_b1}</a>{f'<a class="btn btn-ghost" href="{BIONLUK}" target="_blank" rel="noopener">{cta_b2}</a>' if BIONLUK else ''}</div>
+      </div>
+    </section>
   </div>'''
     ld = [{'@context': 'https://schema.org', '@graph': [person_ld(lang),
           {'@type': 'WebSite', '@id': f'{SITE}/#site', 'url': f'{SITE}/', 'name': 'Ahmet Ulu', 'inLanguage': lang, 'publisher': {'@id': f'{SITE}/#ahmet-ulu'}}]}]
@@ -684,13 +807,57 @@ def build_404():
     write('404.html', out)
 
 def build_post(p, lang):
+    import re as _re, urllib.parse as _up
     path = post_url(p, lang)
     alt = post_url(p, 'en' if lang == 'tr' else 'tr')
     rel = rel_of(path)
     s = S[lang]
+    tr = lang == 'tr'
     body = open(os.path.join(HERE, 'yazilar', f'{p["slug"]}.{lang}.html'), encoding='utf-8').read().rstrip()
     if lang == 'en':  # görseller Türkçe yazının klasöründe duruyor
         body = body.replace('<img src="', f'<img src="{rel}{p["img_dir"]}')
+    # okuma süresi
+    rt = reading_time(p, lang)
+    body = _re.sub(r'(<div class="blog-meta">)(.*?)(</div>)', lambda m: f'{m.group(1)}{m.group(2)} · {rt}{m.group(3)}', body, count=1)
+    # başlıklara id + içindekiler
+    heads = []
+    def add_id(m):
+        txt = _re.sub(r'<[^>]+>', '', m.group(1))
+        slug = _re.sub(r'[^a-z0-9]+', '-', txt.lower().translate(str.maketrans('çğıöşüâî', 'cgiosuai'))).strip('-')[:60] or f'b{len(heads)}'
+        heads.append((slug, txt))
+        return f'<h3 id="{slug}">{m.group(1)}</h3>'
+    body = _re.sub(r'<h3>(.*?)</h3>', add_id, body)
+    if len(heads) >= 3:
+        items = ''.join(f'<li><a href="#{a}">{esc(t)}</a></li>' for a, t in heads)
+        toc = f'''
+  <details class="toc">
+    <summary>{'İçindekiler' if tr else 'Contents'}</summary>
+    <ol>{items}</ol>
+  </details>'''
+        body = _re.sub(r'(<div class="blog-meta">.*?</div>)', lambda m: m.group(1) + toc, body, count=1)
+    # paylaş + yazar kutusu
+    url = f'{SITE}/{path}'
+    qt = _up.quote(p[lang]['title']); qu = _up.quote(url)
+    share = f'''
+  <div class="share">
+    <span class="share-label">{'Paylaş' if tr else 'Share'}</span>
+    <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url={qu}" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url={qu}&amp;text={qt}" target="_blank" rel="noopener">X</a>
+    <a class="share-btn" href="https://wa.me/?text={qt}%20{qu}" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="share-btn" type="button" data-copy="{url}" data-copied="{'Kopyalandı ✓' if tr else 'Copied ✓'}">{'Linki kopyala' if tr else 'Copy link'}</button>
+  </div>'''
+    about = rel + PAGES['about'][0 if tr else 1]
+    bio = ("Abdullah Gül Üniversitesi'nde elektrik-elektronik mühendisliği öğrencisi; MUSTECH'te gömülü sistemler geliştiricisi ve freelance PCB tasarımcısı."
+           if tr else 'Electrical and electronics engineering student at Abdullah Gül University; embedded systems developer at MUSTECH and freelance PCB designer.')
+    author = f'''
+  <aside class="author">
+    <div class="mono sm" aria-hidden="true"><span>AU</span></div>
+    <div>
+      <div class="author-name">Ahmet Ulu</div>
+      <p>{bio}</p>
+      <div class="author-links"><a href="{about}">{'Hakkımda' if tr else 'About me'} →</a><a href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a><a href="{GITHUB}" target="_blank" rel="noopener">GitHub</a></div>
+    </div>
+  </aside>'''
     others = '\n'.join(post_item(o, lang, rel) for o in POSTS if o is not p)
     blog = rel + PAGES['blog'][0 if lang == 'tr' else 1]
     y, m = p['date']
@@ -706,10 +873,13 @@ def build_post(p, lang):
             {'@type': 'ListItem', 'position': 3, 'name': p[lang]['title'], 'item': f'{SITE}/{path}'}]}]}]
     out = head(lang, path, f'{p[lang]["page_title"]} — Ahmet Ulu', p[lang]['desc'], alt, og_image=p['thumb'], og_type='article', ld=ld)
     out += nav(lang, path, 'blog', alt)
-    out += f'''<main id="icerik">
+    out += f'''<div class="read-progress" aria-hidden="true"><span></span></div>
+<main id="icerik">
 <article class="wrap-narrow article">
   <a href="{blog}" class="back-link">{s['all_posts']}</a>
 {body}
+{share}
+{author}
 
   <nav class="post-nav" aria-label="{s['more_posts']}">
     <div class="post-nav-title">{s['more_posts']}</div>

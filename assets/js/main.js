@@ -77,7 +77,10 @@
     var W = 0, H = 0, frame = 0, lastW = 0, lastDraw = 0;
     var nodes = [], clines = [], chips = [], resistors = [], adj = [], pulses = [];
     var small = false;
-    var GOLD = '212,165,116';
+    var css = getComputedStyle(document.documentElement);
+    var GOLD = (css.getPropertyValue('--accent-rgb') || '34,211,238').trim();
+    var BLUE = '96,165,250';
+    var calm = reduceMotion; // hareket azaltma açıksa daha sakin ama yine görünür
     var mouse = { x: -9999, y: -9999, on: false };
 
     var init = function () {
@@ -125,17 +128,17 @@
       for (var j = 0; j < resCount; j++) {
         resistors.push({ x: Math.random() * (W - 60) + 30, y: Math.random() * (H - 40) + 20, rot: Math.random() > 0.5 ? 0 : Math.PI / 2, pulse: Math.random() * Math.PI * 2, spd: 0.002 + Math.random() * 0.003 });
       }
-      if (reduceMotion) { clines.forEach(function (l) { l.prog = 1; }); drawFrame(); }
+
     };
 
     /* Akım darbeleri: bir pad'den başlayıp izler boyunca rastgele yol alır */
-    var MAX_PULSES = function () { return small ? 3 : 7; };
+    var MAX_PULSES = function () { return (small ? 6 : 16) * (calm ? 0.5 : 1); };
     var spawnPulse = function () {
       var tries = 20, start;
       while (tries--) { start = Math.floor(Math.random() * nodes.length); if (adj[start] && adj[start].length) break; }
       if (!adj[start] || !adj[start].length) return;
       var next = adj[start][Math.floor(Math.random() * adj[start].length)];
-      pulses.push({ from: start, to: next, t: 0, speed: 0.03 + Math.random() * 0.025, steps: 14 + Math.floor(Math.random() * 18), trail: [], life: 1 });
+      pulses.push({ from: start, to: next, t: 0, speed: (0.035 + Math.random() * 0.03) * (calm ? 0.5 : 1), steps: 16 + Math.floor(Math.random() * 22), trail: [], life: 1, col: Math.random() < 0.3 ? BLUE : GOLD });
     };
     var stepPulse = function (pl) {
       pl.t += pl.speed;
@@ -149,7 +152,7 @@
       var a = nodes[pl.from], b = nodes[pl.to], t = Math.min(pl.t, 1);
       var x = a.x + (b.x - a.x) * t, y = a.y + (b.y - a.y) * t;
       if (!pl.dying) pl.trail.push(x, y);
-      if (pl.trail.length > 44 || (pl.dying && pl.trail.length)) pl.trail.splice(0, 2);
+      if (pl.trail.length > 64 || (pl.dying && pl.trail.length)) pl.trail.splice(0, 2);
       return !(pl.dying && pl.trail.length === 0);
     };
     var drawPulse = function (pl) {
@@ -157,18 +160,19 @@
       if (n < 2) return;
       ctx.lineCap = 'round';
       for (var k = 1; k < n; k++) {
-        var al = (k / n) * 0.55;
-        ctx.strokeStyle = 'rgba(' + GOLD + ',' + al + ')';
-        ctx.lineWidth = 1 + (k / n) * 1.6;
+        var al = (k / n) * 0.85;
+        ctx.strokeStyle = 'rgba(' + pl.col + ',' + al + ')';
+        ctx.lineWidth = 1.2 + (k / n) * 2;
         ctx.beginPath(); ctx.moveTo(tr[(k - 1) * 2], tr[(k - 1) * 2 + 1]); ctx.lineTo(tr[k * 2], tr[k * 2 + 1]); ctx.stroke();
       }
       if (!pl.dying) {
         var hx = tr[tr.length - 2], hy = tr[tr.length - 1];
-        var gr = ctx.createRadialGradient(hx, hy, 0, hx, hy, 14);
-        gr.addColorStop(0, 'rgba(240,200,150,0.75)');
-        gr.addColorStop(1, 'rgba(' + GOLD + ',0)');
+        var gr = ctx.createRadialGradient(hx, hy, 0, hx, hy, 20);
+        gr.addColorStop(0, 'rgba(235,252,255,0.95)');
+        gr.addColorStop(0.25, 'rgba(' + pl.col + ',0.6)');
+        gr.addColorStop(1, 'rgba(' + pl.col + ',0)');
         ctx.fillStyle = gr;
-        ctx.beginPath(); ctx.arc(hx, hy, 14, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(hx, hy, 20, 0, Math.PI * 2); ctx.fill();
       }
     };
 
@@ -178,28 +182,28 @@
       var i, l, na, nb, g;
       // Fareyi takip eden hafif ışık (masaüstü)
       if (mouse.on && !small) {
-        var mg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 260);
-        mg.addColorStop(0, 'rgba(' + GOLD + ',0.07)');
+        var mg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 300);
+        mg.addColorStop(0, 'rgba(' + GOLD + ',0.13)');
         mg.addColorStop(1, 'rgba(' + GOLD + ',0)');
         ctx.fillStyle = mg;
-        ctx.fillRect(mouse.x - 260, mouse.y - 260, 520, 520);
+        ctx.fillRect(mouse.x - 300, mouse.y - 300, 600, 600);
       }
       // İzler: tek seferde çiz
       ctx.beginPath();
       for (i = 0; i < clines.length; i++) {
         l = clines[i];
-        if (!reduceMotion && frame > l.delay) l.prog = Math.min(1, l.prog + l.spd);
+        if (frame > l.delay) l.prog = Math.min(1, l.prog + l.spd * (calm ? 3 : 1.6));
         if (l.prog <= 0) continue;
         na = nodes[l.a]; nb = nodes[l.b];
         ctx.moveTo(na.x, na.y);
         ctx.lineTo(na.x + (nb.x - na.x) * l.prog, na.y + (nb.y - na.y) * l.prog);
       }
-      ctx.strokeStyle = 'rgba(' + GOLD + ',0.08)';
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(' + GOLD + ',0.15)';
+      ctx.lineWidth = 1.3;
       ctx.stroke();
       // Akım darbeleri (izler çizildikten sonra başlar)
-      if (!reduceMotion && frame > 160) {
-        if (pulses.length < MAX_PULSES() && Math.random() < 0.04) spawnPulse();
+      if (frame > 50) {
+        if (pulses.length < MAX_PULSES() && Math.random() < 0.12) spawnPulse();
         pulses = pulses.filter(stepPulse);
         pulses.forEach(drawPulse);
       }
@@ -208,11 +212,11 @@
       for (i = 0; i < nodes.length; i++) {
         var n = nodes[i];
         n.pulse += n.spd;
-        g = 0.12 + Math.sin(n.pulse) * 0.06;
-        if (n.flash > 0) { g += n.flash * 0.5; n.flash *= 0.94; if (n.flash < 0.02) n.flash = 0; }
+        g = 0.2 + Math.sin(n.pulse) * 0.08;
+        if (n.flash > 0) { g += n.flash * 0.8; n.flash *= 0.94; if (n.flash < 0.02) n.flash = 0; }
         if (mouse.on && !small) {
           var dx = n.x - mouse.x, dy = n.y - mouse.y, d2 = dx * dx + dy * dy;
-          if (d2 < 48400) g += (1 - Math.sqrt(d2) / 220) * 0.22;
+          if (d2 < 57600) g += (1 - Math.sqrt(d2) / 240) * 0.45;
         }
         ctx.strokeStyle = 'rgba(' + GOLD + ',' + g + ')';
         if (n.via) {
@@ -229,7 +233,7 @@
       for (i = 0; i < chips.length; i++) {
         var c = chips[i];
         c.pulse += c.spd;
-        g = 0.1 + Math.sin(c.pulse) * 0.04;
+        g = 0.16 + Math.sin(c.pulse) * 0.06;
         var cx = c.x - c.w / 2, cy = c.y - c.h / 2;
         ctx.strokeStyle = 'rgba(' + GOLD + ',' + g + ')';
         ctx.strokeRect(cx, cy, c.w, c.h);
@@ -247,7 +251,7 @@
       for (i = 0; i < resistors.length; i++) {
         var r = resistors[i];
         r.pulse += r.spd;
-        g = 0.1 + Math.sin(r.pulse) * 0.05;
+        g = 0.15 + Math.sin(r.pulse) * 0.06;
         ctx.save();
         ctx.translate(r.x, r.y); ctx.rotate(r.rot);
         ctx.strokeStyle = 'rgba(' + GOLD + ',' + g + ')';
@@ -273,7 +277,7 @@
     // Aşağı kaydırdıkça soluklaş; tamamen görünmezse çizimi durdur
     var onScroll = function () {
       var k = Math.min(1, window.scrollY / (window.innerHeight * 0.9));
-      var op = 1 - k * 0.75;
+      var op = 1 - k * 0.5;
       canvas.style.opacity = canvas.classList.contains('show') ? op : '';
       visible = op > 0.05;
     };
@@ -283,6 +287,22 @@
       window.addEventListener('pointermove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; mouse.on = true; }, { passive: true });
       document.addEventListener('pointerleave', function () { mouse.on = false; });
     }
+
+    // Tıklayınca en yakın noktadan akım patlaması
+    window.addEventListener('pointerdown', function (e) {
+      if (e.target.closest && e.target.closest('a,button,input,textarea,label')) return;
+      var best = -1, bd = 1e12;
+      for (var i = 0; i < nodes.length; i++) {
+        if (!adj[i].length) continue;
+        var dx = nodes[i].x - e.clientX, dy = nodes[i].y - e.clientY, d = dx * dx + dy * dy;
+        if (d < bd) { bd = d; best = i; }
+      }
+      if (best < 0) return;
+      nodes[best].flash = 1;
+      adj[best].forEach(function (nb) {
+        pulses.push({ from: best, to: nb, t: 0, speed: 0.06, steps: 10 + Math.floor(Math.random() * 10), trail: [], life: 1, col: GOLD });
+      });
+    });
 
     init();
     var resizeTimer;
@@ -297,57 +317,64 @@
       canvas.classList.add('show');
       onScroll();
       setTimeout(function () { canvas.style.transition = 'opacity .35s ease'; }, 1300);
-      if (!reduceMotion) requestAnimationFrame(loop);
+      requestAnimationFrame(loop);
     }, 500);
   }
 
-  /* ---------- Ana sayfa: kaydırdıkça renk geçişi ---------- */
-  var toned = [].slice.call(document.querySelectorAll('[data-tone]'));
-  if (toned.length) {
-    document.body.classList.add('tone-enabled');
-    var themeMeta = document.querySelector('meta[name="theme-color"]');
-    var currentTone = 'dark', toneTick = false;
-    var updateTone = function () {
-      toneTick = false;
-      var mid = window.innerHeight * 0.55, tone = toned[0].getAttribute('data-tone');
-      for (var i = 0; i < toned.length; i++) {
-        if (toned[i].getBoundingClientRect().top <= mid) tone = toned[i].getAttribute('data-tone');
-      }
-      if (tone !== currentTone) {
-        currentTone = tone;
-        document.body.classList.toggle('tone-light', tone === 'light');
-        if (themeMeta) themeMeta.setAttribute('content', tone === 'light' ? '#f3eee5' : '#111110');
-      }
-    };
-    window.addEventListener('scroll', function () {
-      if (!toneTick) { toneTick = true; requestAnimationFrame(updateTone); }
-    }, { passive: true });
-    window.addEventListener('resize', updateTone);
-    updateTone();
-  }
-
-  /* ---------- Ana sayfa: bölümler kaydırdıkça yumuşakça belirir ---------- */
-  if (toned.length && !reduceMotion && 'IntersectionObserver' in window) {
-    var items = [].slice.call(document.querySelectorAll('.home-sections .section-head, .home-sections .card, .home-sections .service, .home-sections .review, .home-sections .post-item'));
+  /* ---------- Kaydırdıkça yumuşakça belirme ---------- */
+  var revealEls = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  if (revealEls.length && !reduceMotion && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
           var t = en.target;
           t.classList.add('in'); io.unobserve(t);
-          // Animasyon bitince sınıfları kaldır; kartların hover efekti normale dönsün
-          setTimeout(function () { t.classList.remove('will-appear', 'in'); t.style.transitionDelay = ''; }, 1100);
+          setTimeout(function () { t.classList.remove('will-appear', 'in'); t.style.transitionDelay = ''; }, 1200);
         }
       });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    items.forEach(function (el) {
-      // Sayfa açıldığında zaten görünenleri gizleme
-      if (el.getBoundingClientRect().top < window.innerHeight) return;
-      var sib = el.parentElement ? [].indexOf.call(el.parentElement.children, el) : 0;
-      el.style.transitionDelay = Math.min(sib, 3) * 90 + 'ms';
+    }, { rootMargin: '0px 0px -6% 0px' });
+    revealEls.forEach(function (el, i) {
+      var d = parseInt(el.getAttribute('data-reveal') || '0', 10);
+      el.style.transitionDelay = (d * 70) + 'ms';
       el.classList.add('will-appear');
       io.observe(el);
     });
   }
+
+  /* ---------- Bento kutularında fareyi takip eden ışık ---------- */
+  document.querySelectorAll('.tile').forEach(function (t) {
+    t.addEventListener('pointermove', function (e) {
+      var r = t.getBoundingClientRect();
+      t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      t.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  /* ---------- Yazı sayfası: okuma ilerleme çubuğu ---------- */
+  var bar = document.querySelector('.read-progress span');
+  var art = document.querySelector('.article');
+  if (bar && art) {
+    var tickP = false;
+    var updP = function () {
+      tickP = false;
+      var r = art.getBoundingClientRect();
+      var total = r.height - window.innerHeight;
+      var pct = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
+      bar.style.width = (pct * 100) + '%';
+    };
+    window.addEventListener('scroll', function () { if (!tickP) { tickP = true; requestAnimationFrame(updP); } }, { passive: true });
+    updP();
+  }
+
+  /* ---------- Linki kopyala ---------- */
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var old = b.textContent;
+      var done = function () { b.textContent = b.getAttribute('data-copied') || '✓'; setTimeout(function () { b.textContent = old; }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(b.getAttribute('data-copy')).then(done, done);
+      else done();
+    });
+  });
 
   /* ---------- İletişim formu ---------- */
   var form = document.getElementById('contactForm');

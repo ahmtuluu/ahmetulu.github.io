@@ -6,7 +6,7 @@
 <title>Güneş Enerjili Su Analiz Sistemi: ESP32 ile pH, TDS ve Sıcaklık Ölçümü — Ahmet Ulu</title>
 <meta name="description" content="Güneş enerjili, off-grid su analiz sistemi: pH, TDS ve sıcaklık ölçümü, PCB, mobil uygulama ve sensör gürültüsü.">
 <meta name="author" content="Ahmet Ulu">
-<meta name="theme-color" content="#111110">
+<meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html">
 <link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html">
 <link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/blog/water-analysis-system.html">
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=58c64370">
+<link rel="stylesheet" href="../../assets/css/style.css?v=a80df6ca">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "Su Analiz Sistemi", "description": "Güneş enerjili, off-grid su analiz sistemi: pH, TDS ve sıcaklık ölçümü, PCB, mobil uygulama ve sensör gürültüsü.", "image": "https://ahmetulu.com.tr/assets/img/kapak/akilli-tarim.jpg", "datePublished": "2026-03-01", "dateModified": "2026-03-01", "inLanguage": "tr", "mainEntityOfPage": "https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html", "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}, "keywords": ""}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Yazılar", "item": "https://ahmetulu.com.tr/yazilar.html"}, {"@type": "ListItem", "position": 3, "name": "Su Analiz Sistemi", "item": "https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html"}]}]}</script>
 </head>
@@ -42,12 +42,17 @@
     <li class="nav-lang"><a href="../../en/blog/water-analysis-system.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
   </ul>
 </header>
+<div class="read-progress" aria-hidden="true"><span></span></div>
 <main id="icerik">
 <article class="wrap-narrow article">
   <a href="../../yazilar.html" class="back-link">← Tüm yazılar</a>
   <div class="blog-tag">Akıllı Tarım Sistemi · 1. Adım</div>
   <h1>Su Analiz Sistemi: Sıfırdan Bir Sistem Kurmak</h1>
-  <div class="blog-meta">Ahmet Ulu · Mart 2026</div>
+  <div class="blog-meta">Ahmet Ulu · Mart 2026 · 4 dk okuma</div>
+  <details class="toc">
+    <summary>İçindekiler</summary>
+    <ol><li><a href="#baslangic-breadboard-ve-bitmek-bilmeyen-kalibrasyon">Başlangıç: breadboard ve bitmek bilmeyen kalibrasyon</a></li><li><a href="#hic-ders-almadan-ilk-pcb">Hiç ders almadan ilk PCB</a></li><li><a href="#sanayi-toz-ve-kivilcim">Sanayi, toz ve kıvılcım</a></li><li><a href="#enerji-sistemi-neden-bu-kadar-buyuk-aku">Enerji sistemi: neden bu kadar büyük akü?</a></li><li><a href="#mobil-uygulama-veriyi-ciftcinin-eline-tasimak">Mobil uygulama: veriyi çiftçinin eline taşımak</a></li><li><a href="#kafayi-yiyen-sorun-sensor-gurultusu">Kafayı yiyen sorun: sensör gürültüsü</a></li><li><a href="#sonuc">Sonuç</a></li><li><a href="#tesekkurler">Teşekkürler</a></li></ol>
+  </details>
 
   <p>Akıllı tarım projemizin ilk adımını tamamladık: <strong>Su Analiz Sistemi.</strong> Bu sistem aslında tek başına bile ciddi bir iş — sulama suyunun pH'ı, TDS değeri veya sıcaklığı tehlikeli seviyelere ulaştığında çiftçiyi anında uyarıyor, mobil uygulamadan bildirim gönderiyor. Güneş enerjisiyle çalışıyor, şebekeye bağlı değil, doğrudan tarlaya kurulabiliyor. Benim için bu proje sadece bir sistem değil, sıfırdan bir şey inşa etmenin ne demek olduğunu öğrendiğim bir süreçti.</p>
 
@@ -56,7 +61,7 @@
     <figcaption>Breadboard üzerinde ilk sensör testleri — her bileşeni tek tek devreye alıp ESP32 ile haberleştirdim</figcaption>
   </figure>
 
-  <h3>Başlangıç: breadboard ve bitmek bilmeyen kalibrasyon</h3>
+  <h3 id="baslangic-breadboard-ve-bitmek-bilmeyen-kalibrasyon">Başlangıç: breadboard ve bitmek bilmeyen kalibrasyon</h3>
 
   <p>Her şey breadboard üzerinde başladı. pH sensörü, TDS sensörü, DS18B20 sıcaklık sensörü — hepsini teker teker devreye aldım, ESP32 ile konuşturmaya çalıştım. Kulağa basit geliyor ama inanın en çok yoran kısım <strong>kalibrasyon</strong> oldu. Sistem tamamen bitmişken bile kalibrasyon problemi peşimizi bırakmadı. pH sensörü özellikle sinir bozucu — referans solüsyonlarla sürekli ayar gerektiriyor, en ufak sapmada yanlış alarm üretebiliyor. Bu kısımda gerçekten çok vakit harcadık ve hâlâ tam anlamıyla bitmiş sayılmaz.</p>
 
@@ -65,7 +70,7 @@
     <figcaption>İlk PCB deneyimim — hem devre tasarımını hem de lehim tekniğini aynı anda öğrendim</figcaption>
   </figure>
 
-  <h3>Hiç ders almadan ilk PCB</h3>
+  <h3 id="hic-ders-almadan-ilk-pcb">Hiç ders almadan ilk PCB</h3>
 
   <p>Breadboard'da her şey çalışır hale gelince sıra <strong>PCB'ye</strong> geldi. Daha önce hiç PCB tasarlamamıştım, doğrudan yazılıma oturdum ve öğrenerek yaptım. İlk ve en büyük hatamız: kartı çok küçük seçtik. Tüm bileşenleri o küçük alana sığdırmak gerçekten zor oldu. Üstüne bir de bu PCB'de hazır yollar yok — her bağlantıyı tek tek elle çizmem gerekiyordu. Saatler sürdü ama sonunda oldu. Lehim konusunda daha önce deneyimim vardı, o yüzden çok zorlanmadım. Açıkçası çıkan işten oldukça memnun kaldım.</p>
 
@@ -74,7 +79,7 @@
     <figcaption>Sanayide iskelet imalatı — günlerce uğraşmanın meyvesi</figcaption>
   </figure>
 
-  <h3>Sanayi, toz ve kıvılcım</h3>
+  <h3 id="sanayi-toz-ve-kivilcim">Sanayi, toz ve kıvılcım</h3>
 
   <p>Elektronik taraf bitti, sıra fiziksel yapıya geldi. Güneş panelini tutacak, altında elektronik kutuyu barındıracak, sahaya dayanıklı bir iskelet lazımdı. Arkadaşımla birlikte sanayiye gidip geldik, günlerce uğraştık. Burada özellikle teşekkür etmem gereken biri var: <strong>Mehmet usta.</strong> Öğrenci olduğumuzu görüp "kim uğraşacak sizinle" demek yerine uygun fiyata bize yardım etti. Böyle insanlar olmasaydı bu iş çok daha zordu.</p>
 
@@ -83,7 +88,7 @@
     <figcaption>Kutunun içi: Solar charge controller, ESP32 ve tüm sensör bağlantıları</figcaption>
   </figure>
 
-  <h3>Enerji sistemi: neden bu kadar büyük akü?</h3>
+  <h3 id="enerji-sistemi-neden-bu-kadar-buyuk-aku">Enerji sistemi: neden bu kadar büyük akü?</h3>
 
   <p>Sistemi tamamen <strong>off-grid</strong> yapmak istediğimiz için enerji tasarımına özen gösterdik. 12V 24Ah akü ve 24W güneş paneli kullandık — bu biraz büyük gibi görünebilir ama kasıtlı seçtik. İleride su motoru yetersiz kalırsa daha güçlüyle değiştireceğiz, önceden geniş tuttuk. Şu anki pompa çalışma sırasında yaklaşık 0.7A çekiyor, sistem bu akü ile günlerce beslenebilir.</p>
 
@@ -102,7 +107,7 @@
     <div class="tech-row"><span class="comp">Su Motoru</span><span class="detail">6V DC pompa — 1.2A başlangıç, 0.7A çalışma</span></div>
   </div>
 
-  <h3>Mobil uygulama: veriyi çiftçinin eline taşımak</h3>
+  <h3 id="mobil-uygulama-veriyi-ciftcinin-eline-tasimak">Mobil uygulama: veriyi çiftçinin eline taşımak</h3>
 
   <p>Donanım ne kadar iyi olursa olsun, çiftçi tarladan uzaktayken verilere ulaşamıyorsa pek bir anlamı kalmıyor. O yüzden sistemin ayrılmaz bir parçası olarak <strong>mobil uygulama</strong> geliştirdik. ESP32 ölçüm verilerini WiFi üzerinden buluta gönderiyor, uygulama da oradan anlık olarak çekiyor. Arayüzü mümkün olduğunca sade tuttuk — pH değeri, TDS, su sıcaklığı ve sistem durumu ana ekranda tek bakışta görünüyor. Değerler tehlikeli seviyelere ulaştığında doğrudan telefona <strong>bildirim</strong> gidiyor. Teknik bilgisi olmayan bir çiftçinin de rahatça kullanabileceği bir şey yapmak istedik — ve bunu başardığımızı düşünüyorum.</p>
 
@@ -111,7 +116,7 @@
     <figcaption>Güneş paneli üstte, elektronik kutu altında — sistem sahaya hazır</figcaption>
   </figure>
 
-  <h3>Kafayı yiyen sorun: sensör gürültüsü</h3>
+  <h3 id="kafayi-yiyen-sorun-sensor-gurultusu">Kafayı yiyen sorun: sensör gürültüsü</h3>
 
   <p>Her şey hazır, test aşamasına geçtik. Ve tam o sırada garip bir şey fark ettik: sensörler birbirini etkiliyor. Üç sensör aynı anda çalışınca ölçüm değerleri kayıyor. Daha da kötüsü, <strong>su motoru devreye girince</strong> motorun yarattığı elektriksel gürültü sensörleri tamamen çıldırtıyor — anlamsız değerler, sahte alarmlar.</p>
 
@@ -122,29 +127,46 @@
     <figcaption>Sistemin dış görünümü — güneş paneli, kutu ve iskelet bir arada</figcaption>
   </figure>
 
-  <h3>Sonuç</h3>
+  <h3 id="sonuc">Sonuç</h3>
 
   <p>Sistem sahaya kurulabilecek durumda. Güneş enerjisiyle besleniyor, verileri buluta gönderiyor, mobil uygulamadan takip edilebiliyor, anormal durumda bildirim atıyor. Eksikleri var, iyileştirilecek yerleri kesinlikle var. Ama bu ilk adım için bence yeterinden fazlası. En değerli şey ise şu: PCB tasarımı, lehim, kalibrasyon, gürültü problemi, enerji yönetimi... hepsini sıfırdan, yaşayarak öğrendim.</p>
 
-  <h3>Teşekkürler</h3>
+  <h3 id="tesekkurler">Teşekkürler</h3>
 
   <p>Bu projeyi tek başıma yapamadım. Her adımda yanımda olan <strong>arkadaşlarıma</strong> içtenlikle teşekkür etmek istiyorum — sanayideki yorucu günlerde, sabaha kadar süren test aşamalarında, her "neden çalışmıyor" krizinde hep birlikteydik. Ayrıca iskelet imalatında bize yardım eden <strong>Mehmet ustaya</strong>, fikir ve desteklerini esirgemeyen herkese çok teşekkürler. Güzel bir ekip çalışmasıydı.</p>
+
+  <div class="share">
+    <span class="share-label">Paylaş</span>
+    <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A//ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html&amp;text=Su%20Analiz%20Sistemi" target="_blank" rel="noopener">X</a>
+    <a class="share-btn" href="https://wa.me/?text=Su%20Analiz%20Sistemi%20https%3A//ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="share-btn" type="button" data-copy="https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html" data-copied="Kopyalandı ✓">Linki kopyala</button>
+  </div>
+
+  <aside class="author">
+    <div class="mono sm" aria-hidden="true"><span>AU</span></div>
+    <div>
+      <div class="author-name">Ahmet Ulu</div>
+      <p>Abdullah Gül Üniversitesi'nde elektrik-elektronik mühendisliği öğrencisi; MUSTECH'te gömülü sistemler geliştiricisi ve freelance PCB tasarımcısı.</p>
+      <div class="author-links"><a href="../../hakkimda.html">Hakkımda →</a><a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a></div>
+    </div>
+  </aside>
 
   <nav class="post-nav" aria-label="Diğer yazılar">
     <div class="post-nav-title">Diğer yazılar</div>
 <a href="../../yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html" class="post-item" data-filter-item data-tags="PCB Tasarımları">
-  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">PCB Tasarımı · Freelance</div><div class="post-title">KiCad ile PCB Tasarımı: Bionluk'ta Müşteriler İçin Tasarladığım Kartlar</div><div class="post-date">Ekim 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">PCB Tasarımı · Freelance</div><div class="post-title">KiCad ile PCB Tasarımı: Bionluk'ta Müşteriler İçin Tasarladığım Kartlar</div><div class="post-date">Ekim 2026 · 4 dk okuma</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" class="post-item" data-filter-item data-tags="Pratik Projeler">
-  <img class="post-thumb" src="../../assets/img/kapak/guc-kaynagi.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">Pratik Proje</div><div class="post-title">12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu</div><div class="post-date">Nisan 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/guc-kaynagi.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Pratik Proje</div><div class="post-title">12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu</div><div class="post-date">Nisan 2026 · 2 dk okuma</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../yazilar/ev-sarj/ev-sarj-altyapi.html" class="post-item" data-filter-item data-tags="Elektrik Şarj İstasyonu Optimizasyonu">
-  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">EV Şarj · 1. Adım</div><div class="post-title">Raspberry Pi ve Veri Altyapısı</div><div class="post-date">Nisan 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">EV Şarj · 1. Adım</div><div class="post-title">Raspberry Pi ve Veri Altyapısı</div><div class="post-date">Nisan 2026 · 2 dk okuma</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
   </nav>
@@ -161,6 +183,6 @@
     </div>
   </div>
 </footer>
-<script src="../../assets/js/main.js?v=dfaf07f7" defer></script>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <title>Building a 12V Adjustable Power Supply with the LM2596 — Ahmet Ulu</title>
 <meta name="description" content="An adjustable DC power supply based on the LM2596: a 10-turn precision potentiometer instead of the trimpot, problems and fixes.">
 <meta name="author" content="Ahmet Ulu">
-<meta name="theme-color" content="#111110">
+<meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html">
 <link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">
 <link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html">
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=58c64370">
+<link rel="stylesheet" href="../../assets/css/style.css?v=a80df6ca">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "12V DC Adjustable Power Supply — LM2596 Mod", "description": "An adjustable DC power supply based on the LM2596: a 10-turn precision potentiometer instead of the trimpot, problems and fixes.", "image": "https://ahmetulu.com.tr/assets/img/kapak/guc-kaynagi.jpg", "datePublished": "2026-04-01", "dateModified": "2026-04-01", "inLanguage": "en", "mainEntityOfPage": "https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html", "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}, "keywords": ""}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ahmetulu.com.tr/en/blog.html"}, {"@type": "ListItem", "position": 3, "name": "12V DC Adjustable Power Supply — LM2596 Mod", "item": "https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html"}]}]}</script>
 </head>
@@ -42,12 +42,17 @@
     <li class="nav-lang"><a href="../../yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
   </ul>
 </header>
+<div class="read-progress" aria-hidden="true"><span></span></div>
 <main id="icerik">
 <article class="wrap-narrow article">
   <a href="../../en/blog.html" class="back-link">← All posts</a>
   <div class="blog-tag">Practical Project</div>
   <h1>12V DC Adjustable Power Supply — LM2596 with an External Potentiometer Mod</h1>
-  <div class="blog-meta">Ahmet Ulu · April 2026</div>
+  <div class="blog-meta">Ahmet Ulu · April 2026 · 3 min read</div>
+  <details class="toc">
+    <summary>Contents</summary>
+    <ol><li><a href="#how-the-circuit-is-built">How the circuit is built</a></li><li><a href="#problems-and-how-i-solved-them">Problems and how I solved them</a></li><li><a href="#testing">Testing</a></li><li><a href="#the-enclosure-in-the-spirit-of-recycling">The enclosure: in the spirit of recycling</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+  </details>
 
   <p>Recently I wanted to build something that would be useful day to day and would also improve my electronics skills. I designed an adjustable DC power supply based on the <strong>LM2596</strong>. Standard LM2596 modules have a tiny trimpot on them — it is hard to use because it's so small, and fine adjustment needs a screwdriver. So I decided to remove this trimpot and replace it with an externally adjustable <strong>10-turn precision potentiometer</strong>.</p>
 
@@ -56,7 +61,7 @@
     <figcaption>The overall schematic — every connection from the adapter to the output</figcaption>
   </figure>
 
-  <h3>How the circuit is built</h3>
+  <h3 id="how-the-circuit-is-built">How the circuit is built</h3>
 
   <p>I used a <strong>12V DC adapter</strong> as the input. Power from the adapter first goes to the DC input jack, then through a fuse and the on/off switch. After the switch, the line feeds the input of the LM2596 module. On the output side, I added positive and negative terminals and a <strong>digital voltmeter display</strong> to see the voltage in real time.</p>
 
@@ -76,7 +81,7 @@
     <div class="tech-row"><span class="comp">Enclosure</span><span class="detail">A recycled strained-yogurt tub</span></div>
   </div>
 
-  <h3>Problems and how I solved them</h3>
+  <h3 id="problems-and-how-i-solved-them">Problems and how I solved them</h3>
 
   <p>The most educational part was the problems I ran into. First, because my solder wire was poor quality, I applied too much heat to the potentiometer and ruined it. I bought a new potentiometer and used better solder. But the circuit still didn't work.</p>
 
@@ -89,7 +94,7 @@
     <figcaption>The finished device — the voltmeter shows 6.75V and the terminals are ready</figcaption>
   </figure>
 
-  <h3>Testing</h3>
+  <h3 id="testing">Testing</h3>
 
   <p>Once the system was working, I verified it with a multimeter. The device's own display and the multimeter showed the same value — calibration was spot on.</p>
 
@@ -98,7 +103,7 @@
     <figcaption>Multimeter test — the device display and the multimeter show the same value</figcaption>
   </figure>
 
-  <h3>The enclosure: in the spirit of recycling</h3>
+  <h3 id="the-enclosure-in-the-spirit-of-recycling">The enclosure: in the spirit of recycling</h3>
 
   <p>I reused an old <strong>strained-yogurt tub</strong> I had lying around as the enclosure. This hero, which normally served in the kitchen, has changed careers and now works in power electronics on my desk.</p>
 
@@ -107,27 +112,44 @@
     <figcaption>The DC input jack and the on/off switch on the side</figcaption>
   </figure>
 
-  <h3>Conclusion</h3>
+  <h3 id="conclusion">Conclusion</h3>
 
   <p>This project taught me how much solder quality matters, that too much heat can damage components, that you should measure instead of blindly trusting pin numbers, and how critical <strong>reading the datasheet</strong> is. Sometimes the fix isn't buying a new part — it's understanding the logic of the circuit.</p>
 
   <p>In the future I'm thinking of adding a current meter, fan cooling and a USB output. For me, this wasn't just a circuit; it was real problem-solving practice.</p>
 
+  <div class="share">
+    <span class="share-label">Share</span>
+    <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//ahmetulu.com.tr/en/blog/adjustable-power-supply.html" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A//ahmetulu.com.tr/en/blog/adjustable-power-supply.html&amp;text=12V%20DC%20Adjustable%20Power%20Supply%20%E2%80%94%20LM2596%20Mod" target="_blank" rel="noopener">X</a>
+    <a class="share-btn" href="https://wa.me/?text=12V%20DC%20Adjustable%20Power%20Supply%20%E2%80%94%20LM2596%20Mod%20https%3A//ahmetulu.com.tr/en/blog/adjustable-power-supply.html" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="share-btn" type="button" data-copy="https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html" data-copied="Copied ✓">Copy link</button>
+  </div>
+
+  <aside class="author">
+    <div class="mono sm" aria-hidden="true"><span>AU</span></div>
+    <div>
+      <div class="author-name">Ahmet Ulu</div>
+      <p>Electrical and electronics engineering student at Abdullah Gül University; embedded systems developer at MUSTECH and freelance PCB designer.</p>
+      <div class="author-links"><a href="../../en/about.html">About me →</a><a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a></div>
+    </div>
+  </aside>
+
   <nav class="post-nav" aria-label="More posts">
     <div class="post-nav-title">More posts</div>
 <a href="../../en/blog/kicad-pcb-design.html" class="post-item" data-filter-item data-tags="PCB Designs">
-  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">PCB Design · Freelance</div><div class="post-title">PCB Design with KiCad: Boards I Designed for Clients</div><div class="post-date">October 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">PCB Design · Freelance</div><div class="post-title">PCB Design with KiCad: Boards I Designed for Clients</div><div class="post-date">October 2026 · 5 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../en/blog/ev-charging-data-infrastructure.html" class="post-item" data-filter-item data-tags="EV Charging Station Optimization">
-  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">EV Charging · Step 1</div><div class="post-title">Raspberry Pi and the Data Infrastructure</div><div class="post-date">April 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">EV Charging · Step 1</div><div class="post-title">Raspberry Pi and the Data Infrastructure</div><div class="post-date">April 2026 · 2 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../en/blog/water-analysis-system.html" class="post-item" data-filter-item data-tags="Smart Agriculture System">
-  <img class="post-thumb" src="../../assets/img/kapak/akilli-tarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">Smart Agriculture · Step 1</div><div class="post-title">Water Analysis System</div><div class="post-date">March 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/akilli-tarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Smart Agriculture · Step 1</div><div class="post-title">Water Analysis System</div><div class="post-date">March 2026 · 6 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
   </nav>
@@ -144,6 +166,6 @@
     </div>
   </div>
 </footer>
-<script src="../../assets/js/main.js?v=dfaf07f7" defer></script>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
 </body>
 </html>

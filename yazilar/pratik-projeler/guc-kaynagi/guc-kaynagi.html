@@ -6,7 +6,7 @@
 <title>LM2596 ile 12V Ayarlı Güç Kaynağı Yapımı — Ahmet Ulu</title>
 <meta name="description" content="LM2596 tabanlı ayarlanabilir DC güç kaynağı: trimpot yerine 10 tur hassas potansiyometre, sorunlar ve çözümleri.">
 <meta name="author" content="Ahmet Ulu">
-<meta name="theme-color" content="#111110">
+<meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">
 <link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">
 <link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/blog/adjustable-power-supply.html">
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../assets/css/style.css?v=58c64370">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=a80df6ca">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu", "description": "LM2596 tabanlı ayarlanabilir DC güç kaynağı: trimpot yerine 10 tur hassas potansiyometre, sorunlar ve çözümleri.", "image": "https://ahmetulu.com.tr/assets/img/kapak/guc-kaynagi.jpg", "datePublished": "2026-04-01", "dateModified": "2026-04-01", "inLanguage": "tr", "mainEntityOfPage": "https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html", "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}, "keywords": ""}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Yazılar", "item": "https://ahmetulu.com.tr/yazilar.html"}, {"@type": "ListItem", "position": 3, "name": "12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu", "item": "https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html"}]}]}</script>
 </head>
@@ -42,12 +42,17 @@
     <li class="nav-lang"><a href="../../../en/blog/adjustable-power-supply.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
   </ul>
 </header>
+<div class="read-progress" aria-hidden="true"><span></span></div>
 <main id="icerik">
 <article class="wrap-narrow article">
   <a href="../../../yazilar.html" class="back-link">← Tüm yazılar</a>
   <div class="blog-tag">Pratik Proje</div>
   <h1>12V DC Ayarlı Güç Kaynağı — LM2596 ile Harici Potansiyometre Modifikasyonu</h1>
-  <div class="blog-meta">Ahmet Ulu · Nisan 2026</div>
+  <div class="blog-meta">Ahmet Ulu · Nisan 2026 · 2 dk okuma</div>
+  <details class="toc">
+    <summary>İçindekiler</summary>
+    <ol><li><a href="#devrenin-yapisi">Devrenin yapısı</a></li><li><a href="#sorunlar-ve-cozumleri">Sorunlar ve çözümleri</a></li><li><a href="#test">Test</a></li><li><a href="#kasa-geri-donusum-ruhu">Kasa: geri dönüşüm ruhu</a></li><li><a href="#sonuc">Sonuç</a></li></ol>
+  </details>
 
   <p>Son zamanlarda hem günlük kullanımda işime yarayacak hem de elektronik bilgimi geliştirecek bir proje yapmak istedim. <strong>LM2596</strong> tabanlı ayarlanabilir bir DC güç kaynağı tasarladım. Standart LM2596 modüller üzerinde küçük bir trimpot bulunuyor — hem çok küçük olduğu için kullanımı zor hem de hassas ayar için tornavida gerekiyor. Ben de bu trimpotu sökerek yerine dışarıdan çevrilebilen <strong>10 tur hassas potansiyometre</strong> bağlamaya karar verdim.</p>
 
@@ -56,7 +61,7 @@
     <figcaption>Devrenin genel şeması — adaptörden çıkışa kadar tüm bağlantılar</figcaption>
   </figure>
 
-  <h3>Devrenin yapısı</h3>
+  <h3 id="devrenin-yapisi">Devrenin yapısı</h3>
 
   <p>Giriş kaynağı olarak <strong>12V DC adaptör</strong> kullandım. Adaptörden gelen enerji önce DC giriş soketine, ardından sigortaya ve açma-kapama anahtarına bağlandı. Anahtardan sonra hat LM2596 modülünün girişine verildi. Çıkış tarafında pozitif ve negatif terminaller ile anlık voltajı görmek için <strong>dijital voltmetre ekranı</strong> ekledim.</p>
 
@@ -76,7 +81,7 @@
     <div class="tech-row"><span class="comp">Kasa</span><span class="detail">Geri dönüşüm süzme peynir kabı</span></div>
   </div>
 
-  <h3>Sorunlar ve çözümleri</h3>
+  <h3 id="sorunlar-ve-cozumleri">Sorunlar ve çözümleri</h3>
 
   <p>En öğretici kısım karşılaştığım sorunlardı. İlk olarak lehim telimin kalitesiz olması yüzünden potansiyometreye gereğinden fazla ısı uyguladım ve pot kullanılamaz hale geldi. Yeni bir potansiyometre aldım, daha kaliteli lehim teli kullandım. Ama devre hâlâ çalışmıyordu.</p>
 
@@ -89,7 +94,7 @@
     <figcaption>Tamamlanmış cihaz — voltmetre 6.75V gösteriyor, terminaller hazır</figcaption>
   </figure>
 
-  <h3>Test</h3>
+  <h3 id="test">Test</h3>
 
   <p>Sistem çalışır hale gelince multimetre ile doğrulama yaptım. Cihazın kendi ekranı ile multimetre aynı değeri gösteriyordu — kalibrasyon sorunsuz.</p>
 
@@ -98,7 +103,7 @@
     <figcaption>Multimetre testi — cihaz ekranı ve multimetre aynı değeri gösteriyor</figcaption>
   </figure>
 
-  <h3>Kasa: geri dönüşüm ruhu</h3>
+  <h3 id="kasa-geri-donusum-ruhu">Kasa: geri dönüşüm ruhu</h3>
 
   <p>Elimde bulunan eski bir <strong>süzme peynir kabını</strong> değerlendirdim ve cihaz kasası olarak kullandım. Normalde mutfakta görev yapan bu kahraman, kariyer değiştirerek artık masaüstünde güç elektroniği alanında hizmet veriyor.</p>
 
@@ -107,27 +112,44 @@
     <figcaption>Yan tarafta DC giriş soketi ve açma-kapama anahtarı</figcaption>
   </figure>
 
-  <h3>Sonuç</h3>
+  <h3 id="sonuc">Sonuç</h3>
 
   <p>Bu proje bana lehim kalitesinin önemini, fazla ısının bileşenlere zarar verebileceğini, pin numaralarına körü körüne güvenmek yerine ölçüm yapılması gerektiğini ve <strong>datasheet okumanın</strong> ne kadar kritik olduğunu öğretti. Bazen sorun yeni parça almakla değil, devrenin mantığını anlayarak çözülüyor.</p>
 
   <p>Gelecekte akım ölçer, fan soğutma ve USB çıkış eklemeyi düşünüyorum. Bu çalışma benim için sadece bir devre değil, gerçek bir problem çözme pratiği oldu.</p>
 
+  <div class="share">
+    <span class="share-label">Paylaş</span>
+    <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A//ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html&amp;text=12V%20DC%20Ayarl%C4%B1%20G%C3%BC%C3%A7%20Kayna%C4%9F%C4%B1%20%E2%80%94%20LM2596%20Modifikasyonu" target="_blank" rel="noopener">X</a>
+    <a class="share-btn" href="https://wa.me/?text=12V%20DC%20Ayarl%C4%B1%20G%C3%BC%C3%A7%20Kayna%C4%9F%C4%B1%20%E2%80%94%20LM2596%20Modifikasyonu%20https%3A//ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="share-btn" type="button" data-copy="https://ahmetulu.com.tr/yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html" data-copied="Kopyalandı ✓">Linki kopyala</button>
+  </div>
+
+  <aside class="author">
+    <div class="mono sm" aria-hidden="true"><span>AU</span></div>
+    <div>
+      <div class="author-name">Ahmet Ulu</div>
+      <p>Abdullah Gül Üniversitesi'nde elektrik-elektronik mühendisliği öğrencisi; MUSTECH'te gömülü sistemler geliştiricisi ve freelance PCB tasarımcısı.</p>
+      <div class="author-links"><a href="../../../hakkimda.html">Hakkımda →</a><a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a></div>
+    </div>
+  </aside>
+
   <nav class="post-nav" aria-label="Diğer yazılar">
     <div class="post-nav-title">Diğer yazılar</div>
 <a href="../../../yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html" class="post-item" data-filter-item data-tags="PCB Tasarımları">
-  <img class="post-thumb" src="../../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">PCB Tasarımı · Freelance</div><div class="post-title">KiCad ile PCB Tasarımı: Bionluk'ta Müşteriler İçin Tasarladığım Kartlar</div><div class="post-date">Ekim 2026</div></div>
+  <img class="post-thumb" src="../../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">PCB Tasarımı · Freelance</div><div class="post-title">KiCad ile PCB Tasarımı: Bionluk'ta Müşteriler İçin Tasarladığım Kartlar</div><div class="post-date">Ekim 2026 · 4 dk okuma</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../../yazilar/ev-sarj/ev-sarj-altyapi.html" class="post-item" data-filter-item data-tags="Elektrik Şarj İstasyonu Optimizasyonu">
-  <img class="post-thumb" src="../../../assets/img/kapak/ev-sarj.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">EV Şarj · 1. Adım</div><div class="post-title">Raspberry Pi ve Veri Altyapısı</div><div class="post-date">Nisan 2026</div></div>
+  <img class="post-thumb" src="../../../assets/img/kapak/ev-sarj.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">EV Şarj · 1. Adım</div><div class="post-title">Raspberry Pi ve Veri Altyapısı</div><div class="post-date">Nisan 2026 · 2 dk okuma</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../../yazilar/akilli-tarim/su-analizi.html" class="post-item" data-filter-item data-tags="Akıllı Tarım Sistemi">
-  <img class="post-thumb" src="../../../assets/img/kapak/akilli-tarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">Akıllı Tarım · 1. Adım</div><div class="post-title">Su Analiz Sistemi</div><div class="post-date">Mart 2026</div></div>
+  <img class="post-thumb" src="../../../assets/img/kapak/akilli-tarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Akıllı Tarım · 1. Adım</div><div class="post-title">Su Analiz Sistemi</div><div class="post-date">Mart 2026 · 4 dk okuma</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
   </nav>
@@ -144,6 +166,6 @@
     </div>
   </div>
 </footer>
-<script src="../../../assets/js/main.js?v=dfaf07f7" defer></script>
+<script src="../../../assets/js/main.js?v=5969ab74" defer></script>
 </body>
 </html>

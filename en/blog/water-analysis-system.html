@@ -6,7 +6,7 @@
 <title>Solar-Powered Water Analysis System with ESP32: pH, TDS and Temperature — Ahmet Ulu</title>
 <meta name="description" content="A solar-powered, off-grid water analysis system: pH, TDS and temperature sensing, a PCB, a mobile app and sensor noise.">
 <meta name="author" content="Ahmet Ulu">
-<meta name="theme-color" content="#111110">
+<meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/en/blog/water-analysis-system.html">
 <link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/yazilar/akilli-tarim/su-analizi.html">
 <link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/blog/water-analysis-system.html">
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=58c64370">
+<link rel="stylesheet" href="../../assets/css/style.css?v=a80df6ca">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "Water Analysis System", "description": "A solar-powered, off-grid water analysis system: pH, TDS and temperature sensing, a PCB, a mobile app and sensor noise.", "image": "https://ahmetulu.com.tr/assets/img/kapak/akilli-tarim.jpg", "datePublished": "2026-03-01", "dateModified": "2026-03-01", "inLanguage": "en", "mainEntityOfPage": "https://ahmetulu.com.tr/en/blog/water-analysis-system.html", "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}, "keywords": ""}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ahmetulu.com.tr/en/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Water Analysis System", "item": "https://ahmetulu.com.tr/en/blog/water-analysis-system.html"}]}]}</script>
 </head>
@@ -42,12 +42,17 @@
     <li class="nav-lang"><a href="../../yazilar/akilli-tarim/su-analizi.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
   </ul>
 </header>
+<div class="read-progress" aria-hidden="true"><span></span></div>
 <main id="icerik">
 <article class="wrap-narrow article">
   <a href="../../en/blog.html" class="back-link">← All posts</a>
   <div class="blog-tag">Smart Agriculture System · Step 1</div>
   <h1>Water Analysis System: Building a System from Scratch</h1>
-  <div class="blog-meta">Ahmet Ulu · March 2026</div>
+  <div class="blog-meta">Ahmet Ulu · March 2026 · 6 min read</div>
+  <details class="toc">
+    <summary>Contents</summary>
+    <ol><li><a href="#the-start-a-breadboard-and-endless-calibration">The start: a breadboard and endless calibration</a></li><li><a href="#a-first-pcb-without-any-lessons">A first PCB without any lessons</a></li><li><a href="#workshops-dust-and-sparks">Workshops, dust and sparks</a></li><li><a href="#the-energy-system-why-such-a-big-battery">The energy system: why such a big battery?</a></li><li><a href="#the-mobile-app-putting-the-data-in-the-farmer-s-hands">The mobile app: putting the data in the farmer&#x27;s hands</a></li><li><a href="#the-problem-that-drove-us-crazy-sensor-noise">The problem that drove us crazy: sensor noise</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#thanks">Thanks</a></li></ol>
+  </details>
 
   <p>We have completed the first step of our smart agriculture project: <strong>the Water Analysis System.</strong> On its own, this is already a serious piece of work — when the pH, TDS value or temperature of irrigation water reaches dangerous levels, it instantly warns the farmer and sends a notification through the mobile app. It runs on solar power, is not connected to the grid, and can be installed directly in the field. For me this project was not just a system; it was the process in which I learned what it really means to build something from scratch.</p>
 
@@ -56,7 +61,7 @@
     <figcaption>First sensor tests on the breadboard — I brought each component up one by one and got it talking to the ESP32</figcaption>
   </figure>
 
-  <h3>The start: a breadboard and endless calibration</h3>
+  <h3 id="the-start-a-breadboard-and-endless-calibration">The start: a breadboard and endless calibration</h3>
 
   <p>Everything started on a breadboard. The pH sensor, the TDS sensor, the DS18B20 temperature sensor — I brought them up one at a time and tried to get them talking to the ESP32. It sounds simple, but believe me, the most exhausting part was <strong>calibration</strong>. Even when the system was completely finished, calibration problems kept following us. The pH sensor is especially frustrating — it constantly needs adjusting with reference solutions, and the smallest drift can trigger a false alarm. We spent a lot of time on this part, and honestly it still isn't completely finished.</p>
 
@@ -65,7 +70,7 @@
     <figcaption>My first PCB experience — I learned circuit layout and soldering technique at the same time</figcaption>
   </figure>
 
-  <h3>A first PCB without any lessons</h3>
+  <h3 id="a-first-pcb-without-any-lessons">A first PCB without any lessons</h3>
 
   <p>Once everything worked on the breadboard, it was time for the <strong>PCB</strong>. I had never designed a PCB before; I sat down with the software and learned by doing. Our first and biggest mistake: we chose a board that was too small. Fitting every component into that tiny area was really hard. On top of that, this board has no pre-made traces — I had to route every single connection by hand. It took hours, but in the end it worked. I already had some soldering experience, so that part wasn't too hard. Honestly, I was quite happy with the result.</p>
 
@@ -74,7 +79,7 @@
     <figcaption>Building the frame at the workshop — the result of days of effort</figcaption>
   </figure>
 
-  <h3>Workshops, dust and sparks</h3>
+  <h3 id="workshops-dust-and-sparks">Workshops, dust and sparks</h3>
 
   <p>With the electronics done, it was time for the physical structure. We needed a sturdy frame that would hold the solar panel, house the electronics box underneath and survive in the field. My friend and I went back and forth to the industrial area and worked on it for days. There is one person I especially need to thank here: <strong>Mehmet usta.</strong> When he saw we were students, instead of saying "who's going to bother with you", he helped us for a fair price. Without people like him this would have been much harder.</p>
 
@@ -83,7 +88,7 @@
     <figcaption>Inside the box: the solar charge controller, the ESP32 and all sensor connections</figcaption>
   </figure>
 
-  <h3>The energy system: why such a big battery?</h3>
+  <h3 id="the-energy-system-why-such-a-big-battery">The energy system: why such a big battery?</h3>
 
   <p>Because we wanted the system to be fully <strong>off-grid</strong>, we paid close attention to the energy design. We used a 12V 24Ah battery and a 24W solar panel — this may look a bit oversized, but it was a deliberate choice. If the water pump turns out to be too weak, we will replace it with a more powerful one, so we left plenty of headroom. The current pump draws about 0.7A while running, and the system can run for days on this battery.</p>
 
@@ -102,7 +107,7 @@
     <div class="tech-row"><span class="comp">Water Pump</span><span class="detail">6V DC pump — 1.2A inrush, 0.7A running</span></div>
   </div>
 
-  <h3>The mobile app: putting the data in the farmer's hands</h3>
+  <h3 id="the-mobile-app-putting-the-data-in-the-farmer-s-hands">The mobile app: putting the data in the farmer's hands</h3>
 
   <p>No matter how good the hardware is, it means little if the farmer can't reach the data while away from the field. That's why we developed a <strong>mobile app</strong> as an integral part of the system. The ESP32 sends its measurements to the cloud over WiFi, and the app pulls them from there in real time. We kept the interface as simple as possible — pH, TDS, water temperature and system status are all visible at a glance on the main screen. When values reach dangerous levels, a <strong>notification</strong> goes straight to the phone. We wanted to build something that a farmer with no technical background could use comfortably — and I think we succeeded.</p>
 
@@ -111,7 +116,7 @@
     <figcaption>Solar panel on top, electronics box below — the system is ready for the field</figcaption>
   </figure>
 
-  <h3>The problem that drove us crazy: sensor noise</h3>
+  <h3 id="the-problem-that-drove-us-crazy-sensor-noise">The problem that drove us crazy: sensor noise</h3>
 
   <p>Everything was ready and we moved on to testing. And right then we noticed something strange: the sensors were affecting each other. When all three sensors ran at the same time, the readings drifted. Even worse, <strong>when the water pump kicked in</strong>, the electrical noise it created drove the sensors completely haywire — meaningless values and false alarms.</p>
 
@@ -122,29 +127,46 @@
     <figcaption>The system from outside — solar panel, box and frame together</figcaption>
   </figure>
 
-  <h3>Conclusion</h3>
+  <h3 id="conclusion">Conclusion</h3>
 
   <p>The system is ready to be installed in the field. It runs on solar power, sends its data to the cloud, can be monitored from the mobile app and sends notifications when something is wrong. It has shortcomings, and there are definitely things to improve. But for a first step, I think it is more than enough. The most valuable part is this: PCB design, soldering, calibration, noise problems, energy management... I learned all of it from scratch, by doing it.</p>
 
-  <h3>Thanks</h3>
+  <h3 id="thanks">Thanks</h3>
 
   <p>I couldn't have done this project alone. I sincerely want to thank <strong>my friends</strong> who were with me at every step — through the exhausting days at the workshop, the tests that lasted until morning, and every "why isn't it working" crisis, we were always together. Many thanks also to <strong>Mehmet usta</strong>, who helped us build the frame, and to everyone who shared their ideas and support. It was great teamwork.</p>
+
+  <div class="share">
+    <span class="share-label">Share</span>
+    <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//ahmetulu.com.tr/en/blog/water-analysis-system.html" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A//ahmetulu.com.tr/en/blog/water-analysis-system.html&amp;text=Water%20Analysis%20System" target="_blank" rel="noopener">X</a>
+    <a class="share-btn" href="https://wa.me/?text=Water%20Analysis%20System%20https%3A//ahmetulu.com.tr/en/blog/water-analysis-system.html" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="share-btn" type="button" data-copy="https://ahmetulu.com.tr/en/blog/water-analysis-system.html" data-copied="Copied ✓">Copy link</button>
+  </div>
+
+  <aside class="author">
+    <div class="mono sm" aria-hidden="true"><span>AU</span></div>
+    <div>
+      <div class="author-name">Ahmet Ulu</div>
+      <p>Electrical and electronics engineering student at Abdullah Gül University; embedded systems developer at MUSTECH and freelance PCB designer.</p>
+      <div class="author-links"><a href="../../en/about.html">About me →</a><a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a></div>
+    </div>
+  </aside>
 
   <nav class="post-nav" aria-label="More posts">
     <div class="post-nav-title">More posts</div>
 <a href="../../en/blog/kicad-pcb-design.html" class="post-item" data-filter-item data-tags="PCB Designs">
-  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">PCB Design · Freelance</div><div class="post-title">PCB Design with KiCad: Boards I Designed for Clients</div><div class="post-date">October 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">PCB Design · Freelance</div><div class="post-title">PCB Design with KiCad: Boards I Designed for Clients</div><div class="post-date">October 2026 · 5 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../en/blog/adjustable-power-supply.html" class="post-item" data-filter-item data-tags="Practical Projects">
-  <img class="post-thumb" src="../../assets/img/kapak/guc-kaynagi.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">Practical Project</div><div class="post-title">12V DC Adjustable Power Supply — LM2596 Mod</div><div class="post-date">April 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/guc-kaynagi.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Practical Project</div><div class="post-title">12V DC Adjustable Power Supply — LM2596 Mod</div><div class="post-date">April 2026 · 3 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
 <a href="../../en/blog/ev-charging-data-infrastructure.html" class="post-item" data-filter-item data-tags="EV Charging Station Optimization">
-  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
-  <div class="post-info"><div class="post-kicker">EV Charging · Step 1</div><div class="post-title">Raspberry Pi and the Data Infrastructure</div><div class="post-date">April 2026</div></div>
+  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">EV Charging · Step 1</div><div class="post-title">Raspberry Pi and the Data Infrastructure</div><div class="post-date">April 2026 · 2 min read</div></div>
   <span class="post-arrow" aria-hidden="true">→</span>
 </a>
   </nav>
@@ -161,6 +183,6 @@
     </div>
   </div>
 </footer>
-<script src="../../assets/js/main.js?v=dfaf07f7" defer></script>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
 </body>
 </html>
