@@ -191,6 +191,8 @@ def head(lang, path, title, desc, alt_path, og_image='assets/img/og.jpg', og_typ
         gc = f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>\n'
     robots = '<meta name="robots" content="noindex">\n' if noindex else ''
     gsc = f'<meta name="google-site-verification" content="{GSC_VERIFICATION}">\n' if GSC_VERIFICATION and path == 'index.html' else ''
+    if path in ('index.html', 'en/index.html'):
+        gsc += ''.join(f'<link rel="me" href="{u}">\n' for u in [GITHUB, LINKEDIN] + ([BIONLUK] if BIONLUK else []))
     ldjson = ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>\n' for x in (ld or []))
     return f'''<!DOCTYPE html>
 <html lang="{lang}">
@@ -272,11 +274,16 @@ def asset_ver(path):
 
 def person_ld(lang):
     return {
-        '@type': 'Person', '@id': f'{SITE}/#ahmet-ulu', 'name': 'Ahmet Ulu', 'url': f'{SITE}/',
+        '@type': 'Person', '@id': f'{SITE}/#ahmet-ulu', 'name': 'Ahmet Ulu', 'alternateName': ['Ahmet ULU', 'ahmtuluu'],
+        'givenName': 'Ahmet', 'familyName': 'Ulu', 'url': f'{SITE}/',
+        'description': ("Abdullah Gül Üniversitesi'nde elektrik-elektronik mühendisliği öğrencisi; MUSTECH'te gömülü sistemler geliştiricisi ve freelance PCB tasarımcısı."
+                        if lang == 'tr' else 'Electrical and electronics engineering student at Abdullah Gül University, embedded systems developer at MUSTECH and freelance PCB designer.'),
+        'worksFor': {'@type': 'Organization', 'name': 'MUSTECH', 'url': 'https://mustechagro.com.tr/'},
+        'knowsLanguage': ['tr', 'en'],
         'image': f'{SITE}/assets/img/og.jpg', 'email': f'mailto:{EMAIL}',
         'jobTitle': 'Elektrik-Elektronik Mühendisliği Öğrencisi, Gömülü Sistemler Geliştiricisi' if lang == 'tr' else 'Electrical & Electronics Engineering Student, Embedded Systems Developer',
         'address': {'@type': 'PostalAddress', 'addressLocality': 'Kayseri', 'addressCountry': 'TR'},
-        'alumniOf': {'@type': 'CollegeOrUniversity', 'name': 'Abdullah Gül Üniversitesi'},
+        'alumniOf': {'@type': 'CollegeOrUniversity', 'name': 'Abdullah Gül Üniversitesi', 'url': 'https://www.agu.edu.tr/'},
         'knowsAbout': ['Gömülü Sistemler', 'IoT', 'PCB Tasarımı', 'KiCad', 'ESP32', 'STM32', 'Raspberry Pi', 'Elektrikli Araç Şarj Sistemleri'],
         'sameAs': [GITHUB, LINKEDIN] + ([BIONLUK] if BIONLUK else []),
     }
@@ -594,11 +601,11 @@ def build_home(lang):
     </section>
   </div>'''
     ld = [{'@context': 'https://schema.org', '@graph': [person_ld(lang),
-          {'@type': 'WebSite', '@id': f'{SITE}/#site', 'url': f'{SITE}/', 'name': 'Ahmet Ulu', 'inLanguage': lang, 'publisher': {'@id': f'{SITE}/#ahmet-ulu'}}]}]
+          {'@type': 'WebSite', '@id': f'{SITE}/#site', 'url': f'{SITE}/', 'name': 'Ahmet Ulu', 'alternateName': ['ahmetulu.com.tr', 'Ahmet Ulu — Kişisel Site'], 'inLanguage': lang, 'publisher': {'@id': f'{SITE}/#ahmet-ulu'}}]}]
     page(lang, 'home', title, desc, body, ld=ld)
 
 ABOUT = {
- 'tr': dict(title='Hakkımda — Ahmet Ulu', h='Hakkımda', sub='Kim olduğum, ne ile ilgilendiğim.',
+ 'tr': dict(title='Ahmet Ulu Kimdir? — Hakkımda', h='Ahmet Ulu hakkında', sub='Kim olduğum, ne ile ilgilendiğim.',
    desc="Ahmet Ulu kimdir? Gömülü sistemler, IoT ve PCB tasarımı üzerine çalışan elektrik-elektronik mühendisliği öğrencisi; MUSTECH'te gömülü sistemler geliştiricisi, Bionluk'ta freelance PCB tasarımcısı.",
    paras=["Merhaba, ben <strong>Ahmet Ulu</strong>. Kayseri'den bir yazılım ve donanım geliştiricisiyim. Gömülü sistemler, IoT projeleri ve otomasyon üzerine çalışıyorum. Makine öğrenmesini gerçek dünya problemlerine uygulamak hem hedefim hem de tutkum.",
           "<strong>Python, C ve C++</strong> ile yazılım geliştirirken; <strong>Raspberry Pi, STM32 ve ESP32</strong> gibi kartlarla donanım projelerini hayata geçiriyorum. Kodu sadece ekranda değil, gerçek bir sistemin içinde çalışırken görmek başka bir his.",
@@ -613,7 +620,7 @@ ABOUT = {
    skills=[('Yazılım', ['Python', 'C', 'C++']), ('Donanım ve Kartlar', ['ESP32', 'STM32', 'Arduino', 'Raspberry Pi']),
            ('PCB ve Araçlar', ['KiCad', 'MATLAB & Simulink', 'Git', 'Linux']), ('Haberleşme', ['UART', 'SPI', 'I²C', 'LoRa']),
            ('Uzmanlık Alanları', ['Gömülü Sistemler', 'IoT', 'Otomasyon']), ('İlgi Alanları', ['Machine Learning', 'Sinyal İşleme', 'Kontrol Sistemleri'])]),
- 'en': dict(title='About — Ahmet Ulu', h='About', sub='Who I am and what I work on.',
+ 'en': dict(title='About Ahmet Ulu — Electronics Engineering Student', h='About Ahmet Ulu', sub='Who I am and what I work on.',
    desc='Who is Ahmet Ulu? An electrical and electronics engineering student working on embedded systems, IoT and PCB design; embedded systems developer at MUSTECH and freelance PCB designer on Bionluk.',
    paras=["Hi, I'm <strong>Ahmet Ulu</strong>, a software and hardware developer from Kayseri, Türkiye. I work on embedded systems, IoT projects and automation. Applying machine learning to real-world problems is both my goal and my passion.",
           "I write software in <strong>Python, C and C++</strong>, and bring hardware projects to life with boards like the <strong>Raspberry Pi, STM32 and ESP32</strong>. Seeing code run not just on a screen but inside a real system is a different feeling.",
@@ -656,7 +663,9 @@ def build_about(lang):
             f'    <h2 class="sub-title">{a["skills_h"]}</h2>\n'
             f'    <div class="skills-grid">\n{skills}\n    </div>\n'
             '  </div>')
-    page(lang, 'about', a['title'], a['desc'], body)
+    ld = [{'@context': 'https://schema.org', '@type': 'ProfilePage', 'url': f'{SITE}/{PAGES["about"][0 if lang == "tr" else 1]}',
+           'inLanguage': lang, 'dateModified': datetime.date.today().isoformat(), 'mainEntity': person_ld(lang)}]
+    page(lang, 'about', a['title'], a['desc'], body, ld=ld)
 
 def build_education(lang):
     if lang == 'tr':
