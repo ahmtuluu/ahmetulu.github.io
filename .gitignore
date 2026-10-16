@@ -16,3 +16,6 @@ yazilar/pcb-tasarim/*
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Python önbelleği
+__pycache__/

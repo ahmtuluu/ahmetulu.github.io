@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>LED Resistor Calculator — Ahmet Ulu</title>
+<meta name="description" content="LED resistor calculator: R = (Vs − Vf)/I. Forward voltage by colour, LEDs in series, E24 standard resistor suggestion and power rating.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/tools/led-resistor.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/led-direnci.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/led-resistor.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/led-direnci.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="LED Resistor Calculator — Ahmet Ulu">
+<meta property="og:description" content="LED resistor calculator: R = (Vs − Vf)/I. Forward voltage by colour, LEDs in series, E24 standard resistor suggestion and power rating.">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/tools/led-resistor.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "LED Resistor Calculator", "description": "LED resistor calculator: R = (Vs − Vf)/I. Forward voltage by colour, LEDs in series, E24 standard resistor suggestion and power rating.", "url": "https://ahmetulu.com.tr/en/tools/led-resistor.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "LED resistor", "item": "https://ahmetulu.com.tr/en/tools/led-resistor.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html">Blog</a></li>
+    <li><a href="../../en/tools.html" aria-current="page">Tools</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../araclar/led-direnci.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../en/index.html">Home</a><span aria-hidden="true">/</span><a href="../../en/tools.html">Tools</a><span aria-hidden="true">/</span><span>LED resistor</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Components</span><h1>LED Resistor Calculator</h1><p>Pick the LED colour, enter the supply voltage and current: you get the required resistor, a standard value you can buy and its power rating.</p></div>
+    <div class="calc" data-tool="led"><noscript><p class="calc-note warn">This calculator needs JavaScript. The formulas are below.</p></noscript></div>
+    <section class="tool-doc" id="how-it-works">
+      <h2>How is it calculated?</h2>
+<p>The voltage across an LED stays almost constant with current (the forward voltage, Vf). So a series resistor is needed to limit the current; the rest of the supply voltage drops across it.</p>
+<div class="formula"><span>R = (Vs − n · Vf) / I</span><span>Actual current:   I = (Vs − n · Vf) / R(E24)</span><span>Resistor power:   P = (Vs − n · Vf) · I</span><small>n: number of LEDs in series</small></div>
+<p>The calculated resistor is rarely a standard value. The tool suggests the <strong>next value up in the E24 series</strong>, so the LED current never exceeds your target. A power rating of at least twice the calculated power is recommended.</p>
+<h3>Typical Vf by colour</h3>
+<ul><li>Red ≈ 2.0 V · orange / yellow ≈ 2.1 V · IR ≈ 1.3 V</li><li>Green, blue, white (InGaN) ≈ 3.0–3.2 V</li></ul>
+<p>These are typical values; the exact figure is in the LED datasheet and changes with current and temperature.</p>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li><a href="https://en.wikipedia.org/wiki/Light-emitting_diode" target="_blank" rel="noopener">Wikipedia — Light-emitting diode</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../../en/tools/ohms-law.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19h4v-2.6A6.6 6.6 0 1 1 15 16.4V19h4"/></svg></span><span class="tool-txt"><span class="tile-title">Ohm&#x27;s law</span><span class="tile-sub">Enter two of voltage, current, resistance and power; get the other two.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/resistor-color-code.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12h3M19 12h3M5 8h14v8H5zM9 8v8M12 8v8M15 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Resistor color code</span><span class="tile-sub">Click the colours to see the value, or type a value to get the colours.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/smd-code.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h16v8H4zM4 8h3v8H4zM17 8h3v8h-3zM10 12h4"/></svg></span><span class="tool-txt"><span class="tile-title">SMD code decoder</span><span class="tile-sub">Turn codes like 103, 4702, 4R7, 01C, 104J into values.</span></span><span class="tile-link">Open →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

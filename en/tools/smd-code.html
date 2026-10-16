@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SMD Resistor and Capacitor Code Decoder — Ahmet Ulu</title>
+<meta name="description" content="SMD resistor code and capacitor code decoder: 3-digit (103), 4-digit (1002), R notation (4R7), EIA-96 (01C) and capacitor codes (104, 473J).">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/tools/smd-code.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/smd-kod-cozucu.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/smd-code.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/smd-kod-cozucu.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="SMD Resistor and Capacitor Code Decoder — Ahmet Ulu">
+<meta property="og:description" content="SMD resistor code and capacitor code decoder: 3-digit (103), 4-digit (1002), R notation (4R7), EIA-96 (01C) and capacitor codes (104, 473J).">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/tools/smd-code.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "SMD Resistor and Capacitor Code Decoder", "description": "SMD resistor code and capacitor code decoder: 3-digit (103), 4-digit (1002), R notation (4R7), EIA-96 (01C) and capacitor codes (104, 473J).", "url": "https://ahmetulu.com.tr/en/tools/smd-code.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "SMD code decoder", "item": "https://ahmetulu.com.tr/en/tools/smd-code.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html">Blog</a></li>
+    <li><a href="../../en/tools.html" aria-current="page">Tools</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../araclar/smd-kod-cozucu.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../en/index.html">Home</a><span aria-hidden="true">/</span><a href="../../en/tools.html">Tools</a><span aria-hidden="true">/</span><span>SMD code decoder</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Components</span><h1>SMD Resistor and Capacitor Code Decoder</h1><p>Type the code printed on an SMD resistor or ceramic capacitor and see the value instantly. Understands 3-digit, 4-digit, R-notation and EIA-96 codes.</p></div>
+    <div class="calc" data-tool="smd"><noscript><p class="calc-note warn">This calculator needs JavaScript. The formulas are below.</p></noscript></div>
+    <section class="tool-doc" id="how-it-works">
+      <h2>How is it calculated?</h2>
+<h3>SMD resistors</h3>
+<div class="formula"><span>3 digits:   AB C  →  AB × 10^C          103 = 10 × 10³ = 10 kΩ</span><span>4 digits:   ABC D →  ABC × 10^D        1002 = 100 × 10² = 10 kΩ</span><span>R as decimal point:   4R7 = 4.7 Ω,   R10 = 0.1 Ω</span><span>EIA-96:   01C = 100 × 100 = 10 kΩ</span></div>
+<p>In an <strong>EIA-96</strong> code the two digits are the index of the value in the E96 series (01 = 100, 02 = 102 … 96 = 976). The letter is the multiplier: Z = 0.001 · Y/R = 0.01 · X/S = 0.1 · A = 1 · B/H = 10 · C = 100 · D = 1 k · E = 10 k · F = 100 k.</p>
+<h3>Ceramic capacitors</h3>
+<div class="formula"><span>AB C  →  AB × 10^C pF          104 = 10 × 10⁴ pF = 100 nF</span><span>C = 8 → ×0.01,   C = 9 → ×0.1</span><small>A trailing letter is the tolerance: B ±0.1 pF · C ±0.25 pF · D ±0.5 pF · F ±1% · G ±2% · J ±5% · K ±10% · M ±20% · Z +80/−20%</small></div>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li><a href="https://webstore.iec.ch/en/publication/65655" target="_blank" rel="noopener">IEC 60062 — Marking codes for resistors and capacitors</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../../en/tools/resistor-color-code.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12h3M19 12h3M5 8h14v8H5zM9 8v8M12 8v8M15 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Resistor color code</span><span class="tile-sub">Click the colours to see the value, or type a value to get the colours.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/led-resistor.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h5M16 12h5M8 7v10l8-5zM16 7v10M14 5l2.5-2.5M17 7l2.5-2.5"/></svg></span><span class="tool-txt"><span class="tile-title">LED resistor</span><span class="tile-sub">Find the series resistor, a standard value and its power rating for an LED.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/series-parallel.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h4m10 0h4M7 6h10v4H7zM3 16h4m10 0h4M7 14h10v4H7zM3 8v8M21 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Series / parallel</span><span class="tile-sub">Find the series and parallel equivalent of resistors, capacitors or inductors.</span></span><span class="tile-link">Open →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

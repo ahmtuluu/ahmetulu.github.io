@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>555 Zamanlayıcı Hesaplama (Astable / Monostable) — Ahmet Ulu</title>
+<meta name="description" content="555 zamanlayıcı hesaplayıcı: astable modda frekans, görev oranı, yüksek/düşük süre; monostable modda darbe süresi. NE555 datasheet formülleriyle.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/araclar/555-zamanlayici.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/555-zamanlayici.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/555-timer.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/555-zamanlayici.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="555 Zamanlayıcı Hesaplama (Astable / Monostable) — Ahmet Ulu">
+<meta property="og:description" content="555 zamanlayıcı hesaplayıcı: astable modda frekans, görev oranı, yüksek/düşük süre; monostable modda darbe süresi. NE555 datasheet formülleriyle.">
+<meta property="og:url" content="https://ahmetulu.com.tr/araclar/555-zamanlayici.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "555 Zamanlayıcı Hesaplama (Astable / Monostable)", "description": "555 zamanlayıcı hesaplayıcı: astable modda frekans, görev oranı, yüksek/düşük süre; monostable modda darbe süresi. NE555 datasheet formülleriyle.", "url": "https://ahmetulu.com.tr/araclar/555-zamanlayici.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "555 zamanlayıcı", "item": "https://ahmetulu.com.tr/araclar/555-zamanlayici.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../egitim.html">Eğitim</a></li>
+    <li><a href="../projeler.html">Projeler</a></li>
+    <li><a href="../yazilar.html">Yazılar</a></li>
+    <li><a href="../araclar.html" aria-current="page">Araçlar</a></li>
+    <li><a href="../iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="../en/tools/555-timer.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Konum"><a href="../index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="../araclar.html">Araçlar</a><span aria-hidden="true">/</span><span>555 zamanlayıcı</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Zamanlama ve filtre</span><h1>555 Zamanlayıcı Hesaplama (Astable / Monostable)</h1><p>555 entegresiyle osilatör ya da tek darbe devresi kur: R1, R2 ve C&#x27;ye göre frekansı, görev oranını ve darbe süresini hesapla.</p></div>
+    <div class="calc" data-tool="t555"><noscript><p class="calc-note warn">Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.</p></noscript></div>
+    <section class="tool-doc" id="nasil-hesaplanir">
+      <h2>Nasıl hesaplanır?</h2>
+<p>Formüller Texas Instruments <strong>NE555 datasheet</strong>'indeki denklemlerdir. Kondansatör, besleme geriliminin 1/3'ü ile 2/3'ü arasında dolup boşalır; 0,693 bu aralığın karşılığı olan ln 2'dir.</p>
+<h3>Astable (osilatör)</h3>
+<div class="formula"><span>tH = 0,693 · (R1 + R2) · C</span><span>tL = 0,693 · R2 · C</span><span>f = 1,44 / ((R1 + 2·R2) · C)</span><span>Görev oranı = (R1 + R2) / (R1 + 2·R2)</span></div>
+<h3>Monostable (tek darbe)</h3>
+<div class="formula"><span>t = 1,1 · R1 · C</span></div>
+<h3>Pratikte dikkat</h3>
+<ul><li>Bu bağlantıda görev oranı her zaman %50'nin üstündedir. Daha düşük görev oranı için R2'ye paralel bir diyot eklenir.</li>
+<li>R1 çok küçük olursa deşarj pini fazla akım çeker; birkaç kΩ ve üstü uygundur.</li>
+<li>Elektrolitik kondansatörlerin toleransı geniştir (±%20); hassas zamanlama için film kondansatör tercih et.</li></ul>
+      <h3>Kaynaklar</h3>
+      <ul class="sources">
+        <li><a href="https://www.ti.com/lit/ds/symlink/ne555.pdf" target="_blank" rel="noopener">Texas Instruments — NE555 datasheet</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../araclar/rc-filtre.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4v16h18M3 19c5 0 6-13 18-13"/></svg></span><span class="tool-txt"><span class="tile-title">RC filtre / τ</span><span class="tile-sub">Kesim frekansı, zaman sabiti ve hedef yüzdeye şarj süresi.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/led-direnci.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h5M16 12h5M8 7v10l8-5zM16 7v10M14 5l2.5-2.5M17 7l2.5-2.5"/></svg></span><span class="tool-txt"><span class="tile-title">LED direnci</span><span class="tile-sub">LED için seri direnci, standart değeri ve direnç gücünü bul.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/seri-paralel.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h4m10 0h4M7 6h10v4H7zM3 16h4m10 0h4M7 14h10v4H7zM3 8v8M21 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Seri / paralel</span><span class="tile-sub">Direnç, kondansatör veya bobinlerin seri ve paralel eşdeğerini bul.</span></span><span class="tile-link">Aç →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

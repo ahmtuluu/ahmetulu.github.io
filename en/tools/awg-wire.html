@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AWG ↔ mm² Wire Gauge Calculator — Ahmet Ulu</title>
+<meta name="description" content="AWG to mm² converter: cross-section, diameter and resistance per metre from AWG; nearest AWG from mm². Uses the ASTM B258 formula.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/tools/awg-wire.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/awg-kablo.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/awg-wire.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/awg-kablo.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="AWG ↔ mm² Wire Gauge Calculator — Ahmet Ulu">
+<meta property="og:description" content="AWG to mm² converter: cross-section, diameter and resistance per metre from AWG; nearest AWG from mm². Uses the ASTM B258 formula.">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/tools/awg-wire.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "AWG ↔ mm² Wire Gauge Calculator", "description": "AWG to mm² converter: cross-section, diameter and resistance per metre from AWG; nearest AWG from mm². Uses the ASTM B258 formula.", "url": "https://ahmetulu.com.tr/en/tools/awg-wire.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "AWG ↔ mm²", "item": "https://ahmetulu.com.tr/en/tools/awg-wire.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html">Blog</a></li>
+    <li><a href="../../en/tools.html" aria-current="page">Tools</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../araclar/awg-kablo.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../en/index.html">Home</a><span aria-hidden="true">/</span><a href="../../en/tools.html">Tools</a><span aria-hidden="true">/</span><span>AWG ↔ mm²</span></nav>
+    <div class="tool-head"><span class="tool-kicker">PCB & wiring</span><h1>AWG ↔ mm² Wire Gauge Calculator</h1><p>Convert an AWG number to a mm² cross-section, or find the AWG for the mm² you have. Diameter and copper resistance are calculated too.</p></div>
+    <div class="calc" data-tool="awg"><noscript><p class="calc-note warn">This calculator needs JavaScript. The formulas are below.</p></noscript></div>
+    <section class="tool-doc" id="how-it-works">
+      <h2>How is it calculated?</h2>
+<p>AWG (American Wire Gauge) is a log scale: a higher number means a thinner wire, and every 6 gauges the diameter roughly halves.</p>
+<div class="formula"><span>d (mm) = 0.127 · 92^((36 − n) / 39)</span><span>A = π · d² / 4</span><span>R / m = ρ / A,   ρ(Cu, 20 °C) = 1.7241·10⁻⁸ Ω·m</span><small>00 → n = −1,  000 → n = −2,  0000 → n = −3</small></div>
+<p>In “mm² → AWG” mode the thinnest AWG whose area is <strong>equal or larger</strong> than your value is suggested, so you never end up with a thinner wire.</p>
+<p>Current capacity is not a single number: it depends on the insulation, whether wires are bundled and the ambient temperature.</p>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li><a href="https://store.astm.org/standards/b258" target="_blank" rel="noopener">ASTM B258 — AWG sizes of solid round wires</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/American_wire_gauge" target="_blank" rel="noopener">Wikipedia — American wire gauge</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../../en/tools/pcb-trace-width.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h6l4 4h8M3 18h8l3-3h7M3 12h18"/><circle cx="21" cy="10" r="1.2"/><circle cx="21" cy="15" r="1.2"/></svg></span><span class="tool-txt"><span class="tile-title">PCB trace width</span><span class="tile-sub">Minimum trace width, resistance and drop from current and copper weight.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/ohms-law.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19h4v-2.6A6.6 6.6 0 1 1 15 16.4V19h4"/></svg></span><span class="tool-txt"><span class="tile-title">Ohm&#x27;s law</span><span class="tile-sub">Enter two of voltage, current, resistance and power; get the other two.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/battery-life.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h15v8H3zM18 10.5h3v3h-3M6.5 11v2M9.5 11v2M12.5 11v2"/></svg></span><span class="tool-txt"><span class="tile-title">Battery life</span><span class="tile-sub">Estimate average current and battery life from active and sleep currents.</span></span><span class="tile-link">Open →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

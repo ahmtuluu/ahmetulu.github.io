@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ayarlı Regülatör Direnç Hesaplama (LM2596, LM317, MP1584…) — Ahmet Ulu</title>
+<meta name="description" content="LM2596, XL4015, MP1584, LM317 ve AMS1117 ayarlı regülatör hesaplayıcı: geri besleme dirençlerinden Vout, hedef gerilim için direnç ve E24/E96 önerisi.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/araclar/ayarli-regulator.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/ayarli-regulator.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/adjustable-regulator.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/ayarli-regulator.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="Ayarlı Regülatör Direnç Hesaplama (LM2596, LM317, MP1584…) — Ahmet Ulu">
+<meta property="og:description" content="LM2596, XL4015, MP1584, LM317 ve AMS1117 ayarlı regülatör hesaplayıcı: geri besleme dirençlerinden Vout, hedef gerilim için direnç ve E24/E96 önerisi.">
+<meta property="og:url" content="https://ahmetulu.com.tr/araclar/ayarli-regulator.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Ayarlı Regülatör Direnç Hesaplama (LM2596, LM317, MP1584…)", "description": "LM2596, XL4015, MP1584, LM317 ve AMS1117 ayarlı regülatör hesaplayıcı: geri besleme dirençlerinden Vout, hedef gerilim için direnç ve E24/E96 önerisi.", "url": "https://ahmetulu.com.tr/araclar/ayarli-regulator.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Ayarlı regülatör", "item": "https://ahmetulu.com.tr/araclar/ayarli-regulator.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../egitim.html">Eğitim</a></li>
+    <li><a href="../projeler.html">Projeler</a></li>
+    <li><a href="../yazilar.html">Yazılar</a></li>
+    <li><a href="../araclar.html" aria-current="page">Araçlar</a></li>
+    <li><a href="../iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="../en/tools/adjustable-regulator.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Konum"><a href="../index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="../araclar.html">Araçlar</a><span aria-hidden="true">/</span><span>Ayarlı regülatör</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Güç</span><h1>Ayarlı Regülatör Direnç Hesaplama (LM2596, LM317, MP1584…)</h1><p>Entegreyi seç: dirençlerden çıkış gerilimini hesapla ya da istediğin gerilim için gereken direnci ve en yakın standart değeri bul.</p></div>
+    <div class="calc" data-tool="regulator"><noscript><p class="calc-note warn">Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.</p></noscript></div>
+    <section class="tool-doc" id="nasil-hesaplanir">
+      <h2>Nasıl hesaplanır?</h2>
+<p>Ayarlı regülatörler çıkışı bir direnç bölücüyle izler ve FB/ADJ pinindeki gerilimi iç referansa (Vref) eşitler. İki farklı bağlantı tipi vardır.</p>
+<h3>FB tipi: LM2596, XL4015, MP1584</h3>
+<div class="formula"><span>Vout = Vref · (1 + Rüst / Ralt)</span><span>Rüst = Ralt · (Vout / Vref − 1)</span><small>Rüst: Vout → FB,  Ralt: FB → GND.  Vref: LM2596 = 1,23 V · XL4015 = 1,25 V · MP1584 = 0,8 V</small></div>
+<h3>ADJ tipi: LM317, AMS1117</h3>
+<div class="formula"><span>Vout = Vref · (1 + R2 / R1) + Iadj · R2</span><span>R2 = (Vout − Vref) / (Vref / R1 + Iadj)</span><small>R1: OUT → ADJ,  R2: ADJ → GND.  Vref = 1,25 V,  Iadj ≈ 50 µA</small></div>
+<p>Hedef gerilim modunda hesaplanan direnç için <strong>E24</strong> ve <strong>E96</strong> serilerinden en yakın değerler önerilir ve o değerle elde edilecek gerçek çıkış gösterilir.</p>
+<h3>Datasheet uyarıları</h3>
+<ul><li><strong>LM2596:</strong> FB → GND direnci için 240 Ω – 1,5 kΩ aralığı önerilir. Araç bu aralığın dışında uyarı verir.</li>
+<li><strong>MP1584:</strong> alt direncin 40 kΩ'un altında tutulması önerilir.</li>
+<li>Vref'in kendisi de ±%2–3 toleranslıdır; hassas bir gerilim gerekiyorsa çıkışı ölçüp ince ayar yap.</li></ul>
+      <p class="tool-post">Bu hesabı kullandığım proje: <a href="../yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu</a></p>
+      <h3>Kaynaklar</h3>
+      <ul class="sources">
+        <li><a href="https://www.ti.com/lit/ds/symlink/lm2596.pdf" target="_blank" rel="noopener">Texas Instruments — LM2596 datasheet</a></li>
+        <li><a href="https://www.radiolocman.com/datasheet/data.html?di=685191" target="_blank" rel="noopener">XLSEMI — XL4015 datasheet</a></li>
+        <li><a href="https://www.monolithicpower.com/pub/media/document/MP1584_r1.1.pdf" target="_blank" rel="noopener">Monolithic Power Systems — MP1584 datasheet</a></li>
+        <li><a href="https://www.ti.com/lit/ds/symlink/lm317.pdf" target="_blank" rel="noopener">Texas Instruments — LM317 datasheet</a></li>
+        <li><a href="http://www.advanced-monolithic.com/pdf/ds1117.pdf" target="_blank" rel="noopener">Advanced Monolithic Systems — AMS1117 datasheet</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../araclar/buck-donusturucu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 15h3a2.4 2.4 0 0 1 4.8 0 2.4 2.4 0 0 1 4.8 0 2.4 2.4 0 0 1 4.8 0H22M4 7h6M7 4v6M15 7h5"/></svg></span><span class="tool-txt"><span class="tile-title">Buck dönüştürücü</span><span class="tile-sub">Bobin, çıkış kondansatörü, görev oranı ve tepe akımını hesapla.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/gerilim-bolucu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v3M10 5h4v5h-4zM12 10v4M10 14h4v5h-4zM12 19v3M12 12h8"/><circle cx="12" cy="12" r="1.2"/></svg></span><span class="tool-txt"><span class="tile-title">Gerilim bölücü</span><span class="tile-sub">Vout&#x27;u bul ya da istenen gerilim için alt direnci seç; yük etkisiyle birlikte.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/pil-omru.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h15v8H3zM18 10.5h3v3h-3M6.5 11v2M9.5 11v2M12.5 11v2"/></svg></span><span class="tool-txt"><span class="tile-title">Pil ömrü</span><span class="tile-sub">Aktif ve uyku akımlarıyla ortalama akımı ve pil ömrünü tahmin et.</span></span><span class="tile-link">Aç →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

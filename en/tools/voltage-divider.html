@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Voltage Divider Calculator — Ahmet Ulu</title>
+<meta name="description" content="Voltage divider calculator: Vout = Vin·R2/(R1+R2). Find R2 for a target voltage, get E24/E96 standard values and see the effect of a load.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/tools/voltage-divider.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/gerilim-bolucu.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/voltage-divider.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/gerilim-bolucu.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="Voltage Divider Calculator — Ahmet Ulu">
+<meta property="og:description" content="Voltage divider calculator: Vout = Vin·R2/(R1+R2). Find R2 for a target voltage, get E24/E96 standard values and see the effect of a load.">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/tools/voltage-divider.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Voltage Divider Calculator", "description": "Voltage divider calculator: Vout = Vin·R2/(R1+R2). Find R2 for a target voltage, get E24/E96 standard values and see the effect of a load.", "url": "https://ahmetulu.com.tr/en/tools/voltage-divider.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Voltage divider", "item": "https://ahmetulu.com.tr/en/tools/voltage-divider.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html">Blog</a></li>
+    <li><a href="../../en/tools.html" aria-current="page">Tools</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../araclar/gerilim-bolucu.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../en/index.html">Home</a><span aria-hidden="true">/</span><a href="../../en/tools.html">Tools</a><span aria-hidden="true">/</span><span>Voltage divider</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Basics</span><h1>Voltage Divider Calculator</h1><p>Drop a voltage with two resistors: calculate the output, or find the resistor needed for a target voltage. Add a load resistance to see the real output.</p></div>
+    <div class="calc" data-tool="divider"><noscript><p class="calc-note warn">This calculator needs JavaScript. The formulas are below.</p></noscript></div>
+    <section class="tool-doc" id="how-it-works">
+      <h2>How is it calculated?</h2>
+<p>When two resistors are in series and the output is taken from the middle, the input voltage is divided in the ratio of the resistors.</p>
+<div class="formula"><span>Vout = Vin · R2 / (R1 + R2)</span><span>With a load:   R2' = R2 · RL / (R2 + RL)</span><span>R2 = R1 · Vout / (Vin − Vout)</span><span>Divider current:   I = Vin / (R1 + R2)</span></div>
+<p>In “find bottom resistor” mode R2 is calculated, then the nearest standard values in the <strong>E24 (±5%)</strong> and <strong>E96 (±1%)</strong> series are suggested together with the real Vout you would get.</p>
+<h3>In practice</h3>
+<ul><li>A divider is not a power supply: its output drops under load. The load field shows how much.</li>
+<li>For measuring a battery with an ADC, a total of 10–100 kΩ is a good start; MΩ values can add noise and error.</li></ul>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li><a href="https://en.wikipedia.org/wiki/Voltage_divider" target="_blank" rel="noopener">Wikipedia — Voltage divider</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../../en/tools/adjustable-regulator.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h10v10H4zM14 9h6M14 13h6M9 16v5M7 11h4"/></svg></span><span class="tool-txt"><span class="tile-title">Adjustable regulator</span><span class="tile-sub">Feedback resistors for the LM2596, XL4015, MP1584, LM317 and AMS1117.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/ohms-law.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19h4v-2.6A6.6 6.6 0 1 1 15 16.4V19h4"/></svg></span><span class="tool-txt"><span class="tile-title">Ohm&#x27;s law</span><span class="tile-sub">Enter two of voltage, current, resistance and power; get the other two.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/series-parallel.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h4m10 0h4M7 6h10v4H7zM3 16h4m10 0h4M7 14h10v4H7zM3 8v8M21 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Series / parallel</span><span class="tile-sub">Find the series and parallel equivalent of resistors, capacitors or inductors.</span></span><span class="tile-link">Open →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

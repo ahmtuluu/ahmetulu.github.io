@@ -11,7 +11,10 @@ Bu klasör (_kaynak) sitede yayınlanmaz. Sayfaların hepsi buradaki verilerden 
 - Opsiyonel bölümler (doldurulunca görünür): BIONLUK, STATS, REVIEWS, CV, GOATCOUNTER
 Elle düzenlenen HTML dosyaları bir sonraki çalıştırmada üzerine yazılır; değişiklikleri buradan yap.
 """
-import os, html, hashlib, json, datetime
+import os, sys, html, hashlib, json, datetime
+sys.dont_write_bytecode = True
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import araclar
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -55,7 +58,7 @@ ICON = {
 # ---------------------------------------------------------------- arayüz metinleri
 S = {
  'tr': dict(
-   nav=[('home', None), ('about', 'Hakkımda'), ('education', 'Eğitim'), ('projects', 'Projeler'), ('blog', 'Yazılar'), ('contact', 'İletişim')],
+   nav=[('home', None), ('about', 'Hakkımda'), ('education', 'Eğitim'), ('projects', 'Projeler'), ('blog', 'Yazılar'), ('tools', 'Araçlar'), ('contact', 'İletişim')],
    skip='İçeriğe geç', menu='Menüyü aç/kapat', other_lang='EN', other_lang_label='English',
    all_posts='← Tüm yazılar', more_posts='Diğer yazılar', all_='Tümü', see_all='Tümü →',
    featured='Öne çıkan projeler', latest='Son yazılar', scroll='Öne çıkanlar',
@@ -66,7 +69,7 @@ S = {
    cv='CV indir (PDF)', locale='tr_TR',
  ),
  'en': dict(
-   nav=[('home', None), ('about', 'About'), ('education', 'Education'), ('projects', 'Projects'), ('blog', 'Blog'), ('contact', 'Contact')],
+   nav=[('home', None), ('about', 'About'), ('education', 'Education'), ('projects', 'Projects'), ('blog', 'Blog'), ('tools', 'Tools'), ('contact', 'Contact')],
    skip='Skip to content', menu='Toggle menu', other_lang='TR', other_lang_label='Türkçe',
    all_posts='← All posts', more_posts='More posts', all_='All', see_all='See all →',
    featured='Featured projects', latest='Latest posts', scroll='Highlights',
@@ -83,6 +86,7 @@ PAGES = {  # anahtar: (tr yolu, en yolu)
  'education': ('egitim.html', 'en/education.html'),
  'projects': ('projeler.html', 'en/projects.html'),
  'blog': ('yazilar.html', 'en/blog.html'),
+ 'tools': ('araclar.html', 'en/tools.html'),
  'contact': ('iletisim.html', 'en/contact.html'),
 }
 MONTHS = {'tr': ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
@@ -429,6 +433,17 @@ def reviews_block(lang):
 '''
 
 # ---------------------------------------------------------------- sayfalar
+HOME_TOOLS = ['led', 'regulator', 'color', 'trace']
+def home_tools(lang, rel, P):
+    tr = lang == 'tr'
+    h = 'Elektronik hesap araçları' if tr else 'Electronics calculators'
+    sub = (f'LED direncinden LM2596 ayarına, {len(araclar.TOOLS)} ücretsiz araç. Formülleri ve kaynaklarıyla.' if tr
+           else f'From LED resistors to LM2596 settings: {len(araclar.TOOLS)} free tools, with formulas and sources.')
+    cards = '\n'.join(tool_card(araclar.TOOL[i], lang, rel, tags=False) for i in HOME_TOOLS)
+    return (f'    <section class="section" data-reveal="0">\n'
+            f'      <div class="section-head"><div><h2 class="section-title">{h}</h2><p class="section-sub">{sub}</p></div><a class="section-link" href="{P("tools")}">{S[lang]["see_all"]}</a></div>\n'
+            f'      <div class="tool-grid home-tools">\n{cards}\n      </div>\n    </section>')
+
 def build_home(lang):
     s = S[lang]
     rel = rel_of(PAGES['home'][0 if lang == 'tr' else 1])
@@ -570,6 +585,7 @@ def build_home(lang):
       </div>
     </section>
 {reviews_block(lang)}
+{home_tools(lang, rel, P)}
     <section class="section">
       <div class="cta-band" data-reveal="0">
         <div><h2 class="section-title">{cta_h}</h2><p>{cta_t}</p></div>
@@ -891,6 +907,108 @@ def build_post(p, lang):
     out += footer(lang, path)
     write(path, out)
 
+# ---------------------------------------------------------------- hesap araçları
+def tool_url(t, lang):
+    return f'araclar/{t["slugs"][0]}.html' if lang == 'tr' else f'en/tools/{t["slugs"][1]}.html'
+
+def tool_icon(t):
+    return f'<span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24">{araclar.ICONS[t["id"]]}</svg></span>'
+
+def tool_card(t, lang, rel, tags=True):
+    c = t[lang]
+    cat = next(x for x in araclar.CATS if x[0] == t['cat'])
+    data = f' data-filter-item data-tags="{esc(cat[1] if lang == "tr" else cat[2])}"' if tags else ''
+    go = 'Aç →' if lang == 'tr' else 'Open →'
+    return (f'        <a class="tile tool-card" href="{rel}{tool_url(t, lang)}"{data}>{tool_icon(t)}'
+            f'<span class="tool-txt"><span class="tile-title">{esc(c["short"])}</span><span class="tile-sub">{esc(c["card"])}</span></span>'
+            f'<span class="tile-link">{go}</span></a>')
+
+def build_tools_hub(lang):
+    tr = lang == 'tr'
+    path = PAGES['tools'][0 if tr else 1]
+    rel = rel_of(path)
+    if tr:
+        title = 'Elektronik Hesap Araçları — Ahmet Ulu'
+        desc = 'Ücretsiz elektronik hesap araçları: Ohm kanunu, LED direnci, gerilim bölücü, direnç renk kodu, SMD kod, LM2596/LM317 regülatör, buck, PCB iz genişliği, AWG, RC ve 555.'
+        k, h = 'Ücretsiz · Kayıt yok', 'Elektronik hesap araçları'
+        sub = 'Devre tasarlarken en sık ihtiyaç duyduğum hesapları tek yerde topladım. Hesaplar tarayıcında yapılır, hiçbir veri gönderilmez; her sayfanın altında formülü ve kaynağı var.'
+        n1, n2, ph = 'araç', 'kategori', 'Araçlarda ara… (ör. LED, LM2596, 555)'
+    else:
+        title = 'Electronics Calculators — Ahmet Ulu'
+        desc = "Free electronics calculators: Ohm's law, LED resistor, voltage divider, resistor color code, SMD codes, LM2596/LM317 regulators, buck, PCB trace width, AWG, RC and 555."
+        k, h = 'Free · No sign-up', 'Electronics calculators'
+        sub = 'The calculations I need most often when designing circuits, in one place. Everything runs in your browser and nothing is sent anywhere; each page explains its formula and source.'
+        n1, n2, ph = 'tools', 'categories', 'Search tools… (e.g. LED, LM2596, 555)'
+    secs = []
+    for cid, ctr, cen, dtr, den in araclar.CATS:
+        cards = '\n'.join(tool_card(t, lang, rel) for t in araclar.TOOLS if t['cat'] == cid)
+        secs.append('    <section class="tool-section" data-filter-section>\n'
+                    f'      <div class="tool-section-title"><h2>{ctr if tr else cen}</h2><span>{dtr if tr else den}</span></div>\n'
+                    f'      <div class="tool-grid">\n{cards}\n      </div>\n    </section>')
+    tags = [c[1] if tr else c[2] for c in araclar.CATS]
+    body = (f'  <div class="wrap inner fade-in tools-page" data-filter>\n'
+            f'    <div class="tools-hero">\n'
+            f'      <div class="tool-head"><span class="tool-kicker">{k}</span><h1>{h}</h1><p>{sub}</p></div>\n'
+            f'      <div class="tools-count"><div><b>{len(araclar.TOOLS)}</b><span>{n1}</span></div><div><b>{len(araclar.CATS)}</b><span>{n2}</span></div></div>\n'
+            f'    </div>\n'
+            f'{filter_bar(lang, ph, tags)}\n'
+            + '\n'.join(secs) +
+            f'\n    <p class="filter-empty" data-filter-empty hidden>{S[lang]["no_result"]}</p>\n'
+            f'  </div>')
+    ld = [{'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': h, 'description': desc, 'url': f'{SITE}/{path}', 'inLanguage': lang,
+           'hasPart': [{'@type': 'WebApplication', 'name': t[lang]['title'], 'url': f'{SITE}/{tool_url(t, lang)}'} for t in araclar.TOOLS]}]
+    page(lang, 'tools', title, desc, body, ld=ld)
+
+def build_tool(t, lang):
+    tr = lang == 'tr'
+    path = tool_url(t, lang)
+    alt = tool_url(t, 'en' if tr else 'tr')
+    rel = rel_of(path)
+    c = t[lang]
+    cat = next(x for x in araclar.CATS if x[0] == t['cat'])
+    hub = rel + PAGES['tools'][0 if tr else 1]
+    home = rel + PAGES['home'][0 if tr else 1]
+    doc = c['doc']() if callable(c['doc']) else c['doc']
+    srcs = '\n'.join(f'        <li><a href="{u}" target="_blank" rel="noopener">{esc(n)}</a></li>' for n, u in (araclar.SRC[k] for k in t['src']))
+    rel_cards = '\n'.join(tool_card(araclar.TOOL[r], lang, rel, tags=False) for r in t['related'])
+    post = ''
+    if t.get('post'):
+        p = POST[t['post']]
+        lab = 'Bu hesabı kullandığım proje' if tr else 'A project where I used this'
+        post = f'\n      <p class="tool-post">{lab}: <a href="{rel}{post_url(p, lang)}">{esc(p[lang]["title"])}</a></p>'
+    noscript = 'Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.' if tr else 'This calculator needs JavaScript. The formulas are below.'
+    L = (lambda a, b: a if tr else b)
+    body = (f'  <div class="wrap inner fade-in tools-page">\n'
+            f'    <nav class="crumbs" aria-label="{L("Konum", "Breadcrumb")}"><a href="{home}">{L("Ana sayfa", "Home")}</a><span aria-hidden="true">/</span>'
+            f'<a href="{hub}">{L("Araçlar", "Tools")}</a><span aria-hidden="true">/</span><span>{esc(c["short"])}</span></nav>\n'
+            f'    <div class="tool-head"><span class="tool-kicker">{cat[1] if tr else cat[2]}</span><h1>{esc(c["title"])}</h1><p>{esc(c["lead"])}</p></div>\n'
+            f'    <div class="calc" data-tool="{t["id"]}"><noscript><p class="calc-note warn">{noscript}</p></noscript></div>\n'
+            f'    <section class="tool-doc" id="{L("nasil-hesaplanir", "how-it-works")}">\n'
+            f'      <h2>{L("Nasıl hesaplanır?", "How is it calculated?")}</h2>\n'
+            f'{doc}{post}\n'
+            f'      <h3>{L("Kaynaklar", "Sources")}</h3>\n'
+            f'      <ul class="sources">\n{srcs}\n      </ul>\n'
+            f'    </section>\n'
+            f'    <section class="tool-related">\n'
+            f'      <div class="tool-section-title"><h2>{L("Diğer araçlar", "More tools")}</h2><a class="inline-link" href="{hub}">{S[lang]["see_all"]}</a></div>\n'
+            f'      <div class="tool-grid">\n{rel_cards}\n      </div>\n'
+            f'    </section>\n'
+            f'  </div>')
+    ld = [{'@context': 'https://schema.org', '@graph': [
+        {'@type': 'WebApplication', 'name': c['title'], 'description': c['desc'], 'url': f'{SITE}/{path}', 'inLanguage': lang,
+         'applicationCategory': 'UtilitiesApplication', 'operatingSystem': 'Any', 'isAccessibleForFree': True,
+         'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'TRY'},
+         'author': {'@type': 'Person', 'name': 'Ahmet Ulu', 'url': f'{SITE}/'}},
+        {'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'Ahmet Ulu', 'item': f'{SITE}/' + ('' if tr else 'en/')},
+            {'@type': 'ListItem', 'position': 2, 'name': L('Araçlar', 'Tools'), 'item': f'{SITE}/{PAGES["tools"][0 if tr else 1]}'},
+            {'@type': 'ListItem', 'position': 3, 'name': c['short'], 'item': f'{SITE}/{path}'}]}]}]
+    out = head(lang, path, f'{c["title"]} — Ahmet Ulu', c['desc'], alt, ld=ld)
+    out += nav(lang, path, 'tools', alt)
+    out += f'<main id="icerik">\n{body}\n</main>\n' + footer(lang, path)
+    out = out.replace('</body>', f'<script src="{rel}assets/js/tools.js?v={asset_ver("assets/js/tools.js")}" defer></script>\n</body>')
+    write(path, out)
+
 def build_sitemap():
     today = datetime.date.today().isoformat()
     urls = []
@@ -900,6 +1018,8 @@ def build_sitemap():
         y, m = p['date']
         mod = p.get('modified', f'{y}-{m:02d}-01')
         urls += [(p['tr_url'], mod), (p['en_url'], mod)]
+    for t in araclar.TOOLS:
+        urls += [(tool_url(t, 'tr'), today), (tool_url(t, 'en'), today)]
     body = '\n'.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{d}</lastmod></url>'.replace('/index.html<', '/<') for u, d in urls)
     write('sitemap.xml', f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n')
     write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
@@ -911,5 +1031,8 @@ if __name__ == '__main__':
         build_projects(lang); build_blog(lang); build_contact(lang)
         for p in POSTS:
             build_post(p, lang)
+        build_tools_hub(lang)
+        for t in araclar.TOOLS:
+            build_tool(t, lang)
     build_404(); build_sitemap()
     print('Tamam.')

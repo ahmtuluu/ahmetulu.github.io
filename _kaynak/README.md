@@ -37,3 +37,11 @@ python3 _kaynak/build.py
 - Fotoğraf: `<figure class="blog-figure"><img class="blog-img" ...><figcaption>…</figcaption></figure>`. Tıklanınca galeri açılır, ileri/geri gidilebilir, telefonda kaydırılabilir.
 - Teknik detay kutusu: `<div class="tech-box">…</div>`
 - Şematik / PCB / 3D sekmeli görüntüleyici: `_ornek.tr.html` içindeki `<div class="dv">` bloğu. Sekme ve panel `id`'leri sayfa içinde benzersiz olmalı.
+
+## Hesap araçları
+
+- Hesap kodu ve arayüz: `assets/js/tools.js` (her araç `TOOLS.<id>`; alanlar, modlar, `calc` fonksiyonu).
+- Sayfa içeriği (başlık, açıklama, formüller, kaynaklar, ilgili araçlar): `_kaynak/araclar.py` → `TOOLS` listesi.
+- Sayfalar: `araclar.html` + `araclar/<slug>.html` (TR), `en/tools.html` + `en/tools/<slug>.html` (EN). Ana sayfada `HOME_TOOLS` listesindeki 4 araç gösterilir.
+- Yeni araç: `tools.js`'e `TOOLS.<id>` ekle → `araclar.py`'ye kayıt + `ICONS[<id>]` ekle → build → her iki dilde hesapları test et.
+- Değerler adres çubuğuna yazılır (`?Vs=12&If=20`), yani hesap linki paylaşılabilir.

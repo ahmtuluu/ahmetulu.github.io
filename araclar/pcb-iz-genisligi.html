@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PCB İz Genişliği Hesaplama (IPC-2221) — Ahmet Ulu</title>
+<meta name="description" content="PCB iz genişliği hesaplayıcı (IPC-2221): akım, bakır kalınlığı (oz) ve sıcaklık artışına göre iz genişliği, iz direnci, gerilim düşümü ve güç kaybı.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/pcb-trace-width.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="PCB İz Genişliği Hesaplama (IPC-2221) — Ahmet Ulu">
+<meta property="og:description" content="PCB iz genişliği hesaplayıcı (IPC-2221): akım, bakır kalınlığı (oz) ve sıcaklık artışına göre iz genişliği, iz direnci, gerilim düşümü ve güç kaybı.">
+<meta property="og:url" content="https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "PCB İz Genişliği Hesaplama (IPC-2221)", "description": "PCB iz genişliği hesaplayıcı (IPC-2221): akım, bakır kalınlığı (oz) ve sıcaklık artışına göre iz genişliği, iz direnci, gerilim düşümü ve güç kaybı.", "url": "https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "PCB iz genişliği", "item": "https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../egitim.html">Eğitim</a></li>
+    <li><a href="../projeler.html">Projeler</a></li>
+    <li><a href="../yazilar.html">Yazılar</a></li>
+    <li><a href="../araclar.html" aria-current="page">Araçlar</a></li>
+    <li><a href="../iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="../en/tools/pcb-trace-width.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Konum"><a href="../index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="../araclar.html">Araçlar</a><span aria-hidden="true">/</span><span>PCB iz genişliği</span></nav>
+    <div class="tool-head"><span class="tool-kicker">PCB ve kablo</span><h1>PCB İz Genişliği Hesaplama (IPC-2221)</h1><p>Akımı, bakır kalınlığını ve izin verdiğin sıcaklık artışını gir; PCB izinin en az ne kadar geniş olması gerektiğini ve iz üzerindeki kaybı gör.</p></div>
+    <div class="calc" data-tool="trace"><noscript><p class="calc-note warn">Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.</p></noscript></div>
+    <section class="tool-doc" id="nasil-hesaplanir">
+      <h2>Nasıl hesaplanır?</h2>
+<p>Hesap, <strong>IPC-2221</strong> standardındaki akım–sıcaklık artışı eğrilerinin denklemine dayanır.</p>
+<div class="formula"><span>I = k · ΔT^0,44 · A^0,725</span><span>A = (I / (k · ΔT^0,44))^(1/0,725)   [mil²]</span><span>W = A / (t · 1,378)   [mil],   W(mm) = W(mil) · 0,0254</span><small>k = 0,048 dış katman, 0,024 iç katman · t: bakır kalınlığı (oz) · 1 oz = 1,378 mil = 35 µm</small></div>
+<p>İz uzunluğunu girersen iz direnci de hesaplanır. Bakırın özdirenci sıcaklıkla arttığı için hesapta ortam + sıcaklık artışı kullanılır:</p>
+<div class="formula"><span>R = ρ · L / (W · t)</span><span>ρ = 1,72·10⁻⁸ Ω·m · (1 + 0,00393 · (T − 20 °C))</span></div>
+<h3>Pratikte dikkat</h3>
+<ul><li>İç katmanlar ısıyı daha zor attığı için aynı akımda yaklaşık iki kat daha geniş iz ister.</li>
+<li>IPC-2221 eğrileri temkinlidir ve 35 A'e kadar geçerlidir. Daha ayrıntılı analiz için yeni standart IPC-2152 kullanılır.</li></ul>
+      <p class="tool-post">Bu hesabı kullandığım proje: <a href="../yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html">KiCad ile PCB Tasarımı: Bionluk&#x27;ta Müşteriler İçin Tasarladığım Kartlar</a></p>
+      <h3>Kaynaklar</h3>
+      <ul class="sources">
+        <li><a href="https://shop.ipc.org/ipc-2221/ipc-2221-standard-only" target="_blank" rel="noopener">IPC-2221 — Generic Standard on Printed Board Design</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../araclar/awg-kablo.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/></svg></span><span class="tool-txt"><span class="tile-title">AWG ↔ mm²</span><span class="tile-sub">AWG&#x27;yi mm²&#x27;ye çevir; çap ve metre başına direnç.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/buck-donusturucu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 15h3a2.4 2.4 0 0 1 4.8 0 2.4 2.4 0 0 1 4.8 0 2.4 2.4 0 0 1 4.8 0H22M4 7h6M7 4v6M15 7h5"/></svg></span><span class="tool-txt"><span class="tile-title">Buck dönüştürücü</span><span class="tile-sub">Bobin, çıkış kondansatörü, görev oranı ve tepe akımını hesapla.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/ohm-kanunu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19h4v-2.6A6.6 6.6 0 1 1 15 16.4V19h4"/></svg></span><span class="tool-txt"><span class="tile-title">Ohm kanunu</span><span class="tile-sub">Gerilim, akım, direnç ve güçten ikisini gir; diğer ikisini bul.</span></span><span class="tile-link">Aç →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

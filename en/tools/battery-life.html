@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Battery Life Calculator (with Sleep Mode) — Ahmet Ulu</title>
+<meta name="description" content="Battery life calculator: average current and estimated run time from active and sleep current. Made for ESP32 deep sleep projects.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/tools/battery-life.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/pil-omru.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/battery-life.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/pil-omru.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="Battery Life Calculator (with Sleep Mode) — Ahmet Ulu">
+<meta property="og:description" content="Battery life calculator: average current and estimated run time from active and sleep current. Made for ESP32 deep sleep projects.">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/tools/battery-life.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Battery Life Calculator (with Sleep Mode)", "description": "Battery life calculator: average current and estimated run time from active and sleep current. Made for ESP32 deep sleep projects.", "url": "https://ahmetulu.com.tr/en/tools/battery-life.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Battery life", "item": "https://ahmetulu.com.tr/en/tools/battery-life.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html">Blog</a></li>
+    <li><a href="../../en/tools.html" aria-current="page">Tools</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../araclar/pil-omru.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../en/index.html">Home</a><span aria-hidden="true">/</span><a href="../../en/tools.html">Tools</a><span aria-hidden="true">/</span><span>Battery life</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Power</span><h1>Battery Life Calculator (with Sleep Mode)</h1><p>Enter how long your device is awake and how long it sleeps; see the average current and how many days the battery lasts. For ESP32-style sleep projects.</p></div>
+    <div class="calc" data-tool="battery"><noscript><p class="calc-note warn">This calculator needs JavaScript. The formulas are below.</p></noscript></div>
+    <section class="tool-doc" id="how-it-works">
+      <h2>How is it calculated?</h2>
+<p>A device with a sleep mode spends most of its time at a very low current. What sets battery life is the <strong>average current</strong> over one cycle.</p>
+<div class="formula"><span>Iavg = (Iactive · tactive + Isleep · tsleep) / (tactive + tsleep)</span><span>Life (hours) = Capacity (Ah) · k / Iavg</span><small>k: usable capacity ratio (margin for cut-off voltage, temperature and self-discharge)</small></div>
+<p>Example: 80 mA for 5 s, then 20 µA sleep for 10 s → average ≈ 26.7 mA. Stretch the sleep to 10 minutes and the average drops to ≈ 0.68 mA, so a 2000 mAh battery lasts for months.</p>
+<h3>In practice</h3>
+<ul><li>On development boards the regulator, USB-serial chip and LEDs can draw mA even in sleep; measure to be sure.</li>
+<li>Usable capacity drops at high current and low temperature.</li></ul>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li><a href="https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf" target="_blank" rel="noopener">Espressif — ESP32 datasheet (güç tüketimi tabloları)</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../../en/tools/adjustable-regulator.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h10v10H4zM14 9h6M14 13h6M9 16v5M7 11h4"/></svg></span><span class="tool-txt"><span class="tile-title">Adjustable regulator</span><span class="tile-sub">Feedback resistors for the LM2596, XL4015, MP1584, LM317 and AMS1117.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/buck-converter.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 15h3a2.4 2.4 0 0 1 4.8 0 2.4 2.4 0 0 1 4.8 0 2.4 2.4 0 0 1 4.8 0H22M4 7h6M7 4v6M15 7h5"/></svg></span><span class="tool-txt"><span class="tile-title">Buck converter</span><span class="tile-sub">Calculate the inductor, output capacitor, duty cycle and peak current.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/ohms-law.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19h4v-2.6A6.6 6.6 0 1 1 15 16.4V19h4"/></svg></span><span class="tool-txt"><span class="tile-title">Ohm&#x27;s law</span><span class="tile-sub">Enter two of voltage, current, resistance and power; get the other two.</span></span><span class="tile-link">Open →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

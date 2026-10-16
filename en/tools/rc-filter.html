@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>RC Filter and Time Constant Calculator — Ahmet Ulu</title>
+<meta name="description" content="RC filter calculator: cut-off frequency fc = 1/(2πRC), time constant τ = RC and capacitor charge time. For low/high-pass filters and delay circuits.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/tools/rc-filter.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/rc-filtre.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/rc-filter.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/rc-filtre.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="RC Filter and Time Constant Calculator — Ahmet Ulu">
+<meta property="og:description" content="RC filter calculator: cut-off frequency fc = 1/(2πRC), time constant τ = RC and capacitor charge time. For low/high-pass filters and delay circuits.">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/tools/rc-filter.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "RC Filter and Time Constant Calculator", "description": "RC filter calculator: cut-off frequency fc = 1/(2πRC), time constant τ = RC and capacitor charge time. For low/high-pass filters and delay circuits.", "url": "https://ahmetulu.com.tr/en/tools/rc-filter.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "RC filter / τ", "item": "https://ahmetulu.com.tr/en/tools/rc-filter.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html">Blog</a></li>
+    <li><a href="../../en/tools.html" aria-current="page">Tools</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../araclar/rc-filtre.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../en/index.html">Home</a><span aria-hidden="true">/</span><a href="../../en/tools.html">Tools</a><span aria-hidden="true">/</span><span>RC filter / τ</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Timing & filters</span><h1>RC Filter and Time Constant Calculator</h1><p>Enter R and C to see the RC filter cut-off frequency, the time constant (τ) and how long the capacitor takes to charge to the level you want.</p></div>
+    <div class="calc" data-tool="rc"><noscript><p class="calc-note warn">This calculator needs JavaScript. The formulas are below.</p></noscript></div>
+    <section class="tool-doc" id="how-it-works">
+      <h2>How is it calculated?</h2>
+<p>A resistor and a capacitor form both a simple filter and a delay circuit. The same product sets both: <strong>τ = R·C</strong>.</p>
+<div class="formula"><span>τ = R · C</span><span>fc = 1 / (2π · R · C)</span><span>Vc(t) = V · (1 − e^(−t/τ))   →   t = −τ · ln(1 − p)</span><small>p: target charge ratio (0.9 = 90%)</small></div>
+<p>After 1τ the capacitor is at 63.2%, after 5τ at 99.3%; in practice 5τ counts as fully charged. The cut-off frequency is where signal power halves (−3 dB) and is the same for RC low-pass and high-pass filters.</p>
+<p>Note: a load on the output changes the filter. Keep the load at least 10× larger than R.</p>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li><a href="https://en.wikipedia.org/wiki/RC_circuit" target="_blank" rel="noopener">Wikipedia — RC circuit</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../../en/tools/555-timer.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 16h4V8h5v8h4V8h5v8h2"/></svg></span><span class="tool-txt"><span class="tile-title">555 timer</span><span class="tile-sub">Astable frequency and duty cycle, monostable pulse width.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/decibel.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 18l5-6 4 3 8-9M15 6h5v5"/></svg></span><span class="tool-txt"><span class="tile-title">Decibel (dB)</span><span class="tile-sub">Convert voltage/power ratios to dB, dB to ratios, and dBm ↔ W.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/series-parallel.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h4m10 0h4M7 6h10v4H7zM3 16h4m10 0h4M7 14h10v4H7zM3 8v8M21 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Series / parallel</span><span class="tile-sub">Find the series and parallel equivalent of resistors, capacitors or inductors.</span></span><span class="tile-link">Open →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

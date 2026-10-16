@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Direnç Renk Kodu Hesaplama (4, 5, 6 Bant) — Ahmet Ulu</title>
+<meta name="description" content="Direnç renk kodu hesaplayıcı: 4, 5 ve 6 bant. Renklerden değer ve tolerans, değerden renkler. IEC 60062 renk tablosu ile.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/araclar/direnc-renk-kodu.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/direnc-renk-kodu.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/resistor-color-code.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/direnc-renk-kodu.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="Direnç Renk Kodu Hesaplama (4, 5, 6 Bant) — Ahmet Ulu">
+<meta property="og:description" content="Direnç renk kodu hesaplayıcı: 4, 5 ve 6 bant. Renklerden değer ve tolerans, değerden renkler. IEC 60062 renk tablosu ile.">
+<meta property="og:url" content="https://ahmetulu.com.tr/araclar/direnc-renk-kodu.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Direnç Renk Kodu Hesaplama (4, 5, 6 Bant)", "description": "Direnç renk kodu hesaplayıcı: 4, 5 ve 6 bant. Renklerden değer ve tolerans, değerden renkler. IEC 60062 renk tablosu ile.", "url": "https://ahmetulu.com.tr/araclar/direnc-renk-kodu.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Direnç renk kodu", "item": "https://ahmetulu.com.tr/araclar/direnc-renk-kodu.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../egitim.html">Eğitim</a></li>
+    <li><a href="../projeler.html">Projeler</a></li>
+    <li><a href="../yazilar.html">Yazılar</a></li>
+    <li><a href="../araclar.html" aria-current="page">Araçlar</a></li>
+    <li><a href="../iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="../en/tools/resistor-color-code.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Konum"><a href="../index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="../araclar.html">Araçlar</a><span aria-hidden="true">/</span><span>Direnç renk kodu</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Bileşenler</span><h1>Direnç Renk Kodu Hesaplama (4, 5, 6 Bant)</h1><p>4, 5 ve 6 bantlı dirençlerin renk kodunu çöz: renkleri seç, değeri ve toleransı gör. Ters yönde de çalışır: değeri yaz, hangi renkler olduğunu öğren.</p></div>
+    <div class="calc" data-tool="color"><noscript><p class="calc-note warn">Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.</p></noscript></div>
+    <section class="tool-doc" id="nasil-hesaplanir">
+      <h2>Nasıl hesaplanır?</h2>
+<p>Renk bantları soldan sağa okunur. Tolerans bandı genelde diğerlerinden biraz ayrıktır ve sağ tarafta kalır.</p>
+<div class="formula"><span>4 bant:   [hane][hane] × [çarpan]   [tolerans]</span><span>5 bant:   [hane][hane][hane] × [çarpan]   [tolerans]</span><span>6 bant:   5 bant + [sıcaklık katsayısı]</span><small>Örnek: sarı-mor-kırmızı-altın = 47 × 100 = 4,7 kΩ ±%5</small></div>
+<p>“Değerden renk bul” alanı, yazdığın değeri 4 bantta 2, 5–6 bantta 3 anlamlı haneye yuvarlar ve çarpanı seçer.</p>
+<h3>Renk tablosu (IEC 60062)</h3>
+<div class="table-wrap"><table class="calc-table"><thead><tr><th>Renk</th><th>Hane</th><th>Çarpan</th><th>Tolerans</th><th>ppm/K</th></tr></thead><tbody><tr><td><span class="cdot" style="background:#1a1a1a"></span>Siyah</td><td>0</td><td>×1</td><td>—</td><td>250</td></tr><tr><td><span class="cdot" style="background:#7c4a1e"></span>Kahverengi</td><td>1</td><td>×10</td><td>±%1</td><td>100</td></tr><tr><td><span class="cdot" style="background:#dc2626"></span>Kırmızı</td><td>2</td><td>×100</td><td>±%2</td><td>50</td></tr><tr><td><span class="cdot" style="background:#f97316"></span>Turuncu</td><td>3</td><td>×1 k</td><td>±%0,05</td><td>15</td></tr><tr><td><span class="cdot" style="background:#facc15"></span>Sarı</td><td>4</td><td>×10 k</td><td>±%0,02</td><td>25</td></tr><tr><td><span class="cdot" style="background:#16a34a"></span>Yeşil</td><td>5</td><td>×100 k</td><td>±%0,5</td><td>20</td></tr><tr><td><span class="cdot" style="background:#2563eb"></span>Mavi</td><td>6</td><td>×1 M</td><td>±%0,25</td><td>10</td></tr><tr><td><span class="cdot" style="background:#7c3aed"></span>Mor</td><td>7</td><td>×10 M</td><td>±%0,1</td><td>5</td></tr><tr><td><span class="cdot" style="background:#9ca3af"></span>Gri</td><td>8</td><td>×100 M</td><td>±%0,01</td><td>1</td></tr><tr><td><span class="cdot" style="background:#f8fafc"></span>Beyaz</td><td>9</td><td>×1 G</td><td>—</td><td>—</td></tr><tr><td><span class="cdot" style="background:#c9a227"></span>Altın</td><td>—</td><td>×0,1</td><td>±%5</td><td>—</td></tr><tr><td><span class="cdot" style="background:#c0c4cc"></span>Gümüş</td><td>—</td><td>×0,01</td><td>±%10</td><td>—</td></tr></tbody></table></div>
+      <h3>Kaynaklar</h3>
+      <ul class="sources">
+        <li><a href="https://webstore.iec.ch/en/publication/65655" target="_blank" rel="noopener">IEC 60062 — Marking codes for resistors and capacitors</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Electronic_color_code" target="_blank" rel="noopener">Wikipedia — Electronic color code</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../araclar/smd-kod-cozucu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h16v8H4zM4 8h3v8H4zM17 8h3v8h-3zM10 12h4"/></svg></span><span class="tool-txt"><span class="tile-title">SMD kod çözücü</span><span class="tile-sub">103, 4702, 4R7, 01C, 104J gibi kodları değere çevir.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/led-direnci.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h5M16 12h5M8 7v10l8-5zM16 7v10M14 5l2.5-2.5M17 7l2.5-2.5"/></svg></span><span class="tool-txt"><span class="tile-title">LED direnci</span><span class="tile-sub">LED için seri direnci, standart değeri ve direnç gücünü bul.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/seri-paralel.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h4m10 0h4M7 6h10v4H7zM3 16h4m10 0h4M7 14h10v4H7zM3 8v8M21 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Seri / paralel</span><span class="tile-sub">Direnç, kondansatör veya bobinlerin seri ve paralel eşdeğerini bul.</span></span><span class="tile-link">Aç →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

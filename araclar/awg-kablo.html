@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AWG ↔ mm² Kablo Kesiti Hesaplama — Ahmet Ulu</title>
+<meta name="description" content="AWG mm² dönüştürücü: AWG&#x27;den kesit alanı, çap ve metre başına direnç; mm²&#x27;den en yakın AWG. ASTM B258 formülüyle.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/araclar/awg-kablo.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/awg-kablo.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/awg-wire.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/awg-kablo.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="AWG ↔ mm² Kablo Kesiti Hesaplama — Ahmet Ulu">
+<meta property="og:description" content="AWG mm² dönüştürücü: AWG&#x27;den kesit alanı, çap ve metre başına direnç; mm²&#x27;den en yakın AWG. ASTM B258 formülüyle.">
+<meta property="og:url" content="https://ahmetulu.com.tr/araclar/awg-kablo.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "AWG ↔ mm² Kablo Kesiti Hesaplama", "description": "AWG mm² dönüştürücü: AWG'den kesit alanı, çap ve metre başına direnç; mm²'den en yakın AWG. ASTM B258 formülüyle.", "url": "https://ahmetulu.com.tr/araclar/awg-kablo.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "AWG ↔ mm²", "item": "https://ahmetulu.com.tr/araclar/awg-kablo.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../egitim.html">Eğitim</a></li>
+    <li><a href="../projeler.html">Projeler</a></li>
+    <li><a href="../yazilar.html">Yazılar</a></li>
+    <li><a href="../araclar.html" aria-current="page">Araçlar</a></li>
+    <li><a href="../iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="../en/tools/awg-wire.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Konum"><a href="../index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="../araclar.html">Araçlar</a><span aria-hidden="true">/</span><span>AWG ↔ mm²</span></nav>
+    <div class="tool-head"><span class="tool-kicker">PCB ve kablo</span><h1>AWG ↔ mm² Kablo Kesiti Hesaplama</h1><p>AWG numarasını mm² kesite çevir ya da elindeki mm² için karşılık gelen AWG&#x27;yi bul. Çap ve bakır direnci de hesaplanır.</p></div>
+    <div class="calc" data-tool="awg"><noscript><p class="calc-note warn">Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.</p></noscript></div>
+    <section class="tool-doc" id="nasil-hesaplanir">
+      <h2>Nasıl hesaplanır?</h2>
+<p>AWG (American Wire Gauge) logaritmik bir ölçektir: numara büyüdükçe kablo incelir ve her 6 numarada çap yaklaşık yarıya iner.</p>
+<div class="formula"><span>d (mm) = 0,127 · 92^((36 − n) / 39)</span><span>A = π · d² / 4</span><span>R / m = ρ / A,   ρ(Cu, 20 °C) = 1,7241·10⁻⁸ Ω·m</span><small>00 → n = −1,  000 → n = −2,  0000 → n = −3</small></div>
+<p>“mm² → AWG” modunda, girdiğin kesit alanına <strong>eşit ya da daha büyük</strong> olan en ince AWG önerilir; yani daha ince bir kabloya düşmezsin.</p>
+<p>Kablonun taşıyabileceği akım tek bir sayı değildir: yalıtım malzemesine, kabloların demet halinde olup olmamasına ve ortam sıcaklığına göre değişir.</p>
+      <h3>Kaynaklar</h3>
+      <ul class="sources">
+        <li><a href="https://store.astm.org/standards/b258" target="_blank" rel="noopener">ASTM B258 — AWG sizes of solid round wires</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/American_wire_gauge" target="_blank" rel="noopener">Wikipedia — American wire gauge</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../araclar/pcb-iz-genisligi.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h6l4 4h8M3 18h8l3-3h7M3 12h18"/><circle cx="21" cy="10" r="1.2"/><circle cx="21" cy="15" r="1.2"/></svg></span><span class="tool-txt"><span class="tile-title">PCB iz genişliği</span><span class="tile-sub">Akıma ve bakır kalınlığına göre en az iz genişliği, direnç ve düşüm.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/ohm-kanunu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19h4v-2.6A6.6 6.6 0 1 1 15 16.4V19h4"/></svg></span><span class="tool-txt"><span class="tile-title">Ohm kanunu</span><span class="tile-sub">Gerilim, akım, direnç ve güçten ikisini gir; diğer ikisini bul.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/pil-omru.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h15v8H3zM18 10.5h3v3h-3M6.5 11v2M9.5 11v2M12.5 11v2"/></svg></span><span class="tool-txt"><span class="tile-title">Pil ömrü</span><span class="tile-sub">Aktif ve uyku akımlarıyla ortalama akımı ve pil ömrünü tahmin et.</span></span><span class="tile-link">Aç →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

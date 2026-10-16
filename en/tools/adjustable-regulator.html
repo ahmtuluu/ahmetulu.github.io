@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Adjustable Regulator Resistor Calculator (LM2596, LM317, MP1584…) — Ahmet Ulu</title>
+<meta name="description" content="Adjustable regulator calculator for the LM2596, XL4015, MP1584, LM317 and AMS1117: Vout from feedback resistors, resistor for a target voltage, E24/E96 values.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/tools/adjustable-regulator.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/ayarli-regulator.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/adjustable-regulator.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/ayarli-regulator.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="Adjustable Regulator Resistor Calculator (LM2596, LM317, MP1584…) — Ahmet Ulu">
+<meta property="og:description" content="Adjustable regulator calculator for the LM2596, XL4015, MP1584, LM317 and AMS1117: Vout from feedback resistors, resistor for a target voltage, E24/E96 values.">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/tools/adjustable-regulator.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Adjustable Regulator Resistor Calculator (LM2596, LM317, MP1584…)", "description": "Adjustable regulator calculator for the LM2596, XL4015, MP1584, LM317 and AMS1117: Vout from feedback resistors, resistor for a target voltage, E24/E96 values.", "url": "https://ahmetulu.com.tr/en/tools/adjustable-regulator.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Adjustable regulator", "item": "https://ahmetulu.com.tr/en/tools/adjustable-regulator.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html">Blog</a></li>
+    <li><a href="../../en/tools.html" aria-current="page">Tools</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../araclar/ayarli-regulator.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../en/index.html">Home</a><span aria-hidden="true">/</span><a href="../../en/tools.html">Tools</a><span aria-hidden="true">/</span><span>Adjustable regulator</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Power</span><h1>Adjustable Regulator Resistor Calculator (LM2596, LM317, MP1584…)</h1><p>Pick the chip: calculate the output voltage from the resistors, or find the resistor and nearest standard value for the voltage you want.</p></div>
+    <div class="calc" data-tool="regulator"><noscript><p class="calc-note warn">This calculator needs JavaScript. The formulas are below.</p></noscript></div>
+    <section class="tool-doc" id="how-it-works">
+      <h2>How is it calculated?</h2>
+<p>Adjustable regulators sense the output through a resistor divider and hold the FB/ADJ pin at an internal reference (Vref). There are two wiring styles.</p>
+<h3>FB type: LM2596, XL4015, MP1584</h3>
+<div class="formula"><span>Vout = Vref · (1 + Rtop / Rbot)</span><span>Rtop = Rbot · (Vout / Vref − 1)</span><small>Rtop: Vout → FB,  Rbot: FB → GND.  Vref: LM2596 = 1.23 V · XL4015 = 1.25 V · MP1584 = 0.8 V</small></div>
+<h3>ADJ type: LM317, AMS1117</h3>
+<div class="formula"><span>Vout = Vref · (1 + R2 / R1) + Iadj · R2</span><span>R2 = (Vout − Vref) / (Vref / R1 + Iadj)</span><small>R1: OUT → ADJ,  R2: ADJ → GND.  Vref = 1.25 V,  Iadj ≈ 50 µA</small></div>
+<p>In target-voltage mode the nearest values in the <strong>E24</strong> and <strong>E96</strong> series are suggested together with the real output they give.</p>
+<h3>Datasheet notes</h3>
+<ul><li><strong>LM2596:</strong> 240 Ω – 1.5 kΩ is recommended for the FB → GND resistor. The tool warns outside this range.</li>
+<li><strong>MP1584:</strong> keep the bottom resistor below 40 kΩ.</li>
+<li>Vref itself has about ±2–3% tolerance; if you need a precise voltage, measure the output and trim.</li></ul>
+      <p class="tool-post">A project where I used this: <a href="../../en/blog/adjustable-power-supply.html">12V DC Adjustable Power Supply — LM2596 Mod</a></p>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li><a href="https://www.ti.com/lit/ds/symlink/lm2596.pdf" target="_blank" rel="noopener">Texas Instruments — LM2596 datasheet</a></li>
+        <li><a href="https://www.radiolocman.com/datasheet/data.html?di=685191" target="_blank" rel="noopener">XLSEMI — XL4015 datasheet</a></li>
+        <li><a href="https://www.monolithicpower.com/pub/media/document/MP1584_r1.1.pdf" target="_blank" rel="noopener">Monolithic Power Systems — MP1584 datasheet</a></li>
+        <li><a href="https://www.ti.com/lit/ds/symlink/lm317.pdf" target="_blank" rel="noopener">Texas Instruments — LM317 datasheet</a></li>
+        <li><a href="http://www.advanced-monolithic.com/pdf/ds1117.pdf" target="_blank" rel="noopener">Advanced Monolithic Systems — AMS1117 datasheet</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../../en/tools/buck-converter.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 15h3a2.4 2.4 0 0 1 4.8 0 2.4 2.4 0 0 1 4.8 0 2.4 2.4 0 0 1 4.8 0H22M4 7h6M7 4v6M15 7h5"/></svg></span><span class="tool-txt"><span class="tile-title">Buck converter</span><span class="tile-sub">Calculate the inductor, output capacitor, duty cycle and peak current.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/voltage-divider.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v3M10 5h4v5h-4zM12 10v4M10 14h4v5h-4zM12 19v3M12 12h8"/><circle cx="12" cy="12" r="1.2"/></svg></span><span class="tool-txt"><span class="tile-title">Voltage divider</span><span class="tile-sub">Find Vout or pick the bottom resistor for a target voltage, including load.</span></span><span class="tile-link">Open →</span></a>
+        <a class="tile tool-card" href="../../en/tools/battery-life.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h15v8H3zM18 10.5h3v3h-3M6.5 11v2M9.5 11v2M12.5 11v2"/></svg></span><span class="tool-txt"><span class="tile-title">Battery life</span><span class="tile-sub">Estimate average current and battery life from active and sleep currents.</span></span><span class="tile-link">Open →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

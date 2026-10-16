@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Seri ve Paralel Direnç / Kondansatör / Bobin Hesaplama — Ahmet Ulu</title>
+<meta name="description" content="Seri ve paralel direnç, kondansatör ve bobin hesaplayıcı. 10 değere kadar ekle, eşdeğer değeri anında gör. Formüller ve açıklamalar.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/araclar/seri-paralel.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/seri-paralel.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/series-parallel.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/seri-paralel.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="Seri ve Paralel Direnç / Kondansatör / Bobin Hesaplama — Ahmet Ulu">
+<meta property="og:description" content="Seri ve paralel direnç, kondansatör ve bobin hesaplayıcı. 10 değere kadar ekle, eşdeğer değeri anında gör. Formüller ve açıklamalar.">
+<meta property="og:url" content="https://ahmetulu.com.tr/araclar/seri-paralel.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Seri ve Paralel Direnç / Kondansatör / Bobin Hesaplama", "description": "Seri ve paralel direnç, kondansatör ve bobin hesaplayıcı. 10 değere kadar ekle, eşdeğer değeri anında gör. Formüller ve açıklamalar.", "url": "https://ahmetulu.com.tr/araclar/seri-paralel.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Seri / paralel", "item": "https://ahmetulu.com.tr/araclar/seri-paralel.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../egitim.html">Eğitim</a></li>
+    <li><a href="../projeler.html">Projeler</a></li>
+    <li><a href="../yazilar.html">Yazılar</a></li>
+    <li><a href="../araclar.html" aria-current="page">Araçlar</a></li>
+    <li><a href="../iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="../en/tools/series-parallel.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Konum"><a href="../index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="../araclar.html">Araçlar</a><span aria-hidden="true">/</span><span>Seri / paralel</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Temel hesaplar</span><h1>Seri ve Paralel Direnç / Kondansatör / Bobin Hesaplama</h1><p>Elindeki değerleri gir; seri ve paralel bağlandığında toplamın ne olacağını birlikte gör. Elinde olmayan bir değeri iki parçayla elde etmek için ideal.</p></div>
+    <div class="calc" data-tool="series"><noscript><p class="calc-note warn">Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.</p></noscript></div>
+    <section class="tool-doc" id="nasil-hesaplanir">
+      <h2>Nasıl hesaplanır?</h2>
+<p>Dirençler ve bobinler aynı kuralla toplanır; kondansatörlerde kural <strong>tersine döner</strong>.</p>
+<div class="formula"><span>Direnç / bobin, seri:   R = R1 + R2 + …</span><span>Direnç / bobin, paralel:   1/R = 1/R1 + 1/R2 + …</span><span>Kondansatör, paralel:   C = C1 + C2 + …</span><span>Kondansatör, seri:   1/C = 1/C1 + 1/C2 + …</span><small>Bobin hesabında bobinler arasındaki manyetik kuplaj ihmal edilir.</small></div>
+<p>İki eşit direnç paralel bağlanınca değer yarıya iner (2 × 10 kΩ → 5 kΩ). Paralel bağlantının sonucu her zaman <strong>en küçük değerden de küçüktür</strong>; bu, sonucu kontrol etmenin hızlı bir yoludur.</p>
+      <h3>Kaynaklar</h3>
+      <ul class="sources">
+        <li><a href="https://en.wikipedia.org/wiki/Series_and_parallel_circuits" target="_blank" rel="noopener">Wikipedia — Series and parallel circuits</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../araclar/ohm-kanunu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19h4v-2.6A6.6 6.6 0 1 1 15 16.4V19h4"/></svg></span><span class="tool-txt"><span class="tile-title">Ohm kanunu</span><span class="tile-sub">Gerilim, akım, direnç ve güçten ikisini gir; diğer ikisini bul.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/gerilim-bolucu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v3M10 5h4v5h-4zM12 10v4M10 14h4v5h-4zM12 19v3M12 12h8"/><circle cx="12" cy="12" r="1.2"/></svg></span><span class="tool-txt"><span class="tile-title">Gerilim bölücü</span><span class="tile-sub">Vout&#x27;u bul ya da istenen gerilim için alt direnci seç; yük etkisiyle birlikte.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/rc-filtre.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4v16h18M3 19c5 0 6-13 18-13"/></svg></span><span class="tool-txt"><span class="tile-title">RC filtre / τ</span><span class="tile-sub">Kesim frekansı, zaman sabiti ve hedef yüzdeye şarj süresi.</span></span><span class="tile-link">Aç →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

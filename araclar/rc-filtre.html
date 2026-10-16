@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>RC Filtre ve Zaman Sabiti Hesaplama — Ahmet Ulu</title>
+<meta name="description" content="RC filtre hesaplayıcı: kesim frekansı fc = 1/(2πRC), zaman sabiti τ = RC ve kondansatör şarj süresi. Alçak/yüksek geçiren filtre ve gecikme devreleri için.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/araclar/rc-filtre.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/rc-filtre.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/rc-filter.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/rc-filtre.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="RC Filtre ve Zaman Sabiti Hesaplama — Ahmet Ulu">
+<meta property="og:description" content="RC filtre hesaplayıcı: kesim frekansı fc = 1/(2πRC), zaman sabiti τ = RC ve kondansatör şarj süresi. Alçak/yüksek geçiren filtre ve gecikme devreleri için.">
+<meta property="og:url" content="https://ahmetulu.com.tr/araclar/rc-filtre.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "RC Filtre ve Zaman Sabiti Hesaplama", "description": "RC filtre hesaplayıcı: kesim frekansı fc = 1/(2πRC), zaman sabiti τ = RC ve kondansatör şarj süresi. Alçak/yüksek geçiren filtre ve gecikme devreleri için.", "url": "https://ahmetulu.com.tr/araclar/rc-filtre.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "RC filtre / τ", "item": "https://ahmetulu.com.tr/araclar/rc-filtre.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../egitim.html">Eğitim</a></li>
+    <li><a href="../projeler.html">Projeler</a></li>
+    <li><a href="../yazilar.html">Yazılar</a></li>
+    <li><a href="../araclar.html" aria-current="page">Araçlar</a></li>
+    <li><a href="../iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="../en/tools/rc-filter.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Konum"><a href="../index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="../araclar.html">Araçlar</a><span aria-hidden="true">/</span><span>RC filtre / τ</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Zamanlama ve filtre</span><h1>RC Filtre ve Zaman Sabiti Hesaplama</h1><p>R ve C değerini gir: RC filtrenin kesim frekansını, zaman sabitini (τ) ve kondansatörün istediğin yüzdeye ne kadar sürede dolduğunu gör.</p></div>
+    <div class="calc" data-tool="rc"><noscript><p class="calc-note warn">Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.</p></noscript></div>
+    <section class="tool-doc" id="nasil-hesaplanir">
+      <h2>Nasıl hesaplanır?</h2>
+<p>Bir direnç ve bir kondansatör hem basit bir filtre hem de bir gecikme devresi oluşturur. İkisini de aynı çarpım belirler: <strong>τ = R·C</strong>.</p>
+<div class="formula"><span>τ = R · C</span><span>fc = 1 / (2π · R · C)</span><span>Vc(t) = V · (1 − e^(−t/τ))   →   t = −τ · ln(1 − p)</span><small>p: hedef şarj oranı (0,9 = %90)</small></div>
+<p>1τ'da kondansatör %63,2'ye, 5τ'da %99,3'e dolar; pratikte 5τ “tam dolu” kabul edilir. Kesim frekansı, sinyalin gücünün yarıya (−3 dB) indiği noktadır ve alçak geçiren ile yüksek geçiren RC filtre için aynıdır.</p>
+<p>Not: Çıkışa bağlanan yük filtreyi değiştirir. Yük direnci R'den en az 10 kat büyük olmalıdır.</p>
+      <h3>Kaynaklar</h3>
+      <ul class="sources">
+        <li><a href="https://en.wikipedia.org/wiki/RC_circuit" target="_blank" rel="noopener">Wikipedia — RC circuit</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../araclar/555-zamanlayici.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 16h4V8h5v8h4V8h5v8h2"/></svg></span><span class="tool-txt"><span class="tile-title">555 zamanlayıcı</span><span class="tile-sub">Astable frekans ve görev oranı, monostable darbe süresi.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/desibel.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 18l5-6 4 3 8-9M15 6h5v5"/></svg></span><span class="tool-txt"><span class="tile-title">Desibel (dB)</span><span class="tile-sub">Gerilim/güç oranını dB&#x27;ye çevir, dB&#x27;yi orana çevir, dBm ↔ W.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/seri-paralel.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h4m10 0h4M7 6h10v4H7zM3 16h4m10 0h4M7 14h10v4H7zM3 8v8M21 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Seri / paralel</span><span class="tile-sub">Direnç, kondansatör veya bobinlerin seri ve paralel eşdeğerini bul.</span></span><span class="tile-link">Aç →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>

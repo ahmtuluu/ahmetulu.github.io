@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>LED Direnci Hesaplama — Ahmet Ulu</title>
+<meta name="description" content="LED direnci hesaplayıcı: R = (Vs − Vf)/I. LED rengine göre ileri gerilim, seri LED sayısı, E24 standart direnç önerisi ve güç hesabı.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/araclar/led-direnci.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/araclar/led-direnci.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/tools/led-resistor.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/araclar/led-direnci.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="LED Direnci Hesaplama — Ahmet Ulu">
+<meta property="og:description" content="LED direnci hesaplayıcı: R = (Vs − Vf)/I. LED rengine göre ileri gerilim, seri LED sayısı, E24 standart direnç önerisi ve güç hesabı.">
+<meta property="og:url" content="https://ahmetulu.com.tr/araclar/led-direnci.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=d30a29a1">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "LED Direnci Hesaplama", "description": "LED direnci hesaplayıcı: R = (Vs − Vf)/I. LED rengine göre ileri gerilim, seri LED sayısı, E24 standart direnç önerisi ve güç hesabı.", "url": "https://ahmetulu.com.tr/araclar/led-direnci.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "LED direnci", "item": "https://ahmetulu.com.tr/araclar/led-direnci.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../hakkimda.html">Hakkımda</a></li>
+    <li><a href="../egitim.html">Eğitim</a></li>
+    <li><a href="../projeler.html">Projeler</a></li>
+    <li><a href="../yazilar.html">Yazılar</a></li>
+    <li><a href="../araclar.html" aria-current="page">Araçlar</a></li>
+    <li><a href="../iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="../en/tools/led-resistor.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in tools-page">
+    <nav class="crumbs" aria-label="Konum"><a href="../index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="../araclar.html">Araçlar</a><span aria-hidden="true">/</span><span>LED direnci</span></nav>
+    <div class="tool-head"><span class="tool-kicker">Bileşenler</span><h1>LED Direnci Hesaplama</h1><p>LED rengini seç, besleme gerilimini ve akımı gir: gereken direnç, satın alabileceğin standart değer ve direncin güç değeri hazır.</p></div>
+    <div class="calc" data-tool="led"><noscript><p class="calc-note warn">Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.</p></noscript></div>
+    <section class="tool-doc" id="nasil-hesaplanir">
+      <h2>Nasıl hesaplanır?</h2>
+<p>LED üzerindeki gerilim akımla neredeyse sabit kalır (ileri gerilim, Vf). Bu yüzden akımı sınırlamak için seri bir direnç gerekir; direncin üzerine kalan gerilim düşer.</p>
+<div class="formula"><span>R = (Vs − n · Vf) / I</span><span>Gerçek akım:   I = (Vs − n · Vf) / R(E24)</span><span>Direnç gücü:   P = (Vs − n · Vf) · I</span><small>n: seri bağlı LED sayısı</small></div>
+<p>Hesaplanan direnç genelde standart bir değer değildir. Araç, <strong>E24 serisinde bir üst değeri</strong> önerir; böylece LED akımı hedeflediğin değeri hiçbir zaman aşmaz. Direncin güç değeri için hesaplanan gücün en az iki katı önerilir.</p>
+<h3>Renklere göre tipik Vf</h3>
+<ul><li>Kırmızı ≈ 2,0 V · turuncu / sarı ≈ 2,1 V · IR ≈ 1,3 V</li><li>Yeşil, mavi, beyaz (InGaN) ≈ 3,0–3,2 V</li></ul>
+<p>Bunlar tipik değerlerdir; kesin değer LED'in datasheet'inde yazar ve akıma, sıcaklığa göre değişir.</p>
+      <h3>Kaynaklar</h3>
+      <ul class="sources">
+        <li><a href="https://en.wikipedia.org/wiki/Light-emitting_diode" target="_blank" rel="noopener">Wikipedia — Light-emitting diode</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
+      </ul>
+    </section>
+    <section class="tool-related">
+      <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
+      <div class="tool-grid">
+        <a class="tile tool-card" href="../araclar/ohm-kanunu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19h4v-2.6A6.6 6.6 0 1 1 15 16.4V19h4"/></svg></span><span class="tool-txt"><span class="tile-title">Ohm kanunu</span><span class="tile-sub">Gerilim, akım, direnç ve güçten ikisini gir; diğer ikisini bul.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/direnc-renk-kodu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12h3M19 12h3M5 8h14v8H5zM9 8v8M12 8v8M15 8v8"/></svg></span><span class="tool-txt"><span class="tile-title">Direnç renk kodu</span><span class="tile-sub">Renklere tıkla, değeri gör; ya da değeri yaz, renkleri bul.</span></span><span class="tile-link">Aç →</span></a>
+        <a class="tile tool-card" href="../araclar/smd-kod-cozucu.html"><span class="tool-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h16v8H4zM4 8h3v8H4zM17 8h3v8h-3zM10 12h4"/></svg></span><span class="tool-txt"><span class="tile-title">SMD kod çözücü</span><span class="tile-sub">103, 4702, 4R7, 01C, 104J gibi kodları değere çevir.</span></span><span class="tile-link">Aç →</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=5969ab74" defer></script>
+<script src="../assets/js/tools.js?v=bceff70e" defer></script>
+</body>
+</html>
