@@ -1,0 +1,73 @@
+  <div class="blog-tag">Web Tasarımı · MUSTECH</div>
+  <h1>MUSTECH Agro Web Sitesi: Akıllı Tarım Şirketi İçin Tasarladığım Site</h1>
+  <div class="blog-meta">Ahmet Ulu · Ekim 2026</div>
+
+  <p>MUSTECH'te gömülü sistemler üzerinde çalışırken şirketin web sitesini de ben hazırladım: <a href="https://mustechagro.com.tr/" target="_blank" rel="noopener">mustechagro.com.tr</a>. MUSTECH, Kayseri merkezli bir akıllı tarım şirketi; sensörler, yazılım ve saha desteğiyle çiftçilerin su ve gübre kullanımını azaltmayı hedefliyor. Sitenin işi, bu ürünleri sade bir dille anlatmak ve çiftçinin bize kolayca ulaşmasını sağlamak.</p>
+
+  <p>Siteyi hazır bir platform ya da framework kullanmadan, <strong>düz HTML, CSS ve JavaScript</strong> ile yaptım. Tasarımda ve kodlamada yapay zeka araçlarından destek aldım. Çiftçilerin çoğu siteye telefondan gireceği için her bölümü önce telefon ekranına göre düşündüm.</p>
+
+  <div class="phone-gallery">
+    <figure><img src="hero.jpg" class="blog-img" alt="MUSTECH Agro ana sayfası, açık tema, telefon görünümü" width="600" height="1298" loading="eager" decoding="async"><figcaption>Ana sayfa, açık tema</figcaption></figure>
+    <figure><img src="hero-gece.jpg" class="blog-img" alt="MUSTECH Agro ana sayfası, koyu tema, telefon görünümü" width="600" height="1296" loading="lazy" decoding="async"><figcaption>Koyu tema: gece görünümü</figcaption></figure>
+    <figure><img src="panel-gece.jpg" class="blog-img" alt="Örnek parsel paneli: toprak nemi, sıcaklık, pH ve azot" width="600" height="1296" loading="lazy" decoding="async"><figcaption>Örnek parsel paneli ve buğday tarlası animasyonu</figcaption></figure>
+  </div>
+
+  <h3>Sitede neler var?</h3>
+
+  <p>Site tek sayfadan oluşuyor ve yukarıdan aşağıya bir hikâye gibi ilerliyor: şirketi tanıtan giriş, "Ölç, Analiz et, Öner, Uygula" adımlarıyla çalışma şekli, altı ürün (akıllı sulama, toprak analiz sensörü, frekanslı zararlı hayvan kovucu, tarla yönetim yazılımı, hava durumu istasyonu, gübre optimizasyonu), hizmetler, sık sorulan sorular ve iletişim.</p>
+
+  <ul>
+    <li><strong>Türkçe / İngilizce:</strong> Üstteki EN düğmesiyle tüm sayfa İngilizceye geçiyor; tercih hatırlanıyor.</li>
+    <li><strong>Açık ve koyu tema:</strong> Koyu temada arka plandaki tarla da geceye dönüyor.</li>
+    <li><strong>Buğday tarlası animasyonu:</strong> Rüzgârda sallanan başaklar canvas ile çiziliyor. Ekranda görünmediğinde ya da sekme arka plandayken duruyor; böylece telefonun pilini ve işlemcisini boşuna harcamıyor.</li>
+    <li><strong>Örnek parsel paneli:</strong> Toprak nemi, sıcaklık, pH ve azot değerlerini gösteren, ürünlerin sahada ne işe yaradığını anlatan bir gösterim ("Örnek gösterimdir" diye belirtiliyor).</li>
+  </ul>
+
+  <h3>Ücretsiz tarla araçları</h3>
+
+  <p>Siteyi sadece bir tanıtım sayfası olmaktan çıkarmak için ziyaretçinin gerçekten kullanabileceği iki araç ekledim.</p>
+
+  <p><strong>Hava durumu ve tarım göstergeleri.</strong> İl ya da ilçe aranarak veya "konumumu bul" ile seçilen yer için OpenWeather'dan hava tahmini alınıyor. Bu veriden dört gösterge çıkıyor: <strong>ilaçlama</strong> (önümüzdeki saatlerde rüzgâr ve yağış ihtimaline göre uygun / dikkat / uygun değil), <strong>don riski</strong> (önümüzdeki üç günün en düşük sıcaklığına göre), <strong>sulama</strong> (günlük buharlaşma ET₀ ve beklenen yağışa göre) ve <strong>mantar hastalığı riski</strong> (nem ve sıcaklığa göre). Altında beş günlük tahmin var.</p>
+
+  <p><strong>Sulama suyu hesaplayıcı.</strong> FAO-56 yöntemiyle yaklaşık bir hesap yapıyor: ürün ve gelişme dönemine göre bitki katsayısı (Kc) seçiliyor, günlük buharlaşmayla çarpılıyor (<strong>ETc = Kc × ET₀</strong>), alana ve sulama yönteminin verimine göre dekar başına ve toplam su ihtiyacı hesaplanıyor.</p>
+
+  <div class="phone-gallery">
+    <figure><img src="hava.jpg" class="blog-img" alt="Konum seçimi ve anlık hava durumu kartı" width="600" height="1299" loading="lazy" decoding="async"><figcaption>Konum ve anlık hava durumu</figcaption></figure>
+    <figure><img src="tarla-gostergeleri.jpg" class="blog-img" alt="İlaçlama, don, sulama ve mantar riski göstergeleri" width="600" height="1299" loading="lazy" decoding="async"><figcaption>İlaçlama, don, sulama ve mantar riski</figcaption></figure>
+    <figure><img src="sulama-hesap.jpg" class="blog-img" alt="FAO-56 yöntemiyle sulama suyu hesaplayıcı" width="600" height="1295" loading="lazy" decoding="async"><figcaption>Sulama suyu hesaplayıcı (FAO-56)</figcaption></figure>
+  </div>
+
+  <h3>MUSTECH Asistan</h3>
+
+  <div class="split-media">
+    <figure><img src="asistan.jpg" class="blog-img" alt="MUSTECH Asistan sohbet penceresi" width="600" height="1296" loading="lazy" decoding="async"><figcaption>Hazır sorular ve iki dilli cevaplar</figcaption></figure>
+    <div>
+      <p>Sağ alttaki düğmeyle açılan küçük bir asistan da var. Ürünler, kurulum, fiyat teklifi, teknik destek, hizmet bölgeleri gibi yaklaşık 25 konuda soruları <strong>anahtar kelimelerle</strong> eşleştirip sitedeki bilgilere dayanarak cevap veriyor; cevabın altında ilgili bölüme giden bir düğme çıkıyor.</p>
+      <p>Herhangi bir dış servise bağlı değil, tamamen tarayıcıda çalışıyor. Bu yüzden hızlı ve ücretsiz; yeni bir soru-cevap eklemek için listeye bir satır eklemek yetiyor.</p>
+    </div>
+  </div>
+
+  <h3>İletişim formu</h3>
+
+  <p>Form, mesajı FormSubmit üzerinden doğrudan şirketin e-posta adresine gönderiyor; ayrı bir sunucu gerekmiyor. Spam botlarına karşı gizli bir tuzak alan (honeypot) var. Bir ürün kartındaki "Bilgi alın" düğmesine basınca formdaki konu alanı o ürünle otomatik doluyor.</p>
+
+  <div class="tech-box">
+    <h4>Teknik detaylar</h4>
+    <ul>
+      <li>Framework yok: HTML, CSS ve JavaScript; dil, animasyon, araçlar ve asistan ayrı JavaScript dosyalarında</li>
+      <li>CSS değişkenleriyle iki tema, <code>clamp()</code> ile ekran boyutuna göre ölçeklenen yazılar, grid düzen</li>
+      <li>Erişilebilirlik: "içeriğe geç" bağlantısı, hareket azaltma tercihine (<code>prefers-reduced-motion</code>) uyan animasyonlar</li>
+      <li>SEO: Organization ve FAQPage yapısal verisi, sosyal medya paylaşım kartları</li>
+      <li>Hava verisi: OpenWeather API · Form: FormSubmit · Yayın: Cloudflare üzerinden</li>
+    </ul>
+  </div>
+
+  <div class="cta-box">
+    <div>
+      <h4>Siteyi canlı gör</h4>
+      <p>Tarla araçlarını kendi bulunduğun yer için deneyebilir, asistana soru sorabilirsin.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="https://mustechagro.com.tr/" target="_blank" rel="noopener">mustechagro.com.tr →</a>
+    </div>
+  </div>

@@ -801,3 +801,26 @@ a.tile:hover{border-color:var(--accent-border);transform:translateY(-3px);}
 .home-tools{grid-template-columns:repeat(4,minmax(0,1fr));}
 @media (max-width:1000px){.home-tools{grid-template-columns:1fr 1fr;}}
 @media (max-width:600px){.home-tools{grid-template-columns:1fr;}}
+
+/* Yazı: listeler, telefon galerisi, yan yana görsel + metin */
+.article ul{margin:0 0 22px 20px;display:flex;flex-direction:column;gap:8px;}
+.article li{font-size:16.5px;color:var(--soft);line-height:1.75;padding-left:4px;}
+.article li::marker{color:var(--accent);}
+.article li strong{color:var(--text);font-weight:500;}
+.tech-box ul{margin-bottom:0;}
+.tech-box li{font-size:15px;}
+.article code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;color:#cffafe;background:rgba(var(--accent-rgb),.08);padding:1px 6px;border-radius:5px;}
+.phone-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:32px 0;}
+.phone-gallery figure,.split-media figure{margin:0;}
+.phone-gallery .blog-img,.split-media .blog-img{width:100%;max-height:none;border-radius:22px;border:5px solid #1c2538;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.7),0 0 0 1px var(--border);background:#fff;}
+.phone-gallery figcaption,.split-media figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.5;}
+.split-media{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:start;margin:8px 0 24px;}
+@media (max-width:600px){
+  .phone-gallery{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:64%;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin-left:-18px;margin-right:-18px;padding:4px 18px 10px;scrollbar-width:none;}
+  .phone-gallery::-webkit-scrollbar{display:none;}
+  .phone-gallery figure{scroll-snap-align:center;}
+  .split-media{grid-template-columns:1fr;gap:18px;}
+  .split-media figure{max-width:240px;margin:0 auto;}
+}

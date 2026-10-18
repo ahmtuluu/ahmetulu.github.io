@@ -94,6 +94,7 @@ MONTHS = {'tr': ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz
 
 # ---------------------------------------------------------------- içerik
 GROUPS = [  # yazılar sayfasındaki gruplar (sıra önemli)
+ dict(key='web', tr=('Web Projeleri', 'Tasarlayıp kodladığım siteler'), en=('Web Projects', 'Websites I designed and built')),
  dict(key='pcb', tr=('PCB Tasarımları', 'Bionluk üzerinden müşteriler için yaptığım tasarımlar'), en=('PCB Designs', 'Designs I made for clients through Bionluk')),
  dict(key='tarim', tr=('Akıllı Tarım Sistemi', 'Projenin adım adım gelişimi'), en=('Smart Agriculture System', 'Step-by-step development of the project')),
  dict(key='ev', tr=('Elektrik Şarj İstasyonu Optimizasyonu', 'Projenin adım adım gelişimi'), en=('EV Charging Station Optimization', 'Step-by-step development of the project')),
@@ -101,6 +102,15 @@ GROUPS = [  # yazılar sayfasındaki gruplar (sıra önemli)
 ]
 
 POSTS = [  # en yeni en üstte
+ dict(slug='mustech-web', group='web', date=(2026, 10),
+      tr_url='yazilar/mustech-web/mustech-agro-web-sitesi.html', en_url='en/blog/mustech-agro-website.html',
+      img_dir='yazilar/mustech-web/', thumb='assets/img/kapak/mustech-web.jpg',
+      keywords={'tr': ['MUSTECH', 'Mustech Agro', 'akıllı tarım web sitesi', 'HTML CSS JavaScript', 'FAO-56 sulama hesabı'],
+                'en': ['MUSTECH', 'Mustech Agro', 'smart agriculture website', 'HTML CSS JavaScript', 'FAO-56 irrigation calculator']},
+      tr=dict(kicker='Web Tasarımı · MUSTECH', title='MUSTECH Agro Web Sitesi', page_title='MUSTECH Agro Web Sitesi: HTML, CSS ve JavaScript ile Akıllı Tarım Sitesi',
+              desc='MUSTECH Agro için tasarlayıp kodladığım web sitesi: iki dil, açık/koyu tema, buğday tarlası animasyonu, hava durumuna dayalı tarla araçları, FAO-56 sulama hesaplayıcı ve sohbet asistanı.'),
+      en=dict(kicker='Web Design · MUSTECH', title='The MUSTECH Agro Website', page_title='The MUSTECH Agro Website: A Smart Agriculture Site in HTML, CSS and JavaScript',
+              desc='The website I designed and built for MUSTECH Agro: two languages, light/dark themes, a wheat field animation, weather-based field tools, an FAO-56 irrigation calculator and a chat assistant.')),
  dict(slug='pcb-tasarim', group='pcb', date=(2026, 10),
       tr_url='yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html', en_url='en/blog/kicad-pcb-design.html',
       img_dir='yazilar/pcb-tasarim/', thumb='assets/img/kapak/pcb-tasarim.jpg',
@@ -137,6 +147,10 @@ PROJECTS = [
       tags=['PCB Tasarımı', 'KiCad', 'ESP32', 'Freelance'],
       tr=dict(title='Freelance PCB Tasarımı', desc='Bionluk üzerinden müşterilere özel şematik ve PCB tasarımı: ihtiyacı dinlemekten üretime hazır dosyalara kadar. 8 sipariş, 5.0 puan.'),
       en=dict(title='Freelance PCB Design', desc='Custom schematic and PCB design for clients on Bionluk, from understanding the need to production-ready files. 8 orders, 5.0 rating.')),
+ dict(kind='main', year='2026', cover='assets/img/kapak/mustech-web.jpg', posts=['mustech-web'], url='https://mustechagro.com.tr/',
+      tags=['Web Tasarımı', 'HTML/CSS', 'JavaScript', 'MUSTECH'],
+      tr=dict(title='MUSTECH Agro Web Sitesi', desc='Çalıştığım akıllı tarım şirketinin sitesi: iki dil, açık/koyu tema, hava durumuna dayalı tarla araçları, FAO-56 sulama hesaplayıcı ve sohbet asistanı. Düz HTML, CSS ve JavaScript.'),
+      en=dict(title='MUSTECH Agro Website', desc='The site of the smart agriculture company I work at: two languages, light/dark themes, weather-based field tools, an FAO-56 irrigation calculator and a chat assistant. Plain HTML, CSS and JavaScript.')),
  dict(kind='main', year='2025', cover='assets/img/kapak/akilli-tarim.jpg', posts=['su-analizi'],
       tags=['ESP32', 'Python', 'IoT', 'Sensör'],
       tr=dict(title='Akıllı Tarım Sistemi', desc='Toprak nemi, sıcaklık ve ışık sensörleriyle otomatik sulama ve izleme yapan IoT tabanlı proje.'),
@@ -154,9 +168,9 @@ PROJECTS = [
       tr=dict(title='12V DC Ayarlı Güç Kaynağı', desc='LM2596 buck modülünün trimpotu yerine dışarıdan çevrilebilen 10 tur hassas potansiyometre ve dijital voltmetre.'),
       en=dict(title='12V DC Adjustable Power Supply', desc='An LM2596 buck module with an external 10-turn precision potentiometer instead of the trimpot, plus a digital voltmeter.')),
 ]
-FEATURED = [0, 1, 2]  # ana sayfadaki projeler (PROJECTS indeksleri)
+FEATURED = [0, 2, 3]  # ana sayfadaki projeler (PROJECTS indeksleri)
 
-TAG_EN = {'PCB Tasarımı': 'PCB Design', 'Sensör': 'Sensors', 'Enerji': 'Energy', 'Otomasyon': 'Automation', 'Güç Elektroniği': 'Power Electronics',
+TAG_EN = {'Web Tasarımı': 'Web Design', 'PCB Tasarımı': 'PCB Design', 'Sensör': 'Sensors', 'Enerji': 'Energy', 'Otomasyon': 'Automation', 'Güç Elektroniği': 'Power Electronics',
           'Lehim': 'Soldering', 'PCB Tasarımı': 'PCB Design'}
 
 # ---------------------------------------------------------------- yardımcılar
@@ -360,6 +374,9 @@ def project_card(pr, lang, rel):
     else:
         links = f'<span class="card-link muted">{s["soon"]}</span>'
         count = ''
+    if pr.get('url'):
+        visit = 'Siteyi ziyaret et ↗' if lang == 'tr' else 'Visit the site ↗'
+        links += f'<a class="card-link" href="{pr["url"]}" target="_blank" rel="noopener">{visit}</a>'
     data_tags = '|'.join(tag_name(x, lang) for x in pr['tags'])
     return f'''<article class="card" data-filter-item data-tags="{esc(data_tags)}">
   {media}

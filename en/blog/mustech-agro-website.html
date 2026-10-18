@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The MUSTECH Agro Website: A Smart Agriculture Site in HTML, CSS and JavaScript — Ahmet Ulu</title>
+<meta name="description" content="The website I designed and built for MUSTECH Agro: two languages, light/dark themes, a wheat field animation, weather-based field tools, an FAO-56 irrigation calculator and a chat assistant.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/en/blog/mustech-agro-website.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/yazilar/mustech-web/mustech-agro-web-sitesi.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/blog/mustech-agro-website.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/yazilar/mustech-web/mustech-agro-web-sitesi.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="The MUSTECH Agro Website: A Smart Agriculture Site in HTML, CSS and JavaScript — Ahmet Ulu">
+<meta property="og:description" content="The website I designed and built for MUSTECH Agro: two languages, light/dark themes, a wheat field animation, weather-based field tools, an FAO-56 irrigation calculator and a chat assistant.">
+<meta property="og:url" content="https://ahmetulu.com.tr/en/blog/mustech-agro-website.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/kapak/mustech-web.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css?v=c25ef062">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "The MUSTECH Agro Website", "description": "The website I designed and built for MUSTECH Agro: two languages, light/dark themes, a wheat field animation, weather-based field tools, an FAO-56 irrigation calculator and a chat assistant.", "image": "https://ahmetulu.com.tr/assets/img/kapak/mustech-web.jpg", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "inLanguage": "en", "mainEntityOfPage": "https://ahmetulu.com.tr/en/blog/mustech-agro-website.html", "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}, "keywords": "MUSTECH, Mustech Agro, smart agriculture website, HTML CSS JavaScript, FAO-56 irrigation calculator"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ahmetulu.com.tr/en/blog.html"}, {"@type": "ListItem", "position": 3, "name": "The MUSTECH Agro Website", "item": "https://ahmetulu.com.tr/en/blog/mustech-agro-website.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">Skip to content</a>
+<header class="site-nav">
+  <a href="../../en/index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="../../en/about.html">About</a></li>
+    <li><a href="../../en/education.html">Education</a></li>
+    <li><a href="../../en/projects.html">Projects</a></li>
+    <li><a href="../../en/blog.html" aria-current="page">Blog</a></li>
+    <li><a href="../../en/tools.html">Tools</a></li>
+    <li><a href="../../en/contact.html">Contact</a></li>
+    <li class="nav-lang"><a href="../../yazilar/mustech-web/mustech-agro-web-sitesi.html" hreflang="tr" lang="tr" aria-label="Türkçe">TR</a></li>
+  </ul>
+</header>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<main id="icerik">
+<article class="wrap-narrow article">
+  <a href="../../en/blog.html" class="back-link">← All posts</a>
+  <div class="blog-tag">Web Design · MUSTECH</div>
+  <h1>The MUSTECH Agro Website: A Site for a Smart Agriculture Company</h1>
+  <div class="blog-meta">Ahmet Ulu · October 2026 · 4 min read</div>
+  <details class="toc">
+    <summary>Contents</summary>
+    <ol><li><a href="#what-is-on-the-site">What is on the site?</a></li><li><a href="#free-field-tools">Free field tools</a></li><li><a href="#mustech-assistant">MUSTECH Assistant</a></li><li><a href="#contact-form">Contact form</a></li></ol>
+  </details>
+
+  <p>While working on embedded systems at MUSTECH, I also built the company's website: <a href="https://mustechagro.com.tr/" target="_blank" rel="noopener">mustechagro.com.tr</a>. MUSTECH is a smart agriculture company based in Kayseri, Türkiye; it helps farmers use less water and fertilizer with sensors, software and field support. The site's job is to explain these products in plain language and make it easy for farmers to get in touch.</p>
+
+  <p>I built it without a ready-made platform or framework, using <strong>plain HTML, CSS and JavaScript</strong>, with help from AI tools for design and coding. Most farmers visit from their phones, so I designed every section for a phone screen first.</p>
+
+  <div class="phone-gallery">
+    <figure><img src="../../yazilar/mustech-web/hero.jpg" class="blog-img" alt="MUSTECH Agro home page, light theme, phone view" width="600" height="1298" loading="eager" decoding="async"><figcaption>Home page, light theme</figcaption></figure>
+    <figure><img src="../../yazilar/mustech-web/hero-gece.jpg" class="blog-img" alt="MUSTECH Agro home page, dark theme, phone view" width="600" height="1296" loading="lazy" decoding="async"><figcaption>Dark theme: night view</figcaption></figure>
+    <figure><img src="../../yazilar/mustech-web/panel-gece.jpg" class="blog-img" alt="Sample field panel: soil moisture, temperature, pH and nitrogen" width="600" height="1296" loading="lazy" decoding="async"><figcaption>Sample field panel and wheat field animation</figcaption></figure>
+  </div>
+
+  <h3 id="what-is-on-the-site">What is on the site?</h3>
+
+  <p>It is a single page that reads like a story from top to bottom: an introduction to the company, how it works in four steps (measure, analyze, recommend, apply), six products (smart irrigation, a soil analysis sensor, a frequency-based pest animal repeller, farm management software, a weather station and fertilizer optimization), services, FAQs and contact.</p>
+
+  <ul>
+    <li><strong>Turkish / English:</strong> the EN button switches the whole page to English, and the choice is remembered.</li>
+    <li><strong>Light and dark theme:</strong> in the dark theme the field in the background turns to night as well.</li>
+    <li><strong>Wheat field animation:</strong> wheat swaying in the wind, drawn on a canvas. It pauses when it is off screen or the tab is in the background, so it does not waste the phone's battery or CPU.</li>
+    <li><strong>Sample field panel:</strong> a demo showing soil moisture, temperature, pH and nitrogen to explain what the products do in the field (clearly labeled as a sample).</li>
+  </ul>
+
+  <h3 id="free-field-tools">Free field tools</h3>
+
+  <p>To make the site more than a brochure, I added two tools that visitors can actually use.</p>
+
+  <p><strong>Weather and farming indicators.</strong> The visitor searches for a city or district, or uses "find my location", and the site fetches the forecast from OpenWeather. Four indicators are derived from it: <strong>spraying</strong> (good / caution / not suitable, from wind and rain probability over the next hours), <strong>frost risk</strong> (from the lowest temperature in the next three days), <strong>irrigation</strong> (from daily evapotranspiration ET₀ and expected rain) and <strong>fungal disease risk</strong> (from humidity and temperature). A five-day forecast sits below.</p>
+
+  <p><strong>Irrigation water calculator.</strong> An approximate FAO-56 calculation: a crop coefficient (Kc) is picked by crop and growth stage, multiplied by daily evapotranspiration (<strong>ETc = Kc × ET₀</strong>), and the water need per decare and in total is calculated from the area and the efficiency of the irrigation method.</p>
+
+  <div class="phone-gallery">
+    <figure><img src="../../yazilar/mustech-web/hava.jpg" class="blog-img" alt="Location search and current weather card" width="600" height="1299" loading="lazy" decoding="async"><figcaption>Location and current weather</figcaption></figure>
+    <figure><img src="../../yazilar/mustech-web/tarla-gostergeleri.jpg" class="blog-img" alt="Spraying, frost, irrigation and fungal risk indicators" width="600" height="1299" loading="lazy" decoding="async"><figcaption>Spraying, frost, irrigation and fungal risk</figcaption></figure>
+    <figure><img src="../../yazilar/mustech-web/sulama-hesap.jpg" class="blog-img" alt="FAO-56 irrigation water calculator" width="600" height="1295" loading="lazy" decoding="async"><figcaption>Irrigation water calculator (FAO-56)</figcaption></figure>
+  </div>
+
+  <h3 id="mustech-assistant">MUSTECH Assistant</h3>
+
+  <div class="split-media">
+    <figure><img src="../../yazilar/mustech-web/asistan.jpg" class="blog-img" alt="MUSTECH Assistant chat window" width="600" height="1296" loading="lazy" decoding="async"><figcaption>Quick questions and bilingual answers</figcaption></figure>
+    <div>
+      <p>A small assistant opens from the button in the bottom-right corner. It matches questions on about 25 topics (products, installation, quotes, technical support, service regions and more) by <strong>keywords</strong> and answers from the information on the site, with a button that jumps to the relevant section.</p>
+      <p>It does not rely on any outside service and runs entirely in the browser, so it is fast and free; adding a new question and answer is one more line in a list.</p>
+    </div>
+  </div>
+
+  <h3 id="contact-form">Contact form</h3>
+
+  <p>The form sends the message straight to the company's email through FormSubmit, so no server is needed. A hidden trap field (honeypot) stops spam bots. Clicking the info button on a product card fills the form's topic with that product.</p>
+
+  <div class="tech-box">
+    <h4>Technical details</h4>
+    <ul>
+      <li>No framework: HTML, CSS and JavaScript, with language, animation, tools and the assistant in separate JavaScript files</li>
+      <li>Two themes with CSS variables, fluid type with <code>clamp()</code>, grid layout</li>
+      <li>Accessibility: a "skip to content" link and animations that respect <code>prefers-reduced-motion</code></li>
+      <li>SEO: Organization and FAQPage structured data, social sharing cards</li>
+      <li>Weather data: OpenWeather API · Form: FormSubmit · Served through Cloudflare</li>
+    </ul>
+  </div>
+
+  <div class="cta-box">
+    <div>
+      <h4>See it live</h4>
+      <p>Try the field tools for your own location or ask the assistant a question.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="https://mustechagro.com.tr/" target="_blank" rel="noopener">mustechagro.com.tr →</a>
+    </div>
+  </div>
+
+  <div class="share">
+    <span class="share-label">Share</span>
+    <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//ahmetulu.com.tr/en/blog/mustech-agro-website.html" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A//ahmetulu.com.tr/en/blog/mustech-agro-website.html&amp;text=The%20MUSTECH%20Agro%20Website" target="_blank" rel="noopener">X</a>
+    <a class="share-btn" href="https://wa.me/?text=The%20MUSTECH%20Agro%20Website%20https%3A//ahmetulu.com.tr/en/blog/mustech-agro-website.html" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="share-btn" type="button" data-copy="https://ahmetulu.com.tr/en/blog/mustech-agro-website.html" data-copied="Copied ✓">Copy link</button>
+  </div>
+
+  <aside class="author">
+    <div class="mono sm" aria-hidden="true"><span>AU</span></div>
+    <div>
+      <div class="author-name">Ahmet Ulu</div>
+      <p>Electrical and electronics engineering student at Abdullah Gül University; embedded systems developer at MUSTECH and freelance PCB designer.</p>
+      <div class="author-links"><a href="../../en/about.html">About me →</a><a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a></div>
+    </div>
+  </aside>
+
+  <nav class="post-nav" aria-label="More posts">
+    <div class="post-nav-title">More posts</div>
+<a href="../../en/blog/kicad-pcb-design.html" class="post-item" data-filter-item data-tags="PCB Designs">
+  <img class="post-thumb" src="../../assets/img/kapak/pcb-tasarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">PCB Design · Freelance</div><div class="post-title">PCB Design with KiCad: Boards I Designed for Clients</div><div class="post-date">October 2026 · 5 min read</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+<a href="../../en/blog/adjustable-power-supply.html" class="post-item" data-filter-item data-tags="Practical Projects">
+  <img class="post-thumb" src="../../assets/img/kapak/guc-kaynagi.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Practical Project</div><div class="post-title">12V DC Adjustable Power Supply — LM2596 Mod</div><div class="post-date">April 2026 · 3 min read</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+<a href="../../en/blog/ev-charging-data-infrastructure.html" class="post-item" data-filter-item data-tags="EV Charging Station Optimization">
+  <img class="post-thumb" src="../../assets/img/kapak/ev-sarj.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">EV Charging · Step 1</div><div class="post-title">Raspberry Pi and the Data Infrastructure</div><div class="post-date">April 2026 · 2 min read</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+<a href="../../en/blog/water-analysis-system.html" class="post-item" data-filter-item data-tags="Smart Agriculture System">
+  <img class="post-thumb" src="../../assets/img/kapak/akilli-tarim.jpg" alt="" width="96" height="72" loading="lazy" decoding="async">
+  <div class="post-info"><div class="post-kicker">Smart Agriculture · Step 1</div><div class="post-title">Water Analysis System</div><div class="post-date">March 2026 · 6 min read</div></div>
+  <span class="post-arrow" aria-hidden="true">→</span>
+</a>
+  </nav>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/js/main.js?v=5969ab74" defer></script>
+</body>
+</html>
