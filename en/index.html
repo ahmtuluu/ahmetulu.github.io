@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=c25ef062">
+<link rel="stylesheet" href="../assets/css/style.css?v=4429213d">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="me" href="https://github.com/ahmtuluu">
 <link rel="me" href="https://www.linkedin.com/in/ahmet-ulu-16099832b/">
@@ -51,7 +51,7 @@
   <div class="wrap">
     <section class="bento" aria-label="Introduction">
       <div class="tile t-intro" data-reveal="0">
-        <div class="avail"><span class="dot" aria-hidden="true"></span>Open to freelance PCB work</div>
+        <a class="avail" href="../en/pcb-design-service.html"><span class="dot" aria-hidden="true"></span>Open to freelance PCB work</a>
         <h1 class="home-title" id="homeTitle"><span class="tline">Hi, I'm</span><em class="tline">Ahmet Ulu.</em></h1>
         <div class="role">Embedded Systems · IoT · PCB Design</div>
         <p class="home-desc">I'm an electrical and electronics engineering student. Most of what I've really learned came from outside the classroom, while building things: from sensors to PCBs, from Raspberry Pi to mobile apps.</p>
@@ -118,6 +118,57 @@
         <div class="cv-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div>
         <div class="tile-sub">PDF ↓</div>
       </a>
+    </section>
+    <section class="section" id="pcb-nedir" data-reveal="0">
+      <div class="pcb-explain">
+        <div class="pcb-explain-text">
+          <span class="tool-kicker">What is a PCB?</span>
+          <h2 class="section-title">From a tangle of wires to one board</h2>
+          <p>A PCB (printed circuit board) is the green board inside electronic devices. Instead of wires, thin copper tracks on the board connect the parts. Your circuit gets smaller and sturdier, and you can make as many copies as you need.</p>
+          <ul class="pcb-uses"><li>Turning an Arduino / ESP32 prototype into a product</li><li>School and capstone projects</li><li>Relay, sensor and motor boards</li><li>10 or 100 copies of the same board</li></ul>
+          <div class="cta-actions"><a class="btn btn-primary" href="../en/pcb-design-service.html">About PCB design →</a><a class="btn btn-ghost" href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Get a quote on Bionluk</a></div>
+        </div>
+        <div class="pcb-explain-art"><svg class="pcb-illu" viewBox="0 0 640 270" role="img" aria-label="Prototype: breadboard and wires → PCB: one solid, tidy board">
+  <defs><pattern id="bbh" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="1.6" fill="#b9b6a8"/></pattern>
+  <radialGradient id="ledg"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#ef4444" stop-opacity="0"/></radialGradient></defs>
+  <rect x="14" y="30" width="272" height="190" rx="12" fill="#ecebe4" stroke="#cfcdc2"/>
+  <rect x="24" y="42" width="252" height="166" fill="url(#bbh)"/>
+  <rect x="14" y="120" width="272" height="9" fill="#dcdad0"/>
+  <rect x="30" y="150" width="92" height="60" rx="5" fill="#1f6fb2"/><rect x="62" y="166" width="28" height="22" rx="2" fill="#0f2f4d"/>
+  <rect x="150" y="104" width="46" height="36" rx="3" fill="#222"/>
+  <rect x="216" y="56" width="50" height="40" rx="4" fill="#6b46c1"/><circle cx="241" cy="76" r="9" fill="#d6ccf5"/>
+  <circle cx="92" cy="70" r="7" fill="#ef4444"/><rect x="112" y="66" width="22" height="8" rx="3" fill="#d6b98c"/>
+  <g fill="none" stroke-width="3.4" stroke-linecap="round">
+    <path d="M60 150C60 90 170 60 160 104" stroke="#ef4444"/>
+    <path d="M80 150C100 40 240 20 236 56" stroke="#eab308"/>
+    <path d="M100 150C140 215 232 200 252 96" stroke="#22c55e"/>
+    <path d="M45 150C18 80 120 38 186 104" stroke="#3b82f6"/>
+    <path d="M110 150C164 122 126 66 96 74" stroke="#f97316"/>
+    <path d="M70 208C200 246 262 160 262 96" stroke="#9ca3af"/>
+    <path d="M118 158C170 170 210 150 190 140" stroke="#ec4899"/>
+  </g>
+  <g class="pcb-arrow"><circle cx="319" cy="125" r="20"/><path d="M308 125h20m-7-7 7 7-7 7" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <rect x="352" y="30" width="276" height="190" rx="14" fill="#0e5a3a" stroke="#0a4029" stroke-width="2"/>
+  <g fill="#0a4029" stroke="#c9a227" stroke-width="2"><circle cx="368" cy="46" r="6"/><circle cx="612" cy="46" r="6"/><circle cx="368" cy="204" r="6"/><circle cx="612" cy="204" r="6"/></g>
+  <g fill="none" stroke="#d9b45a" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M384 74H402L412 84V102H414"/><path d="M384 96H398L408 106V118H414"/>
+    <path d="M384 154H402L410 146V142H414"/><path d="M384 176H404L414 166V150H414"/>
+    <path d="M496 102H522L534 90V66H556"/><path d="M496 126H548L560 138V146"/>
+    <path d="M496 150H514L526 162V186H578"/><path d="M496 118H580L592 130H600"/>
+  </g>
+  <g fill="#d9b45a"><circle cx="556" cy="66" r="4"/><circle cx="560" cy="146" r="4"/><circle cx="578" cy="186" r="4"/></g>
+  <rect x="356" y="60" width="28" height="50" rx="3" fill="#1f8f4e"/><circle cx="370" cy="74" r="5" fill="#a7f3c4"/><circle cx="370" cy="96" r="5" fill="#a7f3c4"/>
+  <rect x="356" y="140" width="28" height="50" rx="3" fill="#1f8f4e"/><circle cx="370" cy="154" r="5" fill="#a7f3c4"/><circle cx="370" cy="176" r="5" fill="#a7f3c4"/>
+  <path d="M426 92v-6M426 162v6M434 92v-6M434 162v6M442 92v-6M442 162v6M450 92v-6M450 162v6M458 92v-6M458 162v6M466 92v-6M466 162v6M474 92v-6M474 162v6M482 92v-6M482 162v6M420 98h-6M490 98h6M420 106h-6M490 106h6M420 114h-6M490 114h6M420 122h-6M490 122h6M420 130h-6M490 130h6M420 138h-6M490 138h6M420 146h-6M490 146h6M420 154h-6M490 154h6" stroke="#d9b45a" stroke-width="3"/>
+  <rect x="420" y="92" width="70" height="70" rx="4" fill="#1a1a1a"/><circle cx="430" cy="102" r="2.5" fill="#555"/>
+  <circle cx="566" cy="66" r="18" fill="url(#ledg)"/><circle cx="566" cy="66" r="7" fill="#ef4444"/>
+  <circle cx="572" cy="160" r="11" fill="#2563eb" stroke="#93c5fd" stroke-width="1.5"/>
+  <rect x="598" y="120" width="16" height="64" rx="2" fill="#111"/><rect x="603" y="126" width="6" height="6" fill="#d9b45a"/><rect x="603" y="141" width="6" height="6" fill="#d9b45a"/><rect x="603" y="156" width="6" height="6" fill="#d9b45a"/><rect x="603" y="171" width="6" height="6" fill="#d9b45a"/>
+  <text x="440" y="206" class="silk">AU-01  REV A</text>
+  <text x="150" y="252" text-anchor="middle" class="lbl">Prototype: breadboard and wires</text>
+  <text x="490" y="252" text-anchor="middle" class="lbl">PCB: one solid, tidy board</text>
+</svg></div>
+      </div>
     </section>
 
     <section class="section" data-reveal="0">

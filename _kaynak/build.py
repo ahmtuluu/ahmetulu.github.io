@@ -15,6 +15,7 @@ import os, sys, html, hashlib, json, datetime
 sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import araclar
+import pcb
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -87,6 +88,7 @@ PAGES = {  # anahtar: (tr yolu, en yolu)
  'projects': ('projeler.html', 'en/projects.html'),
  'blog': ('yazilar.html', 'en/blog.html'),
  'tools': ('araclar.html', 'en/tools.html'),
+ 'pcb': ('pcb-tasarim-hizmeti.html', 'en/pcb-design-service.html'),
  'contact': ('iletisim.html', 'en/contact.html'),
 }
 MONTHS = {'tr': ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
@@ -457,6 +459,113 @@ def reviews_block(lang):
 '''
 
 # ---------------------------------------------------------------- sayfalar
+# ---------------------------------------------------------------- PCB tasarım hizmeti
+def pcb_svg_icon(name):
+    return f'<svg viewBox="0 0 24 24" aria-hidden="true">{pcb.ICONS[name]}</svg>'
+
+def pcb_explain(lang, rel, P):
+    """Ana sayfadaki kısa 'PCB nedir?' bölümü."""
+    t = pcb.T[lang]
+    chips = ''.join(f'<li>{esc(c)}</li>' for c in t['home_chips'])
+    b2 = f'<a class="btn btn-ghost" href="{BIONLUK}" target="_blank" rel="noopener">{t["home_b2"]}</a>' if BIONLUK else ''
+    return (f'    <section class="section" id="pcb-nedir" data-reveal="0">\n'
+            f'      <div class="pcb-explain">\n'
+            f'        <div class="pcb-explain-text">\n'
+            f'          <span class="tool-kicker">{t["home_k"]}</span>\n'
+            f'          <h2 class="section-title">{t["home_h"]}</h2>\n'
+            f'          <p>{t["home_p"]}</p>\n'
+            f'          <ul class="pcb-uses">{chips}</ul>\n'
+            f'          <div class="cta-actions"><a class="btn btn-primary" href="{P("pcb")}">{t["home_b1"]}</a>{b2}</div>\n'
+            f'        </div>\n'
+            f'        <div class="pcb-explain-art">{pcb.illustration(lang)}</div>\n'
+            f'      </div>\n'
+            f'    </section>\n')
+
+def build_pcb_service(lang):
+    tr = lang == 'tr'
+    t = pcb.T[lang]
+    path = PAGES['pcb'][0 if tr else 1]
+    rel = rel_of(path)
+    P = lambda k: rel + PAGES[k][0 if tr else 1]
+    img = lambda f: f'{rel}assets/img/pcb/{f}'
+    bion = f'<a class="btn btn-primary" href="{BIONLUK}" target="_blank" rel="noopener">{t["b1"]}</a>' if BIONLUK else ''
+    actions = f'<div class="cta-actions">{bion}<a class="btn btn-ghost" href="{P("contact")}">{t["b2"]}</a></div>'
+    when = '\n'.join(f'        <div class="tile pcb-when"><span class="tool-ico">{pcb_svg_icon(ic)}</span>'
+                     f'<div class="tile-title">{esc(h)}</div><p class="tile-sub">{esc(d)}</p></div>' for ic, h, d in t['when'])
+    types = ''.join(f'<li>{esc(x)}</li>' for x in t['types'])
+    steps = []
+    for i, (im, h, d) in enumerate(t['steps'], 1):
+        media = (f'<div class="pcb-step-media"><img src="{img(im)}" alt="{esc(h)}" width="720" height="540" loading="lazy" decoding="async"></div>' if im
+                 else f'<div class="pcb-step-media pcb-step-chat">{pcb_svg_icon("chat")}</div>')
+        steps.append(f'        <li class="pcb-step">{media}<div class="pcb-step-body"><span class="pcb-step-n">{i}</span>'
+                     f'<div class="tile-title">{esc(h)}</div><p class="tile-sub">{esc(d)}</p></div></li>')
+    post = POST.get('pcb-tasarim')
+    post_href = rel + post_url(post, lang) if post else P('projects')
+    work = '\n'.join(f'        <a class="tile tile-img pcb-work" href="{post_href}"><img src="{img(im)}" alt="{esc(h)}" width="720" height="540" loading="lazy" decoding="async">'
+                     f'<div class="tile-over"><div class="tile-title">{esc(h)}</div><div class="tile-sub">{esc(d)}</div></div></a>' for im, h, d in t['work'])
+    need = ''.join(f'<li>{esc(x)}</li>' for x in t['need'])
+    faq = '\n'.join(f'        <details class="faq-item"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in t['faq'])
+    body = f'''  <div class="wrap inner fade-in pcb-page">
+    <nav class="crumbs" aria-label="{'Konum' if tr else 'Breadcrumb'}"><a href="{P('home')}">{'Ana sayfa' if tr else 'Home'}</a><span aria-hidden="true">/</span><span>{'PCB tasarımı' if tr else 'PCB design'}</span></nav>
+    <header class="pcb-hero">
+      <div class="tool-head"><span class="tool-kicker">{t['k']}</span><h1>{t['h']}</h1><p>{t['lead']}</p>
+        {actions}
+      </div>
+      {stats_html(lang)}
+    </header>
+
+    <section class="pcb-sec pcb-what">
+      <div class="pcb-what-text"><h2 class="section-title">{t['what_h']}</h2>{''.join(f'<p>{x}</p>' for x in t['what_p'])}</div>
+      <div class="pcb-explain-art">{pcb.illustration(lang)}</div>
+    </section>
+
+    <section class="pcb-sec">
+      <h2 class="section-title">{t['when_h']}</h2>
+      <div class="pcb-when-grid">
+{when}
+      </div>
+      <h3 class="pcb-sub">{t['types_h']}</h3>
+      <ul class="pcb-uses">{types}</ul>
+    </section>
+
+    <section class="pcb-sec">
+      <h2 class="section-title">{t['steps_h']}</h2>
+      <ol class="pcb-steps">
+{chr(10).join(steps)}
+      </ol>
+    </section>
+
+    <section class="pcb-sec">
+      <div class="section-head"><div><h2 class="section-title">{t['work_h']}</h2></div><a class="section-link" href="{post_href}">{t['work_more']}</a></div>
+      <div class="pcb-work-grid">
+{work}
+      </div>
+    </section>
+
+    <section class="pcb-sec pcb-two">
+      <div class="pcb-need"><h2 class="section-title">{t['need_h']}</h2><ul class="pcb-check">{need}</ul></div>
+      <div class="pcb-faq"><h2 class="section-title">{t['faq_h']}</h2>
+{faq}
+      </div>
+    </section>
+{reviews_block(lang)}
+    <section class="section">
+      <div class="cta-band">
+        <div><h2 class="section-title">{t['cta_h']}</h2><p>{t['cta_p']}</p></div>
+        {actions}
+      </div>
+    </section>
+  </div>'''
+    ld = [{'@context': 'https://schema.org', '@graph': [
+        {'@type': 'Service', 'name': 'PCB tasarımı' if tr else 'PCB design', 'serviceType': 'PCB design',
+         'description': t['desc'], 'url': f'{SITE}/{path}', 'areaServed': 'TR', 'inLanguage': lang,
+         'provider': {'@id': f'{SITE}/#ahmet-ulu'}},
+        {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in t['faq']]},
+        {'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'Ahmet Ulu', 'item': f'{SITE}/' + ('' if tr else 'en/')},
+            {'@type': 'ListItem', 'position': 2, 'name': 'PCB tasarımı' if tr else 'PCB design', 'item': f'{SITE}/{path}'}]}]}]
+    page(lang, 'pcb', t['title'], t['desc'], body, ld=ld)
+
 HOME_TOOLS = ['led', 'regulator', 'color', 'trace']
 def home_tools(lang, rel, P):
     tr = lang == 'tr'
@@ -543,7 +652,7 @@ def build_home(lang):
     body = f'''  <div class="wrap">
     <section class="bento" aria-label="{'Tanıtım' if tr else 'Introduction'}">
       <div class="tile t-intro" data-reveal="0">
-        <div class="avail"><span class="dot" aria-hidden="true"></span>{avail}</div>
+        <a class="avail" href="{P('pcb')}"><span class="dot" aria-hidden="true"></span>{avail}</a>
         <h1 class="home-title" id="homeTitle"><span class="tline">{l1}</span><em class="tline">{l2}</em></h1>
         <div class="role">{role}</div>
         <p class="home-desc">{intro}</p>
@@ -601,7 +710,7 @@ def build_home(lang):
       </a>
 {cv_tile}
     </section>
-
+{pcb_explain(lang, rel, P)}
     <section class="section" data-reveal="0">
       <div class="section-head"><div><h2 class="section-title">{blog_h}</h2><p class="section-sub">{blog_sub}</p></div><a class="section-link" href="{P('blog')}">{s['see_all']}</a></div>
       <div class="post-cards">
@@ -1058,6 +1167,7 @@ if __name__ == '__main__':
         for p in POSTS:
             build_post(p, lang)
         build_tools_hub(lang)
+        build_pcb_service(lang)
         for t in araclar.TOOLS:
             build_tool(t, lang)
     build_404(); build_sitemap()

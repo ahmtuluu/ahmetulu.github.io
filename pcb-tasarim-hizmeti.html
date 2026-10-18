@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PCB Tasarımı Yaptırma: Baskı Devre (PCB) Nedir? — Ahmet Ulu</title>
+<meta name="description" content="PCB (baskı devre) nedir, ne zaman gerekir? Arduino/ESP32 prototipinizi, okul projenizi ya da ürün fikrinizi KiCad ile üretime hazır bir PCB&#x27;ye dönüştürüyorum. Örnek tasarımlar, süreç ve sık sorulanlar.">
+<meta name="author" content="Ahmet Ulu">
+<meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://ahmetulu.com.tr/pcb-tasarim-hizmeti.html">
+<link rel="alternate" hreflang="tr" href="https://ahmetulu.com.tr/pcb-tasarim-hizmeti.html">
+<link rel="alternate" hreflang="en" href="https://ahmetulu.com.tr/en/pcb-design-service.html">
+<link rel="alternate" hreflang="x-default" href="https://ahmetulu.com.tr/pcb-tasarim-hizmeti.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Ahmet Ulu">
+<meta property="og:title" content="PCB Tasarımı Yaptırma: Baskı Devre (PCB) Nedir? — Ahmet Ulu">
+<meta property="og:description" content="PCB (baskı devre) nedir, ne zaman gerekir? Arduino/ESP32 prototipinizi, okul projenizi ya da ürün fikrinizi KiCad ile üretime hazır bir PCB&#x27;ye dönüştürüyorum. Örnek tasarımlar, süreç ve sık sorulanlar.">
+<meta property="og:url" content="https://ahmetulu.com.tr/pcb-tasarim-hizmeti.html">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=4429213d">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Service", "name": "PCB tasarımı", "serviceType": "PCB design", "description": "PCB (baskı devre) nedir, ne zaman gerekir? Arduino/ESP32 prototipinizi, okul projenizi ya da ürün fikrinizi KiCad ile üretime hazır bir PCB'ye dönüştürüyorum. Örnek tasarımlar, süreç ve sık sorulanlar.", "url": "https://ahmetulu.com.tr/pcb-tasarim-hizmeti.html", "areaServed": "TR", "inLanguage": "tr", "provider": {"@id": "https://ahmetulu.com.tr/#ahmet-ulu"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "PCB ile baskı devre aynı şey mi?", "acceptedAnswer": {"@type": "Answer", "text": "Evet. PCB, \"Printed Circuit Board\" kelimelerinin kısaltması; Türkçede baskı devre, baskılı devre kartı ya da kısaca devre kartı denir."}}, {"@type": "Question", "name": "Teknik bilgim yok, yine de yaptırabilir miyim?", "acceptedAnswer": {"@type": "Answer", "text": "Evet. Ne yapmasını istediğinizi kendi cümlelerinizle anlatmanız yeterli; teknik kısımları birlikte netleştiririz."}}, {"@type": "Question", "name": "Kartı siz mi üretiyorsunuz?", "acceptedAnswer": {"@type": "Answer", "text": "Ben tasarımı ve üretim dosyalarını hazırlıyorum. Kartın kendisi PCB üretim firmalarında basılıyor; dosyaları nasıl sipariş edeceğinizi de anlatırım."}}, {"@type": "Question", "name": "Ne kadar sürer, ücreti ne kadar?", "acceptedAnswer": {"@type": "Answer", "text": "Kartın büyüklüğüne ve karmaşıklığına göre değişiyor. Projenizi anlatın, size süre ve fiyat söyleyeyim."}}, {"@type": "Question", "name": "Hangi programı kullanıyorsunuz?", "acceptedAnswer": {"@type": "Answer", "text": "KiCad. Ücretsiz ve açık kaynaklı olduğu için dosyalarınızı ileride siz ya da başka biri de açıp düzenleyebilir."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "PCB tasarımı", "item": "https://ahmetulu.com.tr/pcb-tasarim-hizmeti.html"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+<header class="site-nav">
+  <a href="index.html" class="nav-logo"><span class="nav-logo-mark" aria-hidden="true">A</span>Ahmet Ulu</a>
+  <button class="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="menu"><span></span></button>
+  <ul class="nav-links" id="menu">
+    <li><a href="hakkimda.html">Hakkımda</a></li>
+    <li><a href="egitim.html">Eğitim</a></li>
+    <li><a href="projeler.html">Projeler</a></li>
+    <li><a href="yazilar.html">Yazılar</a></li>
+    <li><a href="araclar.html">Araçlar</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+    <li class="nav-lang"><a href="en/pcb-design-service.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
+  </ul>
+</header>
+<main id="icerik">
+  <div class="wrap inner fade-in pcb-page">
+    <nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a><span aria-hidden="true">/</span><span>PCB tasarımı</span></nav>
+    <header class="pcb-hero">
+      <div class="tool-head"><span class="tool-kicker">Freelance · KiCad</span><h1>Fikrinizi üretilebilir bir karta dönüştürüyorum</h1><p>Elinizde kablolarla çalışan bir prototip, bir okul projesi ya da sadece bir fikir olabilir. Teknik bilgi gerekmiyor: ne yapmasını istediğinizi anlatın, şematiğini ve baskı devre kartını (PCB) ben tasarlayayım, üretime hazır dosyaları size teslim edeyim.</p>
+        <div class="cta-actions"><a class="btn btn-primary" href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk'tan teklif al →</a><a class="btn btn-ghost" href="iletisim.html">Bana yaz</a></div>
+      </div>
+      <div class="stats"><div class="stat"><div class="stat-num">8</div><div class="stat-label">tamamlanan sipariş</div></div><div class="stat"><div class="stat-num">5.0</div><div class="stat-label">Bionluk puanı</div></div><div class="stat"><div class="stat-num">6/6</div><div class="stat-label">beş yıldızlı yorum</div></div></div>
+    </header>
+
+    <section class="pcb-sec pcb-what">
+      <div class="pcb-what-text"><h2 class="section-title">PCB (baskı devre) nedir?</h2><p>PCB, İngilizce <strong>Printed Circuit Board</strong> yani <strong>baskı devre kartı</strong> demek. Telefonunuzun, kombinizin, çamaşır makinenizin içinde gördüğünüz, üzerinde küçük parçalar dizili yeşil kart budur.</p><p>Bir devreyi ilk denerken parçalar genelde breadboard denen delikli bir tahtaya takılır ve kablolarla birbirine bağlanır. Bu, denemek için harikadır ama kablolar kolayca çıkar, devre büyük ve dağınık olur. PCB'de ise bağlantılar kartın üzerine basılmış bakır yollardır: kablo yoktur, parçalar karta lehimlenir ve kart bir kutuya rahatça sığar.</p></div>
+      <div class="pcb-explain-art"><svg class="pcb-illu" viewBox="0 0 640 270" role="img" aria-label="Prototip: breadboard ve kablolar → PCB: tek, sağlam ve düzenli kart">
+  <defs><pattern id="bbh" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="1.6" fill="#b9b6a8"/></pattern>
+  <radialGradient id="ledg"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#ef4444" stop-opacity="0"/></radialGradient></defs>
+  <rect x="14" y="30" width="272" height="190" rx="12" fill="#ecebe4" stroke="#cfcdc2"/>
+  <rect x="24" y="42" width="252" height="166" fill="url(#bbh)"/>
+  <rect x="14" y="120" width="272" height="9" fill="#dcdad0"/>
+  <rect x="30" y="150" width="92" height="60" rx="5" fill="#1f6fb2"/><rect x="62" y="166" width="28" height="22" rx="2" fill="#0f2f4d"/>
+  <rect x="150" y="104" width="46" height="36" rx="3" fill="#222"/>
+  <rect x="216" y="56" width="50" height="40" rx="4" fill="#6b46c1"/><circle cx="241" cy="76" r="9" fill="#d6ccf5"/>
+  <circle cx="92" cy="70" r="7" fill="#ef4444"/><rect x="112" y="66" width="22" height="8" rx="3" fill="#d6b98c"/>
+  <g fill="none" stroke-width="3.4" stroke-linecap="round">
+    <path d="M60 150C60 90 170 60 160 104" stroke="#ef4444"/>
+    <path d="M80 150C100 40 240 20 236 56" stroke="#eab308"/>
+    <path d="M100 150C140 215 232 200 252 96" stroke="#22c55e"/>
+    <path d="M45 150C18 80 120 38 186 104" stroke="#3b82f6"/>
+    <path d="M110 150C164 122 126 66 96 74" stroke="#f97316"/>
+    <path d="M70 208C200 246 262 160 262 96" stroke="#9ca3af"/>
+    <path d="M118 158C170 170 210 150 190 140" stroke="#ec4899"/>
+  </g>
+  <g class="pcb-arrow"><circle cx="319" cy="125" r="20"/><path d="M308 125h20m-7-7 7 7-7 7" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <rect x="352" y="30" width="276" height="190" rx="14" fill="#0e5a3a" stroke="#0a4029" stroke-width="2"/>
+  <g fill="#0a4029" stroke="#c9a227" stroke-width="2"><circle cx="368" cy="46" r="6"/><circle cx="612" cy="46" r="6"/><circle cx="368" cy="204" r="6"/><circle cx="612" cy="204" r="6"/></g>
+  <g fill="none" stroke="#d9b45a" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M384 74H402L412 84V102H414"/><path d="M384 96H398L408 106V118H414"/>
+    <path d="M384 154H402L410 146V142H414"/><path d="M384 176H404L414 166V150H414"/>
+    <path d="M496 102H522L534 90V66H556"/><path d="M496 126H548L560 138V146"/>
+    <path d="M496 150H514L526 162V186H578"/><path d="M496 118H580L592 130H600"/>
+  </g>
+  <g fill="#d9b45a"><circle cx="556" cy="66" r="4"/><circle cx="560" cy="146" r="4"/><circle cx="578" cy="186" r="4"/></g>
+  <rect x="356" y="60" width="28" height="50" rx="3" fill="#1f8f4e"/><circle cx="370" cy="74" r="5" fill="#a7f3c4"/><circle cx="370" cy="96" r="5" fill="#a7f3c4"/>
+  <rect x="356" y="140" width="28" height="50" rx="3" fill="#1f8f4e"/><circle cx="370" cy="154" r="5" fill="#a7f3c4"/><circle cx="370" cy="176" r="5" fill="#a7f3c4"/>
+  <path d="M426 92v-6M426 162v6M434 92v-6M434 162v6M442 92v-6M442 162v6M450 92v-6M450 162v6M458 92v-6M458 162v6M466 92v-6M466 162v6M474 92v-6M474 162v6M482 92v-6M482 162v6M420 98h-6M490 98h6M420 106h-6M490 106h6M420 114h-6M490 114h6M420 122h-6M490 122h6M420 130h-6M490 130h6M420 138h-6M490 138h6M420 146h-6M490 146h6M420 154h-6M490 154h6" stroke="#d9b45a" stroke-width="3"/>
+  <rect x="420" y="92" width="70" height="70" rx="4" fill="#1a1a1a"/><circle cx="430" cy="102" r="2.5" fill="#555"/>
+  <circle cx="566" cy="66" r="18" fill="url(#ledg)"/><circle cx="566" cy="66" r="7" fill="#ef4444"/>
+  <circle cx="572" cy="160" r="11" fill="#2563eb" stroke="#93c5fd" stroke-width="1.5"/>
+  <rect x="598" y="120" width="16" height="64" rx="2" fill="#111"/><rect x="603" y="126" width="6" height="6" fill="#d9b45a"/><rect x="603" y="141" width="6" height="6" fill="#d9b45a"/><rect x="603" y="156" width="6" height="6" fill="#d9b45a"/><rect x="603" y="171" width="6" height="6" fill="#d9b45a"/>
+  <text x="440" y="206" class="silk">AU-01  REV A</text>
+  <text x="150" y="252" text-anchor="middle" class="lbl">Prototip: breadboard ve kablolar</text>
+  <text x="490" y="252" text-anchor="middle" class="lbl">PCB: tek, sağlam ve düzenli kart</text>
+</svg></div>
+    </section>
+
+    <section class="pcb-sec">
+      <h2 class="section-title">Ne zaman PCB'ye ihtiyacınız olur?</h2>
+      <div class="pcb-when-grid">
+        <div class="tile pcb-when"><span class="tool-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><div class="tile-title">Prototipiniz çalışıyor ama kablo yumağı</div><p class="tile-sub">Breadboard&#x27;da ya da kablolarla çalışan devrenizi, kutuya sığan ve titreşimde bozulmayan tek bir karta taşıyalım.</p></div>
+        <div class="tile pcb-when"><span class="tool-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5zM3 13l9 5 9-5M3 17l9 5 9-5"/></svg></span><div class="tile-title">Aynı cihazdan birden çok yapacaksınız</div><p class="tile-sub">5, 50 ya da 500 adet üretecekseniz her birini elle kablolamak yerine fabrikada basılan, birbirinin aynısı kartlar kullanırsınız.</p></div>
+        <div class="tile pcb-when"><span class="tool-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5M22 9v6"/></svg></span><div class="tile-title">Okul ya da bitirme projesi</div><p class="tile-sub">Jüriye sunacağınız projede düzenli ve profesyonel görünen bir kart büyük fark yaratır, arıza riskini de azaltır.</p></div>
+        <div class="tile pcb-when"><span class="tool-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></span><div class="tile-title">Bir ürün fikriniz var</div><p class="tile-sub">Satmayı düşündüğünüz bir cihaz için küçük, ucuz ve üretime uygun bir kart tasarlayalım.</p></div>
+      </div>
+      <h3 class="pcb-sub">Örnek kart türleri</h3>
+      <ul class="pcb-uses"><li>Arduino / ESP32 / STM32 tabanlı kontrol kartları</li><li>Röle, MOSFET ve motor sürücü çıkışları</li><li>Sensör ve buton giriş kartları</li><li>Güç girişi ve regülatör devreleri</li><li>LED, gösterge ve trafik ışığı kartları</li><li>Mevcut modülleri tek karta toplayan kartlar</li></ul>
+    </section>
+
+    <section class="pcb-sec">
+      <h2 class="section-title">Süreç nasıl işliyor?</h2>
+      <ol class="pcb-steps">
+        <li class="pcb-step"><div class="pcb-step-media pcb-step-chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg></div><div class="pcb-step-body"><span class="pcb-step-n">1</span><div class="tile-title">Anlatın</div><p class="tile-sub">Kart ne yapacak, neyle beslenecek, hangi sensör ve çıkışlar olacak? Varsa prototipinizin fotoğrafı ya da elle çizdiğiniz bir taslak yeterli.</p></div></li>
+        <li class="pcb-step"><div class="pcb-step-media"><img src="assets/img/pcb/sema.jpg" alt="Şematik" width="720" height="540" loading="lazy" decoding="async"></div><div class="pcb-step-body"><span class="pcb-step-n">2</span><div class="tile-title">Şematik</div><p class="tile-sub">Devrenin çizimini hazırlıyorum: hangi parçanın nereye bağlandığını gösteren elektrik şeması.</p></div></li>
+        <li class="pcb-step"><div class="pcb-step-media"><img src="assets/img/pcb/pcb.jpg" alt="PCB yerleşimi" width="720" height="540" loading="lazy" decoding="async"></div><div class="pcb-step-body"><span class="pcb-step-n">3</span><div class="tile-title">PCB yerleşimi</div><p class="tile-sub">Parçaları karta yerleştirip bakır yolları çiziyorum. Güç hatları kalın, klemensler kenarda, kart kutuya uygun.</p></div></li>
+        <li class="pcb-step"><div class="pcb-step-media"><img src="assets/img/pcb/3d.jpg" alt="3D önizleme ve teslim" width="720" height="540" loading="lazy" decoding="async"></div><div class="pcb-step-body"><span class="pcb-step-n">4</span><div class="tile-title">3D önizleme ve teslim</div><p class="tile-sub">Kartın 3D görüntüsünü birlikte kontrol ediyoruz, istediğiniz değişiklikleri yapıyorum ve üretime hazır dosyaları teslim ediyorum.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="pcb-sec">
+      <div class="section-head"><div><h2 class="section-title">Tasarladığım kartlardan örnekler</h2></div><a class="section-link" href="yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html">Tasarımların ayrıntıları →</a></div>
+      <div class="pcb-work-grid">
+        <a class="tile tile-img pcb-work" href="yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html"><img src="assets/img/pcb/3d.jpg" alt="Trafik sinyalizasyon kartı" width="720" height="540" loading="lazy" decoding="async"><div class="tile-over"><div class="tile-title">Trafik sinyalizasyon kartı</div><div class="tile-sub">NodeMCU tabanlı, trafik ışıklarını süren ve buton/sensör girişlerini okuyan kontrol kartı.</div></div></a>
+        <a class="tile tile-img pcb-work" href="yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html"><img src="assets/img/pcb/peltier-3d.jpg" alt="ESP32 Peltier kontrol kartı" width="720" height="540" loading="lazy" decoding="async"><div class="tile-over"><div class="tile-title">ESP32 Peltier kontrol kartı</div><div class="tile-sub">Altı Peltier modülünü PWM ile süren; fanları, pompaları ve sensörleri de yöneten ESP32 tabanlı kart.</div></div></a>
+      </div>
+    </section>
+
+    <section class="pcb-sec pcb-two">
+      <div class="pcb-need"><h2 class="section-title">Sizden ne gerekiyor?</h2><ul class="pcb-check"><li>Kartın ne yapmasını istediğiniz (birkaç cümle yeter)</li><li>Neyle beslenecek: pil, adaptör, 12 V, USB…</li><li>Bağlanacak sensörler, modüller, röleler, ekran vb.</li><li>Varsa boyut ya da kutu kısıtı</li><li>Varsa prototipinizin fotoğrafı, şeması ya da kodu</li></ul></div>
+      <div class="pcb-faq"><h2 class="section-title">Sık sorulanlar</h2>
+        <details class="faq-item"><summary>PCB ile baskı devre aynı şey mi?</summary><p>Evet. PCB, &quot;Printed Circuit Board&quot; kelimelerinin kısaltması; Türkçede baskı devre, baskılı devre kartı ya da kısaca devre kartı denir.</p></details>
+        <details class="faq-item"><summary>Teknik bilgim yok, yine de yaptırabilir miyim?</summary><p>Evet. Ne yapmasını istediğinizi kendi cümlelerinizle anlatmanız yeterli; teknik kısımları birlikte netleştiririz.</p></details>
+        <details class="faq-item"><summary>Kartı siz mi üretiyorsunuz?</summary><p>Ben tasarımı ve üretim dosyalarını hazırlıyorum. Kartın kendisi PCB üretim firmalarında basılıyor; dosyaları nasıl sipariş edeceğinizi de anlatırım.</p></details>
+        <details class="faq-item"><summary>Ne kadar sürer, ücreti ne kadar?</summary><p>Kartın büyüklüğüne ve karmaşıklığına göre değişiyor. Projenizi anlatın, size süre ve fiyat söyleyeyim.</p></details>
+        <details class="faq-item"><summary>Hangi programı kullanıyorsunuz?</summary><p>KiCad. Ücretsiz ve açık kaynaklı olduğu için dosyalarınızı ileride siz ya da başka biri de açıp düzenleyebilir.</p></details>
+      </div>
+    </section>
+      <section class="section">
+        <div class="section-head"><h2 class="section-title">Müşteri yorumları</h2><a class="section-link" href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk'taki tüm yorumlar →</a></div>
+        <div class="review-grid">
+        <figure class="review">
+          <div class="review-stars" aria-label="5/5">★★★★★</div>
+          <blockquote>“Ahmet Bey, aklımdaki projeyi anlatmam sonucu tam olarak ihtiyacım olan pcb tasarımını çok kısa bir sürede geliştirdi. Kendisine çok teşekkür ediyorum. Güvenle çalışabilirsiniz.”</blockquote>
+          <figcaption>Bionluk alıcısı</figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review-stars" aria-label="5/5">★★★★★</div>
+          <blockquote>“İhtiyaçlarım doğrultusundaki PCB yi tasarladı ve detaylarını hiç sıkılmadan anlattı teşekkürler”</blockquote>
+          <figcaption>Bionluk alıcısı</figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review-stars" aria-label="5/5">★★★★★</div>
+          <blockquote>“Ahmet bey, tam istediğim gibi yaptı. İsteklerimi dinledi istişarede bulunduk, hep yardımcı oldu, kısa sürede teslim etti. Bu ilk işimizdi bundan sonrada beraber çalışacağız bionluk üzerinden çok teşekkürler ellerinize sağlık. Başarılarınızın devamını dilerim. Kolay gelsin”</blockquote>
+          <figcaption>Bionluk alıcısı</figcaption>
+        </figure>
+        </div>
+      </section>
+
+    <section class="section">
+      <div class="cta-band">
+        <div><h2 class="section-title">Projenizi anlatın</h2><p>Kısa bir açıklama yeterli; size nasıl bir kart gerektiğini ve yaklaşık ücretini söyleyeyim.</p></div>
+        <div class="cta-actions"><a class="btn btn-primary" href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk'tan teklif al →</a><a class="btn btn-ghost" href="iletisim.html">Bana yaz</a></div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
+    <div class="footer-social">
+      <a href="https://github.com/ahmtuluu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bionluk.com/ahmetuluu" target="_blank" rel="noopener">Bionluk</a>
+      <a href="mailto:ahulu2006@gmail.com">E-posta</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/main.js?v=5969ab74" defer></script>
+</body>
+</html>
