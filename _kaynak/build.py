@@ -149,6 +149,12 @@ PROJECTS = [
       tags=['PCB Tasarımı', 'KiCad', 'ESP32', 'Freelance'],
       tr=dict(title='Freelance PCB Tasarımı', desc='Bionluk üzerinden müşterilere özel şematik ve PCB tasarımı: ihtiyacı dinlemekten üretime hazır dosyalara kadar. 8 sipariş, 5.0 puan.'),
       en=dict(title='Freelance PCB Design', desc='Custom schematic and PCB design for clients on Bionluk, from understanding the need to production-ready files. 8 orders, 5.0 rating.')),
+ dict(kind='main', year='2026', cover='assets/img/kapak/planner.jpg', posts=[],
+      links=[('Canlı demoyu dene ↗', 'Try the live demo ↗', 'https://ahmtuluu.github.io/planner/demo.html'),
+             ('Tanıtım sayfası ↗', 'Product page ↗', 'https://ahmtuluu.github.io/planner/')],
+      tags=['Uygulama', 'JavaScript', 'PWA', 'Google Apps Script', 'Gemini API', 'Telegram Bot'],
+      tr=dict(title='Planner — Akıllı Ajanda Uygulaması', desc='Kendi ihtiyacım için yaptığım ajanda: Telegram\'dan sabah brifingi ve hatırlatmalar, Gemini ile gün planı ve alt adımlar, mesajla görev ekleme, alışkanlık serileri. Telefonda uygulama gibi kurulur, bilgisayarda tarayıcıda çalışır.'),
+      en=dict(title='Planner — Smart Planner App', desc='A planner I built for myself: morning briefings and reminders on Telegram, day plans and subtasks with Gemini, adding tasks by message and habit streaks. Installs like an app on the phone and runs in the browser on a computer.')),
  dict(kind='main', year='2026', cover='assets/img/kapak/mustech-web.jpg', posts=['mustech-web'], url='https://mustechagro.com.tr/',
       tags=['Web Tasarımı', 'HTML/CSS', 'JavaScript', 'MUSTECH'],
       tr=dict(title='MUSTECH Agro Web Sitesi', desc='Çalıştığım akıllı tarım şirketinin sitesi: iki dil, açık/koyu tema, hava durumuna dayalı tarla araçları, FAO-56 sulama hesaplayıcı ve sohbet asistanı. Düz HTML, CSS ve JavaScript.'),
@@ -170,9 +176,9 @@ PROJECTS = [
       tr=dict(title='12V DC Ayarlı Güç Kaynağı', desc='LM2596 buck modülünün trimpotu yerine dışarıdan çevrilebilen 10 tur hassas potansiyometre ve dijital voltmetre.'),
       en=dict(title='12V DC Adjustable Power Supply', desc='An LM2596 buck module with an external 10-turn precision potentiometer instead of the trimpot, plus a digital voltmeter.')),
 ]
-FEATURED = [0, 2, 3]  # ana sayfadaki projeler (PROJECTS indeksleri)
+FEATURED = [0, 3, 4]  # ana sayfadaki projeler (PROJECTS indeksleri)
 
-TAG_EN = {'Web Tasarımı': 'Web Design', 'PCB Tasarımı': 'PCB Design', 'Sensör': 'Sensors', 'Enerji': 'Energy', 'Otomasyon': 'Automation', 'Güç Elektroniği': 'Power Electronics',
+TAG_EN = {'Uygulama': 'App', 'Web Tasarımı': 'Web Design', 'PCB Tasarımı': 'PCB Design', 'Sensör': 'Sensors', 'Enerji': 'Energy', 'Otomasyon': 'Automation', 'Güç Elektroniği': 'Power Electronics',
           'Lehim': 'Soldering', 'PCB Tasarımı': 'PCB Design'}
 
 # ---------------------------------------------------------------- yardımcılar
@@ -379,6 +385,10 @@ def project_card(pr, lang, rel):
     if pr.get('url'):
         visit = 'Siteyi ziyaret et ↗' if lang == 'tr' else 'Visit the site ↗'
         links += f'<a class="card-link" href="{pr["url"]}" target="_blank" rel="noopener">{visit}</a>'
+    if pr.get('links'):
+        links = ''.join(f'<a class="card-link{" card-stretch" if i == 0 and not pr["posts"] else ""}" href="{u}" target="_blank" rel="noopener">{ltr if lang == "tr" else len_}</a>'
+                        for i, (ltr, len_, u) in enumerate(pr['links'])) + (links if pr['posts'] else '')
+        count = count if pr['posts'] else f'<span class="badge">{"Canlı demo" if lang == "tr" else "Live demo"}</span>'
     data_tags = '|'.join(tag_name(x, lang) for x in pr['tags'])
     return f'''<article class="card" data-filter-item data-tags="{esc(data_tags)}">
   {media}
@@ -566,6 +576,45 @@ def build_pcb_service(lang):
             {'@type': 'ListItem', 'position': 2, 'name': 'PCB tasarımı' if tr else 'PCB design', 'item': f'{SITE}/{path}'}]}]}]
     page(lang, 'pcb', t['title'], t['desc'], body, ld=ld)
 
+# ---------------------------------------------------------------- Planner (uygulama tanıtımı)
+PLANNER = dict(
+    site='https://ahmtuluu.github.io/planner/', demo='https://ahmtuluu.github.io/planner/demo.html',
+    tr=dict(k='Yeni · Kendi yaptığım uygulama', h='Planner', tag='Günün, cebinde.',
+            p='Kendi ihtiyacım için yaptığım akıllı ajanda. Sabahları Telegram\'dan günün özetini gönderiyor, Gemini ile günümü saat saat planlıyor, yaklaşan teslimleri hatırlatıyor. Telefona uygulama olarak kuruluyor, bilgisayarda tarayıcıda çalışıyor.',
+            feats=[('☀️', 'Telegram\'dan sabah brifingi'), ('✨', 'Gemini ile gün planı'), ('🧩', 'Görevi alt adımlara bölme'),
+                   ('💬', '"yarın 14:00 #iş" gibi hızlı ekleme'), ('🔥', 'Alışkanlık serileri'), ('📱', 'Telefon + bilgisayar')],
+            b1='Canlı demoyu dene ↗', b2='Tanıtım sayfası ↗',
+            note='Sunucusuz: Google Apps Script + Google Sheets · Telegram Bot API · Gemini API',
+            alts=['Planner takvim ekranı', 'Planner bugün ekranı', 'Planner istatistik ekranı, koyu tema']),
+    en=dict(k='New · An app I built', h='Planner', tag='Your day, in your pocket.',
+            p='A smart planner I built for myself. Every morning it sends a summary of the day on Telegram, plans my day hour by hour with Gemini and reminds me of upcoming deadlines. It installs as an app on the phone and runs in the browser on a computer.',
+            feats=[('☀️', 'Morning briefing on Telegram'), ('✨', 'Day plan with Gemini'), ('🧩', 'Break tasks into steps'),
+                   ('💬', 'Quick add: "tomorrow 14:00 #work"'), ('🔥', 'Habit streaks'), ('📱', 'Phone + desktop')],
+            b1='Try the live demo ↗', b2='Product page ↗',
+            note='Serverless: Google Apps Script + Google Sheets · Telegram Bot API · Gemini API',
+            alts=['Planner calendar screen', 'Planner today screen', 'Planner statistics screen, dark theme']),
+)
+
+def home_planner(lang, rel):
+    t = PLANNER[lang]
+    feats = ''.join(f'<li><span aria-hidden="true">{e}</span>{esc(x)}</li>' for e, x in t['feats'])
+    imgs = ''.join(f'<img class="pl-phone pl-{i}" src="{rel}assets/img/planner/{f}.jpg" alt="{esc(a)}" width="600" height="1298" loading="lazy" decoding="async">'
+                   for i, (f, a) in enumerate(zip(['takvim', 'bugun', 'istatistik'], t['alts'])))
+    return (f'    <section class="section" id="planner" data-reveal="0">\n'
+            f'      <div class="planner-band">\n'
+            f'        <div class="planner-text">\n'
+            f'          <span class="pl-kicker">{t["k"]}</span>\n'
+            f'          <div class="pl-title"><img src="{rel}assets/img/planner/icon.png" alt="" width="56" height="56"><div><h2>{t["h"]}</h2><p class="pl-tag">{t["tag"]}</p></div></div>\n'
+            f'          <p>{t["p"]}</p>\n'
+            f'          <ul class="pl-feats">{feats}</ul>\n'
+            f'          <div class="cta-actions"><a class="btn pl-btn" href="{PLANNER["demo"]}" target="_blank" rel="noopener">{t["b1"]}</a>'
+            f'<a class="btn btn-ghost" href="{PLANNER["site"]}" target="_blank" rel="noopener">{t["b2"]}</a></div>\n'
+            f'          <p class="pl-note">{t["note"]}</p>\n'
+            f'        </div>\n'
+            f'        <div class="planner-art" aria-hidden="false">{imgs}</div>\n'
+            f'      </div>\n'
+            f'    </section>\n')
+
 HOME_TOOLS = ['led', 'regulator', 'color', 'trace']
 def home_tools(lang, rel, P):
     tr = lang == 'tr'
@@ -710,7 +759,7 @@ def build_home(lang):
       </a>
 {cv_tile}
     </section>
-{pcb_explain(lang, rel, P)}
+{home_planner(lang, rel)}{pcb_explain(lang, rel, P)}
     <section class="section" data-reveal="0">
       <div class="section-head"><div><h2 class="section-title">{blog_h}</h2><p class="section-sub">{blog_sub}</p></div><a class="section-link" href="{P('blog')}">{s['see_all']}</a></div>
       <div class="post-cards">

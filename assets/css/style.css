@@ -900,3 +900,59 @@ a.avail:hover{color:var(--text);border-color:var(--accent-border);}
   .pcb-step-body{padding:14px 16px 16px;}
   .pcb-illu .lbl{font-size:16px;}
 }
+
+/* Planner tanıtım bandı (ana sayfa) */
+.planner-band{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;
+  padding:36px 36px 0 36px;border-radius:24px;border:1px solid rgba(192,132,252,.35);
+  background:radial-gradient(520px 320px at 85% 40%,rgba(217,70,239,.22),transparent 65%),radial-gradient(500px 300px at 0% 0%,rgba(124,58,237,.22),transparent 60%),#120f24;}
+.planner-text{padding-bottom:36px;position:relative;z-index:1;}
+.pl-kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#e9d5ff;
+  padding:5px 12px;border-radius:100px;background:rgba(168,85,247,.16);border:1px solid rgba(192,132,252,.4);}
+.pl-kicker::before{content:'';width:6px;height:6px;border-radius:50%;background:#e879f9;box-shadow:0 0 10px #e879f9;}
+.pl-title{display:flex;align-items:center;gap:14px;margin:18px 0 12px;}
+.pl-title img{width:56px;height:56px;border-radius:15px;box-shadow:0 10px 26px -8px rgba(168,85,247,.8);}
+.pl-title h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,36px);line-height:1.1;}
+.pl-tag{font-size:15px;background:linear-gradient(90deg,#c084fc,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:500;}
+.planner-text > p{color:#cdc6e0;font-size:15.5px;line-height:1.75;}
+.pl-feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0 22px;}
+.pl-feats li{display:flex;gap:9px;align-items:center;font-size:13.5px;color:#e4def2;padding:8px 11px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid rgba(192,132,252,.18);}
+.pl-btn{background:linear-gradient(135deg,#8b5cf6,#d946ef);color:#fff;font-weight:500;box-shadow:0 10px 26px -10px rgba(217,70,239,.9);}
+.pl-btn:hover{filter:brightness(1.1);}
+.planner-band .btn-ghost{background:rgba(255,255,255,.04);border-color:rgba(192,132,252,.3);color:#e4def2;}
+.planner-band .btn-ghost:hover{border-color:#e879f9;color:#fff;}
+.pl-note{font-size:12.5px;color:#9d93b8;margin-top:16px;}
+.planner-art{position:relative;height:440px;align-self:end;}
+.pl-phone{position:absolute;bottom:-40px;width:190px;height:auto;border-radius:28px;border:6px solid #1d1830;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.8),0 0 0 1px rgba(192,132,252,.3);background:#fff;transition:transform .5s cubic-bezier(.2,.7,.2,1);}
+.pl-0{left:50%;transform:translateX(-128%) rotate(-7deg);bottom:-70px;opacity:.95;}
+.pl-2{left:50%;transform:translateX(28%) rotate(7deg);bottom:-70px;opacity:.95;}
+.pl-1{left:50%;transform:translateX(-50%);width:215px;z-index:2;}
+.planner-band:hover .pl-0{transform:translateX(-136%) rotate(-9deg);}
+.planner-band:hover .pl-2{transform:translateX(36%) rotate(9deg);}
+.planner-band:hover .pl-1{transform:translateX(-50%) translateY(-8px);}
+@media (max-width:900px){
+  .planner-band{grid-template-columns:minmax(0,1fr);padding:28px 24px 0;}
+  .planner-text{padding-bottom:0;}
+  .planner-art{height:360px;}
+}
+@media (max-width:600px){
+  .planner-band{padding:22px 18px 0;border-radius:20px;}
+  .pl-feats{grid-template-columns:1fr;}
+  .planner-art{height:300px;}
+  .pl-phone{width:140px;border-width:4px;border-radius:22px;}
+  .pl-1{width:160px;}
+  .pl-0{transform:translateX(-118%) rotate(-7deg);}
+  .pl-2{transform:translateX(18%) rotate(7deg);}
+  .planner-band .cta-actions .btn{flex:1;justify-content:center;}
+}
+@media (prefers-reduced-motion:reduce){.pl-phone{transition:none;}}
+.pl-0,.pl-2{width:172px;}
+.pl-0{transform:translateX(-120%) rotate(-7deg);}
+.pl-2{transform:translateX(20%) rotate(7deg);}
+.planner-band:hover .pl-0{transform:translateX(-126%) rotate(-9deg);}
+.planner-band:hover .pl-2{transform:translateX(26%) rotate(9deg);}
+@media (max-width:600px){
+  .pl-0,.pl-2{width:128px;}
+  .pl-0{transform:translateX(-112%) rotate(-7deg);}
+  .pl-2{transform:translateX(12%) rotate(7deg);}
+}
