@@ -52,6 +52,7 @@ ICON = {
  'mail': '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>',
  'search': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
  'leaf': '<svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>',
+ 'download': '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>',
  'doc': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
  'chip': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>',
 }
@@ -270,6 +271,52 @@ def nav(lang, path, active, alt_path):
 </header>
 '''
 
+# ---------------------------------------------------------------- CV seçici (TR / EN)
+CV_META = {
+    'tr': dict(name='Türkçe', code='TR', file='Ahmet_Ulu_CV_TR.pdf', img='assets/img/cv/cv-tr.jpg'),
+    'en': dict(name='English', code='EN', file='Ahmet_Ulu_CV_EN.pdf', img='assets/img/cv/cv-en.jpg'),
+}
+CV_UPDATED = {'tr': 'Ekim 2026', 'en': 'October 2026'}
+
+def cv_options(lang, rel):
+    """İki dilli CV kartları (pencerede ve Hakkımda sayfasında ortak)."""
+    tr = lang == 'tr'
+    order = ['tr', 'en'] if tr else ['en', 'tr']
+    cards = []
+    for i, k in enumerate(order):
+        m = CV_META[k]
+        kb = max(1, round(os.path.getsize(os.path.join(ROOT, CV[k])) / 1024))
+        meta = (f'1 sayfa · PDF · {kb} KB' if tr else f'1 page · PDF · {kb} KB')
+        rec = (f'<span class="cv-rec">{"Bu sayfanın dili" if tr else "This page"}</span>' if i == 0 else '')
+        sub = {('tr', 'tr'): 'Türk firmaları için', ('tr', 'en'): 'Uluslararası başvurular için',
+               ('en', 'en'): 'For international applications', ('en', 'tr'): 'For companies in Türkiye'}[(lang, k)]
+        cards.append(
+            f'<div class="cv-opt{" is-first" if i == 0 else ""}">'
+            f'<a class="cv-prev" href="{rel}{CV[k]}" target="_blank" rel="noopener" hreflang="{k}" aria-label="{m["name"]} CV — {"önizle" if tr else "preview"}">'
+            f'<img src="{rel}{m["img"]}" alt="" width="520" height="322" loading="lazy" decoding="async"><span class="cv-code">{m["code"]}</span></a>'
+            f'<div class="cv-opt-body"><div class="cv-opt-head"><span class="cv-lang">{m["name"]}</span>{rec}</div>'
+            f'<div class="cv-sub">{sub}</div><div class="cv-meta">{meta}</div>'
+            f'<div class="cv-actions"><a class="btn {"btn-primary" if i == 0 else "btn-ghost"} cv-dl" href="{rel}{CV[k]}" download="{m["file"]}" hreflang="{k}">'
+            f'{ICON["download"]}{"İndir" if tr else "Download"}</a>'
+            f'<a class="cv-view" href="{rel}{CV[k]}" target="_blank" rel="noopener" hreflang="{k}">{"Önizle" if tr else "Preview"} ↗</a></div></div></div>')
+    return f'<div class="cv-opts">{"".join(cards)}</div>'
+
+def cv_note(lang):
+    return ('Telefon numaram gizlilik için web sürümünde yok; ihtiyacınız olursa e-postayla isteyebilirsiniz.' if lang == 'tr'
+            else 'My phone number is left out of the web version for privacy; feel free to ask for it by email.')
+
+def cv_dialog(lang, rel):
+    tr = lang == 'tr'
+    return (f'<dialog class="cv-dialog" id="cvDialog" aria-labelledby="cvDlgTitle">\n'
+            f'  <div class="cv-dlg-inner">\n'
+            f'    <div class="cv-dlg-head"><div><h2 id="cvDlgTitle">{"CV\'mi indir" if tr else "Download my CV"}</h2>'
+            f'<p>{"Hangi dilde istersin? İkisi de tek sayfa ve güncel" if tr else "Which language do you need? Both are one page and up to date"} ({CV_UPDATED[lang]}).</p></div>'
+            f'<button type="button" class="cv-close" data-cv-close aria-label="{"Kapat" if tr else "Close"}">×</button></div>\n'
+            f'    {cv_options(lang, rel)}\n'
+            f'    <p class="cv-note">{cv_note(lang)}</p>\n'
+            f'  </div>\n'
+            f'</dialog>\n')
+
 def footer(lang, path):
     rel = rel_of(path)
     bion = f'\n      <a href="{BIONLUK}" target="_blank" rel="noopener">Bionluk</a>' if BIONLUK else ''
@@ -284,7 +331,7 @@ def footer(lang, path):
     </div>
   </div>
 </footer>
-<script src="{rel}assets/js/main.js?v={asset_ver('assets/js/main.js')}" defer></script>
+{cv_dialog(lang, rel) if CV else ''}<script src="{rel}assets/js/main.js?v={asset_ver('assets/js/main.js')}" defer></script>
 </body>
 </html>
 '''
@@ -654,7 +701,7 @@ def build_home(lang):
         feat_k = 'Öne çıkan'
         soc_h = 'Bağlantılar'
         last_k = 'Son yazı'
-        cv_h, cv_t = 'CV', 'Türkçe · PDF'
+        cv_h, cv_t = 'CV', 'Türkçe · English'
         blog_h, blog_sub = 'Son yazılar', 'Projelerin adım adım hikâyesi, hatalar ve öğrendiklerim.'
         cta_h, cta_t = 'Bir projen mi var?', 'PCB tasarımı, gömülü sistem ya da IoT fikrin varsa konuşalım. Genellikle 1–2 gün içinde dönüş yaparım.'
         cta_b1, cta_b2 = 'Bana yaz →', 'Bionluk profilim'
@@ -673,7 +720,7 @@ def build_home(lang):
         feat_k = 'Featured'
         soc_h = 'Elsewhere'
         last_k = 'Latest post'
-        cv_h, cv_t = 'CV', 'PDF'
+        cv_h, cv_t = 'CV', 'English · Türkçe'
         blog_h, blog_sub = 'Latest posts', 'Step-by-step project stories, mistakes and lessons learned.'
         cta_h, cta_t = 'Got a project in mind?', "If you have a PCB, embedded or IoT idea, let's talk. I usually reply within 1–2 days."
         cta_b1, cta_b2 = 'Write to me →', 'My Bionluk profile'
@@ -683,7 +730,7 @@ def build_home(lang):
     rating = STATS[1][0] if len(STATS) > 1 else '5.0'
     cv_tile = ''
     if CV:
-        cv_tile = f'''      <a class="tile t-cv" href="{rel}{CV[lang]}" target="_blank" rel="noopener" data-reveal="6">
+        cv_tile = f'''      <a class="tile t-cv" href="{rel}{CV[lang]}" target="_blank" rel="noopener" data-cv-open aria-haspopup="dialog" data-reveal="6">
         <div class="tile-k">{cv_h}</div>
         <div class="cv-icon" aria-hidden="true">{ICON['doc']}</div>
         <div class="tile-sub">{cv_t} ↓</div>
@@ -828,10 +875,9 @@ def build_about(lang):
                 '      </div>\n')
     cv = ''
     if CV:
-        lab = 'CV indir (Türkçe, PDF)' if lang == 'tr' else 'Download CV (PDF)'
-        other = 'English CV' if lang == 'tr' else 'Turkish CV (Türkçe)'
-        cv = (f'\n    <div class="home-cta" style="margin-top:28px"><a class="btn btn-primary" href="{rel}{CV[lang]}" target="_blank" rel="noopener">{lab}</a>'
-              f'<a class="btn btn-ghost" href="{rel}{CV["en" if lang == "tr" else "tr"]}" target="_blank" rel="noopener" hreflang="{"en" if lang == "tr" else "tr"}">{other}</a></div>')
+        h = 'CV\'mi indir' if lang == 'tr' else 'Download my CV'
+        cv = (f'\n    <section class="cv-inline" id="cv"><h2 class="sub-title">{h}</h2>{cv_options(lang, rel)}'
+              f'<p class="cv-note">{cv_note(lang)}</p></section>')
     body = (f'  <div class="wrap-narrow inner fade-in">\n'
             f'    <div class="page-header"><h1>{a["h"]}</h1><p>{a["sub"]}</p></div>\n'
             f'{paras}{cv}\n'
@@ -970,7 +1016,7 @@ def build_contact(lang):
     if CV:
         cvlab = 'Türkçe · English (PDF)' if lang == 'tr' else 'English · Türkçe (PDF)'
         crel = rel_of(PAGES["contact"][0 if lang == "tr" else 1])
-        bion += f'\n      <a href="{crel}{CV[lang]}" target="_blank" rel="noopener" class="contact-row"><span class="contact-icon">{ICON["doc"]}</span><span class="contact-label">CV</span><span class="contact-value">{cvlab}</span></a>'
+        bion += f'\n      <a href="{crel}{CV[lang]}" target="_blank" rel="noopener" class="contact-row" data-cv-open aria-haspopup="dialog"><span class="contact-icon">{ICON["doc"]}</span><span class="contact-label">CV</span><span class="contact-value">{cvlab}</span></a>'
     if BIONLUK:
         bion = f'\n      <a href="{BIONLUK}" target="_blank" rel="noopener" class="contact-row"><span class="contact-icon">{ICON["chip"]}</span><span class="contact-label">Bionluk</span><span class="contact-value">{t["bion"]}</span></a>' + bion
     body = f'''  <div class="wrap-narrow inner fade-in">

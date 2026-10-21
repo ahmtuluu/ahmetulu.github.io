@@ -554,4 +554,23 @@
       sx = null;
     });
   }
+
+  /* ---------- CV dil seçici penceresi ---------- */
+  (function () {
+    var dlg = document.getElementById('cvDialog');
+    if (!dlg || typeof dlg.showModal !== 'function') return; // eski tarayıcı: bağlantılar doğrudan PDF'i açar
+    var opener = null;
+    document.querySelectorAll('[data-cv-open]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault(); opener = a;
+        dlg.showModal(); document.documentElement.classList.add('cv-lock');
+        var first = dlg.querySelector('.cv-dl'); if (first) first.focus();
+      });
+    });
+    var close = function () { dlg.close(); };
+    dlg.addEventListener('close', function () { document.documentElement.classList.remove('cv-lock'); if (opener) opener.focus(); });
+    dlg.querySelectorAll('[data-cv-close]').forEach(function (b) { b.addEventListener('click', close); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); }); // arka plana tıklayınca kapan
+    dlg.querySelectorAll('.cv-dl').forEach(function (a) { a.addEventListener('click', function () { setTimeout(close, 350); }); });
+  })();
 })();
