@@ -41,7 +41,7 @@ REVIEWS = [
  dict(tr='Ahmet bey, tam istediğim gibi yaptı. İsteklerimi dinledi istişarede bulunduk, hep yardımcı oldu, kısa sürede teslim etti. Bu ilk işimizdi bundan sonrada beraber çalışacağız bionluk üzerinden çok teşekkürler ellerinize sağlık. Başarılarınızın devamını dilerim. Kolay gelsin',
       en="Ahmet did it exactly the way I wanted. He listened to my requests, we discussed it together, he was always helpful and delivered quickly. This was our first job; from now on we'll keep working together through Bionluk. Thank you very much, great work. I wish you continued success."),
 ]
-CV = 'assets/ahmet-ulu-cv.pdf'   # İngilizce CV, telefon numarası çıkarılmış sürüm
+CV = {'tr': 'assets/ahmet-ulu-cv-tr.pdf', 'en': 'assets/ahmet-ulu-cv.pdf'}   # telefonsuz web sürümleri; telefonlu başvuru sürümleri repo dışında (ahmetulu_website\\cv-basvuru)
 GSC_VERIFICATION = "kDmbOcP_ZD3wqx9IxPQzHMZo0sCyWcbTu7h1BzVJdyA"   # Google Search Console 'HTML etiketi' doğrulama kodu (content="..." içindeki değer)
 GOATCOUNTER = None    # ör. 'ahmetulu' (goatcounter.com hesabındaki kod)
 
@@ -654,7 +654,7 @@ def build_home(lang):
         feat_k = 'Öne çıkan'
         soc_h = 'Bağlantılar'
         last_k = 'Son yazı'
-        cv_h, cv_t = 'CV', 'İngilizce · PDF'
+        cv_h, cv_t = 'CV', 'Türkçe · PDF'
         blog_h, blog_sub = 'Son yazılar', 'Projelerin adım adım hikâyesi, hatalar ve öğrendiklerim.'
         cta_h, cta_t = 'Bir projen mi var?', 'PCB tasarımı, gömülü sistem ya da IoT fikrin varsa konuşalım. Genellikle 1–2 gün içinde dönüş yaparım.'
         cta_b1, cta_b2 = 'Bana yaz →', 'Bionluk profilim'
@@ -683,7 +683,7 @@ def build_home(lang):
     rating = STATS[1][0] if len(STATS) > 1 else '5.0'
     cv_tile = ''
     if CV:
-        cv_tile = f'''      <a class="tile t-cv" href="{rel}{CV}" target="_blank" rel="noopener" data-reveal="6">
+        cv_tile = f'''      <a class="tile t-cv" href="{rel}{CV[lang]}" target="_blank" rel="noopener" data-reveal="6">
         <div class="tile-k">{cv_h}</div>
         <div class="cv-icon" aria-hidden="true">{ICON['doc']}</div>
         <div class="tile-sub">{cv_t} ↓</div>
@@ -828,8 +828,10 @@ def build_about(lang):
                 '      </div>\n')
     cv = ''
     if CV:
-        lab = 'CV indir (İngilizce, PDF)' if lang == 'tr' else 'Download CV (PDF)'
-        cv = f'\n    <div class="home-cta" style="margin-top:28px"><a class="btn btn-primary" href="{rel}{CV}" target="_blank" rel="noopener">{lab}</a></div>'
+        lab = 'CV indir (Türkçe, PDF)' if lang == 'tr' else 'Download CV (PDF)'
+        other = 'English CV' if lang == 'tr' else 'Turkish CV (Türkçe)'
+        cv = (f'\n    <div class="home-cta" style="margin-top:28px"><a class="btn btn-primary" href="{rel}{CV[lang]}" target="_blank" rel="noopener">{lab}</a>'
+              f'<a class="btn btn-ghost" href="{rel}{CV["en" if lang == "tr" else "tr"]}" target="_blank" rel="noopener" hreflang="{"en" if lang == "tr" else "tr"}">{other}</a></div>')
     body = (f'  <div class="wrap-narrow inner fade-in">\n'
             f'    <div class="page-header"><h1>{a["h"]}</h1><p>{a["sub"]}</p></div>\n'
             f'{paras}{cv}\n'
@@ -966,8 +968,9 @@ def build_contact(lang):
                  ok="✓ Got your message! I'll get back to you soon.", bion='PCB design on Bionluk')
     bion = ''
     if CV:
-        cvlab = 'CV (İngilizce, PDF)' if lang == 'tr' else 'CV (PDF)'
-        bion += f'\n      <a href="{rel_of(PAGES["contact"][0 if lang == "tr" else 1])}{CV}" target="_blank" rel="noopener" class="contact-row"><span class="contact-icon">{ICON["doc"]}</span><span class="contact-label">CV</span><span class="contact-value">{cvlab}</span></a>'
+        cvlab = 'Türkçe · English (PDF)' if lang == 'tr' else 'English · Türkçe (PDF)'
+        crel = rel_of(PAGES["contact"][0 if lang == "tr" else 1])
+        bion += f'\n      <a href="{crel}{CV[lang]}" target="_blank" rel="noopener" class="contact-row"><span class="contact-icon">{ICON["doc"]}</span><span class="contact-label">CV</span><span class="contact-value">{cvlab}</span></a>'
     if BIONLUK:
         bion = f'\n      <a href="{BIONLUK}" target="_blank" rel="noopener" class="contact-row"><span class="contact-icon">{ICON["chip"]}</span><span class="contact-label">Bionluk</span><span class="contact-value">{t["bion"]}</span></a>' + bion
     body = f'''  <div class="wrap-narrow inner fade-in">
