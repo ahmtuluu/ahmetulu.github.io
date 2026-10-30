@@ -2,9 +2,9 @@
   <h1>Reading a Button and Debouncing on the STM32F407: My First Register-Level Step</h1>
   <div class="blog-meta">Ahmet Ulu · October 2026</div>
 
-  <a class="series-box" href="../stm32-roadmap.html"><span class="series-k">Series</span><span class="series-t">My STM32 Roadmap</span><span class="series-s">Part 1 · All parts and what comes next →</span></a>
+  <a class="series-box" href="../stm32-roadmap.html"><span class="series-k">Series</span><span class="series-t">My STM32 Roadmap</span><span class="series-s">Part 1 · All parts →</span></a>
 
-  <p>I recently joined the <strong>AGÜ rocket team</strong>. A rocket's flight computer reads sensors, tracks altitude, detects apogee to trigger recovery and sends telemetry to the ground. <strong>STM32</strong> is one of the most common microcontrollers on these boards. So I decided to learn STM32 from the ground up, really understanding it, and I am documenting it here part by part.</p>
+  <p>My next step in embedded systems is <strong>STM32</strong>: one of the most common microcontroller families both in industry and in student teams (including the AGÜ rocket team I recently joined). So I decided to learn STM32 from the ground up, really understanding it, and I am documenting it here part by part.</p>
 
   <p>Instead of ready-made functions like Arduino's <code>digitalRead()</code>, I am starting at the <strong>register level</strong>: looking up what each bit does in the reference manual (RM0090) and writing it myself. The board is an <strong>STM32F407G-DISC1</strong> and the IDE is <strong>Keil µVision</strong>. First exercise: read the on-board button and drive the LEDs.</p>
 
@@ -113,7 +113,7 @@
 
   <h3>Why a delay, and its limits</h3>
   <p>For the wait I used a simple counting loop for now: <code>void delay(volatile uint32_t n) { while (n--); }</code>. <code>volatile</code> stops the compiler from optimising this “do-nothing” loop away. I tuned <code>DEBOUNCE</code> by trial: too small and the pin is read again before the bouncing ends; too large and short, quick presses are missed.</p>
-  <p>This approach has two weak points: the delay depends on the CPU frequency and compiler settings, so it is not an exact number of milliseconds; and the CPU can do nothing else while waiting. On a rocket flight computer, locking up the CPU to wait for a button while sensors need reading is not acceptable. So in the coming parts I will learn real millisecond timing with <strong>SysTick</strong> and reading the button with an <strong>EXTI interrupt</strong>.</p>
+  <p>This approach has two weak points: the delay depends on the CPU frequency and compiler settings, so it is not an exact number of milliseconds; and the CPU can do nothing else while waiting. In a project that also reads sensors or communicates, locking up the CPU to wait for a button is not acceptable. There are better ways: real millisecond timing with <strong>SysTick</strong> and reading the button with an <strong>EXTI interrupt</strong>.</p>
 
   <figure class="blog-figure"><img src="kod-1.png" class="blog-img" alt="Keil µVision: definitions and GPIO setup" width="1600" height="607" loading="lazy" decoding="async"><figcaption>The first part of the code in Keil µVision: definitions, clocks and pin setup</figcaption></figure>
   <figure class="blog-figure"><img src="kod-2.png" class="blog-img" alt="Debounce loop and blinking stage" width="1300" height="637" loading="lazy" decoding="async"><figcaption>The debounce loop and stage two</figcaption></figure>
@@ -175,6 +175,7 @@ int main(void)
       <li>IDE: Keil µVision · Language: C, register level (CMSIS header <code>stm32f4xx.h</code>)</li>
       <li>Registers used: <code>RCC_AHB1ENR</code>, <code>GPIOx_MODER</code>, <code>GPIOx_PUPDR</code>, <code>GPIOx_IDR</code>, <code>GPIOx_BSRR</code></li>
       <li>Pins: PA0 (USER button, active-high), PD12–PD15 (LED)</li>
+      <li>If you use LEDs in your own circuit, find the series resistor with the <a href="../tools/led-resistor.html">LED resistor calculator</a>.</li>
     </ul>
   </div>
 
@@ -186,7 +187,7 @@ int main(void)
     <li>Mechanical buttons never give a “clean” signal; you always need debounce.</li>
   </ul>
 
-  <a class="series-box next" href="../stm32-roadmap.html"><span class="series-k">Next part</span><span class="series-t">Part 2: Knight Rider — sweeping the LEDs in sequence</span><span class="series-s">See the roadmap →</span></a>
+  <a class="series-box next" href="../stm32-roadmap.html"><span class="series-k">Series</span><span class="series-t">My STM32 Roadmap</span><span class="series-s">New parts appear here as they are published · All parts →</span></a>
 
   <h3>References</h3>
   <ul>

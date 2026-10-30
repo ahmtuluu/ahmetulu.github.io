@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Battery Life Calculator (with Sleep Mode) — Ahmet Ulu</title>
+<title>Battery Life Calculator (mAh, Sleep Mode, ESP32) — Ahmet Ulu</title>
 <meta name="description" content="Battery life calculator: average current and estimated run time from active and sleep current. Made for ESP32 deep sleep projects.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="Battery Life Calculator (with Sleep Mode) — Ahmet Ulu">
+<meta property="og:title" content="Battery Life Calculator (mAh, Sleep Mode, ESP32) — Ahmet Ulu">
 <meta property="og:description" content="Battery life calculator: average current and estimated run time from active and sleep current. Made for ESP32 deep sleep projects.">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/battery-life.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Battery Life Calculator (with Sleep Mode)", "description": "Battery life calculator: average current and estimated run time from active and sleep current. Made for ESP32 deep sleep projects.", "url": "https://ahmetulu.com.tr/en/tools/battery-life.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Battery life", "item": "https://ahmetulu.com.tr/en/tools/battery-life.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Battery Life Calculator (with Sleep Mode)", "description": "Battery life calculator: average current and estimated run time from active and sleep current. Made for ESP32 deep sleep projects.", "url": "https://ahmetulu.com.tr/en/tools/battery-life.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How long does a 2000 mAh battery last?", "acceptedAnswer": {"@type": "Answer", "text": "Divide by the average current: 2000 mAh / 20 mA = 100 hours. Leave 20–30% margin for regulator losses and temperature."}}, {"@type": "Question", "name": "How does sleep mode extend battery life?", "acceptedAnswer": {"@type": "Answer", "text": "The average current is the time-weighted mix of active and sleep current. If the device sleeps at µA levels most of the time, the battery can last months."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Battery life", "item": "https://ahmetulu.com.tr/en/tools/battery-life.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -56,10 +56,16 @@
 <h3>In practice</h3>
 <ul><li>On development boards the regulator, USB-serial chip and LEDs can draw mA even in sleep; measure to be sure.</li>
 <li>Usable capacity drops at high current and low temperature.</li></ul>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>How long does a 2000 mAh battery last?</summary><p>Divide by the average current: 2000 mAh / 20 mA = 100 hours. Leave 20–30% margin for regulator losses and temperature.</p></details>
+        <details class="faq-item"><summary>How does sleep mode extend battery life?</summary><p>The average current is the time-weighted mix of active and sleep current. If the device sleeps at µA levels most of the time, the battery can last months.</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf" target="_blank" rel="noopener">Espressif — ESP32 datasheet (güç tüketimi tabloları)</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -72,6 +78,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

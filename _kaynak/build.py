@@ -15,6 +15,7 @@ import os, sys, html, hashlib, json, datetime
 sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import araclar
+import araclar_seo
 import pcb
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -98,7 +99,7 @@ MONTHS = {'tr': ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz
 
 # ---------------------------------------------------------------- içerik
 GROUPS = [  # yazılar sayfasındaki gruplar (sıra önemli)
- dict(key='stm32', tr=('STM32 Yol Haritam', 'AGÜ Roket Takımı için STM32F407\'yi register seviyesinde, bölüm bölüm öğreniyorum'), en=('My STM32 Roadmap', 'Learning the STM32F407 at register level, part by part, for the AGÜ rocket team')),
+ dict(key='stm32', tr=('STM32 Yol Haritam', 'STM32F407\'yi register seviyesinde, bölüm bölüm öğreniyorum'), en=('My STM32 Roadmap', 'Learning the STM32F407 at register level, part by part')),
  dict(key='web', tr=('Web Projeleri', 'Tasarlayıp kodladığım siteler'), en=('Web Projects', 'Websites I designed and built')),
  dict(key='pcb', tr=('PCB Tasarımları', 'Bionluk üzerinden müşteriler için yaptığım tasarımlar'), en=('PCB Designs', 'Designs I made for clients through Bionluk')),
  dict(key='tarim', tr=('Akıllı Tarım Sistemi', 'Projenin adım adım gelişimi'), en=('Smart Agriculture System', 'Step-by-step development of the project')),
@@ -110,8 +111,8 @@ POSTS = [  # en yeni en üstte
  dict(slug='stm32-01-buton', group='stm32', date=(2026, 10),
       tr_url='yazilar/stm32/01-buton-debounce.html', en_url='en/blog/stm32-01-button-debounce.html',
       img_dir='yazilar/stm32/', thumb='assets/img/kapak/stm32-01.jpg', step=1,
-      keywords={'tr': ['STM32', 'STM32F407', 'register seviyesi', 'buton debounce', 'kontak sıçraması', 'GPIO', 'BSRR', 'Keil', 'roket takımı'],
-                'en': ['STM32', 'STM32F407', 'register level', 'button debounce', 'contact bounce', 'GPIO', 'BSRR', 'Keil', 'rocket team']},
+      keywords={'tr': ['STM32', 'STM32F407', 'register seviyesi', 'buton debounce', 'kontak sıçraması', 'GPIO', 'BSRR', 'Keil'],
+                'en': ['STM32', 'STM32F407', 'register level', 'button debounce', 'contact bounce', 'GPIO', 'BSRR', 'Keil']},
       tr=dict(kicker='STM32 Yol Haritam · 1. Bölüm', title='STM32F407 ile Buton Okuma ve Debounce', page_title='STM32F407 Buton Okuma ve Debounce: Register Seviyesinde GPIO (Keil)',
               desc='STM32 yol haritamın ilk bölümü: STM32F407 Discovery\'de register seviyesinde buton okuma, BSRR ile LED sürme ve buton sıçramasını (bouncing) yazılımsal debounce ile çözmek. Görseller ve sanal kart ile.'),
       en=dict(kicker='My STM32 Roadmap · Part 1', title='Reading a Button and Debouncing on the STM32F407', page_title='STM32F407 Button Reading and Debounce: Register-Level GPIO (Keil)',
@@ -161,10 +162,6 @@ PROJECTS = [
       tags=['PCB Tasarımı', 'KiCad', 'ESP32', 'Freelance'],
       tr=dict(title='Freelance PCB Tasarımı', desc='Bionluk üzerinden müşterilere özel şematik ve PCB tasarımı: ihtiyacı dinlemekten üretime hazır dosyalara kadar. 8 sipariş, 5.0 puan.'),
       en=dict(title='Freelance PCB Design', desc='Custom schematic and PCB design for clients on Bionluk, from understanding the need to production-ready files. 8 orders, 5.0 rating.')),
- dict(kind='main', year='2026', cover='assets/img/kapak/stm32-01.jpg', posts=['stm32-01-buton'], page='stm32', cover_pos='4% 50%',
-      tags=['STM32', 'C', 'Register', 'Gömülü Sistemler', 'Roket'],
-      tr=dict(title='STM32 Yol Haritam', desc='AGÜ Roket Takımı için STM32F407\'yi register seviyesinde, bölüm bölüm öğreniyorum: GPIO\'dan kesmelere, sensörlerden uçuş bilgisayarına. Her bölümü kodu ve görselleriyle burada paylaşıyorum.'),
-      en=dict(title='My STM32 Roadmap', desc='Learning the STM32F407 at register level, part by part, for the AGÜ rocket team: from GPIO to interrupts, from sensors to a flight computer. Each part is shared here with its code and diagrams.')),
  dict(kind='main', year='2026', cover='assets/img/kapak/planner.jpg', posts=[],
       links=[('Canlı demoyu dene ↗', 'Try the live demo ↗', 'https://ahmtuluu.github.io/planner/demo.html'),
              ('Tanıtım sayfası ↗', 'Product page ↗', 'https://ahmtuluu.github.io/planner/')],
@@ -192,7 +189,7 @@ PROJECTS = [
       tr=dict(title='12V DC Ayarlı Güç Kaynağı', desc='LM2596 buck modülünün trimpotu yerine dışarıdan çevrilebilen 10 tur hassas potansiyometre ve dijital voltmetre.'),
       en=dict(title='12V DC Adjustable Power Supply', desc='An LM2596 buck module with an external 10-turn precision potentiometer instead of the trimpot, plus a digital voltmeter.')),
 ]
-FEATURED = [0, 1, 4]  # ana sayfadaki projeler (PROJECTS indeksleri)
+FEATURED = [0, 3, 4]  # ana sayfadaki projeler (PROJECTS indeksleri)
 
 TAG_EN = {'Gömülü Sistemler': 'Embedded Systems', 'Roket': 'Rocketry', 'Register': 'Registers', 'Uygulama': 'App', 'Web Tasarımı': 'Web Design', 'PCB Tasarımı': 'PCB Design', 'Sensör': 'Sensors', 'Enerji': 'Energy', 'Otomasyon': 'Automation', 'Güç Elektroniği': 'Power Electronics',
           'Lehim': 'Soldering', 'PCB Tasarımı': 'PCB Design'}
@@ -336,7 +333,10 @@ def footer(lang, path):
     rel = rel_of(path)
     bion = f'\n      <a href="{BIONLUK}" target="_blank" rel="noopener">Bionluk</a>' if BIONLUK else ''
     mail = 'E-posta' if lang == 'tr' else 'Email'
+    pop = ''.join(f'<a href="{rel}{tool_url(araclar.TOOL[k], lang)}">{esc(araclar.TOOL[k][lang]["short"])}</a>' for k in FOOTER_TOOLS)
+    hub = rel + PAGES['tools'][0 if lang == 'tr' else 1]
     return f'''<footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="{'Popüler hesap araçları' if lang == 'tr' else 'Popular calculators'}"><a class="ft-k" href="{hub}">{'Hesap araçları' if lang == 'tr' else 'Calculators'}</a>{pop}</nav>
   <div class="wrap">
     <div class="footer-copy">© {YEAR} Ahmet Ulu · Kayseri</div>
     <div class="footer-social">
@@ -373,9 +373,18 @@ def person_ld(lang):
         'sameAs': [GITHUB, LINKEDIN] + ([BIONLUK] if BIONLUK else []),
     }
 
+FOOTER_TOOLS = ['color', 'led', 'ohm', 'smd', 'divider', 'trace', 'awg', 't555']
+
 CANVAS = '<canvas id="circuit-canvas" aria-hidden="true"></canvas>\n'
 
+PAGE_HASH = {}  # sayfa içeriğinin özeti → sitemap lastmod yalnızca içerik değişince güncellenir
+
 def write(path, text):
+    if path.endswith('.html'):
+        import re as _re
+        norm = _re.sub(r'\?v=[0-9a-f]+', '', text)
+        norm = _re.sub(r'"dateModified":\s*"[^"]*"', '', norm)
+        PAGE_HASH[path] = hashlib.md5(norm.encode('utf-8')).hexdigest()
     full = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, 'w', encoding='utf-8', newline='\n') as f:
@@ -643,39 +652,22 @@ def build_pcb_service(lang):
     page(lang, 'pcb', t['title'], t['desc'], body, ld=ld)
 
 # ---------------------------------------------------------------- STM32 yol haritası
-# durum: 'done' yayında, 'wip' uygulama bitti yazı yolda, 'todo' sırada
-STM32_ROAD = [
- dict(st='done', post='stm32-01-buton', ic='⏻',
-      tr=('GPIO: buton okuma ve debounce', 'Saatleri açmak, MODER ile pin modu, IDR ile buton okumak, BSRR ile LED sürmek ve kontak sıçramasını çözmek.', 'Arming anahtarı, durum butonları ve LED göstergeleri hep GPIO ile çalışır.'),
-      en=('GPIO: reading a button and debouncing', 'Enabling clocks, pin modes with MODER, reading a button with IDR, driving LEDs with BSRR and fixing contact bounce.', 'Arming switches, status buttons and indicator LEDs all run on GPIO.')),
- dict(st='wip', ic='≋',
-      tr=('Karaşimşek: LED\'leri sırayla kaydırmak', 'Bit kaydırma ve maskelerle dört LED\'i sırayla yakıp söndürmek.', 'Uçuş aşamasını (hazır, uçuşta, kurtarma) LED desenleriyle göstermek.'),
-      en=('Knight Rider: sweeping the LEDs', 'Lighting the four LEDs in sequence with bit shifts and masks.', 'Showing the flight phase (ready, in flight, recovery) with LED patterns.')),
- dict(st='todo', ic='⚡',
-      tr=('EXTI: butonu kesmeyle okumak', 'NVIC ve EXTI ile butonu sürekli kontrol etmek yerine kesmeyle yakalamak.', 'İşlemciyi bekletmeden olaylara anında tepki vermek.'),
-      en=('EXTI: reading the button with an interrupt', 'Catching the button with NVIC and EXTI instead of polling it.', 'Reacting to events instantly without blocking the CPU.')),
- dict(st='todo', ic='⏱',
-      tr=('SysTick ve TIM: gerçek zamanlama', 'Sayaç döngüsü yerine milisaniye hassasiyetinde gecikme ve periyodik görevler.', 'Sensörleri sabit aralıkla örneklemek ve uçuş süresini ölçmek.'),
-      en=('SysTick and TIM: real timing', 'Millisecond-accurate delays and periodic tasks instead of counting loops.', 'Sampling sensors at a fixed rate and measuring flight time.')),
- dict(st='todo', ic='∿',
-      tr=('PWM: servo ve buzzer', 'Zamanlayıcı kanallarıyla PWM üretmek, görev oranını ayarlamak.', 'Servo kontrolü ve yer ekibine sesli durum bildirimi.'),
-      en=('PWM: servo and buzzer', 'Generating PWM with timer channels and adjusting the duty cycle.', 'Servo control and audible status signals for the ground crew.')),
- dict(st='todo', ic='⇄',
-      tr=('UART: bilgisayarla ve modüllerle konuşmak', 'Seri haberleşme, baud hızı, gönderme/alma ve basit bir komut satırı.', 'Yer istasyonuna telemetri göndermek ve GPS modülünden veri almak.'),
-      en=('UART: talking to a PC and modules', 'Serial communication, baud rate, transmit/receive and a simple command line.', 'Sending telemetry to the ground station and reading a GPS module.')),
- dict(st='todo', ic='◔',
-      tr=('ADC: batarya ve analog sensörler', 'Analog gerilimi dijitale çevirmek, örnekleme ve filtreleme.', 'Uçuş öncesi batarya kontrolü ve gerilim izleme.'),
-      en=('ADC: battery and analog sensors', 'Converting analog voltage to digital, sampling and filtering.', 'Pre-flight battery checks and voltage monitoring.')),
- dict(st='todo', ic='◎',
-      tr=('I²C / SPI: IMU ve barometre', 'Sensör register\'larını okumak; ivme, açı ve basınç verisi.', 'Basınçtan irtifa, IMU\'dan yönelim: uçuş bilgisayarının kalbi.'),
-      en=('I²C / SPI: IMU and barometer', 'Reading sensor registers: acceleration, angle and pressure data.', 'Altitude from pressure, attitude from the IMU: the heart of a flight computer.')),
- dict(st='todo', ic='▤',
-      tr=('DMA ve SD karta kayıt', 'İşlemciyi yormadan veri taşımak ve SD karta yazmak.', 'Uçuş verisini yüksek hızda kaydedip sonradan analiz etmek.'),
-      en=('DMA and SD card logging', 'Moving data without loading the CPU and writing it to an SD card.', 'Logging flight data at a high rate for later analysis.')),
- dict(st='todo', ic='▲',
-      tr=('Mini uçuş bilgisayarı', 'Hepsini birleştirmek: sensör füzyonu, durum makinesi ve kayıt; masa üstünde simülasyonla test.', 'İrtifa takibi, tepe noktasını algılama ve kurtarma tetiklemesi.'),
-      en=('A mini flight computer', 'Putting it all together: sensor fusion, a state machine and logging, tested on the bench with simulated data.', 'Tracking altitude, detecting apogee and triggering recovery.')),
-]
+# Bölümler POSTS'tan (group='stm32') otomatik gelir: yeni yazı ekledikçe burada görünür.
+STM32_IMG = 'assets/img/kapak/stm32-seri.jpg'
+
+def stm32_parts():
+    return sorted([p for p in POSTS if p['group'] == 'stm32'], key=lambda p: p.get('step', 0))
+
+def stm32_series_card(lang, rel):
+    """Yazılar sayfasında STM32 grubunun başındaki seri kartı."""
+    tr = lang == 'tr'
+    n = len(stm32_parts())
+    href = rel + PAGES['stm32'][0 if tr else 1]
+    return (f'      <a class="series-card" href="{href}">'
+            f'<img src="{rel}{STM32_IMG}" alt="" width="800" height="500" loading="lazy" decoding="async">'
+            f'<span class="sc-body"><span class="sc-k">{"Seri" if tr else "Series"} · {n} {"bölüm" if tr else ("part" if n == 1 else "parts")}</span>'
+            f'<span class="sc-t">{"STM32 Yol Haritam" if tr else "My STM32 Roadmap"}</span>'
+            f'<span class="sc-s">{"Register seviyesinde STM32F407, bölüm bölüm. Tüm bölümler →" if tr else "STM32F407 at register level, part by part. All parts →"}</span></span></a>\n')
 
 def build_stm32_roadmap(lang):
     tr = lang == 'tr'
@@ -683,53 +675,42 @@ def build_stm32_roadmap(lang):
     path = PAGES['stm32'][0 if tr else 1]
     rel = rel_of(path)
     P = lambda k: rel + PAGES[k][0 if tr else 1]
-    done = sum(1 for x in STM32_ROAD if x['st'] == 'done')
-    total = len(STM32_ROAD)
-    badge = {'done': L('Yayında', 'Published'), 'wip': L('Uygulama tamam · yazısı yakında', 'Built · write-up coming'), 'todo': L('Sırada', 'Up next')}
+    parts = stm32_parts()
     items = []
-    for i, x in enumerate(STM32_ROAD, 1):
-        h, d, why = x[lang]
-        p = POST.get(x.get('post'))
-        title = f'<a href="{rel}{post_url(p, lang)}">{esc(h)}</a>' if p else esc(h)
-        more = f'<a class="road-link" href="{rel}{post_url(p, lang)}">{L("Yazıyı oku →", "Read the post →")}</a>' if p else ''
-        items.append(f'      <li class="road-step is-{x["st"]}"><span class="road-n" aria-hidden="true">{i}</span>'
-                     f'<div class="road-card"><div class="road-top"><span class="road-part">{L(f"{i}. bölüm", f"Part {i}")}</span><span class="road-badge">{badge[x["st"]]}</span></div>'
-                     f'<h3>{title}</h3><p>{esc(d)}</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>{L("Roket için", "For the rocket")}:</b> {esc(why)}</span></p>{more}</div></li>')
-    why = [(L('Uçuş bilgisayarı', 'Flight computer'), L('Roketin beyni: sensörleri okur, irtifayı hesaplar, tepe noktasında kurtarmayı tetikler. Bu kartlarda en sık görülen işlemcilerden biri STM32.', 'The rocket\'s brain: it reads sensors, computes altitude and triggers recovery at apogee. STM32 is one of the most common MCUs on these boards.')),
-           (L('Zamanlama kritik', 'Timing is critical'), L('Uçuş birkaç saniyede biter. Kesmeler, zamanlayıcılar ve DMA ile hiçbir veriyi kaçırmadan çalışmak gerekiyor.', 'A flight is over in seconds. Interrupts, timers and DMA are needed so that no data is missed.')),
-           (L('Register seviyesi', 'Register level'), L('Hazır kütüphanelerin altında ne olduğunu bilmek, sahada bir şey ters gittiğinde hatayı bulmayı kolaylaştırıyor.', 'Knowing what is under the libraries makes it much easier to find the fault when something goes wrong in the field.'))]
-    why_html = '\n'.join(f'        <div class="tile road-why-tile"><div class="tile-title">{esc(h)}</div><p class="tile-sub">{esc(d)}</p></div>' for h, d in why)
+    for i, p in enumerate(parts, 1):
+        t = p[lang]
+        u = rel + post_url(p, lang)
+        items.append(f'      <li class="road-step is-done"><span class="road-n" aria-hidden="true">{p.get("step", i)}</span>'
+                     f'<a class="road-card road-card-link" href="{u}"><img class="road-thumb" src="{rel}{p["thumb"]}" alt="" width="800" height="500" loading="lazy" decoding="async">'
+                     f'<span class="road-info"><span class="road-top"><span class="road-part">{L(f"{p.get("step", i)}. bölüm", f"Part {p.get("step", i)}")}</span>'
+                     f'<span class="road-date">{date_str(p, lang)} · {reading_time(p, lang)}</span></span>'
+                     f'<span class="road-h">{esc(t["title"])}</span><span class="road-d">{esc(t["desc"])}</span>'
+                     f'<span class="road-link">{L("Yazıyı oku →", "Read the post →")}</span></span></a></li>')
     chips = ''.join(f'<span class="chip-sm">{c}</span>' for c in ['STM32F407G-DISC1', 'Cortex-M4', 'Keil µVision', L('C · register seviyesi', 'C · register level'), 'RM0090'])
-    first = POST['stm32-01-buton']
-    lead = L('<strong>AGÜ Roket Takımı</strong>\'na katıldım. Roketin uçuş bilgisayarı tarafında işe yarayabilmek için STM32\'yi temelden, register seviyesinde öğreniyorum. Her uygulamayı bitirdiğimde karşılaştığım sorunları, çözümleri ve kodu burada bir bölüm olarak yayımlıyorum.',
-             'I joined the <strong>AGÜ rocket team</strong>. To be useful on the flight computer side, I am learning STM32 from the ground up, at register level. Every time I finish an exercise, I publish the problems I ran into, the fixes and the code here as a new part.')
+    n = len(parts)
+    lead = L('STM32\'yi hazır kütüphaneler yerine <strong>register seviyesinde</strong>, referans kılavuza bakarak öğreniyorum. Her uygulamayı bitirdiğimde karşılaştığım sorunları, çözümleri ve kodu burada yeni bir bölüm olarak yayımlıyorum.',
+             'I am learning STM32 at <strong>register level</strong>, working from the reference manual instead of ready-made libraries. Every time I finish an exercise, I publish the problems I ran into, the fixes and the code here as a new part.')
     title = L('STM32 Yol Haritam: Register Seviyesinde STM32F407 — Ahmet Ulu', 'My STM32 Roadmap: STM32F407 at Register Level — Ahmet Ulu')
-    desc = L('AGÜ Roket Takımı için STM32F407\'yi register seviyesinde öğrenme serim: GPIO ve debounce, EXTI, SysTick, PWM, UART, ADC, I²C/SPI sensörler, DMA ve mini uçuş bilgisayarı.',
-             'My series on learning the STM32F407 at register level for the AGÜ rocket team: GPIO and debounce, EXTI, SysTick, PWM, UART, ADC, I²C/SPI sensors, DMA and a mini flight computer.')
+    desc = L('Register seviyesinde STM32F407 öğrenme serim: Keil µVision ile GPIO, register\'lar ve gerçek sorunlar; her bölüm kodu ve görselleriyle.',
+             'My series on learning the STM32F407 at register level: GPIO, registers and real problems in Keil µVision; every part with its code and diagrams.')
+    first = parts[0] if parts else None
+    start = f'<a class="btn btn-primary road-cta" href="{rel}{post_url(first, lang)}">{L("1. bölümden başla →", "Start with part 1 →")}</a>' if first else ''
     body = f'''  <div class="wrap inner fade-in road-page">
-    <nav class="crumbs" aria-label="{L('Konum', 'Breadcrumb')}"><a href="{P('home')}">{L('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href="{P('projects')}">{L('Projeler', 'Projects')}</a><span aria-hidden="true">/</span><span>{L('STM32 yol haritam', 'My STM32 roadmap')}</span></nav>
+    <nav class="crumbs" aria-label="{L('Konum', 'Breadcrumb')}"><a href="{P('home')}">{L('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href="{P('blog')}">{L('Yazılar', 'Blog')}</a><span aria-hidden="true">/</span><span>{L('STM32 yol haritam', 'My STM32 roadmap')}</span></nav>
     <header class="road-hero">
-      <div class="tool-head"><span class="tool-kicker">{L('Seri · AGÜ Roket Takımı', 'Series · AGÜ Rocket Team')}</span><h1>{L('STM32 Yol Haritam', 'My STM32 Roadmap')}</h1><p>{lead}</p>
+      <div class="tool-head"><span class="tool-kicker">{L('Seri · Register seviyesinde', 'Series · Register level')}</span><h1>{L('STM32 Yol Haritam', 'My STM32 Roadmap')}</h1><p>{lead}</p>
         <div class="chips-sm road-chips">{chips}</div>
       </div>
       <div class="road-progress">
-        <div class="tile-k">{L('İlerleme', 'Progress')}</div>
-        <div class="road-num"><b>{done}</b><span>/ {total}</span></div>
-        <div class="road-bar" role="progressbar" aria-valuemin="0" aria-valuemax="{total}" aria-valuenow="{done}" aria-label="{L('Yayımlanan bölümler', 'Published parts')}"><span style="width:{done / total * 100:.0f}%"></span><i style="width:{(done + 1) / total * 100:.0f}%"></i></div>
-        <div class="tile-sub">{L(f'{done} bölüm yayında · 1 uygulama tamam', f'{done} part published · 1 more built')}</div>
-        <a class="btn btn-primary road-cta" href="{rel}{post_url(first, lang)}">{L('1. bölümden başla →', 'Start with part 1 →')}</a>
+        <img class="road-cover" src="{rel}{STM32_IMG}" alt="{L('STM32 mikrodenetleyici çizimi', 'STM32 microcontroller illustration')}" width="800" height="500" decoding="async">
+        <div class="road-num"><b>{n}</b><span>{L('bölüm yayında', 'part published' if n == 1 else 'parts published')}</span></div>
+        <div class="tile-sub">{L('Yeni bölümler yayımladıkça burada görünür.', 'New parts show up here as I publish them.')}</div>
+        {start}
       </div>
     </header>
 
     <section class="pcb-sec">
-      <h2 class="section-title">{L('Neden STM32, neden roket?', 'Why STM32, why a rocket?')}</h2>
-      <div class="road-why-grid">
-{why_html}
-      </div>
-    </section>
-
-    <section class="pcb-sec">
-      <div class="section-head"><div><h2 class="section-title">{L('Bölümler', 'Parts')}</h2><p class="section-sub">{L('Sıradaki adımlar bir plan; öğrendikçe sırası ve içeriği değişebilir.', 'The next steps are a plan; their order and content may change as I learn.')}</p></div></div>
+      <h2 class="section-title">{L('Bölümler', 'Parts')}</h2>
       <ol class="road-list">
 {chr(10).join(items)}
       </ol>
@@ -737,22 +718,24 @@ def build_stm32_roadmap(lang):
 
     <section class="section">
       <div class="cta-band">
-        <div><h2 class="section-title">{L('Yeni bölümleri kaçırma', 'Don\'t miss the next parts')}</h2><p>{L('Her yeni bölümü LinkedIn\'de de paylaşıyorum. STM32, gömülü sistemler ya da roket aviyoniği üzerine konuşmak istersen yazabilirsin.', 'I also share every new part on LinkedIn. If you want to talk about STM32, embedded systems or rocket avionics, feel free to reach out.')}</p></div>
+        <div><h2 class="section-title">{L('Yeni bölümleri kaçırma', 'Don\'t miss the next parts')}</h2><p>{L('Her yeni bölümü LinkedIn\'de de paylaşıyorum. STM32 ya da gömülü sistemler üzerine konuşmak istersen yazabilirsin.', 'I also share every new part on LinkedIn. If you want to talk about STM32 or embedded systems, feel free to reach out.')}</p></div>
         <div class="cta-actions"><a class="btn btn-primary" href="{LINKEDIN}" target="_blank" rel="noopener">{L('LinkedIn\'de takip et ↗', 'Follow on LinkedIn ↗')}</a><a class="btn btn-ghost" href="{P('contact')}">{L('İletişime geç', 'Get in touch')}</a></div>
       </div>
     </section>
   </div>'''
     ld = [{'@context': 'https://schema.org', '@graph': [
         {'@type': 'CollectionPage', 'name': L('STM32 Yol Haritam', 'My STM32 Roadmap'), 'description': desc, 'url': f'{SITE}/{path}', 'inLanguage': lang,
-         'author': {'@id': f'{SITE}/#ahmet-ulu'},
+         'image': f'{SITE}/{STM32_IMG}', 'author': {'@id': f'{SITE}/#ahmet-ulu'},
          'mainEntity': {'@type': 'ItemList', 'itemListElement': [
-             {'@type': 'ListItem', 'position': i, 'name': x[lang][0], **({'url': f'{SITE}/{post_url(POST[x["post"]], lang)}'} if x.get('post') else {})}
-             for i, x in enumerate(STM32_ROAD, 1)]}},
+             {'@type': 'ListItem', 'position': i, 'name': p[lang]['title'], 'url': f'{SITE}/{post_url(p, lang)}'} for i, p in enumerate(parts, 1)]}},
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Ahmet Ulu', 'item': f'{SITE}/' + ('' if tr else 'en/')},
-            {'@type': 'ListItem', 'position': 2, 'name': L('Projeler', 'Projects'), 'item': f'{SITE}/{PAGES["projects"][0 if tr else 1]}'},
+            {'@type': 'ListItem', 'position': 2, 'name': L('Yazılar', 'Blog'), 'item': f'{SITE}/{PAGES["blog"][0 if tr else 1]}'},
             {'@type': 'ListItem', 'position': 3, 'name': L('STM32 Yol Haritam', 'My STM32 Roadmap'), 'item': f'{SITE}/{path}'}]}]}]
-    page(lang, 'stm32', title, desc, body, ld=ld)
+    out = head(lang, path, title, desc, PAGES['stm32'][1 if tr else 0], og_image=STM32_IMG, ld=ld)
+    out += nav(lang, path, 'blog', PAGES['stm32'][1 if tr else 0])
+    out += f'<main id="icerik">\n{body}\n</main>\n' + footer(lang, path)
+    write(path, out)
 
 # ---------------------------------------------------------------- Planner (uygulama tanıtımı)
 PLANNER = dict(
@@ -830,7 +813,7 @@ def build_home(lang):
         uni, uni2 = 'Abdullah Gül Üniversitesi', 'Elektrik-Elektronik Müh.'
         st_h, st_sub, st_link = 'Bionluk puanı', '8 tamamlanan sipariş · 6/6 beş yıldız', 'Profilim →'
         stack_h = 'Kullandıklarım'
-        now_h, now_1, now_2, now_3 = 'Şu an', 'MUSTECH\'te gömülü sistemler geliştiricisi', 'Bionluk\'ta freelance PCB tasarımı', f'AGÜ Roket Takımı · <a href="{P("stm32")}">STM32 öğreniyorum</a>'
+        now_h, now_1, now_2, now_3 = 'Şu an', 'MUSTECH\'te gömülü sistemler geliştiricisi', 'Bionluk\'ta freelance PCB tasarımı', 'AGÜ Roket Takımı üyesi'
         feat_k = 'Öne çıkan'
         soc_h = 'Bağlantılar'
         last_k = 'Son yazı'
@@ -849,7 +832,7 @@ def build_home(lang):
         uni, uni2 = 'Abdullah Gül University', 'Electrical & Electronics Eng.'
         st_h, st_sub, st_link = 'Bionluk rating', '8 completed orders · 6/6 five-star', 'My profile →'
         stack_h = 'My toolkit'
-        now_h, now_1, now_2, now_3 = 'Now', 'Embedded systems developer at MUSTECH', 'Freelance PCB design on Bionluk', f'AGÜ rocket team · <a href="{P("stm32")}">learning STM32</a>'
+        now_h, now_1, now_2, now_3 = 'Now', 'Embedded systems developer at MUSTECH', 'Freelance PCB design on Bionluk', 'Member of the AGÜ rocket team'
         feat_k = 'Featured'
         soc_h = 'Elsewhere'
         last_k = 'Latest post'
@@ -967,7 +950,7 @@ ABOUT = {
           "Bu site; projelerimi, deneyimlerimi ve öğrendiklerimi bir arada tuttuğum dijital evim."],
    exp_h='Deneyim',
    exp=[('Takım Üyesi', 'AGÜ Roket Takımı · Kayseri', 'Ekim 2026 — Devam ediyor',
-         'Uçuş bilgisayarı ve aviyonik tarafına hazırlanmak için STM32F407\'yi register seviyesinde öğreniyorum; GPIO, kesmeler, zamanlayıcılar ve sensör haberleşmesi. İlerlememi adım adım yayımlıyorum.', 'page:stm32'),
+         'Abdullah Gül Üniversitesi roket takımının üyesiyim.', 'icon:rocket'),
         ('Gömülü Sistemler Geliştiricisi', 'MUSTECH · Kayseri', 'Şubat 2026 — Devam ediyor',
          'IoT tabanlı çevresel izleme sistemleri için gömülü yazılım ve donanım arayüzleri; düşük gürültülü sensör arayüz devreleri ve sensör düğümlerinden bulut veritabanına uzanan veri hatları.', None),
         ('Freelance PCB Tasarımcısı', 'Bionluk · Uzaktan', '2025 — Devam ediyor',
@@ -984,7 +967,7 @@ ABOUT = {
           "This site is my digital home, where I keep my projects, experiences and what I've learned in one place."],
    exp_h='Experience',
    exp=[('Team Member', 'AGÜ Rocket Team · Kayseri', 'October 2026 — Present',
-         'Learning the STM32F407 at register level to prepare for flight computer and avionics work: GPIO, interrupts, timers and sensor communication. I publish my progress step by step.', 'page:stm32'),
+         'Member of the Abdullah Gül University rocket team.', 'icon:rocket'),
         ('Embedded Systems Developer', 'MUSTECH · Kayseri', 'February 2026 — Present',
          'Embedded firmware and hardware interfaces for IoT-based environmental monitoring systems; low-noise sensor interface circuits and data pipelines from sensor nodes to cloud databases.', None),
         ('Freelance PCB Designer', 'Bionluk · Remote', '2025 — Present',
@@ -1005,9 +988,7 @@ def build_about(lang):
     exp = ''
     for t, org, d, desc, slug in a['exp']:
         more = f' <a class="inline-link" href="{rel}{post_url(POST[slug], lang)}">{a["read_more"]}</a>' if slug in POST else ''
-        if slug and slug.startswith('page:'):
-            more = f' <a class="inline-link" href="{rel}{PAGES[slug[5:]][0 if lang == "tr" else 1]}">{"STM32 yol haritam →" if lang == "tr" else "My STM32 roadmap →"}</a>'
-        icon = '💼' if slug is None else ('🚀' if slug.startswith('page:') else '🛠️')
+        icon = '💼' if slug is None else ('🚀' if slug == 'icon:rocket' else '🛠️')
         exp += ('      <div class="edu-item">\n'
                 f'        <div class="edu-icon" aria-hidden="true">{icon}</div>\n'
                 f'        <div><div class="edu-title">{t}</div><div class="edu-sub">{org}</div><div class="edu-date">{d}</div><p class="edu-desc">{desc}{more}</p></div>\n'
@@ -1117,6 +1098,8 @@ def build_blog(lang):
         name, gdesc = g[lang]
         names.append(name)
         items = '\n'.join(post_item(p, lang, rel, kicker=False) for p in ps)
+        if g['key'] == 'stm32':
+            items = stm32_series_card(lang, rel) + items
         groups += f'''    <section class="post-group" data-filter-section>
       <h2 class="post-group-title">{name}</h2>
       <p class="post-group-desc">{gdesc}</p>
@@ -1191,7 +1174,7 @@ def build_404():
   </div>
 </main>
 '''
-    out += footer('tr', '404.html').replace('src="assets/', 'src="/assets/')
+    out += footer('tr', '404.html').replace('src="assets/', 'src="/assets/').replace('href="araclar', 'href="/araclar')
     write('404.html', out)
 
 def build_post(p, lang):
@@ -1300,13 +1283,13 @@ def build_tools_hub(lang):
     path = PAGES['tools'][0 if tr else 1]
     rel = rel_of(path)
     if tr:
-        title = 'Elektronik Hesap Araçları — Ahmet Ulu'
-        desc = 'Ücretsiz elektronik hesap araçları: Ohm kanunu, LED direnci, gerilim bölücü, direnç renk kodu, SMD kod, LM2596/LM317 regülatör, buck, PCB iz genişliği, AWG, RC ve 555.'
+        title = 'Elektronik Hesaplama Araçları (Direnç Renk Kodu, LED, Ohm)'
+        desc = 'Ücretsiz elektronik hesaplama araçları: Ohm kanunu, LED direnci, gerilim bölücü, direnç renk kodu, SMD kod, LM2596/LM317 regülatör, buck, PCB iz genişliği, AWG, RC ve 555.'
         k, h = 'Ücretsiz · Kayıt yok', 'Elektronik hesap araçları'
         sub = 'Devre tasarlarken en sık ihtiyaç duyduğum hesapları tek yerde topladım. Hesaplar tarayıcında yapılır, hiçbir veri gönderilmez; her sayfanın altında formülü ve kaynağı var.'
         n1, n2, ph = 'araç', 'kategori', 'Araçlarda ara… (ör. LED, LM2596, 555)'
     else:
-        title = 'Electronics Calculators — Ahmet Ulu'
+        title = 'Electronics Calculators (Resistor Color Code, LED, Ohm\'s Law)'
         desc = "Free electronics calculators: Ohm's law, LED resistor, voltage divider, resistor color code, SMD codes, LM2596/LM317 regulators, buck, PCB trace width, AWG, RC and 555."
         k, h = 'Free · No sign-up', 'Electronics calculators'
         sub = 'The calculations I need most often when designing circuits, in one place. Everything runs in your browser and nothing is sent anywhere; each page explains its formula and source.'
@@ -1350,6 +1333,14 @@ def build_tool(t, lang):
         post = f'\n      <p class="tool-post">{lab}: <a href="{rel}{post_url(p, lang)}">{esc(p[lang]["title"])}</a></p>'
     noscript = 'Bu hesaplayıcı JavaScript ile çalışır. Formüller aşağıda.' if tr else 'This calculator needs JavaScript. The formulas are below.'
     L = (lambda a, b: a if tr else b)
+    seo_extra = araclar_seo.extra(t['id'], lang)
+    faqs = araclar_seo.faq(t['id'], lang)
+    faq_html = ''
+    if faqs:
+        faq_html = (f'\n      <h3 id="{L("sss", "faq")}">{L("Sık sorulan sorular", "Frequently asked questions")}</h3>\n      <div class="tool-faq">\n'
+                    + '\n'.join(f'        <details class="faq-item"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faqs)
+                    + '\n      </div>')
+    upd = L('Son güncelleme: Ekim 2026', 'Last updated: October 2026')
     body = (f'  <div class="wrap inner fade-in tools-page">\n'
             f'    <nav class="crumbs" aria-label="{L("Konum", "Breadcrumb")}"><a href="{home}">{L("Ana sayfa", "Home")}</a><span aria-hidden="true">/</span>'
             f'<a href="{hub}">{L("Araçlar", "Tools")}</a><span aria-hidden="true">/</span><span>{esc(c["short"])}</span></nav>\n'
@@ -1357,9 +1348,10 @@ def build_tool(t, lang):
             f'    <div class="calc" data-tool="{t["id"]}"><noscript><p class="calc-note warn">{noscript}</p></noscript></div>\n'
             f'    <section class="tool-doc" id="{L("nasil-hesaplanir", "how-it-works")}">\n'
             f'      <h2>{L("Nasıl hesaplanır?", "How is it calculated?")}</h2>\n'
-            f'{doc}{post}\n'
+            f'{doc}{seo_extra}{post}{faq_html}\n'
             f'      <h3>{L("Kaynaklar", "Sources")}</h3>\n'
             f'      <ul class="sources">\n{srcs}\n      </ul>\n'
+            f'      <p class="tool-upd">{upd} · Ahmet Ulu</p>\n'
             f'    </section>\n'
             f'    <section class="tool-related">\n'
             f'      <div class="tool-section-title"><h2>{L("Diğer araçlar", "More tools")}</h2><a class="inline-link" href="{hub}">{S[lang]["see_all"]}</a></div>\n'
@@ -1371,11 +1363,12 @@ def build_tool(t, lang):
          'applicationCategory': 'UtilitiesApplication', 'operatingSystem': 'Any', 'isAccessibleForFree': True,
          'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'TRY'},
          'author': {'@type': 'Person', 'name': 'Ahmet Ulu', 'url': f'{SITE}/'}},
+        *([{'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faqs]}] if faqs else []),
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Ahmet Ulu', 'item': f'{SITE}/' + ('' if tr else 'en/')},
             {'@type': 'ListItem', 'position': 2, 'name': L('Araçlar', 'Tools'), 'item': f'{SITE}/{PAGES["tools"][0 if tr else 1]}'},
             {'@type': 'ListItem', 'position': 3, 'name': c['short'], 'item': f'{SITE}/{path}'}]}]}]
-    out = head(lang, path, f'{c["title"]} — Ahmet Ulu', c['desc'], alt, ld=ld)
+    out = head(lang, path, araclar_seo.page_title(t['id'], lang, c['title']), araclar_seo.page_desc(t['id'], lang, c['desc']), alt, ld=ld)
     out += nav(lang, path, 'tools', alt)
     out += f'<main id="icerik">\n{body}\n</main>\n' + footer(lang, path)
     out = out.replace('</body>', f'<script src="{rel}assets/js/tools.js?v={asset_ver("assets/js/tools.js")}" defer></script>\n</body>')
@@ -1383,15 +1376,31 @@ def build_tool(t, lang):
 
 def build_sitemap():
     today = datetime.date.today().isoformat()
+    store_p = os.path.join(HERE, 'lastmod.json')
+    try:
+        store = json.load(open(store_p, encoding='utf-8'))
+    except (OSError, ValueError):
+        store = {}
+    def mod(u, first=today):
+        h = PAGE_HASH.get(u)
+        old = store.get(u)
+        if old and old[0] == h:
+            return old[1]
+        d = first if not old else today
+        store[u] = [h, d]
+        return d
     urls = []
     for k, (tr, en) in PAGES.items():
-        urls += [(tr, today), (en, today)]
+        urls += [(tr, mod(tr)), (en, mod(en))]
     for p in POSTS:
         y, m = p['date']
-        mod = p.get('modified', f'{y}-{m:02d}-01')
-        urls += [(p['tr_url'], mod), (p['en_url'], mod)]
+        first = p.get('modified', f'{y}-{m:02d}-01')
+        urls += [(p['tr_url'], mod(p['tr_url'], first)), (p['en_url'], mod(p['en_url'], first))]
     for t in araclar.TOOLS:
-        urls += [(tool_url(t, 'tr'), today), (tool_url(t, 'en'), today)]
+        a, b = tool_url(t, 'tr'), tool_url(t, 'en')
+        urls += [(a, mod(a)), (b, mod(b))]
+    with open(store_p, 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(store, f, ensure_ascii=False, indent=0, sort_keys=True)
     body = '\n'.join(f'  <url><loc>{SITE}/{u}</loc><lastmod>{d}</lastmod></url>'.replace('/index.html<', '/<') for u, d in urls)
     write('sitemap.xml', f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n')
     write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')

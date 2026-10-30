@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Gerilim Bölücü Hesaplama — Ahmet Ulu</title>
-<meta name="description" content="Gerilim bölücü hesaplayıcı: Vout = Vin·R2/(R1+R2). Hedef gerilim için R2 bul, E24/E96 standart değer öner, yük direnci etkisini gör.">
+<title>Gerilim Bölücü Hesaplama: 5V → 3,3V, 12V → 5V Direnç Seçimi</title>
+<meta name="description" content="Gerilim bölücü hesaplama: Vout = Vin·R2/(R1+R2). Hedef gerilim için direnç bul, E24/E96 standart değer öner. 5 V → 3,3 V ve 12 V → 5 V için hazır tablo.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/araclar/gerilim-bolucu.html">
@@ -14,8 +14,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="Gerilim Bölücü Hesaplama — Ahmet Ulu">
-<meta property="og:description" content="Gerilim bölücü hesaplayıcı: Vout = Vin·R2/(R1+R2). Hedef gerilim için R2 bul, E24/E96 standart değer öner, yük direnci etkisini gör.">
+<meta property="og:title" content="Gerilim Bölücü Hesaplama: 5V → 3,3V, 12V → 5V Direnç Seçimi">
+<meta property="og:description" content="Gerilim bölücü hesaplama: Vout = Vin·R2/(R1+R2). Hedef gerilim için direnç bul, E24/E96 standart değer öner. 5 V → 3,3 V ve 12 V → 5 V için hazır tablo.">
 <meta property="og:url" content="https://ahmetulu.com.tr/araclar/gerilim-bolucu.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Gerilim Bölücü Hesaplama", "description": "Gerilim bölücü hesaplayıcı: Vout = Vin·R2/(R1+R2). Hedef gerilim için R2 bul, E24/E96 standart değer öner, yük direnci etkisini gör.", "url": "https://ahmetulu.com.tr/araclar/gerilim-bolucu.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Gerilim bölücü", "item": "https://ahmetulu.com.tr/araclar/gerilim-bolucu.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Gerilim Bölücü Hesaplama", "description": "Gerilim bölücü hesaplayıcı: Vout = Vin·R2/(R1+R2). Hedef gerilim için R2 bul, E24/E96 standart değer öner, yük direnci etkisini gör.", "url": "https://ahmetulu.com.tr/araclar/gerilim-bolucu.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "5V'u 3,3V'a gerilim bölücüyle nasıl düşürürüm?", "acceptedAnswer": {"@type": "Answer", "text": "R1 = 5,1 kΩ (üst) ve R2 = 10 kΩ (alt) ile çıkış ≈ 3,31 V olur. Bu yöntem sinyal seviyesi düşürmek (ör. 5 V UART → 3,3 V) için uygundur; bir devreyi beslemek için değil."}}, {"@type": "Question", "name": "Gerilim bölücü ile bir modül beslenir mi?", "acceptedAnswer": {"@type": "Answer", "text": "Hayır. Çıkış, çekilen akıma göre değişir. Besleme için regülatör (LDO ya da buck) kullanılmalı."}}, {"@type": "Question", "name": "Gerilim bölücüde hangi direnç değerleri seçilmeli?", "acceptedAnswer": {"@type": "Answer", "text": "Toplam 10–100 kΩ çoğu ADC ve sinyal uygulaması için iyi bir başlangıçtır: düşük değerler gereksiz akım çeker, çok yüksek değerler gürültü ve ölçüm hatası getirir."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Gerilim bölücü", "item": "https://ahmetulu.com.tr/araclar/gerilim-bolucu.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
@@ -55,12 +55,21 @@
 <p>“Alt direnci bul” modunda R2 hesaplandıktan sonra <strong>E24 (±%5)</strong> ve <strong>E96 (±%1)</strong> serilerindeki en yakın standart değer önerilir ve o değerle elde edilecek gerçek Vout gösterilir.</p>
 <h3>Pratikte dikkat</h3>
 <ul><li>Gerilim bölücü bir güç kaynağı değildir: çıkışa yük bağlandığında gerilim düşer. Yük direnci alanı bu düşüşü gösterir.</li>
-<li>ADC ile pil gerilimi ölçerken toplam direnç 10–100 kΩ arası iyi bir başlangıçtır; MΩ seviyesi gürültü ve ölçüm hatası getirebilir.</li></ul>
+<li>ADC ile pil gerilimi ölçerken toplam direnç 10–100 kΩ arası iyi bir başlangıçtır; MΩ seviyesi gürültü ve ölçüm hatası getirebilir.</li></ul><h3>Hazır tablo: sık kullanılan gerilim bölücüler</h3>
+<p>R2 = 10 kΩ sabit, R1 E24 serisinden en yakın değer. Yüksüz çıkış gösterilir; ADC girişi gibi yüksek empedanslı yükler için uygundur.</p>
+<div class="table-wrap"><table class="calc-table"><thead><tr><th>Dönüşüm</th><th>R1 (üst)</th><th>R2 (alt)</th><th>Gerçek Vout</th></tr></thead><tbody><tr><td>5 V → 3,3 V</td><td>5,1 kΩ</td><td>10 kΩ</td><td>3,31 V</td></tr><tr><td>12 V → 5 V</td><td>15 kΩ</td><td>10 kΩ</td><td>4,8 V</td></tr><tr><td>12 V → 3,3 V</td><td>27 kΩ</td><td>10 kΩ</td><td>3,24 V</td></tr><tr><td>24 V → 5 V</td><td>39 kΩ</td><td>10 kΩ</td><td>4,9 V</td></tr><tr><td>9 V → 5 V</td><td>8,2 kΩ</td><td>10 kΩ</td><td>4,95 V</td></tr><tr><td>4,2 V → 3,3 V</td><td>2,7 kΩ</td><td>10 kΩ</td><td>3,31 V</td></tr></tbody></table></div>
+      <h3 id="sss">Sık sorulan sorular</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>5V&#x27;u 3,3V&#x27;a gerilim bölücüyle nasıl düşürürüm?</summary><p>R1 = 5,1 kΩ (üst) ve R2 = 10 kΩ (alt) ile çıkış ≈ 3,31 V olur. Bu yöntem sinyal seviyesi düşürmek (ör. 5 V UART → 3,3 V) için uygundur; bir devreyi beslemek için değil.</p></details>
+        <details class="faq-item"><summary>Gerilim bölücü ile bir modül beslenir mi?</summary><p>Hayır. Çıkış, çekilen akıma göre değişir. Besleme için regülatör (LDO ya da buck) kullanılmalı.</p></details>
+        <details class="faq-item"><summary>Gerilim bölücüde hangi direnç değerleri seçilmeli?</summary><p>Toplam 10–100 kΩ çoğu ADC ve sinyal uygulaması için iyi bir başlangıçtır: düşük değerler gereksiz akım çeker, çok yüksek değerler gürültü ve ölçüm hatası getirir.</p></details>
+      </div>
       <h3>Kaynaklar</h3>
       <ul class="sources">
         <li><a href="https://en.wikipedia.org/wiki/Voltage_divider" target="_blank" rel="noopener">Wikipedia — Voltage divider</a></li>
         <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
       </ul>
+      <p class="tool-upd">Son güncelleme: Ekim 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
@@ -73,6 +82,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popüler hesap araçları"><a class="ft-k" href="../araclar.html">Hesap araçları</a><a href="../araclar/direnc-renk-kodu.html">Direnç renk kodu</a><a href="../araclar/led-direnci.html">LED direnci</a><a href="../araclar/ohm-kanunu.html">Ohm kanunu</a><a href="../araclar/smd-kod-cozucu.html">SMD kod çözücü</a><a href="../araclar/gerilim-bolucu.html">Gerilim bölücü</a><a href="../araclar/pcb-iz-genisligi.html">PCB iz genişliği</a><a href="../araclar/awg-kablo.html">AWG ↔ mm²</a><a href="../araclar/555-zamanlayici.html">555 zamanlayıcı</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

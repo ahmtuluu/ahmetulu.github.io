@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>RC Filtre ve Zaman Sabiti Hesaplama — Ahmet Ulu</title>
+<title>RC Filtre Kesim Frekansı ve Zaman Sabiti Hesaplama — Ahmet Ulu</title>
 <meta name="description" content="RC filtre hesaplayıcı: kesim frekansı fc = 1/(2πRC), zaman sabiti τ = RC ve kondansatör şarj süresi. Alçak/yüksek geçiren filtre ve gecikme devreleri için.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="RC Filtre ve Zaman Sabiti Hesaplama — Ahmet Ulu">
+<meta property="og:title" content="RC Filtre Kesim Frekansı ve Zaman Sabiti Hesaplama — Ahmet Ulu">
 <meta property="og:description" content="RC filtre hesaplayıcı: kesim frekansı fc = 1/(2πRC), zaman sabiti τ = RC ve kondansatör şarj süresi. Alçak/yüksek geçiren filtre ve gecikme devreleri için.">
 <meta property="og:url" content="https://ahmetulu.com.tr/araclar/rc-filtre.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "RC Filtre ve Zaman Sabiti Hesaplama", "description": "RC filtre hesaplayıcı: kesim frekansı fc = 1/(2πRC), zaman sabiti τ = RC ve kondansatör şarj süresi. Alçak/yüksek geçiren filtre ve gecikme devreleri için.", "url": "https://ahmetulu.com.tr/araclar/rc-filtre.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "RC filtre / τ", "item": "https://ahmetulu.com.tr/araclar/rc-filtre.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "RC Filtre ve Zaman Sabiti Hesaplama", "description": "RC filtre hesaplayıcı: kesim frekansı fc = 1/(2πRC), zaman sabiti τ = RC ve kondansatör şarj süresi. Alçak/yüksek geçiren filtre ve gecikme devreleri için.", "url": "https://ahmetulu.com.tr/araclar/rc-filtre.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "RC filtre kesim frekansı formülü nedir?", "acceptedAnswer": {"@type": "Answer", "text": "fc = 1 / (2π·R·C). 10 kΩ ve 100 nF ile fc ≈ 159 Hz."}}, {"@type": "Question", "name": "Zaman sabiti (τ) nedir?", "acceptedAnswer": {"@type": "Answer", "text": "τ = R·C. Kondansatör 1τ'da %63, 5τ'da yaklaşık %99 dolar."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "RC filtre / τ", "item": "https://ahmetulu.com.tr/araclar/rc-filtre.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
@@ -54,10 +54,16 @@
 <div class="formula"><span>τ = R · C</span><span>fc = 1 / (2π · R · C)</span><span>Vc(t) = V · (1 − e^(−t/τ))   →   t = −τ · ln(1 − p)</span><small>p: hedef şarj oranı (0,9 = %90)</small></div>
 <p>1τ'da kondansatör %63,2'ye, 5τ'da %99,3'e dolar; pratikte 5τ “tam dolu” kabul edilir. Kesim frekansı, sinyalin gücünün yarıya (−3 dB) indiği noktadır ve alçak geçiren ile yüksek geçiren RC filtre için aynıdır.</p>
 <p>Not: Çıkışa bağlanan yük filtreyi değiştirir. Yük direnci R'den en az 10 kat büyük olmalıdır.</p>
+      <h3 id="sss">Sık sorulan sorular</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>RC filtre kesim frekansı formülü nedir?</summary><p>fc = 1 / (2π·R·C). 10 kΩ ve 100 nF ile fc ≈ 159 Hz.</p></details>
+        <details class="faq-item"><summary>Zaman sabiti (τ) nedir?</summary><p>τ = R·C. Kondansatör 1τ&#x27;da %63, 5τ&#x27;da yaklaşık %99 dolar.</p></details>
+      </div>
       <h3>Kaynaklar</h3>
       <ul class="sources">
         <li><a href="https://en.wikipedia.org/wiki/RC_circuit" target="_blank" rel="noopener">Wikipedia — RC circuit</a></li>
       </ul>
+      <p class="tool-upd">Son güncelleme: Ekim 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
@@ -70,6 +76,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popüler hesap araçları"><a class="ft-k" href="../araclar.html">Hesap araçları</a><a href="../araclar/direnc-renk-kodu.html">Direnç renk kodu</a><a href="../araclar/led-direnci.html">LED direnci</a><a href="../araclar/ohm-kanunu.html">Ohm kanunu</a><a href="../araclar/smd-kod-cozucu.html">SMD kod çözücü</a><a href="../araclar/gerilim-bolucu.html">Gerilim bölücü</a><a href="../araclar/pcb-iz-genisligi.html">PCB iz genişliği</a><a href="../araclar/awg-kablo.html">AWG ↔ mm²</a><a href="../araclar/555-zamanlayici.html">555 zamanlayıcı</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

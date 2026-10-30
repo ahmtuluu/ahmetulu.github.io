@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>LED Direnci Hesaplama — Ahmet Ulu</title>
-<meta name="description" content="LED direnci hesaplayıcı: R = (Vs − Vf)/I. LED rengine göre ileri gerilim, seri LED sayısı, E24 standart direnç önerisi ve güç hesabı.">
+<title>LED Direnci Hesaplama (5V, 12V, 3,3V) — Hangi Direnç?</title>
+<meta name="description" content="LED direnci hesaplama: besleme gerilimi ve LED rengine göre gereken direnç, standart değer ve güç. 5 V, 12 V ve 3,3 V için hazır tablo.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/araclar/led-direnci.html">
@@ -14,8 +14,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="LED Direnci Hesaplama — Ahmet Ulu">
-<meta property="og:description" content="LED direnci hesaplayıcı: R = (Vs − Vf)/I. LED rengine göre ileri gerilim, seri LED sayısı, E24 standart direnç önerisi ve güç hesabı.">
+<meta property="og:title" content="LED Direnci Hesaplama (5V, 12V, 3,3V) — Hangi Direnç?">
+<meta property="og:description" content="LED direnci hesaplama: besleme gerilimi ve LED rengine göre gereken direnç, standart değer ve güç. 5 V, 12 V ve 3,3 V için hazır tablo.">
 <meta property="og:url" content="https://ahmetulu.com.tr/araclar/led-direnci.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "LED Direnci Hesaplama", "description": "LED direnci hesaplayıcı: R = (Vs − Vf)/I. LED rengine göre ileri gerilim, seri LED sayısı, E24 standart direnç önerisi ve güç hesabı.", "url": "https://ahmetulu.com.tr/araclar/led-direnci.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "LED direnci", "item": "https://ahmetulu.com.tr/araclar/led-direnci.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "LED Direnci Hesaplama", "description": "LED direnci hesaplayıcı: R = (Vs − Vf)/I. LED rengine göre ileri gerilim, seri LED sayısı, E24 standart direnç önerisi ve güç hesabı.", "url": "https://ahmetulu.com.tr/araclar/led-direnci.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "5V ile LED için kaç ohm direnç gerekir?", "acceptedAnswer": {"@type": "Answer", "text": "20 mA için kırmızı LED (≈2,0 V) ile 150 Ω, beyaz/mavi LED (≈3,1 V) ile 100 Ω direnç yeterlidir. Arduino projelerinde sık görülen 220 Ω, akımı biraz düşürerek güvenli tarafta kalır."}}, {"@type": "Question", "name": "12V ile LED için hangi direnç kullanılır?", "acceptedAnswer": {"@type": "Answer", "text": "20 mA için kırmızı LED ile 510 Ω, beyaz LED ile 470 Ω. Direncin harcadığı güç yaklaşık 0,2 W olduğu için 1/2 W direnç seçmek daha güvenlidir."}}, {"@type": "Question", "name": "LED direnci hangi bacağa takılır?", "acceptedAnswer": {"@type": "Answer", "text": "Seri bağlandığı sürece anot (+, uzun bacak) ya da katot (−) tarafına takılabilir; akım aynıdır."}}, {"@type": "Question", "name": "Birden fazla LED tek dirençle sürülebilir mi?", "acceptedAnswer": {"@type": "Answer", "text": "Seri bağlı LED'ler tek dirençle sürülebilir (besleme yeterliyse). Paralel bağlı LED'lerin her birine ayrı direnç koymak gerekir; yoksa akım eşit paylaşılmaz."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "LED direnci", "item": "https://ahmetulu.com.tr/araclar/led-direnci.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
@@ -55,12 +55,23 @@
 <p>Hesaplanan direnç genelde standart bir değer değildir. Araç, <strong>E24 serisinde bir üst değeri</strong> önerir; böylece LED akımı hedeflediğin değeri hiçbir zaman aşmaz. Direncin güç değeri için hesaplanan gücün en az iki katı önerilir.</p>
 <h3>Renklere göre tipik Vf</h3>
 <ul><li>Kırmızı ≈ 2,0 V · turuncu / sarı ≈ 2,1 V · IR ≈ 1,3 V</li><li>Yeşil, mavi, beyaz (InGaN) ≈ 3,0–3,2 V</li></ul>
-<p>Bunlar tipik değerlerdir; kesin değer LED'in datasheet'inde yazar ve akıma, sıcaklığa göre değişir.</p>
+<p>Bunlar tipik değerlerdir; kesin değer LED'in datasheet'inde yazar ve akıma, sıcaklığa göre değişir.</p><h3>Hazır tablo: 20 mA için LED direnci</h3>
+<p>Tek LED, 20 mA akım ve E24 serisinde bir üst standart değer. Daha az parlaklık yeterliyse (gösterge LED'i) akımı 5–10 mA'e düşürüp direnci büyütebilirsin; LED daha uzun ömürlü olur.</p>
+<div class="table-wrap"><table class="calc-table"><thead><tr><th>LED rengi</th><th>3,3 V</th><th>5 V</th><th>9 V</th><th>12 V</th></tr></thead><tbody><tr><td><b>Kırmızı</b> <small>(2 V)</small></td><td>68 Ω</td><td>150 Ω</td><td>360 Ω</td><td>510 Ω</td></tr><tr><td><b>Sarı / turuncu</b> <small>(2,1 V)</small></td><td>62 Ω</td><td>150 Ω</td><td>360 Ω</td><td>510 Ω</td></tr><tr><td><b>Yeşil / mavi / beyaz</b> <small>(3,1 V)</small></td><td>—</td><td>100 Ω</td><td>300 Ω</td><td>470 Ω</td></tr></tbody></table></div>
+<p class="tool-note">“—”: besleme gerilimi LED'in ileri gerilimine çok yakın; direnç akımı güvenle sınırlayamaz. 3,3 V ile mavi/beyaz LED için direnç yerine daha yüksek besleme ya da sabit akım sürücüsü düşün.</p>
+      <h3 id="sss">Sık sorulan sorular</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>5V ile LED için kaç ohm direnç gerekir?</summary><p>20 mA için kırmızı LED (≈2,0 V) ile 150 Ω, beyaz/mavi LED (≈3,1 V) ile 100 Ω direnç yeterlidir. Arduino projelerinde sık görülen 220 Ω, akımı biraz düşürerek güvenli tarafta kalır.</p></details>
+        <details class="faq-item"><summary>12V ile LED için hangi direnç kullanılır?</summary><p>20 mA için kırmızı LED ile 510 Ω, beyaz LED ile 470 Ω. Direncin harcadığı güç yaklaşık 0,2 W olduğu için 1/2 W direnç seçmek daha güvenlidir.</p></details>
+        <details class="faq-item"><summary>LED direnci hangi bacağa takılır?</summary><p>Seri bağlandığı sürece anot (+, uzun bacak) ya da katot (−) tarafına takılabilir; akım aynıdır.</p></details>
+        <details class="faq-item"><summary>Birden fazla LED tek dirençle sürülebilir mi?</summary><p>Seri bağlı LED&#x27;ler tek dirençle sürülebilir (besleme yeterliyse). Paralel bağlı LED&#x27;lerin her birine ayrı direnç koymak gerekir; yoksa akım eşit paylaşılmaz.</p></details>
+      </div>
       <h3>Kaynaklar</h3>
       <ul class="sources">
         <li><a href="https://en.wikipedia.org/wiki/Light-emitting_diode" target="_blank" rel="noopener">Wikipedia — Light-emitting diode</a></li>
         <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
       </ul>
+      <p class="tool-upd">Son güncelleme: Ekim 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
@@ -73,6 +84,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popüler hesap araçları"><a class="ft-k" href="../araclar.html">Hesap araçları</a><a href="../araclar/direnc-renk-kodu.html">Direnç renk kodu</a><a href="../araclar/led-direnci.html">LED direnci</a><a href="../araclar/ohm-kanunu.html">Ohm kanunu</a><a href="../araclar/smd-kod-cozucu.html">SMD kod çözücü</a><a href="../araclar/gerilim-bolucu.html">Gerilim bölücü</a><a href="../araclar/pcb-iz-genisligi.html">PCB iz genişliği</a><a href="../araclar/awg-kablo.html">AWG ↔ mm²</a><a href="../araclar/555-zamanlayici.html">555 zamanlayıcı</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

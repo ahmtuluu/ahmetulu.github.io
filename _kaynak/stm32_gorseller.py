@@ -210,10 +210,10 @@ def body(lang):
   <h1>{T('STM32F407 ile Buton Okuma ve Debounce: Register Seviyesinde İlk Adım', 'Reading a Button and Debouncing on the STM32F407: My First Register-Level Step')}</h1>
   <div class="blog-meta">Ahmet Ulu · {T('Ekim 2026', 'October 2026')}</div>
 
-  <a class="series-box" href="{road}"><span class="series-k">{T('Seri', 'Series')}</span><span class="series-t">{T('STM32 Yol Haritam', 'My STM32 Roadmap')}</span><span class="series-s">{T('1. bölüm · Tüm bölümler ve sıradakiler →', 'Part 1 · All parts and what comes next →')}</span></a>
+  <a class="series-box" href="{road}"><span class="series-k">{T('Seri', 'Series')}</span><span class="series-t">{T('STM32 Yol Haritam', 'My STM32 Roadmap')}</span><span class="series-s">{T('1. bölüm · Tüm bölümler →', 'Part 1 · All parts →')}</span></a>
 
-  <p>{T('Kısa süre önce <strong>AGÜ roket takımına</strong> katıldım. Bir roketin uçuş bilgisayarı sensörleri okur, irtifayı takip eder, tepe noktasını algılayıp kurtarma sistemini tetikler ve yere telemetri gönderir. Bu kartlarda en sık karşılaşılan mikrodenetleyicilerden biri <strong>STM32</strong>. Bu yüzden STM32\'yi temelden, gerçekten anlayarak öğrenmeye karar verdim ve öğrendiklerimi burada bölüm bölüm kaydediyorum.',
-     'I recently joined the <strong>AGÜ rocket team</strong>. A rocket\'s flight computer reads sensors, tracks altitude, detects apogee to trigger recovery and sends telemetry to the ground. <strong>STM32</strong> is one of the most common microcontrollers on these boards. So I decided to learn STM32 from the ground up, really understanding it, and I am documenting it here part by part.')}</p>
+  <p>{T('Gömülü sistemlerde bir sonraki adımım <strong>STM32</strong>: endüstride de öğrenci takımlarında da (kısa süre önce katıldığım AGÜ Roket Takımı dahil) en sık karşılaşılan mikrodenetleyici ailelerinden biri. Bu yüzden STM32\'yi temelden, gerçekten anlayarak öğrenmeye karar verdim ve öğrendiklerimi burada bölüm bölüm kaydediyorum.',
+     'My next step in embedded systems is <strong>STM32</strong>: one of the most common microcontroller families both in industry and in student teams (including the AGÜ rocket team I recently joined). So I decided to learn STM32 from the ground up, really understanding it, and I am documenting it here part by part.')}</p>
 
   <p>{T('Arduino\'daki <code>digitalRead()</code> gibi hazır fonksiyonlar yerine <strong>register seviyesinde</strong> başlıyorum: hangi bit neyi yapıyor, referans kılavuzdan (RM0090) bakıp kendim yazıyorum. Kart <strong>STM32F407G-DISC1</strong>, geliştirme ortamı <strong>Keil µVision</strong>. İlk uygulama: kartın üzerindeki butonu okuyup LED\'leri sürmek.',
      'Instead of ready-made functions like Arduino\'s <code>digitalRead()</code>, I am starting at the <strong>register level</strong>: looking up what each bit does in the reference manual (RM0090) and writing it myself. The board is an <strong>STM32F407G-DISC1</strong> and the IDE is <strong>Keil µVision</strong>. First exercise: read the on-board button and drive the LEDs.')}</p>
@@ -275,8 +275,8 @@ def body(lang):
   <h3>{T('Neden delay ve sınırları', 'Why a delay, and its limits')}</h3>
   <p>{T('Bekleme için şimdilik basit bir sayaç döngüsü kullandım: <code>void delay(volatile uint32_t n) { while (n--); }</code>. <code>volatile</code>, derleyicinin bu “hiçbir şey yapmayan” döngüyü optimizasyonla silmesini engelliyor. <code>DEBOUNCE</code> değerini deneyerek ayarladım: çok küçük olursa sıçramalar geçmeden tekrar okunuyor, çok büyük olursa kısa ve hızlı basışlar kaçırılıyor.',
      'For the wait I used a simple counting loop for now: <code>void delay(volatile uint32_t n) { while (n--); }</code>. <code>volatile</code> stops the compiler from optimising this “do-nothing” loop away. I tuned <code>DEBOUNCE</code> by trial: too small and the pin is read again before the bouncing ends; too large and short, quick presses are missed.')}</p>
-  <p>{T('Bu yöntemin iki zayıf yanı var: süre, işlemci frekansına ve derleyici ayarlarına göre değişiyor, yani milisaniye cinsinden kesin değil; ve beklerken işlemci başka hiçbir iş yapamıyor. Bir roket uçuş bilgisayarında sensör okurken butonu beklemek için işlemciyi kilitlemek kabul edilemez. Bu yüzden sıradaki bölümlerde <strong>SysTick</strong> ile gerçek milisaniye zamanlaması ve butonu <strong>EXTI kesmesiyle</strong> okumayı öğreneceğim.',
-     'This approach has two weak points: the delay depends on the CPU frequency and compiler settings, so it is not an exact number of milliseconds; and the CPU can do nothing else while waiting. On a rocket flight computer, locking up the CPU to wait for a button while sensors need reading is not acceptable. So in the coming parts I will learn real millisecond timing with <strong>SysTick</strong> and reading the button with an <strong>EXTI interrupt</strong>.')}</p>
+  <p>{T('Bu yöntemin iki zayıf yanı var: süre, işlemci frekansına ve derleyici ayarlarına göre değişiyor, yani milisaniye cinsinden kesin değil; ve beklerken işlemci başka hiçbir iş yapamıyor. Aynı anda sensör okuyan ya da haberleşme yapan bir projede, butonu beklemek için işlemciyi kilitlemek kabul edilemez. Bunun daha iyi yolları var: <strong>SysTick</strong> ile gerçek milisaniye zamanlaması ve butonu <strong>EXTI kesmesiyle</strong> okumak.',
+     'This approach has two weak points: the delay depends on the CPU frequency and compiler settings, so it is not an exact number of milliseconds; and the CPU can do nothing else while waiting. In a project that also reads sensors or communicates, locking up the CPU to wait for a button is not acceptable. There are better ways: real millisecond timing with <strong>SysTick</strong> and reading the button with an <strong>EXTI interrupt</strong>.')}</p>
 
   <figure class="blog-figure"><img src="kod-1.png" class="blog-img" alt="{T('Keil µVision: tanımlar ve GPIO ayarları', 'Keil µVision: definitions and GPIO setup')}" width="1600" height="607" loading="lazy" decoding="async"><figcaption>{T('Keil µVision\'da kodun ilk kısmı: tanımlar, saatler ve pin ayarları', 'The first part of the code in Keil µVision: definitions, clocks and pin setup')}</figcaption></figure>
   <figure class="blog-figure"><img src="kod-2.png" class="blog-img" alt="{T('Debounce döngüsü ve yanıp sönme aşaması', 'Debounce loop and blinking stage')}" width="1300" height="637" loading="lazy" decoding="async"><figcaption>{T('Debounce döngüsü ve ikinci aşama', 'The debounce loop and stage two')}</figcaption></figure>
@@ -290,6 +290,7 @@ def body(lang):
       <li>{T('Geliştirme ortamı', 'IDE')}: Keil µVision · {T('Dil', 'Language')}: C, {T('register seviyesi (CMSIS başlığı', 'register level (CMSIS header')} <code>stm32f4xx.h</code>)</li>
       <li>{T('Kullanılan register\'lar', 'Registers used')}: <code>RCC_AHB1ENR</code>, <code>GPIOx_MODER</code>, <code>GPIOx_PUPDR</code>, <code>GPIOx_IDR</code>, <code>GPIOx_BSRR</code></li>
       <li>{T('Pinler', 'Pins')}: PA0 ({T('USER butonu, aktif-yüksek', 'USER button, active-high')}), PD12–PD15 (LED)</li>
+      <li>{T('Kendi devrende LED kullanacaksan seri direnci <a href="../../araclar/led-direnci.html">LED direnci hesaplama</a> aracıyla bulabilirsin.', 'If you use LEDs in your own circuit, find the series resistor with the <a href="../tools/led-resistor.html">LED resistor calculator</a>.')}</li>
     </ul>
   </div>
 
@@ -301,7 +302,7 @@ def body(lang):
     <li>{T('Mekanik butonlar “temiz” sinyal vermez; debounce her zaman gerekir.', 'Mechanical buttons never give a “clean” signal; you always need debounce.')}</li>
   </ul>
 
-  <a class="series-box next" href="{road}"><span class="series-k">{T('Sıradaki bölüm', 'Next part')}</span><span class="series-t">{T('2. Bölüm: Karaşimşek — LED\'leri sırayla kaydırmak', 'Part 2: Knight Rider — sweeping the LEDs in sequence')}</span><span class="series-s">{T('Yol haritasını gör →', 'See the roadmap →')}</span></a>
+  <a class="series-box next" href="{road}"><span class="series-k">{T('Seri', 'Series')}</span><span class="series-t">{T('STM32 Yol Haritam', 'My STM32 Roadmap')}</span><span class="series-s">{T('Yeni bölümler yayımlandıkça burada · Tüm bölümler →', 'New parts appear here as they are published · All parts →')}</span></a>
 
   <h3>{T('Kaynaklar', 'References')}</h3>
   <ul>

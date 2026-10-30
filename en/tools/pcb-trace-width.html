@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>PCB Trace Width Calculator (IPC-2221) — Ahmet Ulu</title>
+<title>PCB Trace Width Calculator — IPC-2221 Table — Ahmet Ulu</title>
 <meta name="description" content="PCB trace width calculator (IPC-2221): trace width from current, copper weight (oz) and temperature rise, plus trace resistance, voltage drop and power loss.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="PCB Trace Width Calculator (IPC-2221) — Ahmet Ulu">
+<meta property="og:title" content="PCB Trace Width Calculator — IPC-2221 Table — Ahmet Ulu">
 <meta property="og:description" content="PCB trace width calculator (IPC-2221): trace width from current, copper weight (oz) and temperature rise, plus trace resistance, voltage drop and power loss.">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/pcb-trace-width.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "PCB Trace Width Calculator (IPC-2221)", "description": "PCB trace width calculator (IPC-2221): trace width from current, copper weight (oz) and temperature rise, plus trace resistance, voltage drop and power loss.", "url": "https://ahmetulu.com.tr/en/tools/pcb-trace-width.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "PCB trace width", "item": "https://ahmetulu.com.tr/en/tools/pcb-trace-width.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "PCB Trace Width Calculator (IPC-2221)", "description": "PCB trace width calculator (IPC-2221): trace width from current, copper weight (oz) and temperature rise, plus trace resistance, voltage drop and power loss.", "url": "https://ahmetulu.com.tr/en/tools/pcb-trace-width.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How wide should a PCB trace be for 1 amp?", "acceptedAnswer": {"@type": "Answer", "text": "Per IPC-2221, on an outer layer with 1 oz (35 µm) copper and a 10 °C rise, at least ≈ 0.3 mm. In practice 0.5 mm or more is comfortable."}}, {"@type": "Question", "name": "Why do inner layers need wider traces?", "acceptedAnswer": {"@type": "Answer", "text": "An inner trace cannot shed heat to the air, so IPC-2221 halves the constant for inner layers, giving roughly 2.6 times the width for the same current."}}, {"@type": "Question", "name": "Does trace length affect the width?", "acceptedAnswer": {"@type": "Answer", "text": "Not the heating calculation, but the voltage drop. Check the drop on long power traces; the tool shows it in millivolts."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "PCB trace width", "item": "https://ahmetulu.com.tr/en/tools/pcb-trace-width.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -56,12 +56,19 @@
 <div class="formula"><span>R = ρ · L / (W · t)</span><span>ρ = 1.72·10⁻⁸ Ω·m · (1 + 0.00393 · (T − 20 °C))</span></div>
 <h3>In practice</h3>
 <ul><li>Inner layers shed heat less easily, so they need roughly twice the width for the same current.</li>
-<li>IPC-2221 curves are conservative and valid up to 35 A. The newer IPC-2152 is used for more detailed analysis.</li></ul>
+<li>IPC-2221 curves are conservative and valid up to 35 A. The newer IPC-2152 is used for more detailed analysis.</li></ul><h3>Quick table: PCB trace width by current</h3><p>IPC-2221 minimum trace width for a 10 °C temperature rise. Leave some margin for production.</p><div class="table-wrap"><table class="calc-table"><thead><tr><th>Current</th><th>Outer layer, 1 oz</th><th>Outer layer, 2 oz</th><th>Inner layer, 1 oz</th></tr></thead><tbody><tr><td><b>0.5 A</b></td><td>0.12 mm</td><td>0.06 mm</td><td>0.3 mm</td></tr><tr><td><b>1 A</b></td><td>0.3 mm</td><td>0.15 mm</td><td>0.78 mm</td></tr><tr><td><b>2 A</b></td><td>0.78 mm</td><td>0.39 mm</td><td>2.03 mm</td></tr><tr><td><b>3 A</b></td><td>1.37 mm</td><td>0.68 mm</td><td>3.56 mm</td></tr><tr><td><b>5 A</b></td><td>2.77 mm</td><td>1.38 mm</td><td>7.19 mm</td></tr></tbody></table></div>
       <p class="tool-post">A project where I used this: <a href="../../en/blog/kicad-pcb-design.html">PCB Design with KiCad: Boards I Designed for Clients</a></p>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>How wide should a PCB trace be for 1 amp?</summary><p>Per IPC-2221, on an outer layer with 1 oz (35 µm) copper and a 10 °C rise, at least ≈ 0.3 mm. In practice 0.5 mm or more is comfortable.</p></details>
+        <details class="faq-item"><summary>Why do inner layers need wider traces?</summary><p>An inner trace cannot shed heat to the air, so IPC-2221 halves the constant for inner layers, giving roughly 2.6 times the width for the same current.</p></details>
+        <details class="faq-item"><summary>Does trace length affect the width?</summary><p>Not the heating calculation, but the voltage drop. Check the drop on long power traces; the tool shows it in millivolts.</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://shop.ipc.org/ipc-2221/ipc-2221-standard-only" target="_blank" rel="noopener">IPC-2221 — Generic Standard on Printed Board Design</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -74,6 +81,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

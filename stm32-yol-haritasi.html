@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>STM32 Yol Haritam: Register Seviyesinde STM32F407 — Ahmet Ulu</title>
-<meta name="description" content="AGÜ Roket Takımı için STM32F407&#x27;yi register seviyesinde öğrenme serim: GPIO ve debounce, EXTI, SysTick, PWM, UART, ADC, I²C/SPI sensörler, DMA ve mini uçuş bilgisayarı.">
+<meta name="description" content="Register seviyesinde STM32F407 öğrenme serim: Keil µVision ile GPIO, register&#x27;lar ve gerçek sorunlar; her bölüm kodu ve görselleriyle.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/stm32-yol-haritasi.html">
@@ -15,18 +15,18 @@
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
 <meta property="og:title" content="STM32 Yol Haritam: Register Seviyesinde STM32F407 — Ahmet Ulu">
-<meta property="og:description" content="AGÜ Roket Takımı için STM32F407&#x27;yi register seviyesinde öğrenme serim: GPIO ve debounce, EXTI, SysTick, PWM, UART, ADC, I²C/SPI sensörler, DMA ve mini uçuş bilgisayarı.">
+<meta property="og:description" content="Register seviyesinde STM32F407 öğrenme serim: Keil µVision ile GPIO, register&#x27;lar ve gerçek sorunlar; her bölüm kodu ve görselleriyle.">
 <meta property="og:url" content="https://ahmetulu.com.tr/stm32-yol-haritasi.html">
-<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
+<meta property="og:image" content="https://ahmetulu.com.tr/assets/img/kapak/stm32-seri.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "CollectionPage", "name": "STM32 Yol Haritam", "description": "AGÜ Roket Takımı için STM32F407'yi register seviyesinde öğrenme serim: GPIO ve debounce, EXTI, SysTick, PWM, UART, ADC, I²C/SPI sensörler, DMA ve mini uçuş bilgisayarı.", "url": "https://ahmetulu.com.tr/stm32-yol-haritasi.html", "inLanguage": "tr", "author": {"@id": "https://ahmetulu.com.tr/#ahmet-ulu"}, "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "GPIO: buton okuma ve debounce", "url": "https://ahmetulu.com.tr/yazilar/stm32/01-buton-debounce.html"}, {"@type": "ListItem", "position": 2, "name": "Karaşimşek: LED'leri sırayla kaydırmak"}, {"@type": "ListItem", "position": 3, "name": "EXTI: butonu kesmeyle okumak"}, {"@type": "ListItem", "position": 4, "name": "SysTick ve TIM: gerçek zamanlama"}, {"@type": "ListItem", "position": 5, "name": "PWM: servo ve buzzer"}, {"@type": "ListItem", "position": 6, "name": "UART: bilgisayarla ve modüllerle konuşmak"}, {"@type": "ListItem", "position": 7, "name": "ADC: batarya ve analog sensörler"}, {"@type": "ListItem", "position": 8, "name": "I²C / SPI: IMU ve barometre"}, {"@type": "ListItem", "position": 9, "name": "DMA ve SD karta kayıt"}, {"@type": "ListItem", "position": 10, "name": "Mini uçuş bilgisayarı"}]}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Projeler", "item": "https://ahmetulu.com.tr/projeler.html"}, {"@type": "ListItem", "position": 3, "name": "STM32 Yol Haritam", "item": "https://ahmetulu.com.tr/stm32-yol-haritasi.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "CollectionPage", "name": "STM32 Yol Haritam", "description": "Register seviyesinde STM32F407 öğrenme serim: Keil µVision ile GPIO, register'lar ve gerçek sorunlar; her bölüm kodu ve görselleriyle.", "url": "https://ahmetulu.com.tr/stm32-yol-haritasi.html", "inLanguage": "tr", "image": "https://ahmetulu.com.tr/assets/img/kapak/stm32-seri.jpg", "author": {"@id": "https://ahmetulu.com.tr/#ahmet-ulu"}, "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "STM32F407 ile Buton Okuma ve Debounce", "url": "https://ahmetulu.com.tr/yazilar/stm32/01-buton-debounce.html"}]}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Yazılar", "item": "https://ahmetulu.com.tr/yazilar.html"}, {"@type": "ListItem", "position": 3, "name": "STM32 Yol Haritam", "item": "https://ahmetulu.com.tr/stm32-yol-haritasi.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
@@ -37,7 +37,7 @@
     <li><a href="hakkimda.html">Hakkımda</a></li>
     <li><a href="egitim.html">Eğitim</a></li>
     <li><a href="projeler.html">Projeler</a></li>
-    <li><a href="yazilar.html">Yazılar</a></li>
+    <li><a href="yazilar.html" aria-current="page">Yazılar</a></li>
     <li><a href="araclar.html">Araçlar</a></li>
     <li><a href="iletisim.html">İletişim</a></li>
     <li class="nav-lang"><a href="en/stm32-roadmap.html" hreflang="en" lang="en" aria-label="English">EN</a></li>
@@ -45,54 +45,36 @@
 </header>
 <main id="icerik">
   <div class="wrap inner fade-in road-page">
-    <nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="projeler.html">Projeler</a><span aria-hidden="true">/</span><span>STM32 yol haritam</span></nav>
+    <nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a><span aria-hidden="true">/</span><a href="yazilar.html">Yazılar</a><span aria-hidden="true">/</span><span>STM32 yol haritam</span></nav>
     <header class="road-hero">
-      <div class="tool-head"><span class="tool-kicker">Seri · AGÜ Roket Takımı</span><h1>STM32 Yol Haritam</h1><p><strong>AGÜ Roket Takımı</strong>'na katıldım. Roketin uçuş bilgisayarı tarafında işe yarayabilmek için STM32'yi temelden, register seviyesinde öğreniyorum. Her uygulamayı bitirdiğimde karşılaştığım sorunları, çözümleri ve kodu burada bir bölüm olarak yayımlıyorum.</p>
+      <div class="tool-head"><span class="tool-kicker">Seri · Register seviyesinde</span><h1>STM32 Yol Haritam</h1><p>STM32'yi hazır kütüphaneler yerine <strong>register seviyesinde</strong>, referans kılavuza bakarak öğreniyorum. Her uygulamayı bitirdiğimde karşılaştığım sorunları, çözümleri ve kodu burada yeni bir bölüm olarak yayımlıyorum.</p>
         <div class="chips-sm road-chips"><span class="chip-sm">STM32F407G-DISC1</span><span class="chip-sm">Cortex-M4</span><span class="chip-sm">Keil µVision</span><span class="chip-sm">C · register seviyesi</span><span class="chip-sm">RM0090</span></div>
       </div>
       <div class="road-progress">
-        <div class="tile-k">İlerleme</div>
-        <div class="road-num"><b>1</b><span>/ 10</span></div>
-        <div class="road-bar" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="1" aria-label="Yayımlanan bölümler"><span style="width:10%"></span><i style="width:20%"></i></div>
-        <div class="tile-sub">1 bölüm yayında · 1 uygulama tamam</div>
+        <img class="road-cover" src="assets/img/kapak/stm32-seri.jpg" alt="STM32 mikrodenetleyici çizimi" width="800" height="500" decoding="async">
+        <div class="road-num"><b>1</b><span>bölüm yayında</span></div>
+        <div class="tile-sub">Yeni bölümler yayımladıkça burada görünür.</div>
         <a class="btn btn-primary road-cta" href="yazilar/stm32/01-buton-debounce.html">1. bölümden başla →</a>
       </div>
     </header>
 
     <section class="pcb-sec">
-      <h2 class="section-title">Neden STM32, neden roket?</h2>
-      <div class="road-why-grid">
-        <div class="tile road-why-tile"><div class="tile-title">Uçuş bilgisayarı</div><p class="tile-sub">Roketin beyni: sensörleri okur, irtifayı hesaplar, tepe noktasında kurtarmayı tetikler. Bu kartlarda en sık görülen işlemcilerden biri STM32.</p></div>
-        <div class="tile road-why-tile"><div class="tile-title">Zamanlama kritik</div><p class="tile-sub">Uçuş birkaç saniyede biter. Kesmeler, zamanlayıcılar ve DMA ile hiçbir veriyi kaçırmadan çalışmak gerekiyor.</p></div>
-        <div class="tile road-why-tile"><div class="tile-title">Register seviyesi</div><p class="tile-sub">Hazır kütüphanelerin altında ne olduğunu bilmek, sahada bir şey ters gittiğinde hatayı bulmayı kolaylaştırıyor.</p></div>
-      </div>
-    </section>
-
-    <section class="pcb-sec">
-      <div class="section-head"><div><h2 class="section-title">Bölümler</h2><p class="section-sub">Sıradaki adımlar bir plan; öğrendikçe sırası ve içeriği değişebilir.</p></div></div>
+      <h2 class="section-title">Bölümler</h2>
       <ol class="road-list">
-      <li class="road-step is-done"><span class="road-n" aria-hidden="true">1</span><div class="road-card"><div class="road-top"><span class="road-part">1. bölüm</span><span class="road-badge">Yayında</span></div><h3><a href="yazilar/stm32/01-buton-debounce.html">GPIO: buton okuma ve debounce</a></h3><p>Saatleri açmak, MODER ile pin modu, IDR ile buton okumak, BSRR ile LED sürmek ve kontak sıçramasını çözmek.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> Arming anahtarı, durum butonları ve LED göstergeleri hep GPIO ile çalışır.</span></p><a class="road-link" href="yazilar/stm32/01-buton-debounce.html">Yazıyı oku →</a></div></li>
-      <li class="road-step is-wip"><span class="road-n" aria-hidden="true">2</span><div class="road-card"><div class="road-top"><span class="road-part">2. bölüm</span><span class="road-badge">Uygulama tamam · yazısı yakında</span></div><h3>Karaşimşek: LED&#x27;leri sırayla kaydırmak</h3><p>Bit kaydırma ve maskelerle dört LED&#x27;i sırayla yakıp söndürmek.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> Uçuş aşamasını (hazır, uçuşta, kurtarma) LED desenleriyle göstermek.</span></p></div></li>
-      <li class="road-step is-todo"><span class="road-n" aria-hidden="true">3</span><div class="road-card"><div class="road-top"><span class="road-part">3. bölüm</span><span class="road-badge">Sırada</span></div><h3>EXTI: butonu kesmeyle okumak</h3><p>NVIC ve EXTI ile butonu sürekli kontrol etmek yerine kesmeyle yakalamak.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> İşlemciyi bekletmeden olaylara anında tepki vermek.</span></p></div></li>
-      <li class="road-step is-todo"><span class="road-n" aria-hidden="true">4</span><div class="road-card"><div class="road-top"><span class="road-part">4. bölüm</span><span class="road-badge">Sırada</span></div><h3>SysTick ve TIM: gerçek zamanlama</h3><p>Sayaç döngüsü yerine milisaniye hassasiyetinde gecikme ve periyodik görevler.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> Sensörleri sabit aralıkla örneklemek ve uçuş süresini ölçmek.</span></p></div></li>
-      <li class="road-step is-todo"><span class="road-n" aria-hidden="true">5</span><div class="road-card"><div class="road-top"><span class="road-part">5. bölüm</span><span class="road-badge">Sırada</span></div><h3>PWM: servo ve buzzer</h3><p>Zamanlayıcı kanallarıyla PWM üretmek, görev oranını ayarlamak.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> Servo kontrolü ve yer ekibine sesli durum bildirimi.</span></p></div></li>
-      <li class="road-step is-todo"><span class="road-n" aria-hidden="true">6</span><div class="road-card"><div class="road-top"><span class="road-part">6. bölüm</span><span class="road-badge">Sırada</span></div><h3>UART: bilgisayarla ve modüllerle konuşmak</h3><p>Seri haberleşme, baud hızı, gönderme/alma ve basit bir komut satırı.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> Yer istasyonuna telemetri göndermek ve GPS modülünden veri almak.</span></p></div></li>
-      <li class="road-step is-todo"><span class="road-n" aria-hidden="true">7</span><div class="road-card"><div class="road-top"><span class="road-part">7. bölüm</span><span class="road-badge">Sırada</span></div><h3>ADC: batarya ve analog sensörler</h3><p>Analog gerilimi dijitale çevirmek, örnekleme ve filtreleme.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> Uçuş öncesi batarya kontrolü ve gerilim izleme.</span></p></div></li>
-      <li class="road-step is-todo"><span class="road-n" aria-hidden="true">8</span><div class="road-card"><div class="road-top"><span class="road-part">8. bölüm</span><span class="road-badge">Sırada</span></div><h3>I²C / SPI: IMU ve barometre</h3><p>Sensör register&#x27;larını okumak; ivme, açı ve basınç verisi.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> Basınçtan irtifa, IMU&#x27;dan yönelim: uçuş bilgisayarının kalbi.</span></p></div></li>
-      <li class="road-step is-todo"><span class="road-n" aria-hidden="true">9</span><div class="road-card"><div class="road-top"><span class="road-part">9. bölüm</span><span class="road-badge">Sırada</span></div><h3>DMA ve SD karta kayıt</h3><p>İşlemciyi yormadan veri taşımak ve SD karta yazmak.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> Uçuş verisini yüksek hızda kaydedip sonradan analiz etmek.</span></p></div></li>
-      <li class="road-step is-todo"><span class="road-n" aria-hidden="true">10</span><div class="road-card"><div class="road-top"><span class="road-part">10. bölüm</span><span class="road-badge">Sırada</span></div><h3>Mini uçuş bilgisayarı</h3><p>Hepsini birleştirmek: sensör füzyonu, durum makinesi ve kayıt; masa üstünde simülasyonla test.</p><p class="road-why"><span aria-hidden="true">🚀</span><span><b>Roket için:</b> İrtifa takibi, tepe noktasını algılama ve kurtarma tetiklemesi.</span></p></div></li>
+      <li class="road-step is-done"><span class="road-n" aria-hidden="true">1</span><a class="road-card road-card-link" href="yazilar/stm32/01-buton-debounce.html"><img class="road-thumb" src="assets/img/kapak/stm32-01.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"><span class="road-info"><span class="road-top"><span class="road-part">1. bölüm</span><span class="road-date">Ekim 2026 · 9 dk okuma</span></span><span class="road-h">STM32F407 ile Buton Okuma ve Debounce</span><span class="road-d">STM32 yol haritamın ilk bölümü: STM32F407 Discovery&#x27;de register seviyesinde buton okuma, BSRR ile LED sürme ve buton sıçramasını (bouncing) yazılımsal debounce ile çözmek. Görseller ve sanal kart ile.</span><span class="road-link">Yazıyı oku →</span></span></a></li>
       </ol>
     </section>
 
     <section class="section">
       <div class="cta-band">
-        <div><h2 class="section-title">Yeni bölümleri kaçırma</h2><p>Her yeni bölümü LinkedIn'de de paylaşıyorum. STM32, gömülü sistemler ya da roket aviyoniği üzerine konuşmak istersen yazabilirsin.</p></div>
+        <div><h2 class="section-title">Yeni bölümleri kaçırma</h2><p>Her yeni bölümü LinkedIn'de de paylaşıyorum. STM32 ya da gömülü sistemler üzerine konuşmak istersen yazabilirsin.</p></div>
         <div class="cta-actions"><a class="btn btn-primary" href="https://www.linkedin.com/in/ahmet-ulu-16099832b/" target="_blank" rel="noopener">LinkedIn'de takip et ↗</a><a class="btn btn-ghost" href="iletisim.html">İletişime geç</a></div>
       </div>
     </section>
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popüler hesap araçları"><a class="ft-k" href="araclar.html">Hesap araçları</a><a href="araclar/direnc-renk-kodu.html">Direnç renk kodu</a><a href="araclar/led-direnci.html">LED direnci</a><a href="araclar/ohm-kanunu.html">Ohm kanunu</a><a href="araclar/smd-kod-cozucu.html">SMD kod çözücü</a><a href="araclar/gerilim-bolucu.html">Gerilim bölücü</a><a href="araclar/pcb-iz-genisligi.html">PCB iz genişliği</a><a href="araclar/awg-kablo.html">AWG ↔ mm²</a><a href="araclar/555-zamanlayici.html">555 zamanlayıcı</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

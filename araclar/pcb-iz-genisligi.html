@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>PCB İz Genişliği Hesaplama (IPC-2221) — Ahmet Ulu</title>
-<meta name="description" content="PCB iz genişliği hesaplayıcı (IPC-2221): akım, bakır kalınlığı (oz) ve sıcaklık artışına göre iz genişliği, iz direnci, gerilim düşümü ve güç kaybı.">
+<title>PCB Yol (İz) Genişliği Hesaplama — IPC-2221 Tablosu</title>
+<meta name="description" content="PCB yol genişliği hesaplama: akıma ve bakır kalınlığına göre en küçük iz genişliği, direnç ve gerilim düşümü. IPC-2221 formülü ve 0,5–5 A için hazır tablo.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html">
@@ -14,8 +14,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="PCB İz Genişliği Hesaplama (IPC-2221) — Ahmet Ulu">
-<meta property="og:description" content="PCB iz genişliği hesaplayıcı (IPC-2221): akım, bakır kalınlığı (oz) ve sıcaklık artışına göre iz genişliği, iz direnci, gerilim düşümü ve güç kaybı.">
+<meta property="og:title" content="PCB Yol (İz) Genişliği Hesaplama — IPC-2221 Tablosu">
+<meta property="og:description" content="PCB yol genişliği hesaplama: akıma ve bakır kalınlığına göre en küçük iz genişliği, direnç ve gerilim düşümü. IPC-2221 formülü ve 0,5–5 A için hazır tablo.">
 <meta property="og:url" content="https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "PCB İz Genişliği Hesaplama (IPC-2221)", "description": "PCB iz genişliği hesaplayıcı (IPC-2221): akım, bakır kalınlığı (oz) ve sıcaklık artışına göre iz genişliği, iz direnci, gerilim düşümü ve güç kaybı.", "url": "https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "PCB iz genişliği", "item": "https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "PCB İz Genişliği Hesaplama (IPC-2221)", "description": "PCB iz genişliği hesaplayıcı (IPC-2221): akım, bakır kalınlığı (oz) ve sıcaklık artışına göre iz genişliği, iz direnci, gerilim düşümü ve güç kaybı.", "url": "https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "1 amper için PCB yol genişliği kaç mm olmalı?", "acceptedAnswer": {"@type": "Answer", "text": "IPC-2221'e göre dış katmanda 1 oz (35 µm) bakır ve 10 °C artış için en az ≈ 0,3 mm. Pratikte 0,5 mm ve üstü rahat bir seçimdir."}}, {"@type": "Question", "name": "İç katmanlar neden daha geniş yol ister?", "acceptedAnswer": {"@type": "Answer", "text": "İç katmandaki iz ısısını havaya veremez; IPC-2221 bu yüzden iç katmanlar için katsayıyı yarıya indirir ve aynı akım için yaklaşık 2,6 kat daha geniş iz çıkar."}}, {"@type": "Question", "name": "Yol uzunluğu genişliği etkiler mi?", "acceptedAnswer": {"@type": "Answer", "text": "Isınma hesabını değil, gerilim düşümünü etkiler. Uzun güç yollarında düşümü de kontrol et; araç milivolt cinsinden gösterir."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "PCB iz genişliği", "item": "https://ahmetulu.com.tr/araclar/pcb-iz-genisligi.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
@@ -56,12 +56,19 @@
 <div class="formula"><span>R = ρ · L / (W · t)</span><span>ρ = 1,72·10⁻⁸ Ω·m · (1 + 0,00393 · (T − 20 °C))</span></div>
 <h3>Pratikte dikkat</h3>
 <ul><li>İç katmanlar ısıyı daha zor attığı için aynı akımda yaklaşık iki kat daha geniş iz ister.</li>
-<li>IPC-2221 eğrileri temkinlidir ve 35 A'e kadar geçerlidir. Daha ayrıntılı analiz için yeni standart IPC-2152 kullanılır.</li></ul>
+<li>IPC-2221 eğrileri temkinlidir ve 35 A'e kadar geçerlidir. Daha ayrıntılı analiz için yeni standart IPC-2152 kullanılır.</li></ul><h3>Hazır tablo: akıma göre PCB yol genişliği</h3><p>IPC-2221, 10 °C sıcaklık artışı için en küçük iz genişliği. Üretimde bir miktar pay bırak.</p><div class="table-wrap"><table class="calc-table"><thead><tr><th>Akım</th><th>Dış katman, 1 oz</th><th>Dış katman, 2 oz</th><th>İç katman, 1 oz</th></tr></thead><tbody><tr><td><b>0,5 A</b></td><td>0,12 mm</td><td>0,06 mm</td><td>0,3 mm</td></tr><tr><td><b>1 A</b></td><td>0,3 mm</td><td>0,15 mm</td><td>0,78 mm</td></tr><tr><td><b>2 A</b></td><td>0,78 mm</td><td>0,39 mm</td><td>2,03 mm</td></tr><tr><td><b>3 A</b></td><td>1,37 mm</td><td>0,68 mm</td><td>3,56 mm</td></tr><tr><td><b>5 A</b></td><td>2,77 mm</td><td>1,38 mm</td><td>7,19 mm</td></tr></tbody></table></div>
       <p class="tool-post">Bu hesabı kullandığım proje: <a href="../yazilar/pcb-tasarim/kicad-pcb-tasarimlari.html">KiCad ile PCB Tasarımı: Bionluk&#x27;ta Müşteriler İçin Tasarladığım Kartlar</a></p>
+      <h3 id="sss">Sık sorulan sorular</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>1 amper için PCB yol genişliği kaç mm olmalı?</summary><p>IPC-2221&#x27;e göre dış katmanda 1 oz (35 µm) bakır ve 10 °C artış için en az ≈ 0,3 mm. Pratikte 0,5 mm ve üstü rahat bir seçimdir.</p></details>
+        <details class="faq-item"><summary>İç katmanlar neden daha geniş yol ister?</summary><p>İç katmandaki iz ısısını havaya veremez; IPC-2221 bu yüzden iç katmanlar için katsayıyı yarıya indirir ve aynı akım için yaklaşık 2,6 kat daha geniş iz çıkar.</p></details>
+        <details class="faq-item"><summary>Yol uzunluğu genişliği etkiler mi?</summary><p>Isınma hesabını değil, gerilim düşümünü etkiler. Uzun güç yollarında düşümü de kontrol et; araç milivolt cinsinden gösterir.</p></details>
+      </div>
       <h3>Kaynaklar</h3>
       <ul class="sources">
         <li><a href="https://shop.ipc.org/ipc-2221/ipc-2221-standard-only" target="_blank" rel="noopener">IPC-2221 — Generic Standard on Printed Board Design</a></li>
       </ul>
+      <p class="tool-upd">Son güncelleme: Ekim 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
@@ -74,6 +81,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popüler hesap araçları"><a class="ft-k" href="../araclar.html">Hesap araçları</a><a href="../araclar/direnc-renk-kodu.html">Direnç renk kodu</a><a href="../araclar/led-direnci.html">LED direnci</a><a href="../araclar/ohm-kanunu.html">Ohm kanunu</a><a href="../araclar/smd-kod-cozucu.html">SMD kod çözücü</a><a href="../araclar/gerilim-bolucu.html">Gerilim bölücü</a><a href="../araclar/pcb-iz-genisligi.html">PCB iz genişliği</a><a href="../araclar/awg-kablo.html">AWG ↔ mm²</a><a href="../araclar/555-zamanlayici.html">555 zamanlayıcı</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

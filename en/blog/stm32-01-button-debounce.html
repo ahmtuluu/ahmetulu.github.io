@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "Reading a Button and Debouncing on the STM32F407", "description": "Part 1 of my STM32 roadmap: reading a button at register level on the STM32F407 Discovery, driving LEDs with BSRR and fixing contact bounce with a software debounce. With diagrams and a virtual board.", "image": "https://ahmetulu.com.tr/assets/img/kapak/stm32-01.jpg", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "inLanguage": "en", "mainEntityOfPage": "https://ahmetulu.com.tr/en/blog/stm32-01-button-debounce.html", "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}, "keywords": "STM32, STM32F407, register level, button debounce, contact bounce, GPIO, BSRR, Keil, rocket team"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ahmetulu.com.tr/en/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Reading a Button and Debouncing on the STM32F407", "item": "https://ahmetulu.com.tr/en/blog/stm32-01-button-debounce.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "Reading a Button and Debouncing on the STM32F407", "description": "Part 1 of my STM32 roadmap: reading a button at register level on the STM32F407 Discovery, driving LEDs with BSRR and fixing contact bounce with a software debounce. With diagrams and a virtual board.", "image": "https://ahmetulu.com.tr/assets/img/kapak/stm32-01.jpg", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "inLanguage": "en", "mainEntityOfPage": "https://ahmetulu.com.tr/en/blog/stm32-01-button-debounce.html", "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}, "keywords": "STM32, STM32F407, register level, button debounce, contact bounce, GPIO, BSRR, Keil"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ahmetulu.com.tr/en/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Reading a Button and Debouncing on the STM32F407", "item": "https://ahmetulu.com.tr/en/blog/stm32-01-button-debounce.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -55,9 +55,9 @@
     <ol><li><a href="#the-task">The task</a></li><li><a href="#hardware-the-on-board-button-and-leds">Hardware: the on-board button and LEDs</a></li><li><a href="#step-1-turn-on-the-clocks-rcc">Step 1: Turn on the clocks (RCC)</a></li><li><a href="#step-2-set-the-pin-modes-moder-pupdr">Step 2: Set the pin modes (MODER, PUPDR)</a></li><li><a href="#step-3-drive-the-leds-with-bsrr">Step 3: Drive the LEDs with BSRR</a></li><li><a href="#the-problem-one-press-many-counts-bouncing">The problem: one press, many counts (bouncing)</a></li><li><a href="#the-fix-read-wait-read-again">The fix: read, wait, read again</a></li><li><a href="#why-a-delay-and-its-limits">Why a delay, and its limits</a></li><li><a href="#what-i-took-away-from-this-part">What I took away from this part</a></li><li><a href="#references">References</a></li></ol>
   </details>
 
-  <a class="series-box" href="../stm32-roadmap.html"><span class="series-k">Series</span><span class="series-t">My STM32 Roadmap</span><span class="series-s">Part 1 · All parts and what comes next →</span></a>
+  <a class="series-box" href="../stm32-roadmap.html"><span class="series-k">Series</span><span class="series-t">My STM32 Roadmap</span><span class="series-s">Part 1 · All parts →</span></a>
 
-  <p>I recently joined the <strong>AGÜ rocket team</strong>. A rocket's flight computer reads sensors, tracks altitude, detects apogee to trigger recovery and sends telemetry to the ground. <strong>STM32</strong> is one of the most common microcontrollers on these boards. So I decided to learn STM32 from the ground up, really understanding it, and I am documenting it here part by part.</p>
+  <p>My next step in embedded systems is <strong>STM32</strong>: one of the most common microcontroller families both in industry and in student teams (including the AGÜ rocket team I recently joined). So I decided to learn STM32 from the ground up, really understanding it, and I am documenting it here part by part.</p>
 
   <p>Instead of ready-made functions like Arduino's <code>digitalRead()</code>, I am starting at the <strong>register level</strong>: looking up what each bit does in the reference manual (RM0090) and writing it myself. The board is an <strong>STM32F407G-DISC1</strong> and the IDE is <strong>Keil µVision</strong>. First exercise: read the on-board button and drive the LEDs.</p>
 
@@ -166,7 +166,7 @@
 
   <h3 id="why-a-delay-and-its-limits">Why a delay, and its limits</h3>
   <p>For the wait I used a simple counting loop for now: <code>void delay(volatile uint32_t n) { while (n--); }</code>. <code>volatile</code> stops the compiler from optimising this “do-nothing” loop away. I tuned <code>DEBOUNCE</code> by trial: too small and the pin is read again before the bouncing ends; too large and short, quick presses are missed.</p>
-  <p>This approach has two weak points: the delay depends on the CPU frequency and compiler settings, so it is not an exact number of milliseconds; and the CPU can do nothing else while waiting. On a rocket flight computer, locking up the CPU to wait for a button while sensors need reading is not acceptable. So in the coming parts I will learn real millisecond timing with <strong>SysTick</strong> and reading the button with an <strong>EXTI interrupt</strong>.</p>
+  <p>This approach has two weak points: the delay depends on the CPU frequency and compiler settings, so it is not an exact number of milliseconds; and the CPU can do nothing else while waiting. In a project that also reads sensors or communicates, locking up the CPU to wait for a button is not acceptable. There are better ways: real millisecond timing with <strong>SysTick</strong> and reading the button with an <strong>EXTI interrupt</strong>.</p>
 
   <figure class="blog-figure"><img src="../../yazilar/stm32/kod-1.png" class="blog-img" alt="Keil µVision: definitions and GPIO setup" width="1600" height="607" loading="lazy" decoding="async"><figcaption>The first part of the code in Keil µVision: definitions, clocks and pin setup</figcaption></figure>
   <figure class="blog-figure"><img src="../../yazilar/stm32/kod-2.png" class="blog-img" alt="Debounce loop and blinking stage" width="1300" height="637" loading="lazy" decoding="async"><figcaption>The debounce loop and stage two</figcaption></figure>
@@ -228,6 +228,7 @@ int main(void)
       <li>IDE: Keil µVision · Language: C, register level (CMSIS header <code>stm32f4xx.h</code>)</li>
       <li>Registers used: <code>RCC_AHB1ENR</code>, <code>GPIOx_MODER</code>, <code>GPIOx_PUPDR</code>, <code>GPIOx_IDR</code>, <code>GPIOx_BSRR</code></li>
       <li>Pins: PA0 (USER button, active-high), PD12–PD15 (LED)</li>
+      <li>If you use LEDs in your own circuit, find the series resistor with the <a href="../tools/led-resistor.html">LED resistor calculator</a>.</li>
     </ul>
   </div>
 
@@ -239,7 +240,7 @@ int main(void)
     <li>Mechanical buttons never give a “clean” signal; you always need debounce.</li>
   </ul>
 
-  <a class="series-box next" href="../stm32-roadmap.html"><span class="series-k">Next part</span><span class="series-t">Part 2: Knight Rider — sweeping the LEDs in sequence</span><span class="series-s">See the roadmap →</span></a>
+  <a class="series-box next" href="../stm32-roadmap.html"><span class="series-k">Series</span><span class="series-t">My STM32 Roadmap</span><span class="series-s">New parts appear here as they are published · All parts →</span></a>
 
   <h3 id="references">References</h3>
   <ul>
@@ -296,6 +297,7 @@ int main(void)
 </article>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

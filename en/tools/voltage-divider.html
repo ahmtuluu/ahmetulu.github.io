@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Voltage Divider Calculator — Ahmet Ulu</title>
+<title>Voltage Divider Calculator: 5V to 3.3V, 12V to 5V Resistors</title>
 <meta name="description" content="Voltage divider calculator: Vout = Vin·R2/(R1+R2). Find R2 for a target voltage, get E24/E96 standard values and see the effect of a load.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="Voltage Divider Calculator — Ahmet Ulu">
+<meta property="og:title" content="Voltage Divider Calculator: 5V to 3.3V, 12V to 5V Resistors">
 <meta property="og:description" content="Voltage divider calculator: Vout = Vin·R2/(R1+R2). Find R2 for a target voltage, get E24/E96 standard values and see the effect of a load.">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/voltage-divider.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Voltage Divider Calculator", "description": "Voltage divider calculator: Vout = Vin·R2/(R1+R2). Find R2 for a target voltage, get E24/E96 standard values and see the effect of a load.", "url": "https://ahmetulu.com.tr/en/tools/voltage-divider.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Voltage divider", "item": "https://ahmetulu.com.tr/en/tools/voltage-divider.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Voltage Divider Calculator", "description": "Voltage divider calculator: Vout = Vin·R2/(R1+R2). Find R2 for a target voltage, get E24/E96 standard values and see the effect of a load.", "url": "https://ahmetulu.com.tr/en/tools/voltage-divider.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I drop 5V to 3.3V with a voltage divider?", "acceptedAnswer": {"@type": "Answer", "text": "R1 = 5.1 kΩ (top) and R2 = 10 kΩ (bottom) give ≈ 3.31 V. Good for shifting a signal level (e.g. 5 V UART → 3.3 V), not for powering a circuit."}}, {"@type": "Question", "name": "Can a voltage divider power a module?", "acceptedAnswer": {"@type": "Answer", "text": "No. The output changes with the load current. Use a regulator (LDO or buck) for power."}}, {"@type": "Question", "name": "What resistor values should a divider use?", "acceptedAnswer": {"@type": "Answer", "text": "A total of 10–100 kΩ is a good start for most ADC and signal uses: low values waste current, very high values add noise and error."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Voltage divider", "item": "https://ahmetulu.com.tr/en/tools/voltage-divider.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -55,12 +55,21 @@
 <p>In “find bottom resistor” mode R2 is calculated, then the nearest standard values in the <strong>E24 (±5%)</strong> and <strong>E96 (±1%)</strong> series are suggested together with the real Vout you would get.</p>
 <h3>In practice</h3>
 <ul><li>A divider is not a power supply: its output drops under load. The load field shows how much.</li>
-<li>For measuring a battery with an ADC, a total of 10–100 kΩ is a good start; MΩ values can add noise and error.</li></ul>
+<li>For measuring a battery with an ADC, a total of 10–100 kΩ is a good start; MΩ values can add noise and error.</li></ul><h3>Quick table: common voltage dividers</h3>
+<p>R2 fixed at 10 kΩ, R1 is the closest E24 value. Unloaded output; fine for high-impedance loads such as an ADC input.</p>
+<div class="table-wrap"><table class="calc-table"><thead><tr><th>Conversion</th><th>R1 (top)</th><th>R2 (bottom)</th><th>Actual Vout</th></tr></thead><tbody><tr><td>5 V → 3.3 V</td><td>5.1 kΩ</td><td>10 kΩ</td><td>3.31 V</td></tr><tr><td>12 V → 5 V</td><td>15 kΩ</td><td>10 kΩ</td><td>4.8 V</td></tr><tr><td>12 V → 3.3 V</td><td>27 kΩ</td><td>10 kΩ</td><td>3.24 V</td></tr><tr><td>24 V → 5 V</td><td>39 kΩ</td><td>10 kΩ</td><td>4.9 V</td></tr><tr><td>9 V → 5 V</td><td>8.2 kΩ</td><td>10 kΩ</td><td>4.95 V</td></tr><tr><td>4.2 V → 3.3 V</td><td>2.7 kΩ</td><td>10 kΩ</td><td>3.31 V</td></tr></tbody></table></div>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>How do I drop 5V to 3.3V with a voltage divider?</summary><p>R1 = 5.1 kΩ (top) and R2 = 10 kΩ (bottom) give ≈ 3.31 V. Good for shifting a signal level (e.g. 5 V UART → 3.3 V), not for powering a circuit.</p></details>
+        <details class="faq-item"><summary>Can a voltage divider power a module?</summary><p>No. The output changes with the load current. Use a regulator (LDO or buck) for power.</p></details>
+        <details class="faq-item"><summary>What resistor values should a divider use?</summary><p>A total of 10–100 kΩ is a good start for most ADC and signal uses: low values waste current, very high values add noise and error.</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://en.wikipedia.org/wiki/Voltage_divider" target="_blank" rel="noopener">Wikipedia — Voltage divider</a></li>
         <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -73,6 +82,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

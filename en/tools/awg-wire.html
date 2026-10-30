@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>AWG ↔ mm² Wire Gauge Calculator — Ahmet Ulu</title>
+<title>AWG to mm² Conversion Chart and Wire Gauge Calculator</title>
 <meta name="description" content="AWG to mm² converter: cross-section, diameter and resistance per metre from AWG; nearest AWG from mm². Uses the ASTM B258 formula.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="AWG ↔ mm² Wire Gauge Calculator — Ahmet Ulu">
+<meta property="og:title" content="AWG to mm² Conversion Chart and Wire Gauge Calculator">
 <meta property="og:description" content="AWG to mm² converter: cross-section, diameter and resistance per metre from AWG; nearest AWG from mm². Uses the ASTM B258 formula.">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/awg-wire.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "AWG ↔ mm² Wire Gauge Calculator", "description": "AWG to mm² converter: cross-section, diameter and resistance per metre from AWG; nearest AWG from mm². Uses the ASTM B258 formula.", "url": "https://ahmetulu.com.tr/en/tools/awg-wire.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "AWG ↔ mm²", "item": "https://ahmetulu.com.tr/en/tools/awg-wire.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "AWG ↔ mm² Wire Gauge Calculator", "description": "AWG to mm² converter: cross-section, diameter and resistance per metre from AWG; nearest AWG from mm². Uses the ASTM B258 formula.", "url": "https://ahmetulu.com.tr/en/tools/awg-wire.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many mm² is 18 AWG?", "acceptedAnswer": {"@type": "Answer", "text": "18 AWG ≈ 0.82 mm² (diameter ≈ 1.02 mm). The nearest European size is 0.75 mm²."}}, {"@type": "Question", "name": "How many mm² is 22 AWG?", "acceptedAnswer": {"@type": "Answer", "text": "22 AWG ≈ 0.33 mm². Breadboard jumper wires are usually 22–24 AWG."}}, {"@type": "Question", "name": "Does a bigger AWG number mean a thicker wire?", "acceptedAnswer": {"@type": "Answer", "text": "No, a thinner one. Every 6 AWG steps the diameter roughly halves; every 3 steps the area roughly halves."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "AWG ↔ mm²", "item": "https://ahmetulu.com.tr/en/tools/awg-wire.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -53,12 +53,19 @@
 <p>AWG (American Wire Gauge) is a log scale: a higher number means a thinner wire, and every 6 gauges the diameter roughly halves.</p>
 <div class="formula"><span>d (mm) = 0.127 · 92^((36 − n) / 39)</span><span>A = π · d² / 4</span><span>R / m = ρ / A,   ρ(Cu, 20 °C) = 1.7241·10⁻⁸ Ω·m</span><small>00 → n = −1,  000 → n = −2,  0000 → n = −3</small></div>
 <p>In “mm² → AWG” mode the thinnest AWG whose area is <strong>equal or larger</strong> than your value is suggested, so you never end up with a thinner wire.</p>
-<p>Current capacity is not a single number: it depends on the insulation, whether wires are bundled and the ambient temperature.</p>
+<p>Current capacity is not a single number: it depends on the insulation, whether wires are bundled and the ambient temperature.</p><h3>AWG to mm² conversion table</h3><p>Solid copper wire values calculated with the ASTM B258 formula (20 °C).</p><div class="table-wrap"><table class="calc-table"><thead><tr><th>AWG</th><th>Area</th><th>Diameter</th><th>Resistance (copper)</th></tr></thead><tbody><tr><td><b>10 AWG</b></td><td>5.261 mm²</td><td>2.588 mm</td><td>3.3 mΩ/m</td></tr><tr><td><b>12 AWG</b></td><td>3.309 mm²</td><td>2.053 mm</td><td>5.2 mΩ/m</td></tr><tr><td><b>14 AWG</b></td><td>2.081 mm²</td><td>1.628 mm</td><td>8.3 mΩ/m</td></tr><tr><td><b>16 AWG</b></td><td>1.309 mm²</td><td>1.291 mm</td><td>13.2 mΩ/m</td></tr><tr><td><b>18 AWG</b></td><td>0.823 mm²</td><td>1.024 mm</td><td>20.9 mΩ/m</td></tr><tr><td><b>20 AWG</b></td><td>0.518 mm²</td><td>0.812 mm</td><td>33.3 mΩ/m</td></tr><tr><td><b>22 AWG</b></td><td>0.326 mm²</td><td>0.644 mm</td><td>53 mΩ/m</td></tr><tr><td><b>24 AWG</b></td><td>0.205 mm²</td><td>0.511 mm</td><td>84.2 mΩ/m</td></tr><tr><td><b>26 AWG</b></td><td>0.129 mm²</td><td>0.405 mm</td><td>133.9 mΩ/m</td></tr><tr><td><b>28 AWG</b></td><td>0.081 mm²</td><td>0.321 mm</td><td>212.9 mΩ/m</td></tr><tr><td><b>30 AWG</b></td><td>0.051 mm²</td><td>0.255 mm</td><td>338.5 mΩ/m</td></tr></tbody></table></div>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>How many mm² is 18 AWG?</summary><p>18 AWG ≈ 0.82 mm² (diameter ≈ 1.02 mm). The nearest European size is 0.75 mm².</p></details>
+        <details class="faq-item"><summary>How many mm² is 22 AWG?</summary><p>22 AWG ≈ 0.33 mm². Breadboard jumper wires are usually 22–24 AWG.</p></details>
+        <details class="faq-item"><summary>Does a bigger AWG number mean a thicker wire?</summary><p>No, a thinner one. Every 6 AWG steps the diameter roughly halves; every 3 steps the area roughly halves.</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://store.astm.org/standards/b258" target="_blank" rel="noopener">ASTM B258 — AWG sizes of solid round wires</a></li>
         <li><a href="https://en.wikipedia.org/wiki/American_wire_gauge" target="_blank" rel="noopener">Wikipedia — American wire gauge</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -71,6 +78,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

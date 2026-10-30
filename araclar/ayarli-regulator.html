@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Ayarlı Regülatör Direnç Hesaplama (LM2596, LM317, MP1584…) — Ahmet Ulu</title>
+<title>LM2596 / LM317 Çıkış Gerilimi ve Direnç Hesaplama — Ahmet Ulu</title>
 <meta name="description" content="LM2596, XL4015, MP1584, LM317 ve AMS1117 ayarlı regülatör hesaplayıcı: geri besleme dirençlerinden Vout, hedef gerilim için direnç ve E24/E96 önerisi.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="Ayarlı Regülatör Direnç Hesaplama (LM2596, LM317, MP1584…) — Ahmet Ulu">
+<meta property="og:title" content="LM2596 / LM317 Çıkış Gerilimi ve Direnç Hesaplama — Ahmet Ulu">
 <meta property="og:description" content="LM2596, XL4015, MP1584, LM317 ve AMS1117 ayarlı regülatör hesaplayıcı: geri besleme dirençlerinden Vout, hedef gerilim için direnç ve E24/E96 önerisi.">
 <meta property="og:url" content="https://ahmetulu.com.tr/araclar/ayarli-regulator.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Ayarlı Regülatör Direnç Hesaplama (LM2596, LM317, MP1584…)", "description": "LM2596, XL4015, MP1584, LM317 ve AMS1117 ayarlı regülatör hesaplayıcı: geri besleme dirençlerinden Vout, hedef gerilim için direnç ve E24/E96 önerisi.", "url": "https://ahmetulu.com.tr/araclar/ayarli-regulator.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Ayarlı regülatör", "item": "https://ahmetulu.com.tr/araclar/ayarli-regulator.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Ayarlı Regülatör Direnç Hesaplama (LM2596, LM317, MP1584…)", "description": "LM2596, XL4015, MP1584, LM317 ve AMS1117 ayarlı regülatör hesaplayıcı: geri besleme dirençlerinden Vout, hedef gerilim için direnç ve E24/E96 önerisi.", "url": "https://ahmetulu.com.tr/araclar/ayarli-regulator.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "LM2596 çıkış gerilimi nasıl hesaplanır?", "acceptedAnswer": {"@type": "Answer", "text": "Vout = 1,23 × (1 + R2 / R1). R1 FB ile GND arasına, R2 çıkış ile FB arasına bağlanır; R1 için 240 Ω – 1,5 kΩ önerilir."}}, {"@type": "Question", "name": "LM317 ile 5 V için hangi dirençler kullanılır?", "acceptedAnswer": {"@type": "Answer", "text": "R1 = 240 Ω ve R2 = 750 Ω (E24) ile Vout ≈ 5,19 V olur. Daha hassas sonuç için R2'yi E96'dan (ör. 715 Ω) seçebilirsin."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Ayarlı regülatör", "item": "https://ahmetulu.com.tr/araclar/ayarli-regulator.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
@@ -61,6 +61,11 @@
 <li><strong>MP1584:</strong> alt direncin 40 kΩ'un altında tutulması önerilir.</li>
 <li>Vref'in kendisi de ±%2–3 toleranslıdır; hassas bir gerilim gerekiyorsa çıkışı ölçüp ince ayar yap.</li></ul>
       <p class="tool-post">Bu hesabı kullandığım proje: <a href="../yazilar/pratik-projeler/guc-kaynagi/guc-kaynagi.html">12V DC Ayarlı Güç Kaynağı — LM2596 Modifikasyonu</a></p>
+      <h3 id="sss">Sık sorulan sorular</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>LM2596 çıkış gerilimi nasıl hesaplanır?</summary><p>Vout = 1,23 × (1 + R2 / R1). R1 FB ile GND arasına, R2 çıkış ile FB arasına bağlanır; R1 için 240 Ω – 1,5 kΩ önerilir.</p></details>
+        <details class="faq-item"><summary>LM317 ile 5 V için hangi dirençler kullanılır?</summary><p>R1 = 240 Ω ve R2 = 750 Ω (E24) ile Vout ≈ 5,19 V olur. Daha hassas sonuç için R2&#x27;yi E96&#x27;dan (ör. 715 Ω) seçebilirsin.</p></details>
+      </div>
       <h3>Kaynaklar</h3>
       <ul class="sources">
         <li><a href="https://www.ti.com/lit/ds/symlink/lm2596.pdf" target="_blank" rel="noopener">Texas Instruments — LM2596 datasheet</a></li>
@@ -70,6 +75,7 @@
         <li><a href="http://www.advanced-monolithic.com/pdf/ds1117.pdf" target="_blank" rel="noopener">Advanced Monolithic Systems — AMS1117 datasheet</a></li>
         <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
       </ul>
+      <p class="tool-upd">Son güncelleme: Ekim 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
@@ -82,6 +88,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popüler hesap araçları"><a class="ft-k" href="../araclar.html">Hesap araçları</a><a href="../araclar/direnc-renk-kodu.html">Direnç renk kodu</a><a href="../araclar/led-direnci.html">LED direnci</a><a href="../araclar/ohm-kanunu.html">Ohm kanunu</a><a href="../araclar/smd-kod-cozucu.html">SMD kod çözücü</a><a href="../araclar/gerilim-bolucu.html">Gerilim bölücü</a><a href="../araclar/pcb-iz-genisligi.html">PCB iz genişliği</a><a href="../araclar/awg-kablo.html">AWG ↔ mm²</a><a href="../araclar/555-zamanlayici.html">555 zamanlayıcı</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

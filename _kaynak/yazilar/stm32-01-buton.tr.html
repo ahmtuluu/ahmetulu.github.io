@@ -2,9 +2,9 @@
   <h1>STM32F407 ile Buton Okuma ve Debounce: Register Seviyesinde İlk Adım</h1>
   <div class="blog-meta">Ahmet Ulu · Ekim 2026</div>
 
-  <a class="series-box" href="../../stm32-yol-haritasi.html"><span class="series-k">Seri</span><span class="series-t">STM32 Yol Haritam</span><span class="series-s">1. bölüm · Tüm bölümler ve sıradakiler →</span></a>
+  <a class="series-box" href="../../stm32-yol-haritasi.html"><span class="series-k">Seri</span><span class="series-t">STM32 Yol Haritam</span><span class="series-s">1. bölüm · Tüm bölümler →</span></a>
 
-  <p>Kısa süre önce <strong>AGÜ roket takımına</strong> katıldım. Bir roketin uçuş bilgisayarı sensörleri okur, irtifayı takip eder, tepe noktasını algılayıp kurtarma sistemini tetikler ve yere telemetri gönderir. Bu kartlarda en sık karşılaşılan mikrodenetleyicilerden biri <strong>STM32</strong>. Bu yüzden STM32'yi temelden, gerçekten anlayarak öğrenmeye karar verdim ve öğrendiklerimi burada bölüm bölüm kaydediyorum.</p>
+  <p>Gömülü sistemlerde bir sonraki adımım <strong>STM32</strong>: endüstride de öğrenci takımlarında da (kısa süre önce katıldığım AGÜ Roket Takımı dahil) en sık karşılaşılan mikrodenetleyici ailelerinden biri. Bu yüzden STM32'yi temelden, gerçekten anlayarak öğrenmeye karar verdim ve öğrendiklerimi burada bölüm bölüm kaydediyorum.</p>
 
   <p>Arduino'daki <code>digitalRead()</code> gibi hazır fonksiyonlar yerine <strong>register seviyesinde</strong> başlıyorum: hangi bit neyi yapıyor, referans kılavuzdan (RM0090) bakıp kendim yazıyorum. Kart <strong>STM32F407G-DISC1</strong>, geliştirme ortamı <strong>Keil µVision</strong>. İlk uygulama: kartın üzerindeki butonu okuyup LED'leri sürmek.</p>
 
@@ -113,7 +113,7 @@
 
   <h3>Neden delay ve sınırları</h3>
   <p>Bekleme için şimdilik basit bir sayaç döngüsü kullandım: <code>void delay(volatile uint32_t n) { while (n--); }</code>. <code>volatile</code>, derleyicinin bu “hiçbir şey yapmayan” döngüyü optimizasyonla silmesini engelliyor. <code>DEBOUNCE</code> değerini deneyerek ayarladım: çok küçük olursa sıçramalar geçmeden tekrar okunuyor, çok büyük olursa kısa ve hızlı basışlar kaçırılıyor.</p>
-  <p>Bu yöntemin iki zayıf yanı var: süre, işlemci frekansına ve derleyici ayarlarına göre değişiyor, yani milisaniye cinsinden kesin değil; ve beklerken işlemci başka hiçbir iş yapamıyor. Bir roket uçuş bilgisayarında sensör okurken butonu beklemek için işlemciyi kilitlemek kabul edilemez. Bu yüzden sıradaki bölümlerde <strong>SysTick</strong> ile gerçek milisaniye zamanlaması ve butonu <strong>EXTI kesmesiyle</strong> okumayı öğreneceğim.</p>
+  <p>Bu yöntemin iki zayıf yanı var: süre, işlemci frekansına ve derleyici ayarlarına göre değişiyor, yani milisaniye cinsinden kesin değil; ve beklerken işlemci başka hiçbir iş yapamıyor. Aynı anda sensör okuyan ya da haberleşme yapan bir projede, butonu beklemek için işlemciyi kilitlemek kabul edilemez. Bunun daha iyi yolları var: <strong>SysTick</strong> ile gerçek milisaniye zamanlaması ve butonu <strong>EXTI kesmesiyle</strong> okumak.</p>
 
   <figure class="blog-figure"><img src="kod-1.png" class="blog-img" alt="Keil µVision: tanımlar ve GPIO ayarları" width="1600" height="607" loading="lazy" decoding="async"><figcaption>Keil µVision'da kodun ilk kısmı: tanımlar, saatler ve pin ayarları</figcaption></figure>
   <figure class="blog-figure"><img src="kod-2.png" class="blog-img" alt="Debounce döngüsü ve yanıp sönme aşaması" width="1300" height="637" loading="lazy" decoding="async"><figcaption>Debounce döngüsü ve ikinci aşama</figcaption></figure>
@@ -175,6 +175,7 @@ int main(void)
       <li>Geliştirme ortamı: Keil µVision · Dil: C, register seviyesi (CMSIS başlığı <code>stm32f4xx.h</code>)</li>
       <li>Kullanılan register'lar: <code>RCC_AHB1ENR</code>, <code>GPIOx_MODER</code>, <code>GPIOx_PUPDR</code>, <code>GPIOx_IDR</code>, <code>GPIOx_BSRR</code></li>
       <li>Pinler: PA0 (USER butonu, aktif-yüksek), PD12–PD15 (LED)</li>
+      <li>Kendi devrende LED kullanacaksan seri direnci <a href="../../araclar/led-direnci.html">LED direnci hesaplama</a> aracıyla bulabilirsin.</li>
     </ul>
   </div>
 
@@ -186,7 +187,7 @@ int main(void)
     <li>Mekanik butonlar “temiz” sinyal vermez; debounce her zaman gerekir.</li>
   </ul>
 
-  <a class="series-box next" href="../../stm32-yol-haritasi.html"><span class="series-k">Sıradaki bölüm</span><span class="series-t">2. Bölüm: Karaşimşek — LED'leri sırayla kaydırmak</span><span class="series-s">Yol haritasını gör →</span></a>
+  <a class="series-box next" href="../../stm32-yol-haritasi.html"><span class="series-k">Seri</span><span class="series-t">STM32 Yol Haritam</span><span class="series-s">Yeni bölümler yayımlandıkça burada · Tüm bölümler →</span></a>
 
   <h3>Kaynaklar</h3>
   <ul>

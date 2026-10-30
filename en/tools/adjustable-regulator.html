@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Adjustable Regulator Resistor Calculator (LM2596, LM317, MP1584…) — Ahmet Ulu</title>
+<title>LM2596 / LM317 Output Voltage and Resistor Calculator</title>
 <meta name="description" content="Adjustable regulator calculator for the LM2596, XL4015, MP1584, LM317 and AMS1117: Vout from feedback resistors, resistor for a target voltage, E24/E96 values.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="Adjustable Regulator Resistor Calculator (LM2596, LM317, MP1584…) — Ahmet Ulu">
+<meta property="og:title" content="LM2596 / LM317 Output Voltage and Resistor Calculator">
 <meta property="og:description" content="Adjustable regulator calculator for the LM2596, XL4015, MP1584, LM317 and AMS1117: Vout from feedback resistors, resistor for a target voltage, E24/E96 values.">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/adjustable-regulator.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Adjustable Regulator Resistor Calculator (LM2596, LM317, MP1584…)", "description": "Adjustable regulator calculator for the LM2596, XL4015, MP1584, LM317 and AMS1117: Vout from feedback resistors, resistor for a target voltage, E24/E96 values.", "url": "https://ahmetulu.com.tr/en/tools/adjustable-regulator.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Adjustable regulator", "item": "https://ahmetulu.com.tr/en/tools/adjustable-regulator.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Adjustable Regulator Resistor Calculator (LM2596, LM317, MP1584…)", "description": "Adjustable regulator calculator for the LM2596, XL4015, MP1584, LM317 and AMS1117: Vout from feedback resistors, resistor for a target voltage, E24/E96 values.", "url": "https://ahmetulu.com.tr/en/tools/adjustable-regulator.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do you calculate the LM2596 output voltage?", "acceptedAnswer": {"@type": "Answer", "text": "Vout = 1.23 × (1 + R2 / R1). R1 goes from FB to GND, R2 from the output to FB; 240 Ω – 1.5 kΩ is recommended for R1."}}, {"@type": "Question", "name": "Which resistors give 5 V with an LM317?", "acceptedAnswer": {"@type": "Answer", "text": "R1 = 240 Ω and R2 = 750 Ω (E24) give Vout ≈ 5.19 V. For a closer result pick R2 from E96 (e.g. 715 Ω)."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Adjustable regulator", "item": "https://ahmetulu.com.tr/en/tools/adjustable-regulator.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -61,6 +61,11 @@
 <li><strong>MP1584:</strong> keep the bottom resistor below 40 kΩ.</li>
 <li>Vref itself has about ±2–3% tolerance; if you need a precise voltage, measure the output and trim.</li></ul>
       <p class="tool-post">A project where I used this: <a href="../../en/blog/adjustable-power-supply.html">12V DC Adjustable Power Supply — LM2596 Mod</a></p>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>How do you calculate the LM2596 output voltage?</summary><p>Vout = 1.23 × (1 + R2 / R1). R1 goes from FB to GND, R2 from the output to FB; 240 Ω – 1.5 kΩ is recommended for R1.</p></details>
+        <details class="faq-item"><summary>Which resistors give 5 V with an LM317?</summary><p>R1 = 240 Ω and R2 = 750 Ω (E24) give Vout ≈ 5.19 V. For a closer result pick R2 from E96 (e.g. 715 Ω).</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://www.ti.com/lit/ds/symlink/lm2596.pdf" target="_blank" rel="noopener">Texas Instruments — LM2596 datasheet</a></li>
@@ -70,6 +75,7 @@
         <li><a href="http://www.advanced-monolithic.com/pdf/ds1117.pdf" target="_blank" rel="noopener">Advanced Monolithic Systems — AMS1117 datasheet</a></li>
         <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -82,6 +88,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

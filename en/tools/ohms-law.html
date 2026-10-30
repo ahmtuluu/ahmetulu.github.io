@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Ohm&#x27;s Law Calculator — Ahmet Ulu</title>
+<title>Ohm&#x27;s Law Calculator: Voltage, Current, Resistance and Power</title>
 <meta name="description" content="Ohm&#x27;s law calculator: enter two of voltage, current, resistance and power and get the rest instantly. V = I·R and P = V·I explained, with unit selection.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="Ohm&#x27;s Law Calculator — Ahmet Ulu">
+<meta property="og:title" content="Ohm&#x27;s Law Calculator: Voltage, Current, Resistance and Power">
 <meta property="og:description" content="Ohm&#x27;s law calculator: enter two of voltage, current, resistance and power and get the rest instantly. V = I·R and P = V·I explained, with unit selection.">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/ohms-law.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Ohm's Law Calculator", "description": "Ohm's law calculator: enter two of voltage, current, resistance and power and get the rest instantly. V = I·R and P = V·I explained, with unit selection.", "url": "https://ahmetulu.com.tr/en/tools/ohms-law.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Ohm's law", "item": "https://ahmetulu.com.tr/en/tools/ohms-law.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Ohm's Law Calculator", "description": "Ohm's law calculator: enter two of voltage, current, resistance and power and get the rest instantly. V = I·R and P = V·I explained, with unit selection.", "url": "https://ahmetulu.com.tr/en/tools/ohms-law.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the Ohm's law formula?", "acceptedAnswer": {"@type": "Answer", "text": "V = I × R. Voltage (volts) = current (amps) × resistance (ohms). From it, I = V / R and R = V / I; for power use P = V × I."}}, {"@type": "Question", "name": "What units does Ohm's law use?", "acceptedAnswer": {"@type": "Answer", "text": "Volts (V), amps (A), ohms (Ω) and watts (W). When using mA and kΩ, keep the units consistent: 5 V / 1 kΩ = 5 mA."}}, {"@type": "Question", "name": "Does Ohm's law apply to an LED?", "acceptedAnswer": {"@type": "Answer", "text": "Not directly; an LED's voltage does not change linearly with current. Calculate a series resistor instead with the LED resistor tool."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Ohm's law", "item": "https://ahmetulu.com.tr/en/tools/ohms-law.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -55,11 +55,22 @@
 <p>The tool solves these equations for the pair you pick. For example, with P and R known it first finds <strong>V = √(P·R)</strong>, then <strong>I = √(P/R)</strong>.</p>
 <h3>In practice</h3>
 <ul><li>Pick a resistor rated for <strong>at least twice</strong> the calculated power (0.2 W dissipated → 1/2 W resistor).</li>
-<li>Ohm's law applies to linear (ohmic) parts. It does not apply directly to LEDs or diodes; use the LED resistor tool for those.</li></ul>
+<li>Ohm's law applies to linear (ohmic) parts. It does not apply directly to LEDs or diodes; use the LED resistor tool for those.</li></ul><h3>Worked examples</h3>
+<ul><li><strong>Find the current:</strong> 5 V across 220 Ω gives I = 5 / 220 = <strong>22.7 mA</strong>.</li>
+<li><strong>Find the resistance:</strong> a load drawing 2 A from 12 V is R = 12 / 2 = <strong>6 Ω</strong> and uses P = 12 × 2 = <strong>24 W</strong>.</li>
+<li><strong>Power limit:</strong> a 1/4 W, 1 kΩ resistor can carry at most I = √(P / R) = √(0.25 / 1000) ≈ <strong>15.8 mA</strong>.</li></ul>
+<p>An easy way to remember it is the <strong>V-I-R triangle</strong>: cover the quantity you want; if the other two sit side by side multiply (V = I·R), if one is above the other divide (I = V/R, R = V/I).</p>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>What is the Ohm&#x27;s law formula?</summary><p>V = I × R. Voltage (volts) = current (amps) × resistance (ohms). From it, I = V / R and R = V / I; for power use P = V × I.</p></details>
+        <details class="faq-item"><summary>What units does Ohm&#x27;s law use?</summary><p>Volts (V), amps (A), ohms (Ω) and watts (W). When using mA and kΩ, keep the units consistent: 5 V / 1 kΩ = 5 mA.</p></details>
+        <details class="faq-item"><summary>Does Ohm&#x27;s law apply to an LED?</summary><p>Not directly; an LED&#x27;s voltage does not change linearly with current. Calculate a series resistor instead with the LED resistor tool.</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://en.wikipedia.org/wiki/Ohm%27s_law" target="_blank" rel="noopener">Wikipedia — Ohm&#x27;s law</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -72,6 +83,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

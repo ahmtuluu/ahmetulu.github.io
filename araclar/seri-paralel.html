@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Seri ve Paralel Direnç / Kondansatör / Bobin Hesaplama — Ahmet Ulu</title>
+<title>Seri ve Paralel Direnç Hesaplama (Kondansatör, Bobin)</title>
 <meta name="description" content="Seri ve paralel direnç, kondansatör ve bobin hesaplayıcı. 10 değere kadar ekle, eşdeğer değeri anında gör. Formüller ve açıklamalar.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="Seri ve Paralel Direnç / Kondansatör / Bobin Hesaplama — Ahmet Ulu">
+<meta property="og:title" content="Seri ve Paralel Direnç Hesaplama (Kondansatör, Bobin)">
 <meta property="og:description" content="Seri ve paralel direnç, kondansatör ve bobin hesaplayıcı. 10 değere kadar ekle, eşdeğer değeri anında gör. Formüller ve açıklamalar.">
 <meta property="og:url" content="https://ahmetulu.com.tr/araclar/seri-paralel.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Seri ve Paralel Direnç / Kondansatör / Bobin Hesaplama", "description": "Seri ve paralel direnç, kondansatör ve bobin hesaplayıcı. 10 değere kadar ekle, eşdeğer değeri anında gör. Formüller ve açıklamalar.", "url": "https://ahmetulu.com.tr/araclar/seri-paralel.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Seri / paralel", "item": "https://ahmetulu.com.tr/araclar/seri-paralel.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Seri ve Paralel Direnç / Kondansatör / Bobin Hesaplama", "description": "Seri ve paralel direnç, kondansatör ve bobin hesaplayıcı. 10 değere kadar ekle, eşdeğer değeri anında gör. Formüller ve açıklamalar.", "url": "https://ahmetulu.com.tr/araclar/seri-paralel.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Paralel direnç nasıl hesaplanır?", "acceptedAnswer": {"@type": "Answer", "text": "1/R = 1/R1 + 1/R2 + … İki direnç için kısa yol: R = (R1 × R2) / (R1 + R2). 10 kΩ ∥ 10 kΩ = 5 kΩ."}}, {"@type": "Question", "name": "Kondansatörler seri bağlanınca ne olur?", "acceptedAnswer": {"@type": "Answer", "text": "Toplam kapasite küçülür: 1/C = 1/C1 + 1/C2. Paralel bağlanınca ise toplanır."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "Seri / paralel", "item": "https://ahmetulu.com.tr/araclar/seri-paralel.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
@@ -53,10 +53,16 @@
 <p>Dirençler ve bobinler aynı kuralla toplanır; kondansatörlerde kural <strong>tersine döner</strong>.</p>
 <div class="formula"><span>Direnç / bobin, seri:   R = R1 + R2 + …</span><span>Direnç / bobin, paralel:   1/R = 1/R1 + 1/R2 + …</span><span>Kondansatör, paralel:   C = C1 + C2 + …</span><span>Kondansatör, seri:   1/C = 1/C1 + 1/C2 + …</span><small>Bobin hesabında bobinler arasındaki manyetik kuplaj ihmal edilir.</small></div>
 <p>İki eşit direnç paralel bağlanınca değer yarıya iner (2 × 10 kΩ → 5 kΩ). Paralel bağlantının sonucu her zaman <strong>en küçük değerden de küçüktür</strong>; bu, sonucu kontrol etmenin hızlı bir yoludur.</p>
+      <h3 id="sss">Sık sorulan sorular</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>Paralel direnç nasıl hesaplanır?</summary><p>1/R = 1/R1 + 1/R2 + … İki direnç için kısa yol: R = (R1 × R2) / (R1 + R2). 10 kΩ ∥ 10 kΩ = 5 kΩ.</p></details>
+        <details class="faq-item"><summary>Kondansatörler seri bağlanınca ne olur?</summary><p>Toplam kapasite küçülür: 1/C = 1/C1 + 1/C2. Paralel bağlanınca ise toplanır.</p></details>
+      </div>
       <h3>Kaynaklar</h3>
       <ul class="sources">
         <li><a href="https://en.wikipedia.org/wiki/Series_and_parallel_circuits" target="_blank" rel="noopener">Wikipedia — Series and parallel circuits</a></li>
       </ul>
+      <p class="tool-upd">Son güncelleme: Ekim 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
@@ -69,6 +75,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popüler hesap araçları"><a class="ft-k" href="../araclar.html">Hesap araçları</a><a href="../araclar/direnc-renk-kodu.html">Direnç renk kodu</a><a href="../araclar/led-direnci.html">LED direnci</a><a href="../araclar/ohm-kanunu.html">Ohm kanunu</a><a href="../araclar/smd-kod-cozucu.html">SMD kod çözücü</a><a href="../araclar/gerilim-bolucu.html">Gerilim bölücü</a><a href="../araclar/pcb-iz-genisligi.html">PCB iz genişliği</a><a href="../araclar/awg-kablo.html">AWG ↔ mm²</a><a href="../araclar/555-zamanlayici.html">555 zamanlayıcı</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

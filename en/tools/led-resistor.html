@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>LED Resistor Calculator — Ahmet Ulu</title>
-<meta name="description" content="LED resistor calculator: R = (Vs − Vf)/I. Forward voltage by colour, LEDs in series, E24 standard resistor suggestion and power rating.">
+<title>LED Resistor Calculator (5V, 12V, 3.3V) — Which Resistor?</title>
+<meta name="description" content="LED resistor calculator: the resistor you need from the supply voltage and LED colour, with a standard value and power rating. Ready table for 5 V, 12 V and 3.3 V.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
 <link rel="canonical" href="https://ahmetulu.com.tr/en/tools/led-resistor.html">
@@ -14,8 +14,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="LED Resistor Calculator — Ahmet Ulu">
-<meta property="og:description" content="LED resistor calculator: R = (Vs − Vf)/I. Forward voltage by colour, LEDs in series, E24 standard resistor suggestion and power rating.">
+<meta property="og:title" content="LED Resistor Calculator (5V, 12V, 3.3V) — Which Resistor?">
+<meta property="og:description" content="LED resistor calculator: the resistor you need from the supply voltage and LED colour, with a standard value and power rating. Ready table for 5 V, 12 V and 3.3 V.">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/led-resistor.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "LED Resistor Calculator", "description": "LED resistor calculator: R = (Vs − Vf)/I. Forward voltage by colour, LEDs in series, E24 standard resistor suggestion and power rating.", "url": "https://ahmetulu.com.tr/en/tools/led-resistor.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "LED resistor", "item": "https://ahmetulu.com.tr/en/tools/led-resistor.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "LED Resistor Calculator", "description": "LED resistor calculator: R = (Vs − Vf)/I. Forward voltage by colour, LEDs in series, E24 standard resistor suggestion and power rating.", "url": "https://ahmetulu.com.tr/en/tools/led-resistor.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What resistor do I need for an LED on 5V?", "acceptedAnswer": {"@type": "Answer", "text": "For 20 mA, a red LED (≈2.0 V) needs 150 Ω and a white/blue LED (≈3.1 V) needs 100 Ω. The common 220 Ω runs it a little below 20 mA, which is safe."}}, {"@type": "Question", "name": "What resistor do I need for an LED on 12V?", "acceptedAnswer": {"@type": "Answer", "text": "For 20 mA: 510 Ω with a red LED, 470 Ω with a white LED. It dissipates about 0.2 W, so a 1/2 W resistor is safer."}}, {"@type": "Question", "name": "Which leg does the LED resistor go on?", "acceptedAnswer": {"@type": "Answer", "text": "As long as it is in series, it can go on the anode (+, long leg) or the cathode (−) side; the current is the same."}}, {"@type": "Question", "name": "Can several LEDs share one resistor?", "acceptedAnswer": {"@type": "Answer", "text": "LEDs in series can (if the supply is high enough). LEDs in parallel each need their own resistor, or the current will not share evenly."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "LED resistor", "item": "https://ahmetulu.com.tr/en/tools/led-resistor.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -55,12 +55,23 @@
 <p>The calculated resistor is rarely a standard value. The tool suggests the <strong>next value up in the E24 series</strong>, so the LED current never exceeds your target. A power rating of at least twice the calculated power is recommended.</p>
 <h3>Typical Vf by colour</h3>
 <ul><li>Red ≈ 2.0 V · orange / yellow ≈ 2.1 V · IR ≈ 1.3 V</li><li>Green, blue, white (InGaN) ≈ 3.0–3.2 V</li></ul>
-<p>These are typical values; the exact figure is in the LED datasheet and changes with current and temperature.</p>
+<p>These are typical values; the exact figure is in the LED datasheet and changes with current and temperature.</p><h3>Quick table: LED resistor for 20 mA</h3>
+<p>One LED, 20 mA and the next standard value up in the E24 series. For an indicator LED, 5–10 mA is often bright enough and the LED lasts longer.</p>
+<div class="table-wrap"><table class="calc-table"><thead><tr><th>LED</th><th>3.3 V</th><th>5 V</th><th>9 V</th><th>12 V</th></tr></thead><tbody><tr><td><b>Red</b> <small>(2 V)</small></td><td>68 Ω</td><td>150 Ω</td><td>360 Ω</td><td>510 Ω</td></tr><tr><td><b>Yellow / orange</b> <small>(2.1 V)</small></td><td>62 Ω</td><td>150 Ω</td><td>360 Ω</td><td>510 Ω</td></tr><tr><td><b>Green / blue / white</b> <small>(3.1 V)</small></td><td>—</td><td>100 Ω</td><td>300 Ω</td><td>470 Ω</td></tr></tbody></table></div>
+<p class="tool-note">“—”: the supply is too close to the LED forward voltage for a resistor to limit the current safely.</p>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>What resistor do I need for an LED on 5V?</summary><p>For 20 mA, a red LED (≈2.0 V) needs 150 Ω and a white/blue LED (≈3.1 V) needs 100 Ω. The common 220 Ω runs it a little below 20 mA, which is safe.</p></details>
+        <details class="faq-item"><summary>What resistor do I need for an LED on 12V?</summary><p>For 20 mA: 510 Ω with a red LED, 470 Ω with a white LED. It dissipates about 0.2 W, so a 1/2 W resistor is safer.</p></details>
+        <details class="faq-item"><summary>Which leg does the LED resistor go on?</summary><p>As long as it is in series, it can go on the anode (+, long leg) or the cathode (−) side; the current is the same.</p></details>
+        <details class="faq-item"><summary>Can several LEDs share one resistor?</summary><p>LEDs in series can (if the supply is high enough). LEDs in parallel each need their own resistor, or the current will not share evenly.</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://en.wikipedia.org/wiki/Light-emitting_diode" target="_blank" rel="noopener">Wikipedia — Light-emitting diode</a></li>
         <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -73,6 +84,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

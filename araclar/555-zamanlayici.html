@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>555 Zamanlayıcı Hesaplama (Astable / Monostable) — Ahmet Ulu</title>
+<title>555 Zamanlayıcı Hesaplama: Astable Frekans ve Monostable Süre</title>
 <meta name="description" content="555 zamanlayıcı hesaplayıcı: astable modda frekans, görev oranı, yüksek/düşük süre; monostable modda darbe süresi. NE555 datasheet formülleriyle.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="555 Zamanlayıcı Hesaplama (Astable / Monostable) — Ahmet Ulu">
+<meta property="og:title" content="555 Zamanlayıcı Hesaplama: Astable Frekans ve Monostable Süre">
 <meta property="og:description" content="555 zamanlayıcı hesaplayıcı: astable modda frekans, görev oranı, yüksek/düşük süre; monostable modda darbe süresi. NE555 datasheet formülleriyle.">
 <meta property="og:url" content="https://ahmetulu.com.tr/araclar/555-zamanlayici.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "555 Zamanlayıcı Hesaplama (Astable / Monostable)", "description": "555 zamanlayıcı hesaplayıcı: astable modda frekans, görev oranı, yüksek/düşük süre; monostable modda darbe süresi. NE555 datasheet formülleriyle.", "url": "https://ahmetulu.com.tr/araclar/555-zamanlayici.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "555 zamanlayıcı", "item": "https://ahmetulu.com.tr/araclar/555-zamanlayici.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "555 Zamanlayıcı Hesaplama (Astable / Monostable)", "description": "555 zamanlayıcı hesaplayıcı: astable modda frekans, görev oranı, yüksek/düşük süre; monostable modda darbe süresi. NE555 datasheet formülleriyle.", "url": "https://ahmetulu.com.tr/araclar/555-zamanlayici.html", "inLanguage": "tr", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "555 astable frekans formülü nedir?", "acceptedAnswer": {"@type": "Answer", "text": "f = 1,44 / ((R1 + 2·R2) · C). Görev oranı = (R1 + R2) / (R1 + 2·R2), bu yüzden standart devrede her zaman %50'nin üstündedir."}}, {"@type": "Question", "name": "555 monostable süresi nasıl hesaplanır?", "acceptedAnswer": {"@type": "Answer", "text": "t = 1,1 · R · C. 100 kΩ ve 10 µF ile yaklaşık 1,1 saniye."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/"}, {"@type": "ListItem", "position": 2, "name": "Araçlar", "item": "https://ahmetulu.com.tr/araclar.html"}, {"@type": "ListItem", "position": 3, "name": "555 zamanlayıcı", "item": "https://ahmetulu.com.tr/araclar/555-zamanlayici.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">İçeriğe geç</a>
@@ -59,10 +59,16 @@
 <ul><li>Bu bağlantıda görev oranı her zaman %50'nin üstündedir. Daha düşük görev oranı için R2'ye paralel bir diyot eklenir.</li>
 <li>R1 çok küçük olursa deşarj pini fazla akım çeker; birkaç kΩ ve üstü uygundur.</li>
 <li>Elektrolitik kondansatörlerin toleransı geniştir (±%20); hassas zamanlama için film kondansatör tercih et.</li></ul>
+      <h3 id="sss">Sık sorulan sorular</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>555 astable frekans formülü nedir?</summary><p>f = 1,44 / ((R1 + 2·R2) · C). Görev oranı = (R1 + R2) / (R1 + 2·R2), bu yüzden standart devrede her zaman %50&#x27;nin üstündedir.</p></details>
+        <details class="faq-item"><summary>555 monostable süresi nasıl hesaplanır?</summary><p>t = 1,1 · R · C. 100 kΩ ve 10 µF ile yaklaşık 1,1 saniye.</p></details>
+      </div>
       <h3>Kaynaklar</h3>
       <ul class="sources">
         <li><a href="https://www.ti.com/lit/ds/symlink/ne555.pdf" target="_blank" rel="noopener">Texas Instruments — NE555 datasheet</a></li>
       </ul>
+      <p class="tool-upd">Son güncelleme: Ekim 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>Diğer araçlar</h2><a class="inline-link" href="../araclar.html">Tümü →</a></div>
@@ -75,6 +81,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popüler hesap araçları"><a class="ft-k" href="../araclar.html">Hesap araçları</a><a href="../araclar/direnc-renk-kodu.html">Direnç renk kodu</a><a href="../araclar/led-direnci.html">LED direnci</a><a href="../araclar/ohm-kanunu.html">Ohm kanunu</a><a href="../araclar/smd-kod-cozucu.html">SMD kod çözücü</a><a href="../araclar/gerilim-bolucu.html">Gerilim bölücü</a><a href="../araclar/pcb-iz-genisligi.html">PCB iz genişliği</a><a href="../araclar/awg-kablo.html">AWG ↔ mm²</a><a href="../araclar/555-zamanlayici.html">555 zamanlayıcı</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

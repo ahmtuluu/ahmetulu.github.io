@@ -1196,3 +1196,50 @@ details.code-full pre.code{margin:0;border-radius:0 0 12px 12px;border-width:1px
   .road-card{padding:14px 16px;}
   .road-card h3{font-size:18px;}
 }
+
+/* ---------- Hesap araçları: SEO içerikleri, SSS, alt bilgi araç linkleri ---------- */
+.tool-doc ol.steps-ol{margin:0 0 16px 22px;display:flex;flex-direction:column;gap:6px;}
+.tool-doc ol.steps-ol li::marker{color:var(--accent);font-weight:600;}
+.two-tables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:10px 0 18px;}
+.two-tables .table-wrap{margin:0;}
+.calc-table.ctab td{vertical-align:middle;}
+.cband{display:inline-flex;gap:3px;vertical-align:middle;margin-right:8px;padding:3px 6px;border-radius:6px;background:#d6c7a1;}
+.cband .cdot{width:10px;height:18px;border-radius:2px;margin:0;border:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);}
+.cnames{font-size:12.5px;color:var(--muted);}
+.tool-faq{margin-bottom:8px;}
+.tool-faq .faq-item p{font-size:15px;color:var(--soft);line-height:1.75;padding:0 2px 16px;margin:0;}
+.tool-upd{font-size:12.5px;color:var(--muted);margin-top:18px;}
+.footer-tools{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding-top:22px;padding-bottom:0;border-bottom:0;}
+.footer-tools a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-tools a:hover{color:var(--accent);}
+.footer-tools .ft-k{color:var(--soft);font-weight:500;}
+.footer-tools .ft-k::after{content:' →';color:var(--accent);}
+@media (max-width:600px){.two-tables{grid-template-columns:1fr;gap:0;}.cnames{display:block;margin-top:4px;}}
+.tool-doc p.tool-note{font-size:13.5px;color:var(--muted);line-height:1.6;}
+.calc-table.ctab td{white-space:normal;}.calc-table.ctab td:first-child{white-space:nowrap;}
+
+/* STM32 seri kartı (Yazılar) ve sadeleşmiş yol haritası */
+.series-card{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:center;margin:4px 0 14px;padding:12px;border-radius:16px;text-decoration:none;
+  border:1px solid var(--accent-border);background:linear-gradient(135deg,rgba(var(--accent-rgb),.09),transparent 60%),var(--surface);transition:border-color .2s,transform .2s;}
+.series-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.series-card img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;}
+.sc-body{display:flex;flex-direction:column;gap:4px;}
+.sc-k{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);}
+.sc-t{font-family:var(--serif);font-size:21px;color:var(--text);line-height:1.25;}
+.sc-s{font-size:14px;color:var(--soft);line-height:1.5;}
+.series-card:hover .sc-s{color:var(--accent);}
+@media (max-width:560px){.series-card{grid-template-columns:1fr;gap:12px;}}
+.road-cover{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;border:1px solid var(--line);margin-bottom:4px;}
+.road-num span{font-size:15px;}
+.road-card-link{display:grid;grid-template-columns:180px minmax(0,1fr);gap:18px;align-items:center;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s;}
+.road-card-link:hover{border-color:var(--accent);transform:translateY(-1px);}
+.road-thumb{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;}
+.road-info{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.road-date{font-size:12.5px;color:var(--muted);}
+.road-h{font-family:var(--serif);font-size:20px;color:var(--text);line-height:1.35;}
+.road-d{font-size:14.5px;color:var(--soft);line-height:1.6;}
+.road-card-link:hover .road-h{color:var(--accent);}
+.road-list::before{background:linear-gradient(var(--accent),var(--border));}
+@media (max-width:600px){.road-card-link{grid-template-columns:1fr;gap:12px;}}
+.series-card img,.road-thumb,.road-cover{height:auto;}
+.site-footer .wrap.footer-tools{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:8px 16px;}

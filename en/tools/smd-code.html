@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>SMD Resistor and Capacitor Code Decoder — Ahmet Ulu</title>
+<title>SMD Resistor Code and Capacitor Code Calculator (103, 104, 4R7)</title>
 <meta name="description" content="SMD resistor code and capacitor code decoder: 3-digit (103), 4-digit (1002), R notation (4R7), EIA-96 (01C) and capacitor codes (104, 473J).">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="SMD Resistor and Capacitor Code Decoder — Ahmet Ulu">
+<meta property="og:title" content="SMD Resistor Code and Capacitor Code Calculator (103, 104, 4R7)">
 <meta property="og:description" content="SMD resistor code and capacitor code decoder: 3-digit (103), 4-digit (1002), R notation (4R7), EIA-96 (01C) and capacitor codes (104, 473J).">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/smd-code.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "SMD Resistor and Capacitor Code Decoder", "description": "SMD resistor code and capacitor code decoder: 3-digit (103), 4-digit (1002), R notation (4R7), EIA-96 (01C) and capacitor codes (104, 473J).", "url": "https://ahmetulu.com.tr/en/tools/smd-code.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "SMD code decoder", "item": "https://ahmetulu.com.tr/en/tools/smd-code.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "SMD Resistor and Capacitor Code Decoder", "description": "SMD resistor code and capacitor code decoder: 3-digit (103), 4-digit (1002), R notation (4R7), EIA-96 (01C) and capacitor codes (104, 473J).", "url": "https://ahmetulu.com.tr/en/tools/smd-code.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does 103 mean on an SMD resistor?", "acceptedAnswer": {"@type": "Answer", "text": "103 = 10 × 10³ = 10 kΩ. The first two digits are the value and the third is the number of zeros."}}, {"@type": "Question", "name": "How many nF is a 104 capacitor?", "acceptedAnswer": {"@type": "Answer", "text": "104 = 10 × 10⁴ pF = 100,000 pF = 100 nF (0.1 µF), the most common decoupling value."}}, {"@type": "Question", "name": "What does 4R7 mean?", "acceptedAnswer": {"@type": "Answer", "text": "R marks the decimal point: 4R7 = 4.7 Ω, R10 = 0.1 Ω."}}, {"@type": "Question", "name": "What are codes like 01C?", "acceptedAnswer": {"@type": "Answer", "text": "These are EIA-96 codes for ±1% resistors. 01 is the value 100 in the E96 series and C is the ×100 multiplier: 01C = 10 kΩ."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "SMD code decoder", "item": "https://ahmetulu.com.tr/en/tools/smd-code.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -54,12 +54,24 @@
 <div class="formula"><span>3 digits:   AB C  →  AB × 10^C          103 = 10 × 10³ = 10 kΩ</span><span>4 digits:   ABC D →  ABC × 10^D        1002 = 100 × 10² = 10 kΩ</span><span>R as decimal point:   4R7 = 4.7 Ω,   R10 = 0.1 Ω</span><span>EIA-96:   01C = 100 × 100 = 10 kΩ</span></div>
 <p>In an <strong>EIA-96</strong> code the two digits are the index of the value in the E96 series (01 = 100, 02 = 102 … 96 = 976). The letter is the multiplier: Z = 0.001 · Y/R = 0.01 · X/S = 0.1 · A = 1 · B/H = 10 · C = 100 · D = 1 k · E = 10 k · F = 100 k.</p>
 <h3>Ceramic capacitors</h3>
-<div class="formula"><span>AB C  →  AB × 10^C pF          104 = 10 × 10⁴ pF = 100 nF</span><span>C = 8 → ×0.01,   C = 9 → ×0.1</span><small>A trailing letter is the tolerance: B ±0.1 pF · C ±0.25 pF · D ±0.5 pF · F ±1% · G ±2% · J ±5% · K ±10% · M ±20% · Z +80/−20%</small></div>
+<div class="formula"><span>AB C  →  AB × 10^C pF          104 = 10 × 10⁴ pF = 100 nF</span><span>C = 8 → ×0.01,   C = 9 → ×0.1</span><small>A trailing letter is the tolerance: B ±0.1 pF · C ±0.25 pF · D ±0.5 pF · F ±1% · G ±2% · J ±5% · K ±10% · M ±20% · Z +80/−20%</small></div><h3>Common SMD resistor codes</h3>
+<div class="two-tables"><div class="table-wrap"><table class="calc-table"><thead><tr><th>Code</th><th>Value</th></tr></thead><tbody><tr><td><code>100</code></td><td>10 Ω</td></tr><tr><td><code>101</code></td><td>100 Ω</td></tr><tr><td><code>221</code></td><td>220 Ω</td></tr><tr><td><code>331</code></td><td>330 Ω</td></tr><tr><td><code>471</code></td><td>470 Ω</td></tr><tr><td><code>102</code></td><td>1 kΩ</td></tr><tr><td><code>222</code></td><td>2.2 kΩ</td></tr><tr><td><code>472</code></td><td>4.7 kΩ</td></tr></tbody></table></div><div class="table-wrap"><table class="calc-table"><thead><tr><th>Code</th><th>Value</th></tr></thead><tbody><tr><td><code>103</code></td><td>10 kΩ</td></tr><tr><td><code>473</code></td><td>47 kΩ</td></tr><tr><td><code>104</code></td><td>100 kΩ</td></tr><tr><td><code>105</code></td><td>1 MΩ</td></tr><tr><td><code>4R7</code></td><td>4.7 Ω</td></tr><tr><td><code>1001</code></td><td>1 kΩ</td></tr><tr><td><code>1002</code></td><td>10 kΩ</td></tr><tr><td><code>4701</code></td><td>4.7 kΩ</td></tr></tbody></table></div></div>
+<h3>Common ceramic capacitor codes</h3>
+<div class="table-wrap"><table class="calc-table"><thead><tr><th>Code</th><th>Value</th></tr></thead><tbody><tr><td><code>101</code></td><td>100 pF</td></tr><tr><td><code>221</code></td><td>220 pF</td></tr><tr><td><code>102</code></td><td>1 nF</td></tr><tr><td><code>222</code></td><td>2.2 nF</td></tr><tr><td><code>103</code></td><td>10 nF</td></tr><tr><td><code>473</code></td><td>47 nF</td></tr><tr><td><code>104</code></td><td>100 nF</td></tr><tr><td><code>105</code></td><td>1 µF</td></tr><tr><td><code>106</code></td><td>10 µF</td></tr></tbody></table></div>
+<p>A part marked <code>000</code> or <code>0</code> is a 0 Ω jumper.</p>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>What does 103 mean on an SMD resistor?</summary><p>103 = 10 × 10³ = 10 kΩ. The first two digits are the value and the third is the number of zeros.</p></details>
+        <details class="faq-item"><summary>How many nF is a 104 capacitor?</summary><p>104 = 10 × 10⁴ pF = 100,000 pF = 100 nF (0.1 µF), the most common decoupling value.</p></details>
+        <details class="faq-item"><summary>What does 4R7 mean?</summary><p>R marks the decimal point: 4R7 = 4.7 Ω, R10 = 0.1 Ω.</p></details>
+        <details class="faq-item"><summary>What are codes like 01C?</summary><p>These are EIA-96 codes for ±1% resistors. 01 is the value 100 in the E96 series and C is the ×100 multiplier: 01C = 10 kΩ.</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://webstore.iec.ch/en/publication/65655" target="_blank" rel="noopener">IEC 60062 — Marking codes for resistors and capacitors</a></li>
         <li><a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers" target="_blank" rel="noopener">Wikipedia — E series of preferred numbers (IEC 60063)</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -72,6 +84,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Decibel (dB) and dBm Calculator — Ahmet Ulu</title>
+<title>Decibel Calculator: dB and dBm to Watt Conversion — Ahmet Ulu</title>
 <meta name="description" content="Decibel calculator: voltage ratio (20·log), power ratio (10·log), dB to ratio and dBm ↔ watt conversion. Formulas explained.">
 <meta name="author" content="Ahmet Ulu">
 <meta name="theme-color" content="#0a0f1c">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ahmet Ulu">
-<meta property="og:title" content="Decibel (dB) and dBm Calculator — Ahmet Ulu">
+<meta property="og:title" content="Decibel Calculator: dB and dBm to Watt Conversion — Ahmet Ulu">
 <meta property="og:description" content="Decibel calculator: voltage ratio (20·log), power ratio (10·log), dB to ratio and dBm ↔ watt conversion. Formulas explained.">
 <meta property="og:url" content="https://ahmetulu.com.tr/en/tools/decibel.html">
 <meta property="og:image" content="https://ahmetulu.com.tr/assets/img/og.jpg">
@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=152334e4">
+<link rel="stylesheet" href="../../assets/css/style.css?v=d1ba6470">
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Decibel (dB) and dBm Calculator", "description": "Decibel calculator: voltage ratio (20·log), power ratio (10·log), dB to ratio and dBm ↔ watt conversion. Formulas explained.", "url": "https://ahmetulu.com.tr/en/tools/decibel.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Decibel (dB)", "item": "https://ahmetulu.com.tr/en/tools/decibel.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Decibel (dB) and dBm Calculator", "description": "Decibel calculator: voltage ratio (20·log), power ratio (10·log), dB to ratio and dBm ↔ watt conversion. Formulas explained.", "url": "https://ahmetulu.com.tr/en/tools/decibel.html", "inLanguage": "en", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}, "author": {"@type": "Person", "name": "Ahmet Ulu", "url": "https://ahmetulu.com.tr/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does 3 dB mean?", "acceptedAnswer": {"@type": "Answer", "text": "About double (+3 dB) or half (−3 dB) the power. For voltage the same ratio is 6 dB."}}, {"@type": "Question", "name": "How many watts is 0 dBm?", "acceptedAnswer": {"@type": "Answer", "text": "0 dBm = 1 mW. 10 dBm = 10 mW, 20 dBm = 100 mW, 30 dBm = 1 W."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ahmet Ulu", "item": "https://ahmetulu.com.tr/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://ahmetulu.com.tr/en/tools.html"}, {"@type": "ListItem", "position": 3, "name": "Decibel (dB)", "item": "https://ahmetulu.com.tr/en/tools/decibel.html"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#icerik">Skip to content</a>
@@ -53,11 +53,17 @@
 <p>A decibel expresses the ratio of two quantities on a log scale. Because power is proportional to voltage squared (at the same impedance), the factor is 20 for voltage and 10 for power.</p>
 <div class="formula"><span>Voltage:   dB = 20 · log₁₀(V2 / V1)</span><span>Power:   dB = 10 · log₁₀(P2 / P1)</span><span>Inverse:   V ratio = 10^(dB/20),   P ratio = 10^(dB/10)</span><span>dBm:   P(W) = 10^(dBm/10) / 1000,   V(50 Ω) = √(P · 50)</span></div>
 <p>Worth remembering: +6 dB ≈ voltage ×2, +3 dB ≈ power ×2, +20 dB = voltage ×10. 0 dBm = 1 mW and 20 dBm = 100 mW (common for Wi-Fi modules).</p>
+      <h3 id="faq">Frequently asked questions</h3>
+      <div class="tool-faq">
+        <details class="faq-item"><summary>What does 3 dB mean?</summary><p>About double (+3 dB) or half (−3 dB) the power. For voltage the same ratio is 6 dB.</p></details>
+        <details class="faq-item"><summary>How many watts is 0 dBm?</summary><p>0 dBm = 1 mW. 10 dBm = 10 mW, 20 dBm = 100 mW, 30 dBm = 1 W.</p></details>
+      </div>
       <h3>Sources</h3>
       <ul class="sources">
         <li><a href="https://en.wikipedia.org/wiki/Decibel" target="_blank" rel="noopener">Wikipedia — Decibel</a></li>
         <li><a href="https://en.wikipedia.org/wiki/DBm" target="_blank" rel="noopener">Wikipedia — dBm</a></li>
       </ul>
+      <p class="tool-upd">Last updated: October 2026 · Ahmet Ulu</p>
     </section>
     <section class="tool-related">
       <div class="tool-section-title"><h2>More tools</h2><a class="inline-link" href="../../en/tools.html">See all →</a></div>
@@ -70,6 +76,7 @@
   </div>
 </main>
 <footer class="site-footer">
+  <nav class="wrap footer-tools" aria-label="Popular calculators"><a class="ft-k" href="../../en/tools.html">Calculators</a><a href="../../en/tools/resistor-color-code.html">Resistor color code</a><a href="../../en/tools/led-resistor.html">LED resistor</a><a href="../../en/tools/ohms-law.html">Ohm&#x27;s law</a><a href="../../en/tools/smd-code.html">SMD code decoder</a><a href="../../en/tools/voltage-divider.html">Voltage divider</a><a href="../../en/tools/pcb-trace-width.html">PCB trace width</a><a href="../../en/tools/awg-wire.html">AWG ↔ mm²</a><a href="../../en/tools/555-timer.html">555 timer</a></nav>
   <div class="wrap">
     <div class="footer-copy">© 2026 Ahmet Ulu · Kayseri</div>
     <div class="footer-social">
