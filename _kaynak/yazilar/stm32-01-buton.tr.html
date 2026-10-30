@@ -1,0 +1,196 @@
+  <div class="blog-tag">STM32 Yol Haritam · 1. Bölüm</div>
+  <h1>STM32F407 ile Buton Okuma ve Debounce: Register Seviyesinde İlk Adım</h1>
+  <div class="blog-meta">Ahmet Ulu · Ekim 2026</div>
+
+  <a class="series-box" href="../../stm32-yol-haritasi.html"><span class="series-k">Seri</span><span class="series-t">STM32 Yol Haritam</span><span class="series-s">1. bölüm · Tüm bölümler ve sıradakiler →</span></a>
+
+  <p>Kısa süre önce <strong>AGÜ roket takımına</strong> katıldım. Bir roketin uçuş bilgisayarı sensörleri okur, irtifayı takip eder, tepe noktasını algılayıp kurtarma sistemini tetikler ve yere telemetri gönderir. Bu kartlarda en sık karşılaşılan mikrodenetleyicilerden biri <strong>STM32</strong>. Bu yüzden STM32'yi temelden, gerçekten anlayarak öğrenmeye karar verdim ve öğrendiklerimi burada bölüm bölüm kaydediyorum.</p>
+
+  <p>Arduino'daki <code>digitalRead()</code> gibi hazır fonksiyonlar yerine <strong>register seviyesinde</strong> başlıyorum: hangi bit neyi yapıyor, referans kılavuzdan (RM0090) bakıp kendim yazıyorum. Kart <strong>STM32F407G-DISC1</strong>, geliştirme ortamı <strong>Keil µVision</strong>. İlk uygulama: kartın üzerindeki butonu okuyup LED'leri sürmek.</p>
+
+  <h3>Görev</h3>
+  <p>Başlangıçta turuncu ve mavi LED yanar. Butona her basışta yeşil ve kırmızı yanar, bırakınca turuncu ve mavi geri döner. <strong>3 geçerli basıştan</strong> sonra program ikinci aşamaya geçer ve dört LED birlikte yanıp söner. Kulağa basit geliyor ama asıl ders, “geçerli basış” kelimesinde saklı.</p>
+
+  <div class="stm-two">
+    <figure class="stm-fig"><svg class="stm-board" viewBox="-40 0 380 250" role="img" aria-labelledby="cap1"><rect x="20" y="8" width="260" height="234" rx="16" class="pcb"/><rect x="112" y="88" width="76" height="72" rx="6" class="chip"/><text x="150" y="121" text-anchor="middle" class="chip-t">STM32</text><text x="150" y="137" text-anchor="middle" class="chip-s">F407VG</text><g class="led on" style="--c:#f59e0b"><circle cx="150" cy="46" r="22" class="halo"/><rect x="139" y="39" width="22" height="14" rx="3" class="body"/><text x="174" y="42" text-anchor="start" class="lbl"><tspan class="pin">PD13</tspan> turuncu</text></g><g class="led" style="--c:#22c55e"><circle cx="62" cy="124" r="22" class="halo"/><rect x="51" y="117" width="22" height="14" rx="3" class="body"/><text x="32" y="128" text-anchor="end" class="lbl"><tspan class="pin">PD12</tspan> yeşil</text></g><g class="led" style="--c:#ef4444"><circle cx="238" cy="124" r="22" class="halo"/><rect x="227" y="117" width="22" height="14" rx="3" class="body"/><text x="268" y="128" text-anchor="start" class="lbl"><tspan class="pin">PD14</tspan> kırmızı</text></g><g class="led on" style="--c:#3b82f6"><circle cx="150" cy="202" r="22" class="halo"/><rect x="139" y="195" width="22" height="14" rx="3" class="body"/><text x="174" y="214" text-anchor="start" class="lbl"><tspan class="pin">PD15</tspan> mavi</text></g><g class="btn-g"><circle cx="58" cy="210" r="14" class="btn"/><text x="58" y="240" text-anchor="middle" class="lbl">B1 · PA0</text></g></svg><figcaption id="cap1">Buton bırakılı: <b>CROSS_B</b> — turuncu (PD13) + mavi (PD15)</figcaption></figure>
+    <figure class="stm-fig"><svg class="stm-board" viewBox="-40 0 380 250" role="img" aria-labelledby="cap2"><rect x="20" y="8" width="260" height="234" rx="16" class="pcb"/><rect x="112" y="88" width="76" height="72" rx="6" class="chip"/><text x="150" y="121" text-anchor="middle" class="chip-t">STM32</text><text x="150" y="137" text-anchor="middle" class="chip-s">F407VG</text><g class="led" style="--c:#f59e0b"><circle cx="150" cy="46" r="22" class="halo"/><rect x="139" y="39" width="22" height="14" rx="3" class="body"/><text x="174" y="42" text-anchor="start" class="lbl"><tspan class="pin">PD13</tspan> turuncu</text></g><g class="led on" style="--c:#22c55e"><circle cx="62" cy="124" r="22" class="halo"/><rect x="51" y="117" width="22" height="14" rx="3" class="body"/><text x="32" y="128" text-anchor="end" class="lbl"><tspan class="pin">PD12</tspan> yeşil</text></g><g class="led on" style="--c:#ef4444"><circle cx="238" cy="124" r="22" class="halo"/><rect x="227" y="117" width="22" height="14" rx="3" class="body"/><text x="268" y="128" text-anchor="start" class="lbl"><tspan class="pin">PD14</tspan> kırmızı</text></g><g class="led" style="--c:#3b82f6"><circle cx="150" cy="202" r="22" class="halo"/><rect x="139" y="195" width="22" height="14" rx="3" class="body"/><text x="174" y="214" text-anchor="start" class="lbl"><tspan class="pin">PD15</tspan> mavi</text></g><g class="btn-g"><circle cx="58" cy="210" r="14" class="btn"/><text x="58" y="240" text-anchor="middle" class="lbl">B1 · PA0</text></g></svg><figcaption id="cap2">Buton basılı: <b>CROSS_A</b> — yeşil (PD12) + kırmızı (PD14)</figcaption></figure>
+  </div>
+
+  <h3>Donanım: kartın üzerindeki buton ve LED'ler</h3>
+  <p>Mavi <strong>USER</strong> butonu (B1) <strong>PA0</strong> pinine bağlı ve <strong>aktif-yüksek</strong>: basınca pin 1, bırakınca 0 okunuyor. Kartta harici bir pull-down direnci olduğu için PA0'ın dahili pull-up/pull-down dirençlerini kapalı bıraktım. Dört LED ise <strong>PD12–PD15</strong> pinlerinde, kartın ortasında bir artı şeklinde diziliyor. Karşılıklı duran yeşil–kırmızı çiftine <code>CROSS_A</code>, turuncu–mavi çiftine <code>CROSS_B</code> adını verdim.</p>
+
+  <h3>Adım 1: Saatleri aç (RCC)</h3>
+  <p>STM32'de güç tasarrufu için çevre birimlerinin saati varsayılan olarak kapalıdır; GPIO portuna yazmadan önce saatini açmak gerekir. GPIOA ve GPIOD, <strong>AHB1</strong> veriyolunda. <code>RCC_AHB1ENR</code> register'ında bit 0 GPIOA'yı, bit 3 GPIOD'yi açıyor.</p>
+  <pre class="code"><code>RCC-&gt;AHB1ENR |= (1U &lt;&lt; 0) | (1U &lt;&lt; 3);   // GPIOA + GPIOD saati</code></pre>
+
+  <h3>Adım 2: Pin modlarını ayarla (MODER, PUPDR)</h3>
+  <p><code>MODER</code> register'ında her pine <strong>2 bit</strong> düşer. Önce iki biti <code>&= ~(3U &lt;&lt; (i*2))</code> ile temizleyip sonra <code>|= (1U &lt;&lt; (i*2))</code> ile “01” yazıyorum; temizlemeden yazarsam önceki değer karışabilir. PA0'ın modu “00” (giriş) kalıyor.</p>
+  <figure class="stm-fig"><div class="rg"><div class="rg-field" style="--c:#3b82f6"><div class="rg-name">MODER15</div><div class="rg-bits"><span>0</span><span class="one">1</span></div><div class="rg-idx">31:30</div></div><div class="rg-field" style="--c:#ef4444"><div class="rg-name">MODER14</div><div class="rg-bits"><span>0</span><span class="one">1</span></div><div class="rg-idx">29:28</div></div><div class="rg-field" style="--c:#f59e0b"><div class="rg-name">MODER13</div><div class="rg-bits"><span>0</span><span class="one">1</span></div><div class="rg-idx">27:26</div></div><div class="rg-field" style="--c:#22c55e"><div class="rg-name">MODER12</div><div class="rg-bits"><span>0</span><span class="one">1</span></div><div class="rg-idx">25:24</div></div><div class="rg-more">… MODER11 – MODER0</div></div><figcaption>GPIOD_MODER: her pin için 2 bit. PD12–15 için “01” = çıkış.<br><b>00</b> giriş · <b>01</b> çıkış · <b>10</b> alternatif fonksiyon · <b>11</b> analog</figcaption></figure>
+
+  <h3>Adım 3: LED'leri BSRR ile sür</h3>
+  <p>LED'leri <code>ODR</code> yerine <code>BSRR</code> (bit set/reset) register'ıyla yakıp söndürüyorum. Alt 16 bit pini <strong>1 yapar</strong>, üst 16 bit <strong>0 yapar</strong>; 0 yazılan bitler hiçbir şeyi değiştirmez. Böylece tek bir yazmayla bazı LED'leri yakıp bazılarını söndürebiliyorum ve oku-değiştir-yaz yapmama gerek kalmıyor; işlem <strong>atomik</strong>.</p>
+  <figure class="stm-fig"><div class="bsrr"><div class="bs-row"><div class="bs-name">BR — söndür (bit 31–16)</div><div class="bs-cells"><span class="bs" title="BR15 (bit 31)">15</span><span class="bs act" style="--c:#ef4444" title="BR14 (bit 30)">14</span><span class="bs" title="BR13 (bit 29)">13</span><span class="bs act" style="--c:#22c55e" title="BR12 (bit 28)">12</span><span class="bs" title="BR11 (bit 27)">11</span><span class="bs" title="BR10 (bit 26)">10</span><span class="bs" title="BR9 (bit 25)">9</span><span class="bs" title="BR8 (bit 24)">8</span><span class="bs" title="BR7 (bit 23)">7</span><span class="bs" title="BR6 (bit 22)">6</span><span class="bs" title="BR5 (bit 21)">5</span><span class="bs" title="BR4 (bit 20)">4</span><span class="bs" title="BR3 (bit 19)">3</span><span class="bs" title="BR2 (bit 18)">2</span><span class="bs" title="BR1 (bit 17)">1</span><span class="bs" title="BR0 (bit 16)">0</span></div></div><div class="bs-row"><div class="bs-name">BS — yak (bit 15–0)</div><div class="bs-cells"><span class="bs act" style="--c:#3b82f6" title="BS15 (bit 15)">15</span><span class="bs" title="BS14 (bit 14)">14</span><span class="bs act" style="--c:#f59e0b" title="BS13 (bit 13)">13</span><span class="bs" title="BS12 (bit 12)">12</span><span class="bs" title="BS11 (bit 11)">11</span><span class="bs" title="BS10 (bit 10)">10</span><span class="bs" title="BS9 (bit 9)">9</span><span class="bs" title="BS8 (bit 8)">8</span><span class="bs" title="BS7 (bit 7)">7</span><span class="bs" title="BS6 (bit 6)">6</span><span class="bs" title="BS5 (bit 5)">5</span><span class="bs" title="BS4 (bit 4)">4</span><span class="bs" title="BS3 (bit 3)">3</span><span class="bs" title="BS2 (bit 2)">2</span><span class="bs" title="BS1 (bit 1)">1</span><span class="bs" title="BS0 (bit 0)">0</span></div></div></div><figcaption><code>GPIOD-&gt;BSRR = CROSS_B | (CROSS_A &lt;&lt; 16);</code> tek yazmada turuncu ve maviyi (BS13, BS15) yakar, yeşil ve kırmızıyı (BR12, BR14) söndürür. 0 yazılan bitler hiçbir pini değiştirmez.</figcaption></figure>
+
+  <h3>Sorun: bir basış, birden fazla sayım (bouncing)</h3>
+  <p>İlk denemede tek basışın birden fazla basış gibi algılandığını gördüm. İlk başta bunun buton kontakları arasında oluşan bir ark olduğunu düşünmüştüm; asıl sebep ise <strong>mekanik</strong>: butona bastığında içindeki metal kontaklar birbirine çarpar ve yerine oturmadan önce çok kısa bir süre <strong>sekerek</strong> birkaç kez açılıp kapanır. Buna <strong>kontak sıçraması (contact bounce)</strong> deniyor ve çoğu butonda birkaç milisaniye sürüyor.</p>
+  <p>İnsan için birkaç milisaniye hiçbir şey ama 16 MHz'de çalışan bir işlemci bu sürede pini binlerce kez okuyabilir. Kodun gözünden her sıçrama ayrı bir basış: 3 basışlık hedef tek basışta dolabilir.</p>
+  <figure class="stm-fig wide"><div class="wave-scroll"><svg class="stm-wave" viewBox="0 0 630 320" role="img" aria-label="Butona basıldığında ideal ve gerçek sinyal; kontak sıçraması ve debounce bekleme süresi">
+  <path d="M70 20V300" class="g"/><path d="M110 20V300" class="g"/><path d="M150 20V300" class="g"/><path d="M190 20V300" class="g"/><path d="M230 20V300" class="g"/><path d="M270 20V300" class="g"/><path d="M310 20V300" class="g"/><path d="M350 20V300" class="g"/><path d="M390 20V300" class="g"/><path d="M430 20V300" class="g"/><path d="M470 20V300" class="g"/><path d="M510 20V300" class="g"/><path d="M550 20V300" class="g"/><path d="M590 20V300" class="g"/>
+  <rect x="230" y="150" width="62" height="92" rx="4" class="zone"/>
+  <text x="261" y="142" text-anchor="middle" class="zt">sıçrama</text>
+  <text x="14" y="44" class="ch">İdeal</text><text x="14" y="62" class="sub">3,3 V / 0 V</text>
+  <path d="M70 100 H230 V40 H620" class="ideal"/>
+  <text x="14" y="184" class="ch">Gerçek</text><text x="14" y="202" class="sub">PA0 pini</text>
+  <path d="M70 228 H230 V168 H238 V228 H246 V168 H260 V228 H266 V168 H284 V212 H290 V168 H620" class="real"/>
+  <text x="14" y="266" class="ch">Kod</text>
+  <circle cx="230" cy="262" r="5" class="bad"/><circle cx="246" cy="262" r="5" class="bad"/><circle cx="266" cy="262" r="5" class="bad"/><circle cx="290" cy="262" r="5" class="bad"/><text x="304" y="267" class="bad-t">debounce olmadan: 4 basış sayılır</text>
+  <path d="M230 290 H420" class="win"/><path d="M230 284v12M420 284v12" class="win"/>
+  <circle cx="230" cy="290" r="5" class="ok"/><circle cx="420" cy="290" r="7" class="ok"/>
+  <text x="325" y="310" text-anchor="middle" class="ok-t">delay(DEBOUNCE)</text>
+  <text x="434" y="295" class="ok-t">hâlâ 1 → tek basış ✓</text>
+  <text x="240" y="66" class="sub">← butona basıldı</text>
+</svg></div><figcaption>Üstte ideal buton, ortada gerçek sinyal. Debounce olmadan kod her yükselen kenarı ayrı basış sayar (kırmızı); debounce ile ilk okumadan sonra bekleyip tekrar bakar ve tek basış sayar (yeşil).</figcaption></figure>
+
+  <h3>Çözüm: oku, bekle, tekrar oku</h3>
+  <p>Çözüm olarak <strong>yazılımsal debounce</strong> uyguladım: pin 1 okunduğunda hemen sayma, sıçramaların bitmesi için biraz bekle ve tekrar oku. Hâlâ 1 ise bu gerçek bir basıştır. Ardından buton bırakılana kadar bekleyip bırakırken oluşan sıçramayı da atlıyorum; yoksa bırakma anındaki sıçrama yeni bir basış gibi görünebiliyor.</p>
+  <figure class="stm-fig"><ol class="flow"><li><span class="fl-n">1</span><div><code>IDR & BTN</code><p>Pin 1 mi? Basılmış olabilir.</p></div></li><li><span class="fl-n">2</span><div><code>delay(DEBOUNCE)</code><p>Sıçramalar bitsin diye bekle.</p></div></li><li><span class="fl-n">3</span><div><code>IDR & BTN</code><p>Hâlâ 1 mi? → Gerçek basış: LED'leri değiştir, count++</p></div></li><li><span class="fl-n">4</span><div><code>while (IDR & BTN);</code><p>Buton bırakılana kadar bekle.</p></div></li><li><span class="fl-n">5</span><div><code>delay(DEBOUNCE)</code><p>Bırakırken oluşan sıçramayı da atla.</p></div></li></ol><figcaption>count == 3 olunca döngüden çıkar → 4 LED birlikte yanıp söner.</figcaption></figure>
+  <pre class="code"><code>while (count &lt; 3U) {
+    if (GPIOA-&gt;IDR &amp; BTN) {                 // (1) basis olabilir
+        delay(DEBOUNCE);                    // (2) sicramalar bitsin
+        if (GPIOA-&gt;IDR &amp; BTN) {             // (3) hala basili -&gt; gercek basis
+            GPIOD-&gt;BSRR = CROSS_A | (CROSS_B &lt;&lt; 16);
+            count++;
+            while (GPIOA-&gt;IDR &amp; BTN);       // (4) birakilana kadar bekle
+            GPIOD-&gt;BSRR = CROSS_B | (CROSS_A &lt;&lt; 16);
+            delay(DEBOUNCE);                // (5) birakma sicramasini atla
+        }
+    }
+}</code></pre>
+
+  <div class="stm-demo" data-lang="tr">
+  <div class="sd-head"><div><div class="sd-k">Kendin dene</div><div class="sd-t">Sanal kart: 3 geçerli basış</div></div>
+    <label class="sd-sw"><input type="checkbox" checked data-sd-deb><span></span>Debounce</label></div>
+  <div class="sd-body">
+    <svg class="stm-board" viewBox="-40 0 380 250" role="img" aria-labelledby="sdcap"><rect x="20" y="8" width="260" height="234" rx="16" class="pcb"/><rect x="112" y="88" width="76" height="72" rx="6" class="chip"/><text x="150" y="121" text-anchor="middle" class="chip-t">STM32</text><text x="150" y="137" text-anchor="middle" class="chip-s">F407VG</text><g class="led on" style="--c:#f59e0b"><circle cx="150" cy="46" r="22" class="halo"/><rect x="139" y="39" width="22" height="14" rx="3" class="body"/><text x="174" y="42" text-anchor="start" class="lbl"><tspan class="pin">PD13</tspan> turuncu</text></g><g class="led" style="--c:#22c55e"><circle cx="62" cy="124" r="22" class="halo"/><rect x="51" y="117" width="22" height="14" rx="3" class="body"/><text x="32" y="128" text-anchor="end" class="lbl"><tspan class="pin">PD12</tspan> yeşil</text></g><g class="led" style="--c:#ef4444"><circle cx="238" cy="124" r="22" class="halo"/><rect x="227" y="117" width="22" height="14" rx="3" class="body"/><text x="268" y="128" text-anchor="start" class="lbl"><tspan class="pin">PD14</tspan> kırmızı</text></g><g class="led on" style="--c:#3b82f6"><circle cx="150" cy="202" r="22" class="halo"/><rect x="139" y="195" width="22" height="14" rx="3" class="body"/><text x="174" y="214" text-anchor="start" class="lbl"><tspan class="pin">PD15</tspan> mavi</text></g><g class="btn-g"><circle cx="58" cy="210" r="14" class="btn"/><text x="58" y="240" text-anchor="middle" class="lbl">B1 · PA0</text></g></svg>
+    <div class="sd-side">
+      <button type="button" class="sd-btn" data-sd-press>Butona bas</button>
+      <div class="sd-count"><span data-sd-count>0</span> / 3 <small>geçerli basış</small></div>
+      <div class="sd-log" data-sd-log aria-live="polite">Debounce açıkken her basış bir kez sayılır. Kapatıp tekrar dene.</div>
+      <button type="button" class="sd-reset" data-sd-reset>Sıfırla</button>
+    </div>
+  </div>
+  <p class="sd-cap" id="sdcap">Simülasyon: debounce kapalıyken her basışta kontak 2–4 kez “sıçrar”.</p>
+</div>
+<script>
+(function () {
+  var d = document.querySelector('.stm-demo'); if (!d) return;
+  var tr = d.getAttribute('data-lang') === 'tr', count = 0, blink = null, busy = false;
+  var leds = {}; d.querySelectorAll('.stm-board .led').forEach(function (g, i) { leds[[13, 12, 14, 15][i]] = g; });
+  var show = function (pins) { Object.keys(leds).forEach(function (k) { leds[k].classList.toggle('on', pins.indexOf(+k) > -1); }); };
+  var A = [12, 14], B = [13, 15], out = d.querySelector('[data-sd-count]'), log = d.querySelector('[data-sd-log]'), deb = d.querySelector('[data-sd-deb]');
+  var say = function (s) { log.textContent = s; };
+  var finish = function () { var on = false; blink = setInterval(function () { on = !on; show(on ? [12, 13, 14, 15] : []); }, 400);
+    say(tr ? '3 basış tamam → 2. aşama: hepsi yanıp sönüyor.' : '3 presses done → stage 2: all blinking.'); };
+  var add = function () { if (count >= 3) return; count++; out.textContent = count; if (count >= 3) { finish(); } };
+  d.querySelector('[data-sd-press]').addEventListener('click', function () {
+    if (busy || count >= 3) return; busy = true;
+    if (deb.checked) {
+      show(A); add(); if (count < 3) say(tr ? 'Gerçek basış: 1 kez sayıldı ✓' : 'Real press: counted once ✓');
+      setTimeout(function () { if (count < 3) show(B); busy = false; }, 350);
+    } else {
+      var n = 2 + Math.floor(Math.random() * 3), k = 0, before = count;
+      var t = setInterval(function () { show(k % 2 ? B : A); if (k % 2 === 0) add(); k++;
+        if (k >= n * 2 || count >= 3) { clearInterval(t); if (count < 3) show(B); busy = false;
+          var m = (tr ? 'Bir basış ' : 'One press was counted ') + (count - before) + (tr ? ' kez sayıldı ✗ (bouncing)' : ' times ✗ (bouncing)');
+          if (count >= 3) m += tr ? ' → sayaç erken doldu, 2. aşama başladı.' : ' → the counter filled up early and stage 2 started.';
+          say(m); } }, 70);
+    }
+  });
+  d.querySelector('[data-sd-reset]').addEventListener('click', function () { clearInterval(blink); count = 0; out.textContent = 0; busy = false; show(B);
+    say(tr ? 'Sıfırlandı. Başlangıç: turuncu + mavi.' : 'Reset. Start: orange + blue.'); });
+})();
+</script>
+
+  <h3>Neden delay ve sınırları</h3>
+  <p>Bekleme için şimdilik basit bir sayaç döngüsü kullandım: <code>void delay(volatile uint32_t n) { while (n--); }</code>. <code>volatile</code>, derleyicinin bu “hiçbir şey yapmayan” döngüyü optimizasyonla silmesini engelliyor. <code>DEBOUNCE</code> değerini deneyerek ayarladım: çok küçük olursa sıçramalar geçmeden tekrar okunuyor, çok büyük olursa kısa ve hızlı basışlar kaçırılıyor.</p>
+  <p>Bu yöntemin iki zayıf yanı var: süre, işlemci frekansına ve derleyici ayarlarına göre değişiyor, yani milisaniye cinsinden kesin değil; ve beklerken işlemci başka hiçbir iş yapamıyor. Bir roket uçuş bilgisayarında sensör okurken butonu beklemek için işlemciyi kilitlemek kabul edilemez. Bu yüzden sıradaki bölümlerde <strong>SysTick</strong> ile gerçek milisaniye zamanlaması ve butonu <strong>EXTI kesmesiyle</strong> okumayı öğreneceğim.</p>
+
+  <figure class="blog-figure"><img src="kod-1.png" class="blog-img" alt="Keil µVision: tanımlar ve GPIO ayarları" width="1600" height="607" loading="lazy" decoding="async"><figcaption>Keil µVision'da kodun ilk kısmı: tanımlar, saatler ve pin ayarları</figcaption></figure>
+  <figure class="blog-figure"><img src="kod-2.png" class="blog-img" alt="Debounce döngüsü ve yanıp sönme aşaması" width="1300" height="637" loading="lazy" decoding="async"><figcaption>Debounce döngüsü ve ikinci aşama</figcaption></figure>
+
+  <details class="code-full"><summary>Kodun tamamı</summary><pre class="code"><code>#include &quot;stm32f4xx.h&quot;
+
+#define BTN       (1U &lt;&lt; 0)                     // PA0
+#define CROSS_A   ((1U &lt;&lt; 12) | (1U &lt;&lt; 14))     // yesil + kirmizi
+#define CROSS_B   ((1U &lt;&lt; 13) | (1U &lt;&lt; 15))     // turuncu + mavi
+#define LED_ALL   (CROSS_A | CROSS_B)           // PD12-15
+#define DEBOUNCE  30000U                        // fazla olursa kisa basislari kacirir
+#define BLINK     300000U
+
+void delay(volatile uint32_t n) { while (n--); }
+
+int main(void)
+{
+    uint32_t i;
+    uint32_t count = 0;                          // gecerli basis sayisi
+
+    RCC-&gt;AHB1ENR |= (1U &lt;&lt; 0) | (1U &lt;&lt; 3);       // GPIOA + GPIOD saati
+    GPIOA-&gt;MODER &amp;= ~(3U &lt;&lt; (0 * 2));            // PA0 giris
+    GPIOA-&gt;PUPDR &amp;= ~(3U &lt;&lt; (0 * 2));            // PA0 pull yok (kartta pull-down var)
+    for (i = 12; i &lt; 16; i++) {
+        GPIOD-&gt;MODER &amp;= ~(3U &lt;&lt; (i * 2));        // PD12-15 temizle
+        GPIOD-&gt;MODER |=  (1U &lt;&lt; (i * 2));        // PD12-15 cikis
+    }
+
+    GPIOD-&gt;BSRR = CROSS_B | (CROSS_A &lt;&lt; 16);     // baslangic: buton birakili durumu
+
+    while (count &lt; 3U)
+    {
+        if (GPIOA-&gt;IDR &amp; BTN) {                  // (1) basis olabilir
+            delay(DEBOUNCE);                     // (2) sicramalar bitsin
+            if (GPIOA-&gt;IDR &amp; BTN) {              // (3) hala basili -&gt; gercek basis
+                GPIOD-&gt;BSRR = CROSS_A | (CROSS_B &lt;&lt; 16);
+                count++;
+                while (GPIOA-&gt;IDR &amp; BTN);        // (4) birakilana kadar bekle
+                GPIOD-&gt;BSRR = CROSS_B | (CROSS_A &lt;&lt; 16);
+                delay(DEBOUNCE);                 // (5) birakma sicramasini atla
+            }
+        }
+    }
+
+    /* --- 2. asama: hepsi yanip sonsun --- */
+    while (1)
+    {
+        GPIOD-&gt;BSRR = LED_ALL;                   // BS12-15 -&gt; hepsi yanar
+        delay(BLINK);
+        GPIOD-&gt;BSRR = LED_ALL &lt;&lt; 16;             // BR12-15 -&gt; hepsi soner
+        delay(BLINK);
+    }
+}</code></pre></details>
+
+  <div class="tech-box">
+    <h4>Teknik detaylar</h4>
+    <ul>
+      <li>Kart: STM32F407G-DISC1 (STM32F407VG, Cortex-M4)</li>
+      <li>Geliştirme ortamı: Keil µVision · Dil: C, register seviyesi (CMSIS başlığı <code>stm32f4xx.h</code>)</li>
+      <li>Kullanılan register'lar: <code>RCC_AHB1ENR</code>, <code>GPIOx_MODER</code>, <code>GPIOx_PUPDR</code>, <code>GPIOx_IDR</code>, <code>GPIOx_BSRR</code></li>
+      <li>Pinler: PA0 (USER butonu, aktif-yüksek), PD12–PD15 (LED)</li>
+    </ul>
+  </div>
+
+  <h3>Bu bölümden aklımda kalanlar</h3>
+  <ul>
+    <li>Bir çevre birimini kullanmadan önce saatini açmak gerekiyor.</li>
+    <li>MODER gibi çok bitli alanlara yazmadan önce ilgili bitleri temizlemek gerekiyor.</li>
+    <li>BSRR ile pinleri tek yazmada ve güvenle değiştirmek mümkün.</li>
+    <li>Mekanik butonlar “temiz” sinyal vermez; debounce her zaman gerekir.</li>
+  </ul>
+
+  <a class="series-box next" href="../../stm32-yol-haritasi.html"><span class="series-k">Sıradaki bölüm</span><span class="series-t">2. Bölüm: Karaşimşek — LED'leri sırayla kaydırmak</span><span class="series-s">Yol haritasını gör →</span></a>
+
+  <h3>Kaynaklar</h3>
+  <ul>
+    <li><a href="https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" target="_blank" rel="noopener">RM0090 — STM32F405/415, STM32F407/417… Reference manual (STMicroelectronics)</a></li>
+    <li><a href="https://www.st.com/resource/en/user_manual/um1472-discovery-kit-with-stm32f407vg-mcu-stmicroelectronics.pdf" target="_blank" rel="noopener">UM1472 — Discovery kit with STM32F407VG MCU (STMicroelectronics)</a></li>
+    <li><a href="https://www.ganssle.com/debouncing.htm" target="_blank" rel="noopener">Jack Ganssle — A Guide to Debouncing</a></li>
+  </ul>

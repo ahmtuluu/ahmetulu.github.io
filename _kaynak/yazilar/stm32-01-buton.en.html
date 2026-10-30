@@ -1,0 +1,196 @@
+  <div class="blog-tag">My STM32 Roadmap · Part 1</div>
+  <h1>Reading a Button and Debouncing on the STM32F407: My First Register-Level Step</h1>
+  <div class="blog-meta">Ahmet Ulu · October 2026</div>
+
+  <a class="series-box" href="../stm32-roadmap.html"><span class="series-k">Series</span><span class="series-t">My STM32 Roadmap</span><span class="series-s">Part 1 · All parts and what comes next →</span></a>
+
+  <p>I recently joined the <strong>AGÜ rocket team</strong>. A rocket's flight computer reads sensors, tracks altitude, detects apogee to trigger recovery and sends telemetry to the ground. <strong>STM32</strong> is one of the most common microcontrollers on these boards. So I decided to learn STM32 from the ground up, really understanding it, and I am documenting it here part by part.</p>
+
+  <p>Instead of ready-made functions like Arduino's <code>digitalRead()</code>, I am starting at the <strong>register level</strong>: looking up what each bit does in the reference manual (RM0090) and writing it myself. The board is an <strong>STM32F407G-DISC1</strong> and the IDE is <strong>Keil µVision</strong>. First exercise: read the on-board button and drive the LEDs.</p>
+
+  <h3>The task</h3>
+  <p>At the start the orange and blue LEDs are on. Each press turns on green and red, and releasing brings orange and blue back. After <strong>3 valid presses</strong> the program moves to stage two and all four LEDs blink together. Sounds simple, but the real lesson is hidden in the words “valid press”.</p>
+
+  <div class="stm-two">
+    <figure class="stm-fig"><svg class="stm-board" viewBox="-40 0 380 250" role="img" aria-labelledby="cap1"><rect x="20" y="8" width="260" height="234" rx="16" class="pcb"/><rect x="112" y="88" width="76" height="72" rx="6" class="chip"/><text x="150" y="121" text-anchor="middle" class="chip-t">STM32</text><text x="150" y="137" text-anchor="middle" class="chip-s">F407VG</text><g class="led on" style="--c:#f59e0b"><circle cx="150" cy="46" r="22" class="halo"/><rect x="139" y="39" width="22" height="14" rx="3" class="body"/><text x="174" y="42" text-anchor="start" class="lbl"><tspan class="pin">PD13</tspan> orange</text></g><g class="led" style="--c:#22c55e"><circle cx="62" cy="124" r="22" class="halo"/><rect x="51" y="117" width="22" height="14" rx="3" class="body"/><text x="32" y="128" text-anchor="end" class="lbl"><tspan class="pin">PD12</tspan> green</text></g><g class="led" style="--c:#ef4444"><circle cx="238" cy="124" r="22" class="halo"/><rect x="227" y="117" width="22" height="14" rx="3" class="body"/><text x="268" y="128" text-anchor="start" class="lbl"><tspan class="pin">PD14</tspan> red</text></g><g class="led on" style="--c:#3b82f6"><circle cx="150" cy="202" r="22" class="halo"/><rect x="139" y="195" width="22" height="14" rx="3" class="body"/><text x="174" y="214" text-anchor="start" class="lbl"><tspan class="pin">PD15</tspan> blue</text></g><g class="btn-g"><circle cx="58" cy="210" r="14" class="btn"/><text x="58" y="240" text-anchor="middle" class="lbl">B1 · PA0</text></g></svg><figcaption id="cap1">Button released: <b>CROSS_B</b> — orange (PD13) + blue (PD15)</figcaption></figure>
+    <figure class="stm-fig"><svg class="stm-board" viewBox="-40 0 380 250" role="img" aria-labelledby="cap2"><rect x="20" y="8" width="260" height="234" rx="16" class="pcb"/><rect x="112" y="88" width="76" height="72" rx="6" class="chip"/><text x="150" y="121" text-anchor="middle" class="chip-t">STM32</text><text x="150" y="137" text-anchor="middle" class="chip-s">F407VG</text><g class="led" style="--c:#f59e0b"><circle cx="150" cy="46" r="22" class="halo"/><rect x="139" y="39" width="22" height="14" rx="3" class="body"/><text x="174" y="42" text-anchor="start" class="lbl"><tspan class="pin">PD13</tspan> orange</text></g><g class="led on" style="--c:#22c55e"><circle cx="62" cy="124" r="22" class="halo"/><rect x="51" y="117" width="22" height="14" rx="3" class="body"/><text x="32" y="128" text-anchor="end" class="lbl"><tspan class="pin">PD12</tspan> green</text></g><g class="led on" style="--c:#ef4444"><circle cx="238" cy="124" r="22" class="halo"/><rect x="227" y="117" width="22" height="14" rx="3" class="body"/><text x="268" y="128" text-anchor="start" class="lbl"><tspan class="pin">PD14</tspan> red</text></g><g class="led" style="--c:#3b82f6"><circle cx="150" cy="202" r="22" class="halo"/><rect x="139" y="195" width="22" height="14" rx="3" class="body"/><text x="174" y="214" text-anchor="start" class="lbl"><tspan class="pin">PD15</tspan> blue</text></g><g class="btn-g"><circle cx="58" cy="210" r="14" class="btn"/><text x="58" y="240" text-anchor="middle" class="lbl">B1 · PA0</text></g></svg><figcaption id="cap2">Button pressed: <b>CROSS_A</b> — green (PD12) + red (PD14)</figcaption></figure>
+  </div>
+
+  <h3>Hardware: the on-board button and LEDs</h3>
+  <p>The blue <strong>USER</strong> button (B1) is wired to <strong>PA0</strong> and is <strong>active-high</strong>: pressed reads 1, released reads 0. The board already has an external pull-down resistor, so I left PA0's internal pull-ups/pull-downs off. The four LEDs sit on <strong>PD12–PD15</strong>, arranged in a cross in the middle of the board. I named the opposite green–red pair <code>CROSS_A</code> and the orange–blue pair <code>CROSS_B</code>.</p>
+
+  <h3>Step 1: Turn on the clocks (RCC)</h3>
+  <p>To save power, peripheral clocks on an STM32 are off by default; you must enable a GPIO port's clock before writing to it. GPIOA and GPIOD are on the <strong>AHB1</strong> bus. In <code>RCC_AHB1ENR</code>, bit 0 enables GPIOA and bit 3 enables GPIOD.</p>
+  <pre class="code"><code>RCC-&gt;AHB1ENR |= (1U &lt;&lt; 0) | (1U &lt;&lt; 3);   // GPIOA + GPIOD saati</code></pre>
+
+  <h3>Step 2: Set the pin modes (MODER, PUPDR)</h3>
+  <p>In <code>MODER</code> each pin gets <strong>2 bits</strong>. I first clear both bits with <code>&= ~(3U &lt;&lt; (i*2))</code>, then write “01” with <code>|= (1U &lt;&lt; (i*2))</code>; writing without clearing could mix with the previous value. PA0 stays at “00” (input).</p>
+  <figure class="stm-fig"><div class="rg"><div class="rg-field" style="--c:#3b82f6"><div class="rg-name">MODER15</div><div class="rg-bits"><span>0</span><span class="one">1</span></div><div class="rg-idx">31:30</div></div><div class="rg-field" style="--c:#ef4444"><div class="rg-name">MODER14</div><div class="rg-bits"><span>0</span><span class="one">1</span></div><div class="rg-idx">29:28</div></div><div class="rg-field" style="--c:#f59e0b"><div class="rg-name">MODER13</div><div class="rg-bits"><span>0</span><span class="one">1</span></div><div class="rg-idx">27:26</div></div><div class="rg-field" style="--c:#22c55e"><div class="rg-name">MODER12</div><div class="rg-bits"><span>0</span><span class="one">1</span></div><div class="rg-idx">25:24</div></div><div class="rg-more">… MODER11 – MODER0</div></div><figcaption>GPIOD_MODER: 2 bits per pin. “01” on PD12–15 = output.<br><b>00</b> input · <b>01</b> output · <b>10</b> alternate function · <b>11</b> analog</figcaption></figure>
+
+  <h3>Step 3: Drive the LEDs with BSRR</h3>
+  <p>I switch the LEDs with <code>BSRR</code> (bit set/reset) instead of <code>ODR</code>. The lower 16 bits <strong>set</strong> a pin to 1 and the upper 16 bits <strong>reset</strong> it to 0; bits written as 0 change nothing. So a single write can turn some LEDs on and others off without a read-modify-write, and the operation is <strong>atomic</strong>.</p>
+  <figure class="stm-fig"><div class="bsrr"><div class="bs-row"><div class="bs-name">BR — reset (bits 31–16)</div><div class="bs-cells"><span class="bs" title="BR15 (bit 31)">15</span><span class="bs act" style="--c:#ef4444" title="BR14 (bit 30)">14</span><span class="bs" title="BR13 (bit 29)">13</span><span class="bs act" style="--c:#22c55e" title="BR12 (bit 28)">12</span><span class="bs" title="BR11 (bit 27)">11</span><span class="bs" title="BR10 (bit 26)">10</span><span class="bs" title="BR9 (bit 25)">9</span><span class="bs" title="BR8 (bit 24)">8</span><span class="bs" title="BR7 (bit 23)">7</span><span class="bs" title="BR6 (bit 22)">6</span><span class="bs" title="BR5 (bit 21)">5</span><span class="bs" title="BR4 (bit 20)">4</span><span class="bs" title="BR3 (bit 19)">3</span><span class="bs" title="BR2 (bit 18)">2</span><span class="bs" title="BR1 (bit 17)">1</span><span class="bs" title="BR0 (bit 16)">0</span></div></div><div class="bs-row"><div class="bs-name">BS — set (bits 15–0)</div><div class="bs-cells"><span class="bs act" style="--c:#3b82f6" title="BS15 (bit 15)">15</span><span class="bs" title="BS14 (bit 14)">14</span><span class="bs act" style="--c:#f59e0b" title="BS13 (bit 13)">13</span><span class="bs" title="BS12 (bit 12)">12</span><span class="bs" title="BS11 (bit 11)">11</span><span class="bs" title="BS10 (bit 10)">10</span><span class="bs" title="BS9 (bit 9)">9</span><span class="bs" title="BS8 (bit 8)">8</span><span class="bs" title="BS7 (bit 7)">7</span><span class="bs" title="BS6 (bit 6)">6</span><span class="bs" title="BS5 (bit 5)">5</span><span class="bs" title="BS4 (bit 4)">4</span><span class="bs" title="BS3 (bit 3)">3</span><span class="bs" title="BS2 (bit 2)">2</span><span class="bs" title="BS1 (bit 1)">1</span><span class="bs" title="BS0 (bit 0)">0</span></div></div></div><figcaption><code>GPIOD-&gt;BSRR = CROSS_B | (CROSS_A &lt;&lt; 16);</code> turns orange and blue on (BS13, BS15) and green and red off (BR12, BR14) in a single write. Bits written as 0 leave their pins alone.</figcaption></figure>
+
+  <h3>The problem: one press, many counts (bouncing)</h3>
+  <p>On my first try I saw a single press being detected as several. At first I thought it was arcing between the button contacts; the real cause is <strong>mechanical</strong>: when you press the button, the metal contacts hit each other and <strong>bounce</strong>, opening and closing a few times for a very short time before they settle. This is called <strong>contact bounce</strong> and on most buttons it lasts a few milliseconds.</p>
+  <p>A few milliseconds is nothing to a human, but a processor running at 16 MHz can read the pin thousands of times in that window. To the code, every bounce is a separate press: a 3-press target can be reached in a single press.</p>
+  <figure class="stm-fig wide"><div class="wave-scroll"><svg class="stm-wave" viewBox="0 0 630 320" role="img" aria-label="Ideal and real signal when the button is pressed; contact bounce and the debounce wait">
+  <path d="M70 20V300" class="g"/><path d="M110 20V300" class="g"/><path d="M150 20V300" class="g"/><path d="M190 20V300" class="g"/><path d="M230 20V300" class="g"/><path d="M270 20V300" class="g"/><path d="M310 20V300" class="g"/><path d="M350 20V300" class="g"/><path d="M390 20V300" class="g"/><path d="M430 20V300" class="g"/><path d="M470 20V300" class="g"/><path d="M510 20V300" class="g"/><path d="M550 20V300" class="g"/><path d="M590 20V300" class="g"/>
+  <rect x="230" y="150" width="62" height="92" rx="4" class="zone"/>
+  <text x="261" y="142" text-anchor="middle" class="zt">bounce</text>
+  <text x="14" y="44" class="ch">Ideal</text><text x="14" y="62" class="sub">3,3 V / 0 V</text>
+  <path d="M70 100 H230 V40 H620" class="ideal"/>
+  <text x="14" y="184" class="ch">Real</text><text x="14" y="202" class="sub">PA0 pin</text>
+  <path d="M70 228 H230 V168 H238 V228 H246 V168 H260 V228 H266 V168 H284 V212 H290 V168 H620" class="real"/>
+  <text x="14" y="266" class="ch">Code</text>
+  <circle cx="230" cy="262" r="5" class="bad"/><circle cx="246" cy="262" r="5" class="bad"/><circle cx="266" cy="262" r="5" class="bad"/><circle cx="290" cy="262" r="5" class="bad"/><text x="304" y="267" class="bad-t">without debounce: 4 presses counted</text>
+  <path d="M230 290 H420" class="win"/><path d="M230 284v12M420 284v12" class="win"/>
+  <circle cx="230" cy="290" r="5" class="ok"/><circle cx="420" cy="290" r="7" class="ok"/>
+  <text x="325" y="310" text-anchor="middle" class="ok-t">delay(DEBOUNCE)</text>
+  <text x="434" y="295" class="ok-t">still 1 → one press ✓</text>
+  <text x="240" y="66" class="sub">← button pressed</text>
+</svg></div><figcaption>Top: an ideal button; middle: the real signal. Without debounce the code counts every rising edge as a press (red); with debounce it waits after the first read, checks again and counts a single press (green).</figcaption></figure>
+
+  <h3>The fix: read, wait, read again</h3>
+  <p>I implemented a <strong>software debounce</strong>: when the pin reads 1, don't count it yet; wait for the bouncing to settle and read again. If it is still 1, it is a real press. Then I wait for the release and skip the bounce on release as well; otherwise the release bounce can look like a new press.</p>
+  <figure class="stm-fig"><ol class="flow"><li><span class="fl-n">1</span><div><code>IDR & BTN</code><p>Is the pin 1? It might be a press.</p></div></li><li><span class="fl-n">2</span><div><code>delay(DEBOUNCE)</code><p>Wait for the bouncing to end.</p></div></li><li><span class="fl-n">3</span><div><code>IDR & BTN</code><p>Still 1? → Real press: swap LEDs, count++</p></div></li><li><span class="fl-n">4</span><div><code>while (IDR & BTN);</code><p>Wait until the button is released.</p></div></li><li><span class="fl-n">5</span><div><code>delay(DEBOUNCE)</code><p>Skip the bounce on release too.</p></div></li></ol><figcaption>When count reaches 3 the loop ends → all 4 LEDs blink together.</figcaption></figure>
+  <pre class="code"><code>while (count &lt; 3U) {
+    if (GPIOA-&gt;IDR &amp; BTN) {                 // (1) basis olabilir
+        delay(DEBOUNCE);                    // (2) sicramalar bitsin
+        if (GPIOA-&gt;IDR &amp; BTN) {             // (3) hala basili -&gt; gercek basis
+            GPIOD-&gt;BSRR = CROSS_A | (CROSS_B &lt;&lt; 16);
+            count++;
+            while (GPIOA-&gt;IDR &amp; BTN);       // (4) birakilana kadar bekle
+            GPIOD-&gt;BSRR = CROSS_B | (CROSS_A &lt;&lt; 16);
+            delay(DEBOUNCE);                // (5) birakma sicramasini atla
+        }
+    }
+}</code></pre>
+
+  <div class="stm-demo" data-lang="en">
+  <div class="sd-head"><div><div class="sd-k">Try it yourself</div><div class="sd-t">Virtual board: 3 valid presses</div></div>
+    <label class="sd-sw"><input type="checkbox" checked data-sd-deb><span></span>Debounce</label></div>
+  <div class="sd-body">
+    <svg class="stm-board" viewBox="-40 0 380 250" role="img" aria-labelledby="sdcap"><rect x="20" y="8" width="260" height="234" rx="16" class="pcb"/><rect x="112" y="88" width="76" height="72" rx="6" class="chip"/><text x="150" y="121" text-anchor="middle" class="chip-t">STM32</text><text x="150" y="137" text-anchor="middle" class="chip-s">F407VG</text><g class="led on" style="--c:#f59e0b"><circle cx="150" cy="46" r="22" class="halo"/><rect x="139" y="39" width="22" height="14" rx="3" class="body"/><text x="174" y="42" text-anchor="start" class="lbl"><tspan class="pin">PD13</tspan> orange</text></g><g class="led" style="--c:#22c55e"><circle cx="62" cy="124" r="22" class="halo"/><rect x="51" y="117" width="22" height="14" rx="3" class="body"/><text x="32" y="128" text-anchor="end" class="lbl"><tspan class="pin">PD12</tspan> green</text></g><g class="led" style="--c:#ef4444"><circle cx="238" cy="124" r="22" class="halo"/><rect x="227" y="117" width="22" height="14" rx="3" class="body"/><text x="268" y="128" text-anchor="start" class="lbl"><tspan class="pin">PD14</tspan> red</text></g><g class="led on" style="--c:#3b82f6"><circle cx="150" cy="202" r="22" class="halo"/><rect x="139" y="195" width="22" height="14" rx="3" class="body"/><text x="174" y="214" text-anchor="start" class="lbl"><tspan class="pin">PD15</tspan> blue</text></g><g class="btn-g"><circle cx="58" cy="210" r="14" class="btn"/><text x="58" y="240" text-anchor="middle" class="lbl">B1 · PA0</text></g></svg>
+    <div class="sd-side">
+      <button type="button" class="sd-btn" data-sd-press>Press the button</button>
+      <div class="sd-count"><span data-sd-count>0</span> / 3 <small>valid presses</small></div>
+      <div class="sd-log" data-sd-log aria-live="polite">With debounce on, each press counts once. Turn it off and try again.</div>
+      <button type="button" class="sd-reset" data-sd-reset>Reset</button>
+    </div>
+  </div>
+  <p class="sd-cap" id="sdcap">Simulation: with debounce off, the contact “bounces” 2–4 times per press.</p>
+</div>
+<script>
+(function () {
+  var d = document.querySelector('.stm-demo'); if (!d) return;
+  var tr = d.getAttribute('data-lang') === 'tr', count = 0, blink = null, busy = false;
+  var leds = {}; d.querySelectorAll('.stm-board .led').forEach(function (g, i) { leds[[13, 12, 14, 15][i]] = g; });
+  var show = function (pins) { Object.keys(leds).forEach(function (k) { leds[k].classList.toggle('on', pins.indexOf(+k) > -1); }); };
+  var A = [12, 14], B = [13, 15], out = d.querySelector('[data-sd-count]'), log = d.querySelector('[data-sd-log]'), deb = d.querySelector('[data-sd-deb]');
+  var say = function (s) { log.textContent = s; };
+  var finish = function () { var on = false; blink = setInterval(function () { on = !on; show(on ? [12, 13, 14, 15] : []); }, 400);
+    say(tr ? '3 basış tamam → 2. aşama: hepsi yanıp sönüyor.' : '3 presses done → stage 2: all blinking.'); };
+  var add = function () { if (count >= 3) return; count++; out.textContent = count; if (count >= 3) { finish(); } };
+  d.querySelector('[data-sd-press]').addEventListener('click', function () {
+    if (busy || count >= 3) return; busy = true;
+    if (deb.checked) {
+      show(A); add(); if (count < 3) say(tr ? 'Gerçek basış: 1 kez sayıldı ✓' : 'Real press: counted once ✓');
+      setTimeout(function () { if (count < 3) show(B); busy = false; }, 350);
+    } else {
+      var n = 2 + Math.floor(Math.random() * 3), k = 0, before = count;
+      var t = setInterval(function () { show(k % 2 ? B : A); if (k % 2 === 0) add(); k++;
+        if (k >= n * 2 || count >= 3) { clearInterval(t); if (count < 3) show(B); busy = false;
+          var m = (tr ? 'Bir basış ' : 'One press was counted ') + (count - before) + (tr ? ' kez sayıldı ✗ (bouncing)' : ' times ✗ (bouncing)');
+          if (count >= 3) m += tr ? ' → sayaç erken doldu, 2. aşama başladı.' : ' → the counter filled up early and stage 2 started.';
+          say(m); } }, 70);
+    }
+  });
+  d.querySelector('[data-sd-reset]').addEventListener('click', function () { clearInterval(blink); count = 0; out.textContent = 0; busy = false; show(B);
+    say(tr ? 'Sıfırlandı. Başlangıç: turuncu + mavi.' : 'Reset. Start: orange + blue.'); });
+})();
+</script>
+
+  <h3>Why a delay, and its limits</h3>
+  <p>For the wait I used a simple counting loop for now: <code>void delay(volatile uint32_t n) { while (n--); }</code>. <code>volatile</code> stops the compiler from optimising this “do-nothing” loop away. I tuned <code>DEBOUNCE</code> by trial: too small and the pin is read again before the bouncing ends; too large and short, quick presses are missed.</p>
+  <p>This approach has two weak points: the delay depends on the CPU frequency and compiler settings, so it is not an exact number of milliseconds; and the CPU can do nothing else while waiting. On a rocket flight computer, locking up the CPU to wait for a button while sensors need reading is not acceptable. So in the coming parts I will learn real millisecond timing with <strong>SysTick</strong> and reading the button with an <strong>EXTI interrupt</strong>.</p>
+
+  <figure class="blog-figure"><img src="kod-1.png" class="blog-img" alt="Keil µVision: definitions and GPIO setup" width="1600" height="607" loading="lazy" decoding="async"><figcaption>The first part of the code in Keil µVision: definitions, clocks and pin setup</figcaption></figure>
+  <figure class="blog-figure"><img src="kod-2.png" class="blog-img" alt="Debounce loop and blinking stage" width="1300" height="637" loading="lazy" decoding="async"><figcaption>The debounce loop and stage two</figcaption></figure>
+
+  <details class="code-full"><summary>Full code</summary><pre class="code"><code>#include &quot;stm32f4xx.h&quot;
+
+#define BTN       (1U &lt;&lt; 0)                     // PA0
+#define CROSS_A   ((1U &lt;&lt; 12) | (1U &lt;&lt; 14))     // yesil + kirmizi
+#define CROSS_B   ((1U &lt;&lt; 13) | (1U &lt;&lt; 15))     // turuncu + mavi
+#define LED_ALL   (CROSS_A | CROSS_B)           // PD12-15
+#define DEBOUNCE  30000U                        // fazla olursa kisa basislari kacirir
+#define BLINK     300000U
+
+void delay(volatile uint32_t n) { while (n--); }
+
+int main(void)
+{
+    uint32_t i;
+    uint32_t count = 0;                          // gecerli basis sayisi
+
+    RCC-&gt;AHB1ENR |= (1U &lt;&lt; 0) | (1U &lt;&lt; 3);       // GPIOA + GPIOD saati
+    GPIOA-&gt;MODER &amp;= ~(3U &lt;&lt; (0 * 2));            // PA0 giris
+    GPIOA-&gt;PUPDR &amp;= ~(3U &lt;&lt; (0 * 2));            // PA0 pull yok (kartta pull-down var)
+    for (i = 12; i &lt; 16; i++) {
+        GPIOD-&gt;MODER &amp;= ~(3U &lt;&lt; (i * 2));        // PD12-15 temizle
+        GPIOD-&gt;MODER |=  (1U &lt;&lt; (i * 2));        // PD12-15 cikis
+    }
+
+    GPIOD-&gt;BSRR = CROSS_B | (CROSS_A &lt;&lt; 16);     // baslangic: buton birakili durumu
+
+    while (count &lt; 3U)
+    {
+        if (GPIOA-&gt;IDR &amp; BTN) {                  // (1) basis olabilir
+            delay(DEBOUNCE);                     // (2) sicramalar bitsin
+            if (GPIOA-&gt;IDR &amp; BTN) {              // (3) hala basili -&gt; gercek basis
+                GPIOD-&gt;BSRR = CROSS_A | (CROSS_B &lt;&lt; 16);
+                count++;
+                while (GPIOA-&gt;IDR &amp; BTN);        // (4) birakilana kadar bekle
+                GPIOD-&gt;BSRR = CROSS_B | (CROSS_A &lt;&lt; 16);
+                delay(DEBOUNCE);                 // (5) birakma sicramasini atla
+            }
+        }
+    }
+
+    /* --- 2. asama: hepsi yanip sonsun --- */
+    while (1)
+    {
+        GPIOD-&gt;BSRR = LED_ALL;                   // BS12-15 -&gt; hepsi yanar
+        delay(BLINK);
+        GPIOD-&gt;BSRR = LED_ALL &lt;&lt; 16;             // BR12-15 -&gt; hepsi soner
+        delay(BLINK);
+    }
+}</code></pre></details>
+
+  <div class="tech-box">
+    <h4>Technical details</h4>
+    <ul>
+      <li>Board: STM32F407G-DISC1 (STM32F407VG, Cortex-M4)</li>
+      <li>IDE: Keil µVision · Language: C, register level (CMSIS header <code>stm32f4xx.h</code>)</li>
+      <li>Registers used: <code>RCC_AHB1ENR</code>, <code>GPIOx_MODER</code>, <code>GPIOx_PUPDR</code>, <code>GPIOx_IDR</code>, <code>GPIOx_BSRR</code></li>
+      <li>Pins: PA0 (USER button, active-high), PD12–PD15 (LED)</li>
+    </ul>
+  </div>
+
+  <h3>What I took away from this part</h3>
+  <ul>
+    <li>A peripheral's clock must be enabled before using it.</li>
+    <li>Multi-bit fields like MODER need to be cleared before writing.</li>
+    <li>BSRR changes pins safely in a single write.</li>
+    <li>Mechanical buttons never give a “clean” signal; you always need debounce.</li>
+  </ul>
+
+  <a class="series-box next" href="../stm32-roadmap.html"><span class="series-k">Next part</span><span class="series-t">Part 2: Knight Rider — sweeping the LEDs in sequence</span><span class="series-s">See the roadmap →</span></a>
+
+  <h3>References</h3>
+  <ul>
+    <li><a href="https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" target="_blank" rel="noopener">RM0090 — STM32F405/415, STM32F407/417… Reference manual (STMicroelectronics)</a></li>
+    <li><a href="https://www.st.com/resource/en/user_manual/um1472-discovery-kit-with-stm32f407vg-mcu-stmicroelectronics.pdf" target="_blank" rel="noopener">UM1472 — Discovery kit with STM32F407VG MCU (STMicroelectronics)</a></li>
+    <li><a href="https://www.ganssle.com/debouncing.htm" target="_blank" rel="noopener">Jack Ganssle — A Guide to Debouncing</a></li>
+  </ul>

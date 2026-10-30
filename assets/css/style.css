@@ -1014,3 +1014,185 @@ a.avail:hover{color:var(--text);border-color:var(--accent-border);}
   .cv-actions .btn{min-height:38px;padding:8px 14px;font-size:13.5px;}
 }
 @media (prefers-reduced-motion:reduce){.cv-dialog[open],.cv-dialog[open]::backdrop{animation:none;}}
+
+/* =========================================================
+   STM32 yol haritası serisi (yazı çizimleri + yol haritası sayfası)
+   ========================================================= */
+.series-box{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"k t" "k s";column-gap:16px;row-gap:2px;align-items:center;
+  margin:0 0 32px;padding:14px 18px;border-radius:14px;text-decoration:none;
+  background:linear-gradient(135deg,rgba(var(--accent-rgb),.10),rgba(59,130,246,.06));border:1px solid var(--accent-border);transition:border-color .2s,transform .2s;}
+.series-box:hover{border-color:var(--accent);transform:translateY(-1px);}
+.series-k{grid-area:k;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--on-accent);background:var(--accent);padding:5px 9px;border-radius:7px;font-weight:600;}
+.series-t{grid-area:t;font-family:var(--serif);font-size:17px;color:var(--text);line-height:1.3;}
+.series-s{grid-area:s;font-size:13px;color:var(--muted);}
+.series-box:hover .series-s{color:var(--accent);}
+.series-box.next{margin:40px 0 12px;background:var(--surface);border-color:var(--border);}
+.series-box.next .series-k{background:var(--surface-2);color:var(--accent);border:1px solid var(--accent-border);}
+
+.stm-fig{margin:28px 0;padding:18px;border-radius:16px;background:var(--surface);border:1px solid var(--border);}
+.stm-fig figcaption{font-size:13.5px;color:var(--muted);line-height:1.6;margin-top:12px;text-align:center;}
+.stm-fig figcaption b{color:var(--text);font-weight:500;}
+.stm-fig figcaption code{font-size:.85em;}
+.stm-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:28px 0;}
+.stm-two .stm-fig{margin:0;}
+
+/* Kart çizimi */
+.stm-board{width:100%;height:auto;display:block;overflow:visible;}
+.stm-board .pcb{fill:#0d1b2f;stroke:#22406a;stroke-width:1.5;}
+.stm-board .chip{fill:#0a0f1c;stroke:#3a4b6b;stroke-width:1.5;}
+.stm-board .chip-t{fill:#cbd5e1;font:600 15px var(--sans);letter-spacing:1px;}
+.stm-board .chip-s{fill:#64748b;font:500 10.5px var(--sans);}
+.stm-board .led .halo{fill:var(--c);opacity:0;transition:opacity .15s;}
+.stm-board .led .body{fill:#1a2438;stroke:#334262;stroke-width:1.2;transition:fill .15s,stroke .15s;}
+.stm-board .led.on .halo{opacity:.28;filter:blur(6px);}
+.stm-board .led.on .body{fill:var(--c);stroke:#fff;stroke-opacity:.5;}
+.stm-board .lbl{fill:#8593ad;font:500 13px var(--sans);}
+.stm-board .led.on .lbl{fill:#e6edf7;}
+.stm-board .lbl .pin{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:600;fill:var(--c,#22d3ee);}
+.stm-board .btn{fill:#1d4ed8;stroke:#93c5fd;stroke-width:2;}
+.stm-board .btn-g .lbl .pin{fill:#93c5fd;}
+
+/* Sinyal (bouncing) çizimi */
+.stm-wave{width:100%;height:auto;display:block;}
+.stm-wave .g{stroke:#1b2640;stroke-width:1;}
+.stm-wave .zone{fill:rgba(239,68,68,.08);stroke:rgba(239,68,68,.45);stroke-dasharray:4 4;}
+.stm-wave .zt{fill:#fca5a5;font:600 12px var(--sans);letter-spacing:.5px;}
+.stm-wave .ch{fill:#e6edf7;font:600 14px var(--sans);}
+.stm-wave .sub{fill:#8593ad;font:500 11.5px var(--sans);}
+.stm-wave .ideal{fill:none;stroke:#64748b;stroke-width:2.5;stroke-dasharray:6 5;}
+.stm-wave .real{fill:none;stroke:var(--accent);stroke-width:2.6;stroke-linejoin:round;}
+.stm-wave .bad{fill:#ef4444;}
+.stm-wave .bad-t{fill:#fca5a5;font:500 12.5px var(--sans);}
+.stm-wave .win{stroke:#22c55e;stroke-width:2;fill:none;}
+.stm-wave .ok{fill:#22c55e;}
+.stm-wave .ok-t{fill:#86efac;font:600 12.5px ui-monospace,Menlo,Consolas,monospace;}
+.stm-fig.wide{padding:14px 10px;}
+.wave-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+/* MODER alanları */
+.rg{display:flex;gap:8px;align-items:stretch;justify-content:center;flex-wrap:wrap;}
+.rg-field{flex:1 1 0;min-width:72px;max-width:130px;border:1px solid var(--border);border-top:3px solid var(--c);border-radius:10px;padding:10px 8px;text-align:center;background:var(--bg);}
+.rg-name{font:600 12px ui-monospace,Menlo,Consolas,monospace;color:var(--c);}
+.rg-bits{display:flex;gap:4px;justify-content:center;margin:8px 0 6px;}
+.rg-bits span{width:28px;height:30px;display:grid;place-items:center;border-radius:6px;font:600 15px ui-monospace,Menlo,Consolas,monospace;background:var(--surface-2);color:var(--muted);border:1px solid var(--border);}
+.rg-bits .one{background:var(--c);color:#04121a;border-color:transparent;}
+.rg-idx{font-size:11px;color:var(--muted);}
+.rg-more{flex:1 1 100%;text-align:center;font:500 12px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);padding-top:4px;}
+
+/* BSRR */
+.bsrr{display:flex;flex-direction:column;gap:12px;}
+.bs-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:center;}
+.bs-name{font:600 12.5px var(--sans);color:var(--soft);}
+.bs-cells{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:3px;}
+.bs-cells .bs{height:30px;display:grid;place-items:center;border-radius:5px;font:600 11px ui-monospace,Menlo,Consolas,monospace;background:var(--bg);color:#4b5b78;border:1px solid var(--line);}
+.bs-cells .bs.act{background:var(--c);color:#04121a;border-color:transparent;box-shadow:0 0 12px -2px var(--c);}
+
+/* Akış */
+.article ol.flow{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:none;}
+.flow li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;align-items:start;position:relative;padding-bottom:16px;}
+.flow li:not(:last-child)::after{content:'';position:absolute;left:16px;top:34px;bottom:2px;width:2px;background:var(--border);}
+.flow li:last-child{padding-bottom:0;}
+.fl-n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);font-weight:600;font-size:14px;}
+.flow code{display:inline-block;margin-top:5px;}
+.article .flow p{font-size:14.5px;margin:4px 0 0;line-height:1.55;}
+.flow li:nth-child(3) .fl-n{background:#22c55e;color:#04121a;border-color:transparent;}
+
+/* Kod blokları */
+.article pre.code{margin:20px 0 28px;padding:16px 18px;border-radius:12px;background:#070b15;border:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.article pre.code code{display:block;background:none;padding:0;border-radius:0;color:#cbd5e1;font-size:13px;line-height:1.65;white-space:pre;tab-size:4;}
+details.code-full{margin:24px 0;border:1px solid var(--border);border-radius:12px;background:var(--surface);}
+details.code-full summary{cursor:pointer;padding:14px 18px;font-size:14.5px;color:var(--text);font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+details.code-full summary::-webkit-details-marker{display:none;}
+details.code-full summary::after{content:'+';color:var(--accent);font-size:20px;line-height:1;transition:transform .2s;}
+details.code-full[open] summary::after{transform:rotate(45deg);}
+details.code-full pre.code{margin:0;border-radius:0 0 12px 12px;border-width:1px 0 0;}
+
+/* Sanal kart demosu */
+.stm-demo{margin:32px 0;border-radius:18px;border:1px solid var(--accent-border);background:linear-gradient(160deg,rgba(var(--accent-rgb),.07),transparent 60%),var(--surface);padding:18px;}
+.sd-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+.sd-k{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+.sd-t{font-family:var(--serif);font-size:19px;color:var(--text);}
+.sd-sw{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--soft);cursor:pointer;user-select:none;}
+.sd-sw input{position:absolute;opacity:0;width:1px;height:1px;}
+.sd-sw span{width:44px;height:24px;border-radius:20px;background:#3b2330;border:1px solid #6b2a3a;position:relative;transition:background .2s,border-color .2s;}
+.sd-sw span::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fca5a5;transition:transform .2s,background .2s;}
+.sd-sw input:checked + span{background:rgba(34,197,94,.25);border-color:#22c55e;}
+.sd-sw input:checked + span::after{transform:translateX(20px);background:#22c55e;}
+.sd-sw input:focus-visible + span{outline:2px solid var(--accent);outline-offset:3px;}
+.sd-body{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:center;}
+.sd-side{display:flex;flex-direction:column;gap:12px;}
+.sd-btn{appearance:none;border:none;cursor:pointer;padding:14px 18px;border-radius:12px;font-weight:600;font-size:15px;color:#fff;background:linear-gradient(180deg,#2563eb,#1d4ed8);box-shadow:0 4px 0 #1e3a8a,0 8px 20px -8px rgba(37,99,235,.7);transition:transform .08s,box-shadow .08s;}
+.sd-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #1e3a8a;}
+.sd-count{font-family:var(--serif);font-size:30px;color:var(--text);line-height:1;}
+.sd-count span{color:var(--accent);}
+.sd-count small{display:block;font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:.3px;}
+.sd-log{font-size:13.5px;color:var(--soft);line-height:1.5;min-height:3em;padding:10px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line);}
+.sd-reset{align-self:flex-start;background:none;border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;}
+.sd-reset:hover{color:var(--accent);border-color:var(--accent-border);}
+.article .sd-cap{font-size:12.5px;color:var(--muted);margin:12px 0 0;text-align:center;line-height:1.5;}
+
+@media (max-width:640px){
+  .stm-two{grid-template-columns:1fr;gap:12px;}
+  .stm-fig{padding:14px 12px;}
+  .stm-wave{min-width:540px;}
+  .sd-body{grid-template-columns:1fr;}
+  .stm-demo .stm-board{max-width:320px;margin:0 auto;}
+  .bs-row{grid-template-columns:1fr;gap:6px;}
+  .bs-cells{gap:2px;}
+  .bs-cells .bs{height:26px;font-size:9.5px;border-radius:4px;}
+  .rg{gap:6px;}
+  .rg-field{min-width:0;padding:8px 4px;}
+  .rg-name{font-size:10.5px;}
+  .rg-bits span{width:22px;height:26px;font-size:13px;}
+  .article pre.code code{font-size:12px;}
+  .series-box{grid-template-areas:"k" "t" "s";grid-template-columns:1fr;row-gap:6px;}
+  .series-k{justify-self:start;}
+}
+
+/* Yol haritası sayfası */
+.road-hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:end;margin-bottom:12px;}
+.road-hero .tool-head{margin-bottom:0;}
+.road-hero .tool-head p strong{color:var(--text);font-weight:500;}
+.road-chips{margin-top:18px;}
+.road-progress{padding:22px;border-radius:20px;border:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:10px;}
+.road-num{display:flex;align-items:baseline;gap:8px;}
+.road-num b{font-family:var(--serif);font-size:48px;font-weight:400;color:var(--accent);line-height:1;}
+.road-num span{font-size:18px;color:var(--muted);}
+.road-bar{position:relative;height:8px;border-radius:8px;background:var(--bg);border:1px solid var(--line);overflow:hidden;}
+.road-bar span,.road-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:8px;}
+.road-bar span{background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:1;}
+.road-bar i{background:repeating-linear-gradient(45deg,rgba(245,158,11,.5) 0 4px,rgba(245,158,11,.2) 4px 8px);}
+.road-cta{margin-top:6px;justify-content:center;}
+.road-why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.road-why-tile .tile-title{margin-bottom:6px;}
+.road-list{list-style:none;margin:0;padding:0;position:relative;}
+.road-list::before{content:'';position:absolute;left:21px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--accent) 0 8%,var(--border) 16%);}
+.road-step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:18px;padding-bottom:16px;position:relative;}
+.road-n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:15px;background:var(--bg);border:2px solid var(--border);color:var(--muted);position:relative;z-index:1;}
+.road-card{padding:18px 20px;border-radius:16px;border:1px solid var(--border);background:var(--surface);}
+.road-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+.road-part{font-size:11.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);}
+.road-badge{font-size:11.5px;padding:2px 10px;border-radius:100px;border:1px solid var(--border);color:var(--muted);}
+.road-card h3{font-family:var(--serif);font-size:20px;font-weight:400;line-height:1.35;margin-bottom:6px;}
+.road-card h3 a{text-decoration:none;}
+.road-card h3 a:hover{color:var(--accent);}
+.road-card p{font-size:14.5px;color:var(--soft);line-height:1.6;}
+.road-why{display:flex;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:13.5px !important;}
+.road-why b{color:var(--text);font-weight:500;}
+.road-link{display:inline-block;margin-top:12px;font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;}
+.road-link:hover{text-decoration:underline;}
+.road-step.is-done .road-n{background:var(--accent);border-color:var(--accent);color:var(--on-accent);box-shadow:0 0 0 6px rgba(var(--accent-rgb),.12);}
+.road-step.is-done .road-card{border-color:var(--accent-border);background:linear-gradient(135deg,rgba(var(--accent-rgb),.08),transparent 55%),var(--surface);}
+.road-step.is-done .road-badge{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-border);}
+.road-step.is-wip .road-n{border-color:#f59e0b;color:#f59e0b;}
+.road-step.is-wip .road-badge{color:#fbbf24;border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.08);}
+.road-step.is-todo .road-card{background:transparent;border-style:dashed;}
+.road-step.is-todo h3{color:var(--soft);}
+@media (max-width:860px){.road-hero{grid-template-columns:1fr;}.road-why-grid{grid-template-columns:1fr;}}
+@media (max-width:600px){
+  .road-list::before{left:15px;}
+  .road-step{grid-template-columns:32px minmax(0,1fr);gap:12px;}
+  .road-n{width:32px;height:32px;font-size:13px;}
+  .road-card{padding:14px 16px;}
+  .road-card h3{font-size:18px;}
+}
