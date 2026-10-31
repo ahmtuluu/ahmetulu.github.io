@@ -100,6 +100,7 @@ MONTHS = {'tr': ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz
 # ---------------------------------------------------------------- içerik
 GROUPS = [  # yazılar sayfasındaki gruplar (sıra önemli)
  dict(key='stm32', tr=('STM32 Yol Haritam', 'STM32F407\'yi register seviyesinde, bölüm bölüm öğreniyorum'), en=('My STM32 Roadmap', 'Learning the STM32F407 at register level, part by part')),
+ dict(key='donanim', tr=('Donanım Tasarımları', 'Bir problemden yola çıkıp tasarladığım kendi kartlarım'), en=('Hardware Designs', 'My own boards, each starting from a real problem')),
  dict(key='web', tr=('Web Projeleri', 'Tasarlayıp kodladığım siteler'), en=('Web Projects', 'Websites I designed and built')),
  dict(key='pcb', tr=('PCB Tasarımları', 'Bionluk üzerinden müşteriler için yaptığım tasarımlar'), en=('PCB Designs', 'Designs I made for clients through Bionluk')),
  dict(key='tarim', tr=('Akıllı Tarım Sistemi', 'Projenin adım adım gelişimi'), en=('Smart Agriculture System', 'Step-by-step development of the project')),
@@ -108,6 +109,15 @@ GROUPS = [  # yazılar sayfasındaki gruplar (sıra önemli)
 ]
 
 POSTS = [  # en yeni en üstte
+ dict(slug='class-d', group='donanim', date=(2026, 10),
+      tr_url='yazilar/class-d/class-d-amplifikator-lc-filtre.html', en_url='en/blog/class-d-amplifier-lc-filter.html',
+      img_dir='yazilar/class-d/', thumb='assets/img/kapak/class-d.jpg',
+      keywords={'tr': ['Class D amplifikatör', 'MAX98357A', 'LC filtre', 'EMI', 'KiCad', 'PCB tasarımı', 'BTL'],
+                'en': ['Class D amplifier', 'MAX98357A', 'LC filter', 'EMI', 'KiCad', 'PCB design', 'BTL']},
+      tr=dict(kicker='PCB Tasarımı · Ses elektroniği', title='Class D Amplifikatörde EMI ve LC Çıkış Filtresi', page_title='Class D Amplifikatör LC Çıkış Filtresi ve EMI: MAX98357A PCB Tasarımı (KiCad)',
+              desc='MAX98357A I²S Class D amplifikatör ve 2 × 22 µH + 220 nF diferansiyel LC çıkış filtresiyle tasarladığım 2 katmanlı PCB: EMI problemi, ≈51 kHz kesim frekansı hesabı, yerleşim ve test noktaları.'),
+      en=dict(kicker='PCB Design · Audio electronics', title='EMI in Class D Amplifiers and an LC Output Filter', page_title='Class D Amplifier LC Output Filter and EMI: MAX98357A PCB Design (KiCad)',
+              desc='A 2-layer PCB I designed with the MAX98357A I²S Class D amplifier and a 2 × 22 µH + 220 nF differential LC output filter: the EMI problem, the ≈51 kHz cut-off calculation, layout and test points.')),
  dict(slug='stm32-01-buton', group='stm32', date=(2026, 10),
       tr_url='yazilar/stm32/01-buton-debounce.html', en_url='en/blog/stm32-01-button-debounce.html',
       img_dir='yazilar/stm32/', thumb='assets/img/kapak/stm32-01.jpg', step=1,
@@ -162,6 +172,10 @@ PROJECTS = [
       tags=['PCB Tasarımı', 'KiCad', 'ESP32', 'Freelance'],
       tr=dict(title='Freelance PCB Tasarımı', desc='Bionluk üzerinden müşterilere özel şematik ve PCB tasarımı: ihtiyacı dinlemekten üretime hazır dosyalara kadar. 8 sipariş, 5.0 puan.'),
       en=dict(title='Freelance PCB Design', desc='Custom schematic and PCB design for clients on Bionluk, from understanding the need to production-ready files. 8 orders, 5.0 rating.')),
+ dict(kind='main', year='2026', cover='assets/img/kapak/class-d.jpg', posts=['class-d'],
+      tags=['PCB Tasarımı', 'KiCad', 'Ses Elektroniği', 'EMI', 'MAX98357A'],
+      tr=dict(title='Class D Amplifikatör ve LC Çıkış Filtresi', desc='MAX98357A I²S Class D amplifikatörlü, diferansiyel LC çıkış filtreli 2 katmanlı PCB. Anahtarlama gürültüsünü ve EMI\'yi azaltmayı hedefleyen, filtre öncesi ve sonrası ölçüm noktaları olan bir tasarım.'),
+      en=dict(title='Class D Amplifier with an LC Output Filter', desc='A 2-layer PCB with the MAX98357A I²S Class D amplifier and a differential LC output filter, aimed at reducing switching noise and EMI, with test points before and after the filter.')),
  dict(kind='main', year='2026', cover='assets/img/kapak/planner.jpg', posts=[],
       links=[('Canlı demoyu dene ↗', 'Try the live demo ↗', 'https://ahmtuluu.github.io/planner/demo.html'),
              ('Tanıtım sayfası ↗', 'Product page ↗', 'https://ahmtuluu.github.io/planner/')],
@@ -189,9 +203,9 @@ PROJECTS = [
       tr=dict(title='12V DC Ayarlı Güç Kaynağı', desc='LM2596 buck modülünün trimpotu yerine dışarıdan çevrilebilen 10 tur hassas potansiyometre ve dijital voltmetre.'),
       en=dict(title='12V DC Adjustable Power Supply', desc='An LM2596 buck module with an external 10-turn precision potentiometer instead of the trimpot, plus a digital voltmeter.')),
 ]
-FEATURED = [0, 3, 4]  # ana sayfadaki projeler (PROJECTS indeksleri)
+FEATURED = [0, 1, 4]  # ana sayfadaki projeler (PROJECTS indeksleri)
 
-TAG_EN = {'Gömülü Sistemler': 'Embedded Systems', 'Roket': 'Rocketry', 'Register': 'Registers', 'Uygulama': 'App', 'Web Tasarımı': 'Web Design', 'PCB Tasarımı': 'PCB Design', 'Sensör': 'Sensors', 'Enerji': 'Energy', 'Otomasyon': 'Automation', 'Güç Elektroniği': 'Power Electronics',
+TAG_EN = {'Ses Elektroniği': 'Audio Electronics', 'Gömülü Sistemler': 'Embedded Systems', 'Roket': 'Rocketry', 'Register': 'Registers', 'Uygulama': 'App', 'Web Tasarımı': 'Web Design', 'PCB Tasarımı': 'PCB Design', 'Sensör': 'Sensors', 'Enerji': 'Energy', 'Otomasyon': 'Automation', 'Güç Elektroniği': 'Power Electronics',
           'Lehim': 'Soldering', 'PCB Tasarımı': 'PCB Design'}
 
 # ---------------------------------------------------------------- yardımcılar
